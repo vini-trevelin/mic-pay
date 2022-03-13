@@ -14,13 +14,8 @@
 #include <avr/interrupt.h>
 #include "botoes.h"
 #include "delayT1.h"
-#include "delayT1.c"
-#include "serial.c"
 
 #define TESTE 1 //comentar para não fazer o main
-#define F_CPU 16000000	//freq CPU (16Mhz)
-#define BAUD 9600		//baud rate
-#define UBRR F_CPU/16/BAUD-1
 
 
 
@@ -176,9 +171,6 @@ char debounce(char pino){					//ROTINA PARA DEBOUNCING
 #ifdef TESTE
 // para teste do arquivo em semparado
 int main(){
-	USART_INIT(UBRR);
-	
-	
 	char teclaLida =  TECLA_INVALIDA;		// inicia como uma tecla invalida
 	setupTeclado();							// inicializa o teclado
 	enableDelayT1();							// para usar o timer1 para delay-> Temos que ver se não vamos usar aquela função pronta dai liberariamos esse timer
@@ -188,7 +180,6 @@ int main(){
 		teclaLida = varrerTeclado();
 		if (teclaLida!=TECLA_INVALIDA){
 			execCmdTecla(teclaLida);
-			USART_envia(freq);
 		}
 	}
 	
