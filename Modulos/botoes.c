@@ -1,9 +1,3 @@
-/*
- * TesteTeclado.c
- *
- * Created: 12/03/2022 07:46:16
- * Author : VITOR
- */ 
 
 //////////////////////////////////////////////////////////////////////////
 						//INCLUDES//
@@ -12,10 +6,10 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "botoes.h"
-#include "delayT1.h"
-
-#define TESTE 1 //comentar para não fazer o main
+#include "../Headers/botoes.h"
+#include "../Headers/delayT1.h"
+#define TECLA_INVALIDA  20
+//#define TESTE 1 //comentar para não fazer o main
 
 
 
@@ -49,7 +43,7 @@ char freq = TECLA_INVALIDA;								// inicia sem gerar onda
 void setupTeclado(){
 	//PORTAS
 	DDRD = 0x8F;							// Para Teclado PD4 - PD6  como entrada
-	DDRC = 0xFF;							// Define porta C como saída todos os bits
+	DDRC = 0x3F;							// Define porta C como saída todos os bits
 	PORTC = 0X3F;							// Liga os bits da porta C (Já desliga os leds também)
 	//TIMERS
 	TCCR0A = 0;								// configura modo normal timer0
