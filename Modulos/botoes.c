@@ -42,9 +42,9 @@ char freq = TECLA_INVALIDA;								// inicia sem gerar onda
 
 void setupTeclado(){
 	//PORTAS
-	DDRD = 0x8F;							// Para Teclado PD4 - PD6  como entrada
-	DDRC = 0x3F;							// Define porta C como saída todos os bits
-	PORTC = 0X3F;							// Liga os bits da porta C (Já desliga os leds também)
+	DDRD = 0x00;							// Para Teclado PD4 .. PD6  como entrada (0) 
+	DDRC = 0x3F; 							// Define porta C como saída PC0 .. PC5 (1)
+	PORTC = 0x3F;							// Liga os bits da porta C (Já desliga os leds também)
 	//TIMERS
 	TCCR0A = 0;								// configura modo normal timer0
 	TCCR0B = 0x4;							// configura preescaller parao timer0 clock/256 -> 16 microssegundos

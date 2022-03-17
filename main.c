@@ -3,6 +3,7 @@
 						//INCLUDES//
 //////////////////////////////////////////////////////////////////////////
 
+#include <stdio.h>
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -37,8 +38,20 @@ int main(){
 	setupTeclado();							// inicializa o teclado
 	enableDelayT1();							// para usar o timer1 para delay-> Temos que ver se não vamos usar aquela função pronta dai liberariamos esse timer
 	enableTestTeclado();
+	
+	char i=65; 
+	char s2[] = "o cliente deve:";
+	char sfinal[10];
+	
 	while (1)
 	{
+		/*
+		sprintf(sfinal,"%d",i); //codigozinho pra escrever as variaves no lcd
+		writeString(s2);
+		writeInstruction(lcd_LineTwo | lcd_SetCursor);
+		writeString(sfinal);
+		*/
+		
 		teclaLida = varrerTeclado();
 		if (teclaLida!=TECLA_INVALIDA){
 			execCmdTecla(teclaLida);
@@ -47,5 +60,4 @@ int main(){
 			//testeAAAAAAAAAAAAAAAAAAAAA
 		}
 	}
-	
 }
