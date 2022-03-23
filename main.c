@@ -31,20 +31,25 @@
 #endif
 
 int main(){
-	USART_INIT(UBRR);
+	// Se começar a escrever 1 sem parar no inicio é só dar Reload que volta funcionar
+	
+	//USART_INIT(UBRR);
 	lcd_init_4d();
 	
-	char teclaLida =  TECLA_INVALIDA;		// inicia como uma tecla invalida
-	setupTeclado();							// inicializa o teclado
-	enableDelayT1();							// para usar o timer1 para delay-> Temos que ver se não vamos usar aquela função pronta dai liberariamos esse timer
-	enableTestTeclado();
+	char teclaLida =  TECLA_INVALIDA;			// inicia como uma tecla invalida
+	//setupTeclado();							// inicializa o teclado
+	//enableDelayT1();							// para usar o timer1 para delay-> Temos que ver se não vamos usar aquela função pronta dai liberariamos esse timer
+	//enableTestTeclado();
 	
-	char i=65; 
-	char s2[] = "o cliente deve:";
-	char sfinal[10];
+	//char i=65; 
+	//char s2[] = "o cliente deve:";
+	//char sfinal[10];
 	
-	while (1)
-	{
+	while (1){
+		
+		teclaLida = valor_tecla(tecla_lida());
+		_delay_ms(2000); // talvez ocorram alguns bugs pelo valor disso aq estar alto, coloquei pq n fiz o debounce
+		
 		/*
 		sprintf(sfinal,"%d",i); //codigozinho pra escrever as variaves no lcd
 		writeString(s2);
@@ -52,12 +57,12 @@ int main(){
 		writeString(sfinal);
 		*/
 		
-		teclaLida = varrerTeclado();
-		if (teclaLida!=TECLA_INVALIDA){
-			execCmdTecla(teclaLida);
-			//USART_envia(freq);
-			writeCharacter(freq);
-			//testeAAAAAAAAAAAAAAAAAAAAA
-		}
+		//teclaLida = varrerTeclado();
+		//if (teclaLida!=TECLA_INVALIDA){
+		//	execCmdTecla(teclaLida);
+		//	//USART_envia(freq);
+		//	writeCharacter(freq);
+		//	//testeAAAAAAAAAAAAAAAAAAAAA
+		//}
 	}
 }
