@@ -8,21 +8,28 @@
 #include <avr/interrupt.h>
 #include "../Headers/botoes.h"
 #include "../Headers/delayT1.h"
+#include "../Headers/lcd.h"
 #define TECLA_INVALIDA  20
+
+void setupBotoes(){
+	//Não faz nada pq por alguma motivo o DDRD e DDRC tem q ficar dentro do tecla_lida()
+}
+
 
 uint8_t tecla_lida(){
 	uint8_t linha,coluna;
+	
+	DDRC &=~(0x0F);
+	DDRD &=~(0x70);
 
-	PORTC |= 0X0F;					// coloca todas linhas em 1
+	PORTC |= 0x0F;					// coloca todas linhas em 1
 
 	for(coluna=0;coluna<3;coluna++){
-		DDRC &=~(0X0F);
-		DDRD &=~(0X70);							// define todas linhas e colunas como saida
-		DDRD|=(0X10<<coluna);					// define denovo? apenas uma entrada por vez (coluna)
+		DDRD|=(0x10<<coluna);					// define denovo? apenas uma entrada por vez (coluna)
 												// 0100 0000 >> c mudei para 0001 0000 << c pois minha coluna 1 eh PD4
 		
 		for(linha=0;linha<4;linha++){
-			if(!(PINC & (0X01<<linha))){		// 0000 1000 (verifica PIND deslocado do numero de linhas) -> tenho que mudar para PINC e comecar em PCO 0000 0001 << linha
+			if(!(PINC & (0x01<<linha))){		// 0000 1000 (verifica PINC deslocado do numero de linhas)
 				return (linha*3+coluna);
 			}
 		}
@@ -30,48 +37,68 @@ uint8_t tecla_lida(){
 	return TECLA_INVALIDA;
 }
 
-char valor_tecla(uint8_t num){ // tirar o writeString daqui quando formos usar de vdd, coloquei aqui só pra mostrar a leitura no display
+void acao_tecla(uint8_t num){ // tirar o writeString daqui quando formos usar de vdd, coloquei aqui só pra mostrar a leitura no display
 	switch (num){
 		case 0:
-		writeString("1");
-		return "1";
+			writeString("1");
+		break;
+		
 		case 1:
-		writeString("2");
-		return "2";
+			writeString("2");
+		break;
+		
 		case 2:
-		writeString("3");
-		return "3";
+			writeString("3");
+		break;
+		
 		case 3:
-		writeString("4");
-		return "4";
+			writeString("4");
+		break;
+		
 		case 4:
-		writeString("5");
-		return "5";
+			writeString("5");
+		break;
+		
 		case 5:
-		writeString("6");
-		return "6";
+			writeString("6");
+		break;
+		
 		case 6:
-		writeString("7");
-		return "7";
+			writeString("7");
+		break;
+		
 		case 7:
-		writeString("8");
-		return "8";
+			writeString("8");
+		break;
+		
 		case 8:
-		writeString("9");
-		return "9";
+			writeString("9");
+		break;
+		
 		case 9:
-		writeString("*");
-		return "*";
+			writeString("*");
+		break;
+		
 		case 10:
-		writeString("0");
-		return "0";
+			writeString("0");
+		break;
+		
 		case 11:
-		writeString("#");
-		return "#";
+			writeString("#");
+			writeInstruction(lcd_Clear);
+		break;
+		
 		default:
-		return "";
+		break;
 	}
 }
+
+/*Por ter começado a funcionar 
+	Obrigado, Pai, por Teu perdão e por dar-me uma vida plena e abundante. Senhor, a Ti, que
+	és o Criador de tudo o que sou e do que possuo, dedico a minha vida, clamando para que
+	eu veja e faça sempre a Tua vontade, e que minhas obras honrem e glorifiquem o Teu
+	Nome. Amém!”
+*/
 
 
 // Comentei tudo aq embaixo que era o código velho

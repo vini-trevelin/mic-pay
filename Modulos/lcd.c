@@ -7,7 +7,7 @@
 
 #include "../Headers/lcd.h"
 
-void lcd_init_4d(){
+void setup_lcd(){
 	
 	//configura os pinos da porta D para saida
 	//f3 = 1111 0011 = D7 D6 ... D1 D0

@@ -1,5 +1,8 @@
 uint8_t tecla_lida();
-char valor_tecla(uint8_t num);
+void acao_tecla(uint8_t num);
+void setupBotoes();
+
+
 //void execCmdTecla(char tecla); // executa o comando de uma tecla ()
 //char varrerTeclado();		   // varre o teclado
 //char debounce(char pino);	   // debounce (usar o timer 1 )
