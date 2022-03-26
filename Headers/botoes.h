@@ -1,5 +1,5 @@
 uint8_t tecla_lida();
-void acao_tecla(uint8_t num);
+char acao_tecla(uint8_t num);
 void setupBotoes();
 
 

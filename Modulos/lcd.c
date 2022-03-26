@@ -9,8 +9,8 @@
 
 void setup_lcd(){
 	
-	//configura os pinos da porta D para saida
-	//f3 = 1111 0011 = D7 D6 ... D1 D0
+	//configura os pinos da porta B para saida
+	//f3 = 1111 0011 = B7 B6 ... B1 B0
 	DDRB = 0xf3;
 	
     lcdPort &= ~(1<<lcd_RS_bit);                //RS = 0 -> setar parametros de config
@@ -21,7 +21,7 @@ void setup_lcd(){
     _delay_ms(10);
  
     write(lcd_FunctionSet4bit);
-    _delay_us(80);                                
+    _delay_us(40);                                
 
 	// Coloca modo 4 bits
     writeInstruction(lcd_FunctionSet4bit);
@@ -46,7 +46,7 @@ void writeString(char text[])
     {
         writeCharacter(text[i]);
         i++;
-        _delay_us(80);     
+        _delay_us(40);     
     }
 }
 
@@ -66,7 +66,7 @@ void writeInstruction(uint8_t instruction)
     lcdPort &= ~(1<<lcd_E_bit);                
     write(instruction);                    // primeiros 4 bits
     write(instruction << 4);               // ultimos 4 bits
-	 _delay_us(80); 
+	 _delay_us(40); 
 }
 
 

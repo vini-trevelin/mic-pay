@@ -12,6 +12,9 @@
 #include "Modulos/lcd.c"
 #include <util/delay.h>
 
+char teclaG = 20; //fazer ser = TECLA_INVALIDA dps
+char contTelaOnOff = 0; //para segurar o botão por 3 segundos
+char telaOnOf = 1; //para saber o estado da tela
 //#define TESTE 1 //comentar para não fazer o main
 
 
@@ -20,25 +23,57 @@
 //////////////////////////////////////////////////////////////////////////
 
 
-#ifdef TESTE 
-	ISR(TIMER0_OVF_vect){						// Interrupcao por overflow do TIMER0
-		if(freq!=TECLA_INVALIDA){
-			TCNT0 =freq*20;
-			PORTB ^= (1 << 5);
-			TIFR0 |= (1<<0);						//limpa estouro
+// #ifdef TESTE 
+// 	ISR(TIMER0_OVF_vect){						// Interrupcao por overflow do TIMER0
+// 		if(freq!=TECLA_INVALIDA){
+// 			TCNT0 =freq*20;
+// 			PORTB ^= (1 << 5);
+// 			TIFR0 |= (1<<0);						//limpa estouro
+// 		}
+// 	}
+// #endif
+
+void setTimer1_UmSeg(){
+	// 16 MHz -> 1 instrução = 62.5ns
+	// Pre scaler de 256 -> 62500Hz logo 62500 contagens para 1 seg
+
+	TCCR1A = 4; //modo comparação
+	TCCR1B = 0x4; //pre scaler de 256
+
+	TCNT1 = 0;  //contagem começa do zero
+	OCR1A = 62500; //até onde tem q contar
+	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em A
+
+	sei();
+}
+
+ISR(TIMER1_COMPA_vect){
+	writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
+	if (teclaG == 12)
+		contTelaOnOff++;
+	else
+		contTelaOnOff = 0;
+		
+	if(contTelaOnOff == 3){ // se for # por 3 segundos
+		if (telaOnOf){
+			writeInstruction(lcd_DisplayOff); //desliga se tiver ligada 
+			telaOnOf = 0;
+		}else{
+			writeInstruction(lcd_DisplayOn); //liga se tiver desligada
+			telaOnOf = 1;
 		}
+		contTelaOnOff = 0;
 	}
-#endif
+}
+
 
 int main(){
-	// Se começar a escrever 1 sem parar no inicio é só dar Reload que volta funcionar
 	
 	//USART_INIT(UBRR);
 	setup_lcd();
 	setupBotoes();
-	
-	//char teclaLida =  TECLA_INVALIDA;			// inicia como uma tecla invalida
-	
+	setTimer1_UmSeg();
+	//char str[3];	
 	/*
 	Antes do while(1) teremos um setupMaquina();
 		Limpa e desliga a tela
@@ -74,9 +109,8 @@ int main(){
 	
 	while (1){
 		
-		acao_tecla(tecla_lida());
+		teclaG = acao_tecla(tecla_lida());
 		_delay_ms(50);
-		
 	}
 }
 
