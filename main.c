@@ -10,28 +10,55 @@
 #include "Modulos/delayT1.c"
 #include "Modulos/serial.c"
 #include "Modulos/lcd.c"
+#include "Headers/botoes.h"
 #include <util/delay.h>
 
-char teclaG = 20; //fazer ser = TECLA_INVALIDA dps
-char contTelaOnOff = 0; //para segurar o botão por 3 segundos
-char telaOnOf = 1; //para saber o estado da tela
-//#define TESTE 1 //comentar para não fazer o main
+#define N_CARACSENHA 4 // todas as senhas com 4 caracteres? REVER ISSO
 
+
+
+//////////////////////////////////////////////////////////////////////////
+//GLOBAIS//
+//////////////////////////////////////////////////////////////////////////
+
+
+char teclaG = TECLA_INVALIDA;
+char contTelaOnOff = 0; //para segurar o botão por 3 segundos
+char telaOnOf = 0; //para saber o estado da tela (inicia Desligada)
+int SENHAADM   = 1234;
+int SENHAUSER1 = 0001;
+int SENHAUSER2 = 0002;
 
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
 //////////////////////////////////////////////////////////////////////////
 
 
-// #ifdef TESTE 
-// 	ISR(TIMER0_OVF_vect){						// Interrupcao por overflow do TIMER0
-// 		if(freq!=TECLA_INVALIDA){
-// 			TCNT0 =freq*20;
-// 			PORTB ^= (1 << 5);
-// 			TIFR0 |= (1<<0);						//limpa estouro
-// 		}
-// 	}
-// #endif
+ISR(TIMER1_COMPA_vect){
+	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
+	if (teclaG == KEY_CONFIRMA)
+	contTelaOnOff++;
+	else
+	contTelaOnOff = 0;
+	
+	if(contTelaOnOff == 3){ // se for # por 3 segundos
+		if (telaOnOf){
+				writeInstruction(lcd_LineOne | lcd_SetCursor);
+				writeInstruction(lcd_DisplayOff); //desliga se tiver ligada
+				telaOnOf = 0;
+			}else{
+				writeInstruction(lcd_LineOne | lcd_SetCursor);
+				writeInstruction(lcd_DisplayOn); //liga se tiver desligada
+				telaOnOf = 1;
+		}
+		contTelaOnOff = 0;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+//FUNÇÔES//
+//////////////////////////////////////////////////////////////////////////
+
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
@@ -39,32 +66,71 @@ void setTimer1_UmSeg(){
 
 	TCCR1A = 4; //modo comparação
 	TCCR1B = 0x4; //pre scaler de 256
-
 	TCNT1 = 0;  //contagem começa do zero
 	OCR1A = 62500; //até onde tem q contar
-	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em A
-
-	sei();
+	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em 
+	sei(); // talvez colocar no mais ??
 }
 
-ISR(TIMER1_COMPA_vect){
-	writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
-	if (teclaG == 12)
-		contTelaOnOff++;
-	else
-		contTelaOnOff = 0;
-		
-	if(contTelaOnOff == 3){ // se for # por 3 segundos
-		if (telaOnOf){
-			writeInstruction(lcd_DisplayOff); //desliga se tiver ligada 
-			telaOnOf = 0;
-		}else{
-			writeInstruction(lcd_DisplayOn); //liga se tiver desligada
-			telaOnOf = 1;
+int lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
+	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
+	char teclaG = acao_tecla(teclaDebouce());
+	char contador = 1;
+	int senhaLida =0;
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	char teclaAnterior=0;
+	while (teclaG != KEY_CONFIRMA || contador<= N_CARACSENHA){
+		teclaG = teclaDebouce();
+		if(teclaG!= TECLA_INVALIDA && teclaG!=KEY_CONFIRMA && teclaG !=KEY_APAGAR){
+			if(teclaG!= KEY_0){
+				switch(contador){
+					case 1:
+					senhaLida+= (teclaG+1)*1000;
+					break;
+					case 2:
+					senhaLida+= (teclaG+1)*100;
+					break;
+					case 3:
+					senhaLida+= (teclaG+1)*10;
+					break;
+					case 4:
+					senhaLida+= (teclaG+1)*1;
+					break;
+					default:
+					senhaLida+=0;
+					break;
+				}
+			}
+			contador++;
+			teclaAnterior =teclaG;
+			writeString("*");
 		}
-		contTelaOnOff = 0;
+		else if(teclaG == KEY_APAGAR){
+			if(contador>1){
+				contador --;
+				switch(contador){
+					case 1:
+					senhaLida-= (teclaAnterior+1)*1000;
+					break;
+					case 2:
+					senhaLida-= (teclaAnterior+1)*100;
+					break;
+					case 3:
+					senhaLida-= (teclaAnterior+1)*10;
+					break;
+					case 4:
+					senhaLida-= (teclaAnterior+1)*1;
+					default:
+					senhaLida-=0;
+					break;
+				}
+			}
+		}
 	}
+	//writeString("SenhaLida");
+	return senhaLida;
 }
+
 
 
 int main(){
@@ -107,11 +173,30 @@ int main(){
 	*/
 	
 	
-	while (1){
-		
-		teclaG = acao_tecla(teclaDebouce());
+	while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
+		teclaG = teclaDebouce();
 	}
+	teclaG =TECLA_INVALIDA;
+	writeString("Insira a Senha"); //chamada de senha inicial
+	char senhaValida = 0;
+	int senhaLida = 0;
+	while(!senhaValida){
+		senhaLida= lerSenha();
+		if (senhaLida == SENHAADM){
+			senhaValida =1;
+			writeString("bem vindo Adm");
+		}
+		else if(senhaLida == SENHAUSER1 || senhaLida ==SENHAUSER2){
+			senhaValida =1;
+			writeString("bem vindo USER");
+		}
+	}
+	//while(1){
+		//pensar o resto aqui
+		
+	//}
 }
+
 
 	//teclaLida = varrerTeclado();
 	//if (teclaLida!=TECLA_INVALIDA){

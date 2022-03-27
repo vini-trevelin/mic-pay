@@ -10,8 +10,6 @@
 #include "../Headers/delayT1.h"
 #include "../Headers/lcd.h"
 #include <util/delay.h>
-#define TECLA_INVALIDA  25
-#define DEBOUNCE 10
 void setupBotoes(){
 	//Não faz nada pq por alguma motivo o DDRD e DDRC tem q ficar dentro do tecla_lida()
 }

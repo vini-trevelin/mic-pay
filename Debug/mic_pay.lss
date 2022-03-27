@@ -3,31 +3,31 @@ mic_pay.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000004  00800100  000003dc  00000470  2**0
+  0 .data         00000036  00800100  00000596  0000062a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000003dc  00000000  00000000  00000094  2**1
+  1 .text         00000596  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000001  00800104  00800104  00000474  2**0
+  2 .bss          00000002  00800136  00800136  00000660  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000474  2**0
+  3 .comment      00000030  00000000  00000000  00000660  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004a4  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000690  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a0  00000000  00000000  000004e4  2**0
+  5 .debug_aranges 000000a8  00000000  00000000  000006d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000cec  00000000  00000000  00000584  2**0
+  6 .debug_info   00000e29  00000000  00000000  00000778  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000007dc  00000000  00000000  00001270  2**0
+  7 .debug_abbrev 000007bf  00000000  00000000  000015a1  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000006c4  00000000  00000000  00001a4c  2**0
+  8 .debug_line   00000826  00000000  00000000  00001d60  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001a8  00000000  00000000  00002110  2**2
+  9 .debug_frame  000001dc  00000000  00000000  00002588  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000004cf  00000000  00000000  000022b8  2**0
+ 10 .debug_str    0000050d  00000000  00000000  00002764  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000006c2  00000000  00000000  00002787  2**0
+ 11 .debug_loc    00000911  00000000  00000000  00002c71  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000090  00000000  00000000  00002e49  2**0
+ 12 .debug_ranges 00000098  00000000  00000000  00003582  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -44,7 +44,7 @@ Disassembly of section .text:
   20:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   24:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   28:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
-  2c:	0c 94 93 01 	jmp	0x326	; 0x326 <__vector_11>
+  2c:	0c 94 7a 01 	jmp	0x2f4	; 0x2f4 <__vector_11>
   30:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   34:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   38:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
@@ -84,18 +84,18 @@ Disassembly of section .text:
   8c:	11 e0       	ldi	r17, 0x01	; 1
   8e:	a0 e0       	ldi	r26, 0x00	; 0
   90:	b1 e0       	ldi	r27, 0x01	; 1
-  92:	ec ed       	ldi	r30, 0xDC	; 220
-  94:	f3 e0       	ldi	r31, 0x03	; 3
+  92:	e6 e9       	ldi	r30, 0x96	; 150
+  94:	f5 e0       	ldi	r31, 0x05	; 5
   96:	02 c0       	rjmp	.+4      	; 0x9c <__do_copy_data+0x10>
   98:	05 90       	lpm	r0, Z+
   9a:	0d 92       	st	X+, r0
-  9c:	a4 30       	cpi	r26, 0x04	; 4
+  9c:	a6 33       	cpi	r26, 0x36	; 54
   9e:	b1 07       	cpc	r27, r17
   a0:	d9 f7       	brne	.-10     	; 0x98 <__do_copy_data+0xc>
 
 000000a2 <__do_clear_bss>:
   a2:	21 e0       	ldi	r18, 0x01	; 1
-  a4:	a4 e0       	ldi	r26, 0x04	; 4
+  a4:	a6 e3       	ldi	r26, 0x36	; 54
   a6:	b1 e0       	ldi	r27, 0x01	; 1
   a8:	01 c0       	rjmp	.+2      	; 0xac <.do_clear_bss_start>
 
@@ -103,11 +103,11 @@ Disassembly of section .text:
   aa:	1d 92       	st	X+, r1
 
 000000ac <.do_clear_bss_start>:
-  ac:	a5 30       	cpi	r26, 0x05	; 5
+  ac:	a8 33       	cpi	r26, 0x38	; 56
   ae:	b2 07       	cpc	r27, r18
   b0:	e1 f7       	brne	.-8      	; 0xaa <.do_clear_bss_loop>
-  b2:	0e 94 db 01 	call	0x3b6	; 0x3b6 <main>
-  b6:	0c 94 ec 01 	jmp	0x3d8	; 0x3d8 <_exit>
+  b2:	0e 94 84 02 	call	0x508	; 0x508 <main>
+  b6:	0c 94 c9 02 	jmp	0x592	; 0x592 <_exit>
 
 000000ba <__bad_interrupt>:
   ba:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -210,7 +210,7 @@ unsigned char USART_recebe(void){
  16c:	fc 01       	movw	r30, r24
  16e:	ec 5c       	subi	r30, 0xCC	; 204
  170:	ff 4f       	sbci	r31, 0xFF	; 255
- 172:	0c 94 e6 01 	jmp	0x3cc	; 0x3cc <__tablejump2__>
+ 172:	0c 94 c3 02 	jmp	0x586	; 0x586 <__tablejump2__>
  176:	81 e0       	ldi	r24, 0x01	; 1
  178:	08 95       	ret
  17a:	83 e0       	ldi	r24, 0x03	; 3
@@ -350,7 +350,7 @@ void writeCharacter(uint8_t caracter)
 
 0000022c <writeString>:
 	// Display On
-    writeInstruction(lcd_DisplayOn); 
+   // writeInstruction(lcd_DisplayOn); 
 }
 
 void writeString(char text[])
@@ -518,158 +518,496 @@ void setup_lcd(){
     writeInstruction(lcd_EntryMode);
  2ec:	86 e0       	ldi	r24, 0x06	; 6
  2ee:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
-    
-	// Display On
-    writeInstruction(lcd_DisplayOn); 
- 2f2:	8c e0       	ldi	r24, 0x0C	; 12
- 2f4:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
- 2f8:	08 95       	ret
+ 2f2:	08 95       	ret
 
-000002fa <setTimer1_UmSeg>:
+000002f4 <__vector_11>:
+//////////////////////////////////////////////////////////////////////////
+						//INTERUPÇÕES//
+//////////////////////////////////////////////////////////////////////////
+
+
+ISR(TIMER1_COMPA_vect){
+ 2f4:	1f 92       	push	r1
+ 2f6:	0f 92       	push	r0
+ 2f8:	0f b6       	in	r0, 0x3f	; 63
+ 2fa:	0f 92       	push	r0
+ 2fc:	11 24       	eor	r1, r1
+ 2fe:	2f 93       	push	r18
+ 300:	3f 93       	push	r19
+ 302:	4f 93       	push	r20
+ 304:	5f 93       	push	r21
+ 306:	6f 93       	push	r22
+ 308:	7f 93       	push	r23
+ 30a:	8f 93       	push	r24
+ 30c:	9f 93       	push	r25
+ 30e:	af 93       	push	r26
+ 310:	bf 93       	push	r27
+ 312:	ef 93       	push	r30
+ 314:	ff 93       	push	r31
+	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
+	if (teclaG == KEY_CONFIRMA)
+ 316:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <teclaG>
+ 31a:	8b 30       	cpi	r24, 0x0B	; 11
+ 31c:	31 f4       	brne	.+12     	; 0x32a <__vector_11+0x36>
+	contTelaOnOff++;
+ 31e:	80 91 37 01 	lds	r24, 0x0137	; 0x800137 <contTelaOnOff>
+ 322:	8f 5f       	subi	r24, 0xFF	; 255
+ 324:	80 93 37 01 	sts	0x0137, r24	; 0x800137 <contTelaOnOff>
+ 328:	02 c0       	rjmp	.+4      	; 0x32e <__vector_11+0x3a>
+	else
+	contTelaOnOff = 0;
+ 32a:	10 92 37 01 	sts	0x0137, r1	; 0x800137 <contTelaOnOff>
+	
+	if(contTelaOnOff == 3){ // se for # por 3 segundos
+ 32e:	80 91 37 01 	lds	r24, 0x0137	; 0x800137 <contTelaOnOff>
+ 332:	83 30       	cpi	r24, 0x03	; 3
+ 334:	c1 f4       	brne	.+48     	; 0x366 <__vector_11+0x72>
+		if (telaOnOf){
+ 336:	80 91 36 01 	lds	r24, 0x0136	; 0x800136 <__data_end>
+ 33a:	88 23       	and	r24, r24
+ 33c:	49 f0       	breq	.+18     	; 0x350 <__vector_11+0x5c>
+				writeInstruction(lcd_LineOne | lcd_SetCursor);
+ 33e:	80 e8       	ldi	r24, 0x80	; 128
+ 340:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+				writeInstruction(lcd_DisplayOff); //desliga se tiver ligada
+ 344:	88 e0       	ldi	r24, 0x08	; 8
+ 346:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+				telaOnOf = 0;
+ 34a:	10 92 36 01 	sts	0x0136, r1	; 0x800136 <__data_end>
+ 34e:	09 c0       	rjmp	.+18     	; 0x362 <__vector_11+0x6e>
+			}else{
+				writeInstruction(lcd_LineOne | lcd_SetCursor);
+ 350:	80 e8       	ldi	r24, 0x80	; 128
+ 352:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+				writeInstruction(lcd_DisplayOn); //liga se tiver desligada
+ 356:	8c e0       	ldi	r24, 0x0C	; 12
+ 358:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+				telaOnOf = 1;
+ 35c:	81 e0       	ldi	r24, 0x01	; 1
+ 35e:	80 93 36 01 	sts	0x0136, r24	; 0x800136 <__data_end>
+		}
+		contTelaOnOff = 0;
+ 362:	10 92 37 01 	sts	0x0137, r1	; 0x800137 <contTelaOnOff>
+	}
+}
+ 366:	ff 91       	pop	r31
+ 368:	ef 91       	pop	r30
+ 36a:	bf 91       	pop	r27
+ 36c:	af 91       	pop	r26
+ 36e:	9f 91       	pop	r25
+ 370:	8f 91       	pop	r24
+ 372:	7f 91       	pop	r23
+ 374:	6f 91       	pop	r22
+ 376:	5f 91       	pop	r21
+ 378:	4f 91       	pop	r20
+ 37a:	3f 91       	pop	r19
+ 37c:	2f 91       	pop	r18
+ 37e:	0f 90       	pop	r0
+ 380:	0f be       	out	0x3f, r0	; 63
+ 382:	0f 90       	pop	r0
+ 384:	1f 90       	pop	r1
+ 386:	18 95       	reti
+
+00000388 <setTimer1_UmSeg>:
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
 	// Pre scaler de 256 -> 62500Hz logo 62500 contagens para 1 seg
 
 	TCCR1A = 4; //modo comparação
- 2fa:	84 e0       	ldi	r24, 0x04	; 4
- 2fc:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+ 388:	84 e0       	ldi	r24, 0x04	; 4
+ 38a:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
 	TCCR1B = 0x4; //pre scaler de 256
- 300:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
-
+ 38e:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
 	TCNT1 = 0;  //contagem começa do zero
- 304:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
- 308:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
+ 392:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
+ 396:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
 	OCR1A = 62500; //até onde tem q contar
- 30c:	84 e2       	ldi	r24, 0x24	; 36
- 30e:	94 ef       	ldi	r25, 0xF4	; 244
- 310:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
- 314:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
-	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em A
- 318:	ef e6       	ldi	r30, 0x6F	; 111
- 31a:	f0 e0       	ldi	r31, 0x00	; 0
- 31c:	80 81       	ld	r24, Z
- 31e:	82 60       	ori	r24, 0x02	; 2
- 320:	80 83       	st	Z, r24
+ 39a:	84 e2       	ldi	r24, 0x24	; 36
+ 39c:	94 ef       	ldi	r25, 0xF4	; 244
+ 39e:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 3a2:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em 
+ 3a6:	ef e6       	ldi	r30, 0x6F	; 111
+ 3a8:	f0 e0       	ldi	r31, 0x00	; 0
+ 3aa:	80 81       	ld	r24, Z
+ 3ac:	82 60       	ori	r24, 0x02	; 2
+ 3ae:	80 83       	st	Z, r24
+	sei(); // talvez colocar no mais ??
+ 3b0:	78 94       	sei
+ 3b2:	08 95       	ret
 
-	sei();
- 322:	78 94       	sei
- 324:	08 95       	ret
-
-00000326 <__vector_11>:
+000003b4 <lerSenha>:
 }
 
-ISR(TIMER1_COMPA_vect){
- 326:	1f 92       	push	r1
- 328:	0f 92       	push	r0
- 32a:	0f b6       	in	r0, 0x3f	; 63
- 32c:	0f 92       	push	r0
- 32e:	11 24       	eor	r1, r1
- 330:	2f 93       	push	r18
- 332:	3f 93       	push	r19
- 334:	4f 93       	push	r20
- 336:	5f 93       	push	r21
- 338:	6f 93       	push	r22
- 33a:	7f 93       	push	r23
- 33c:	8f 93       	push	r24
- 33e:	9f 93       	push	r25
- 340:	af 93       	push	r26
- 342:	bf 93       	push	r27
- 344:	ef 93       	push	r30
- 346:	ff 93       	push	r31
-	writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
- 348:	82 e0       	ldi	r24, 0x02	; 2
- 34a:	91 e0       	ldi	r25, 0x01	; 1
- 34c:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
-	if (teclaG == 12)
- 350:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <teclaG>
- 354:	8c 30       	cpi	r24, 0x0C	; 12
- 356:	31 f4       	brne	.+12     	; 0x364 <__vector_11+0x3e>
-		contTelaOnOff++;
- 358:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <__data_end>
- 35c:	8f 5f       	subi	r24, 0xFF	; 255
- 35e:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <__data_end>
- 362:	02 c0       	rjmp	.+4      	; 0x368 <__vector_11+0x42>
-	else
-		contTelaOnOff = 0;
- 364:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <__data_end>
-		
-	if(contTelaOnOff == 3){ // se for # por 3 segundos
- 368:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <__data_end>
- 36c:	83 30       	cpi	r24, 0x03	; 3
- 36e:	91 f4       	brne	.+36     	; 0x394 <__vector_11+0x6e>
-		if (telaOnOf){
- 370:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 374:	88 23       	and	r24, r24
- 376:	31 f0       	breq	.+12     	; 0x384 <__vector_11+0x5e>
-			writeInstruction(lcd_DisplayOff); //desliga se tiver ligada 
- 378:	88 e0       	ldi	r24, 0x08	; 8
- 37a:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
-			telaOnOf = 0;
- 37e:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
- 382:	06 c0       	rjmp	.+12     	; 0x390 <__vector_11+0x6a>
-		}else{
-			writeInstruction(lcd_DisplayOn); //liga se tiver desligada
- 384:	8c e0       	ldi	r24, 0x0C	; 12
- 386:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
-			telaOnOf = 1;
- 38a:	81 e0       	ldi	r24, 0x01	; 1
- 38c:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+int lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
+ 3b4:	ff 92       	push	r15
+ 3b6:	0f 93       	push	r16
+ 3b8:	1f 93       	push	r17
+ 3ba:	cf 93       	push	r28
+ 3bc:	df 93       	push	r29
+	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
+	char teclaG = acao_tecla(teclaDebouce());
+ 3be:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 3c2:	0e 94 b2 00 	call	0x164	; 0x164 <acao_tecla>
+ 3c6:	c8 2f       	mov	r28, r24
+	char contador = 1;
+	int senhaLida =0;
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+ 3c8:	80 ec       	ldi	r24, 0xC0	; 192
+ 3ca:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+	char teclaAnterior=0;
+ 3ce:	f1 2c       	mov	r15, r1
+
+int lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
+	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
+	char teclaG = acao_tecla(teclaDebouce());
+	char contador = 1;
+	int senhaLida =0;
+ 3d0:	00 e0       	ldi	r16, 0x00	; 0
+ 3d2:	10 e0       	ldi	r17, 0x00	; 0
+}
+
+int lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
+	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
+	char teclaG = acao_tecla(teclaDebouce());
+	char contador = 1;
+ 3d4:	d1 e0       	ldi	r29, 0x01	; 1
+	int senhaLida =0;
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	char teclaAnterior=0;
+	while (teclaG != KEY_CONFIRMA || contador<= N_CARACSENHA){
+ 3d6:	8b c0       	rjmp	.+278    	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+		teclaG = teclaDebouce();
+ 3d8:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 3dc:	c8 2f       	mov	r28, r24
+		if(teclaG!= TECLA_INVALIDA && teclaG!=KEY_CONFIRMA && teclaG !=KEY_APAGAR){
+ 3de:	89 31       	cpi	r24, 0x19	; 25
+ 3e0:	09 f4       	brne	.+2      	; 0x3e4 <lerSenha+0x30>
+ 3e2:	47 c0       	rjmp	.+142    	; 0x472 <__EEPROM_REGION_LENGTH__+0x72>
+ 3e4:	8b 30       	cpi	r24, 0x0B	; 11
+ 3e6:	09 f4       	brne	.+2      	; 0x3ea <lerSenha+0x36>
+ 3e8:	44 c0       	rjmp	.+136    	; 0x472 <__EEPROM_REGION_LENGTH__+0x72>
+ 3ea:	89 30       	cpi	r24, 0x09	; 9
+ 3ec:	09 f4       	brne	.+2      	; 0x3f0 <lerSenha+0x3c>
+ 3ee:	41 c0       	rjmp	.+130    	; 0x472 <__EEPROM_REGION_LENGTH__+0x72>
+			if(teclaG!= KEY_0){
+ 3f0:	8a 30       	cpi	r24, 0x0A	; 10
+ 3f2:	c1 f1       	breq	.+112    	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+				switch(contador){
+ 3f4:	d2 30       	cpi	r29, 0x02	; 2
+ 3f6:	b9 f0       	breq	.+46     	; 0x426 <__EEPROM_REGION_LENGTH__+0x26>
+ 3f8:	18 f4       	brcc	.+6      	; 0x400 <__EEPROM_REGION_LENGTH__>
+ 3fa:	d1 30       	cpi	r29, 0x01	; 1
+ 3fc:	31 f0       	breq	.+12     	; 0x40a <__EEPROM_REGION_LENGTH__+0xa>
+ 3fe:	32 c0       	rjmp	.+100    	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+ 400:	d3 30       	cpi	r29, 0x03	; 3
+ 402:	e1 f0       	breq	.+56     	; 0x43c <__EEPROM_REGION_LENGTH__+0x3c>
+ 404:	d4 30       	cpi	r29, 0x04	; 4
+ 406:	51 f1       	breq	.+84     	; 0x45c <__EEPROM_REGION_LENGTH__+0x5c>
+ 408:	2d c0       	rjmp	.+90     	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+					case 1:
+					senhaLida+= (teclaG+1)*1000;
+ 40a:	90 e0       	ldi	r25, 0x00	; 0
+ 40c:	01 96       	adiw	r24, 0x01	; 1
+ 40e:	48 ee       	ldi	r20, 0xE8	; 232
+ 410:	53 e0       	ldi	r21, 0x03	; 3
+ 412:	84 9f       	mul	r24, r20
+ 414:	90 01       	movw	r18, r0
+ 416:	85 9f       	mul	r24, r21
+ 418:	30 0d       	add	r19, r0
+ 41a:	94 9f       	mul	r25, r20
+ 41c:	30 0d       	add	r19, r0
+ 41e:	11 24       	eor	r1, r1
+ 420:	02 0f       	add	r16, r18
+ 422:	13 1f       	adc	r17, r19
+					break;
+ 424:	1f c0       	rjmp	.+62     	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+					case 2:
+					senhaLida+= (teclaG+1)*100;
+ 426:	90 e0       	ldi	r25, 0x00	; 0
+ 428:	01 96       	adiw	r24, 0x01	; 1
+ 42a:	44 e6       	ldi	r20, 0x64	; 100
+ 42c:	48 9f       	mul	r20, r24
+ 42e:	90 01       	movw	r18, r0
+ 430:	49 9f       	mul	r20, r25
+ 432:	30 0d       	add	r19, r0
+ 434:	11 24       	eor	r1, r1
+ 436:	02 0f       	add	r16, r18
+ 438:	13 1f       	adc	r17, r19
+					break;
+ 43a:	14 c0       	rjmp	.+40     	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+					case 3:
+					senhaLida+= (teclaG+1)*10;
+ 43c:	90 e0       	ldi	r25, 0x00	; 0
+ 43e:	01 96       	adiw	r24, 0x01	; 1
+ 440:	9c 01       	movw	r18, r24
+ 442:	22 0f       	add	r18, r18
+ 444:	33 1f       	adc	r19, r19
+ 446:	88 0f       	add	r24, r24
+ 448:	99 1f       	adc	r25, r25
+ 44a:	88 0f       	add	r24, r24
+ 44c:	99 1f       	adc	r25, r25
+ 44e:	88 0f       	add	r24, r24
+ 450:	99 1f       	adc	r25, r25
+ 452:	82 0f       	add	r24, r18
+ 454:	93 1f       	adc	r25, r19
+ 456:	08 0f       	add	r16, r24
+ 458:	19 1f       	adc	r17, r25
+					break;
+ 45a:	04 c0       	rjmp	.+8      	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+					case 4:
+					senhaLida+= (teclaG+1)*1;
+ 45c:	90 e0       	ldi	r25, 0x00	; 0
+ 45e:	01 96       	adiw	r24, 0x01	; 1
+ 460:	08 0f       	add	r16, r24
+ 462:	19 1f       	adc	r17, r25
+					default:
+					senhaLida+=0;
+					break;
+				}
+			}
+			contador++;
+ 464:	df 5f       	subi	r29, 0xFF	; 255
+			teclaAnterior =teclaG;
+			writeString("*");
+ 466:	87 e0       	ldi	r24, 0x07	; 7
+ 468:	91 e0       	ldi	r25, 0x01	; 1
+ 46a:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+					senhaLida+=0;
+					break;
+				}
+			}
+			contador++;
+			teclaAnterior =teclaG;
+ 46e:	fc 2e       	mov	r15, r28
+			writeString("*");
+ 470:	3e c0       	rjmp	.+124    	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
 		}
-		contTelaOnOff = 0;
- 390:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <__data_end>
+		else if(teclaG == KEY_APAGAR){
+ 472:	c9 30       	cpi	r28, 0x09	; 9
+ 474:	e1 f5       	brne	.+120    	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+			if(contador>1){
+ 476:	d2 30       	cpi	r29, 0x02	; 2
+ 478:	d0 f1       	brcs	.+116    	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+				contador --;
+ 47a:	d1 50       	subi	r29, 0x01	; 1
+				switch(contador){
+ 47c:	d2 30       	cpi	r29, 0x02	; 2
+ 47e:	c1 f0       	breq	.+48     	; 0x4b0 <__EEPROM_REGION_LENGTH__+0xb0>
+ 480:	18 f4       	brcc	.+6      	; 0x488 <__EEPROM_REGION_LENGTH__+0x88>
+ 482:	d1 30       	cpi	r29, 0x01	; 1
+ 484:	31 f0       	breq	.+12     	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
+ 486:	33 c0       	rjmp	.+102    	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+ 488:	d3 30       	cpi	r29, 0x03	; 3
+ 48a:	f9 f0       	breq	.+62     	; 0x4ca <__EEPROM_REGION_LENGTH__+0xca>
+ 48c:	d4 30       	cpi	r29, 0x04	; 4
+ 48e:	51 f1       	breq	.+84     	; 0x4e4 <__EEPROM_REGION_LENGTH__+0xe4>
+ 490:	2e c0       	rjmp	.+92     	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+					case 1:
+					senhaLida-= (teclaAnterior+1)*1000;
+ 492:	8f 2d       	mov	r24, r15
+ 494:	90 e0       	ldi	r25, 0x00	; 0
+ 496:	01 96       	adiw	r24, 0x01	; 1
+ 498:	48 e1       	ldi	r20, 0x18	; 24
+ 49a:	5c ef       	ldi	r21, 0xFC	; 252
+ 49c:	84 9f       	mul	r24, r20
+ 49e:	90 01       	movw	r18, r0
+ 4a0:	85 9f       	mul	r24, r21
+ 4a2:	30 0d       	add	r19, r0
+ 4a4:	94 9f       	mul	r25, r20
+ 4a6:	30 0d       	add	r19, r0
+ 4a8:	11 24       	eor	r1, r1
+ 4aa:	02 0f       	add	r16, r18
+ 4ac:	13 1f       	adc	r17, r19
+					break;
+ 4ae:	1f c0       	rjmp	.+62     	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+					case 2:
+					senhaLida-= (teclaAnterior+1)*100;
+ 4b0:	2f 2d       	mov	r18, r15
+ 4b2:	30 e0       	ldi	r19, 0x00	; 0
+ 4b4:	2f 5f       	subi	r18, 0xFF	; 255
+ 4b6:	3f 4f       	sbci	r19, 0xFF	; 255
+ 4b8:	4c e9       	ldi	r20, 0x9C	; 156
+ 4ba:	42 03       	mulsu	r20, r18
+ 4bc:	c0 01       	movw	r24, r0
+ 4be:	43 9f       	mul	r20, r19
+ 4c0:	90 0d       	add	r25, r0
+ 4c2:	11 24       	eor	r1, r1
+ 4c4:	08 0f       	add	r16, r24
+ 4c6:	19 1f       	adc	r17, r25
+					break;
+ 4c8:	12 c0       	rjmp	.+36     	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+					case 3:
+					senhaLida-= (teclaAnterior+1)*10;
+ 4ca:	2f 2d       	mov	r18, r15
+ 4cc:	30 e0       	ldi	r19, 0x00	; 0
+ 4ce:	2f 5f       	subi	r18, 0xFF	; 255
+ 4d0:	3f 4f       	sbci	r19, 0xFF	; 255
+ 4d2:	46 ef       	ldi	r20, 0xF6	; 246
+ 4d4:	42 03       	mulsu	r20, r18
+ 4d6:	c0 01       	movw	r24, r0
+ 4d8:	43 9f       	mul	r20, r19
+ 4da:	90 0d       	add	r25, r0
+ 4dc:	11 24       	eor	r1, r1
+ 4de:	08 0f       	add	r16, r24
+ 4e0:	19 1f       	adc	r17, r25
+					break;
+ 4e2:	05 c0       	rjmp	.+10     	; 0x4ee <__EEPROM_REGION_LENGTH__+0xee>
+					case 4:
+					senhaLida-= (teclaAnterior+1)*1;
+ 4e4:	8f 2d       	mov	r24, r15
+ 4e6:	90 e0       	ldi	r25, 0x00	; 0
+ 4e8:	01 96       	adiw	r24, 0x01	; 1
+ 4ea:	08 1b       	sub	r16, r24
+ 4ec:	19 0b       	sbc	r17, r25
+	char teclaG = acao_tecla(teclaDebouce());
+	char contador = 1;
+	int senhaLida =0;
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	char teclaAnterior=0;
+	while (teclaG != KEY_CONFIRMA || contador<= N_CARACSENHA){
+ 4ee:	cb 30       	cpi	r28, 0x0B	; 11
+ 4f0:	09 f0       	breq	.+2      	; 0x4f4 <__EEPROM_REGION_LENGTH__+0xf4>
+ 4f2:	72 cf       	rjmp	.-284    	; 0x3d8 <lerSenha+0x24>
+ 4f4:	d5 30       	cpi	r29, 0x05	; 5
+ 4f6:	08 f4       	brcc	.+2      	; 0x4fa <__EEPROM_REGION_LENGTH__+0xfa>
+ 4f8:	6f cf       	rjmp	.-290    	; 0x3d8 <lerSenha+0x24>
+			}
+		}
 	}
+	//writeString("SenhaLida");
+	return senhaLida;
 }
- 394:	ff 91       	pop	r31
- 396:	ef 91       	pop	r30
- 398:	bf 91       	pop	r27
- 39a:	af 91       	pop	r26
- 39c:	9f 91       	pop	r25
- 39e:	8f 91       	pop	r24
- 3a0:	7f 91       	pop	r23
- 3a2:	6f 91       	pop	r22
- 3a4:	5f 91       	pop	r21
- 3a6:	4f 91       	pop	r20
- 3a8:	3f 91       	pop	r19
- 3aa:	2f 91       	pop	r18
- 3ac:	0f 90       	pop	r0
- 3ae:	0f be       	out	0x3f, r0	; 63
- 3b0:	0f 90       	pop	r0
- 3b2:	1f 90       	pop	r1
- 3b4:	18 95       	reti
+ 4fa:	c8 01       	movw	r24, r16
+ 4fc:	df 91       	pop	r29
+ 4fe:	cf 91       	pop	r28
+ 500:	1f 91       	pop	r17
+ 502:	0f 91       	pop	r16
+ 504:	ff 90       	pop	r15
+ 506:	08 95       	ret
 
-000003b6 <main>:
+00000508 <main>:
+
 
 
 int main(){
+ 508:	cf 93       	push	r28
 	
 	//USART_INIT(UBRR);
 	setup_lcd();
- 3b6:	0e 94 55 01 	call	0x2aa	; 0x2aa <setup_lcd>
+ 50a:	0e 94 55 01 	call	0x2aa	; 0x2aa <setup_lcd>
 	setupBotoes();
 	setTimer1_UmSeg();
- 3ba:	0e 94 7d 01 	call	0x2fa	; 0x2fa <setTimer1_UmSeg>
+ 50e:	0e 94 c4 01 	call	0x388	; 0x388 <setTimer1_UmSeg>
+	
+	Implementar debounce (e torcer para continuar funcionando)
 	*/
 	
 	
-	while (1){
+	while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
+ 512:	04 c0       	rjmp	.+8      	; 0x51c <main+0x14>
+		teclaG = teclaDebouce();
+ 514:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 518:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <teclaG>
+	
+	Implementar debounce (e torcer para continuar funcionando)
+	*/
+	
+	
+	while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
+ 51c:	80 91 36 01 	lds	r24, 0x0136	; 0x800136 <__data_end>
+ 520:	88 23       	and	r24, r24
+ 522:	c1 f3       	breq	.-16     	; 0x514 <main+0xc>
+		teclaG = teclaDebouce();
+	}
+	teclaG =TECLA_INVALIDA;
+ 524:	89 e1       	ldi	r24, 0x19	; 25
+ 526:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <teclaG>
+	writeString("Insira a Senha"); //chamada de senha inicial
+ 52a:	89 e0       	ldi	r24, 0x09	; 9
+ 52c:	91 e0       	ldi	r25, 0x01	; 1
+ 52e:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+	char senhaValida = 0;
+ 532:	c0 e0       	ldi	r28, 0x00	; 0
+	int senhaLida = 0;
+	while(!senhaValida){
+ 534:	22 c0       	rjmp	.+68     	; 0x57a <main+0x72>
+		senhaLida= lerSenha();
+ 536:	0e 94 da 01 	call	0x3b4	; 0x3b4 <lerSenha>
+		if (senhaLida == SENHAADM){
+ 53a:	20 91 04 01 	lds	r18, 0x0104	; 0x800104 <SENHAADM>
+ 53e:	30 91 05 01 	lds	r19, 0x0105	; 0x800105 <SENHAADM+0x1>
+ 542:	82 17       	cp	r24, r18
+ 544:	93 07       	cpc	r25, r19
+ 546:	31 f4       	brne	.+12     	; 0x554 <main+0x4c>
+			senhaValida =1;
+			writeString("bem vindo Adm");
+ 548:	88 e1       	ldi	r24, 0x18	; 24
+ 54a:	91 e0       	ldi	r25, 0x01	; 1
+ 54c:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+	char senhaValida = 0;
+	int senhaLida = 0;
+	while(!senhaValida){
+		senhaLida= lerSenha();
+		if (senhaLida == SENHAADM){
+			senhaValida =1;
+ 550:	c1 e0       	ldi	r28, 0x01	; 1
+ 552:	13 c0       	rjmp	.+38     	; 0x57a <main+0x72>
+			writeString("bem vindo Adm");
+		}
+		else if(senhaLida == SENHAUSER1 || senhaLida ==SENHAUSER2){
+ 554:	20 91 02 01 	lds	r18, 0x0102	; 0x800102 <SENHAUSER1>
+ 558:	30 91 03 01 	lds	r19, 0x0103	; 0x800103 <SENHAUSER1+0x1>
+ 55c:	82 17       	cp	r24, r18
+ 55e:	93 07       	cpc	r25, r19
+ 560:	39 f0       	breq	.+14     	; 0x570 <main+0x68>
+ 562:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 566:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 56a:	82 17       	cp	r24, r18
+ 56c:	93 07       	cpc	r25, r19
+ 56e:	29 f4       	brne	.+10     	; 0x57a <main+0x72>
+			senhaValida =1;
+			writeString("bem vindo USER");
+ 570:	86 e2       	ldi	r24, 0x26	; 38
+ 572:	91 e0       	ldi	r25, 0x01	; 1
+ 574:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+		if (senhaLida == SENHAADM){
+			senhaValida =1;
+			writeString("bem vindo Adm");
+		}
+		else if(senhaLida == SENHAUSER1 || senhaLida ==SENHAUSER2){
+			senhaValida =1;
+ 578:	c1 e0       	ldi	r28, 0x01	; 1
+	}
+	teclaG =TECLA_INVALIDA;
+	writeString("Insira a Senha"); //chamada de senha inicial
+	char senhaValida = 0;
+	int senhaLida = 0;
+	while(!senhaValida){
+ 57a:	cc 23       	and	r28, r28
+ 57c:	e1 f2       	breq	.-72     	; 0x536 <main+0x2e>
+	}
+	//while(1){
+		//pensar o resto aqui
 		
-		teclaG = acao_tecla(teclaDebouce());
- 3be:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
- 3c2:	0e 94 b2 00 	call	0x164	; 0x164 <acao_tecla>
- 3c6:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <teclaG>
- 3ca:	f9 cf       	rjmp	.-14     	; 0x3be <main+0x8>
+	//}
+}
+ 57e:	80 e0       	ldi	r24, 0x00	; 0
+ 580:	90 e0       	ldi	r25, 0x00	; 0
+ 582:	cf 91       	pop	r28
+ 584:	08 95       	ret
 
-000003cc <__tablejump2__>:
- 3cc:	ee 0f       	add	r30, r30
- 3ce:	ff 1f       	adc	r31, r31
- 3d0:	05 90       	lpm	r0, Z+
- 3d2:	f4 91       	lpm	r31, Z
- 3d4:	e0 2d       	mov	r30, r0
- 3d6:	09 94       	ijmp
+00000586 <__tablejump2__>:
+ 586:	ee 0f       	add	r30, r30
+ 588:	ff 1f       	adc	r31, r31
+ 58a:	05 90       	lpm	r0, Z+
+ 58c:	f4 91       	lpm	r31, Z
+ 58e:	e0 2d       	mov	r30, r0
+ 590:	09 94       	ijmp
 
-000003d8 <_exit>:
- 3d8:	f8 94       	cli
+00000592 <_exit>:
+ 592:	f8 94       	cli
 
-000003da <__stop_program>:
- 3da:	ff cf       	rjmp	.-2      	; 0x3da <__stop_program>
+00000594 <__stop_program>:
+ 594:	ff cf       	rjmp	.-2      	; 0x594 <__stop_program>

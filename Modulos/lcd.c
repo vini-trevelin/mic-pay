@@ -36,7 +36,7 @@ void setup_lcd(){
     writeInstruction(lcd_EntryMode);
     
 	// Display On
-    writeInstruction(lcd_DisplayOn); 
+   // writeInstruction(lcd_DisplayOn); 
 }
 
 void writeString(char text[])
