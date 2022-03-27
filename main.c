@@ -109,8 +109,7 @@ int main(){
 	
 	while (1){
 		
-		teclaG = acao_tecla(tecla_lida());
-		_delay_ms(50);
+		teclaG = acao_tecla(teclaDebouce());
 	}
 }
 

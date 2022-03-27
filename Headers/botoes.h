@@ -1,4 +1,5 @@
 uint8_t tecla_lida();
+uint8_t teclaDebouce();
 char acao_tecla(uint8_t num);
 void setupBotoes();
 
