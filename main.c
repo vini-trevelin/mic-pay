@@ -13,7 +13,7 @@
 #include "Headers/botoes.h"
 #include <util/delay.h>
 
-#define N_CARACSENHA 4 // todas as senhas com 4 caracteres? REVER ISSO
+#define N_CARACSENHA 6 // todas as senhas com 4 caracteres? REVER ISSO
 
 
 
@@ -25,9 +25,13 @@
 char teclaG = TECLA_INVALIDA;
 char contTelaOnOff = 0; //para segurar o botão por 3 segundos
 char telaOnOf = 0; //para saber o estado da tela (inicia Desligada)
-int SENHAADM   = 1234;
-int SENHAUSER1 = 0001;
-int SENHAUSER2 = 0002;
+
+char senhas[3][N_CARACSENHA] =  {	{1, 1, 1, 1,1,1},
+									{1, 1, 1, 1,1,1},
+									{1, 1, 1, 1,1,1},	
+								};
+char senhaLida[N_CARACSENHA] =  {'F','F','F','F','F','F'}; 
+char userIndex= 10;
 
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
@@ -72,63 +76,49 @@ void setTimer1_UmSeg(){
 	sei(); // talvez colocar no mais ??
 }
 
-int lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
-	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
-	char teclaG = acao_tecla(teclaDebouce());
-	char contador = 1;
-	int senhaLida =0;
-	writeInstruction(lcd_LineTwo | lcd_SetCursor);
-	char teclaAnterior=0;
-	while (teclaG != KEY_CONFIRMA || contador<= N_CARACSENHA){
-		teclaG = teclaDebouce();
-		if(teclaG!= TECLA_INVALIDA && teclaG!=KEY_CONFIRMA && teclaG !=KEY_APAGAR){
-			if(teclaG!= KEY_0){
-				switch(contador){
-					case 1:
-					senhaLida+= (teclaG+1)*1000;
-					break;
-					case 2:
-					senhaLida+= (teclaG+1)*100;
-					break;
-					case 3:
-					senhaLida+= (teclaG+1)*10;
-					break;
-					case 4:
-					senhaLida+= (teclaG+1)*1;
-					break;
-					default:
-					senhaLida+=0;
-					break;
-				}
-			}
-			contador++;
-			teclaAnterior =teclaG;
-			writeString("*");
-		}
-		else if(teclaG == KEY_APAGAR){
-			if(contador>1){
-				contador --;
-				switch(contador){
-					case 1:
-					senhaLida-= (teclaAnterior+1)*1000;
-					break;
-					case 2:
-					senhaLida-= (teclaAnterior+1)*100;
-					break;
-					case 3:
-					senhaLida-= (teclaAnterior+1)*10;
-					break;
-					case 4:
-					senhaLida-= (teclaAnterior+1)*1;
-					default:
-					senhaLida-=0;
-					break;
-				}
-			}
+char validarSenha(char senha1[],char senha2[]){
+	short i = 0;
+	char result =1;
+	for (i =0;i < N_CARACSENHA;i++){
+		if (senha1[i] != senha2[i])
+		{
+			writeCharacter(65);
+			result = 0; // se for falso da exit
 		}
 	}
-	//writeString("SenhaLida");
-	return senhaLida;
+	return result; // retorna Verdadeiro se for igual
+}
+
+
+void lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
+	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
+	teclaG = acao_tecla(teclaDebouce());// mantendo a global ??
+	short contador = 0;
+	char flagOutConfirma = 0;
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	while (!flagOutConfirma || contador ==0){
+		flagOutConfirma = 0;
+		teclaG = teclaDebouce();
+		if(teclaG!= TECLA_INVALIDA && teclaG!=KEY_CONFIRMA && teclaG !=KEY_APAGAR && contador < N_CARACSENHA){
+			senhaLida[contador] = teclaG+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
+			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
+			contador++;
+		}
+		else if(teclaG == KEY_APAGAR){
+			if(contador>0){
+				uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
+			    writeInstruction(lcd_LineTwo | aux);
+				writeString(" "); //TROCAR POR CARACTERE DE ESPACO
+				writeInstruction(lcd_LineTwo | aux);
+				contador --;
+			}
+			senhaLida[contador] = 'F';
+		}
+		else if (teclaG == KEY_CONFIRMA){
+			flagOutConfirma = 1;
+		}
+	}
+	teclaG = TECLA_INVALIDA; //limpa a teclaG
 }
 
 
@@ -136,6 +126,7 @@ int lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo 
 int main(){
 	
 	//USART_INIT(UBRR);
+	short i;
 	setup_lcd();
 	setupBotoes();
 	setTimer1_UmSeg();
@@ -172,29 +163,32 @@ int main(){
 	Implementar debounce (e torcer para continuar funcionando)
 	*/
 	
+	while(1){
+		//while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
+		//	teclaG = teclaDebouce();
+		//}
+		writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
+		teclaG =TECLA_INVALIDA;
+		writeString("Insira a Senha"); //chamada de senha inicial
+		char senhaValida = 0;
+		while(!senhaValida){
+			lerSenha();
+			for (i =0;i<3 ; i++){
+				if(senhaValida == 0 ){
+					senhaValida = validarSenha(senhaLida,senhas[i]);
+				}
+				if (senhaValida){
+					userIndex = i;
+					break;
+				}
+			}
+		}
+		writeInstruction(lcd_Clear);
+		writeInstruction(lcd_LineOne | lcd_SetCursor);
+		writeString("Bem Vindo");
+		while(1); // só para parar aqui
+	}
 	
-	while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
-		teclaG = teclaDebouce();
-	}
-	teclaG =TECLA_INVALIDA;
-	writeString("Insira a Senha"); //chamada de senha inicial
-	char senhaValida = 0;
-	int senhaLida = 0;
-	while(!senhaValida){
-		senhaLida= lerSenha();
-		if (senhaLida == SENHAADM){
-			senhaValida =1;
-			writeString("bem vindo Adm");
-		}
-		else if(senhaLida == SENHAUSER1 || senhaLida ==SENHAUSER2){
-			senhaValida =1;
-			writeString("bem vindo USER");
-		}
-	}
-	//while(1){
-		//pensar o resto aqui
-		
-	//}
 }
 
 
@@ -213,3 +207,5 @@ int main(){
 		writeInstruction(lcd_LineTwo | lcd_SetCursor);
 		writeString(sfinal);
 		*/
+	
+	
