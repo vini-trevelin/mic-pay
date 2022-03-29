@@ -102,6 +102,7 @@ void lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo
 		if(teclaG!= TECLA_INVALIDA && teclaG!=KEY_CONFIRMA && teclaG !=KEY_APAGAR && contador < N_CARACSENHA){
 			senhaLida[contador] = teclaG+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
 			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
+			// # é 35 e * é 42, mas acho q deixamos mostrando a senha mesmo para facilitar 
 			contador++;
 		}
 		else if(teclaG == KEY_APAGAR){
@@ -131,21 +132,11 @@ int main(){
 	setupBotoes();
 	setTimer1_UmSeg();
 	//char str[3];	
+	
 	/*
 	Antes do while(1) teremos um setupMaquina();
 		Limpa e desliga a tela
-		
-	Como pretendo fazer a tela ligar/desligar:
-		Se a tecla lida for = #:
-			Liga um timer e interrupçoes 
-			Deixa o prog rodando
-			dps que passar os N segundos la
-			timer da OV e ve se a tecla ainda é #
-			se for desliga/liga
-			(poderia ate desligar o timer dps, mas provavelmente vamos usar ele para mais coisa)
-			(podemos fazer nossa padrão ser o segundo e dai só fazemos multiplos dele)
-		
-		Para isso vamos precisar de uma varivael global tecla_lida e de uma bool para ver se esta on ou off
+		vamos precisar de uma varivael global bool para ver se a tela esta on ou off
 		
 		
 	Talvez para a primeira  ligada não precisaria fazer o esquema com timer
@@ -157,10 +148,6 @@ int main(){
 		} 
 	e dai dps vem o while grande q vai controlar tudo
 	
-	No momento acao_tecla (antiga valor_tecla) não retorna nada
-	mas provavelmente terá q retornar para que possamos usar tecla_lida aqui na main
-	
-	Implementar debounce (e torcer para continuar funcionando)
 	*/
 	
 	while(1){
@@ -178,7 +165,7 @@ int main(){
 					senhaValida = validarSenha(senhaLida,senhas[i]);
 				}
 				if (senhaValida){
-					userIndex = i;
+					userIndex = i; //0 -> adm , 1 e 2 vendedores (?)
 					break;
 				}
 			}
