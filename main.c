@@ -112,7 +112,7 @@ int main(){
 		//}
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		teclaG =TECLA_INVALIDA;
-		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial
+		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
 
 		while(1); // só para parar aqui
 	}

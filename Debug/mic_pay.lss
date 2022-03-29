@@ -1056,7 +1056,7 @@ int main(){
 		teclaG =TECLA_INVALIDA;
  590:	89 e1       	ldi	r24, 0x19	; 25
  592:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <teclaG>
-		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial
+		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
  596:	81 e0       	ldi	r24, 0x01	; 1
  598:	91 e0       	ldi	r25, 0x01	; 1
  59a:	0e 94 fa 01 	call	0x3f4	; 0x3f4 <login>
