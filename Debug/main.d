@@ -20,8 +20,9 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  .././Modulos/delayT1.c .././Modulos/serial.c \
- .././Modulos/../Headers/serial.h .././Modulos/lcd.c \
- .././Headers/botoes.h
+ .././Modulos/../Headers/serial.h .././Modulos/lcd.c .././Modulos/senha.c \
+ .././Modulos/../Headers/senha.h .././Headers/botoes.h \
+ .././Headers/senha.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -75,4 +76,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././Modulos/lcd.c:
 
+.././Modulos/senha.c:
+
+.././Modulos/../Headers/senha.h:
+
 .././Headers/botoes.h:
+
+.././Headers/senha.h:

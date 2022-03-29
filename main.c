@@ -10,7 +10,9 @@
 #include "Modulos/delayT1.c"
 #include "Modulos/serial.c"
 #include "Modulos/lcd.c"
+#include "Modulos/senha.c"
 #include "Headers/botoes.h"
+#include "Headers/senha.h"
 #include <util/delay.h>
 
 #define N_CARACSENHA 6 // todas as senhas com 4 caracteres? REVER ISSO
@@ -26,12 +28,7 @@ char teclaG = TECLA_INVALIDA;
 char contTelaOnOff = 0; //para segurar o botão por 3 segundos
 char telaOnOf = 0; //para saber o estado da tela (inicia Desligada)
 
-char senhas[3][N_CARACSENHA] =  {	{1, 1, 1, 1,1,1},
-									{1, 1, 1, 1,1,1},
-									{1, 1, 1, 1,1,1},	
-								};
-char senhaLida[N_CARACSENHA] =  {'F','F','F','F','F','F'}; 
-char userIndex= 10;
+ char userIndex= 10;
 
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
@@ -76,58 +73,9 @@ void setTimer1_UmSeg(){
 	sei(); // talvez colocar no mais ??
 }
 
-char validarSenha(char senha1[],char senha2[]){
-	short i = 0;
-	char result =1;
-	for (i =0;i < N_CARACSENHA;i++){
-		if (senha1[i] != senha2[i])
-		{
-			writeCharacter(65);
-			result = 0; // se for falso da exit
-		}
-	}
-	return result; // retorna Verdadeiro se for igual
-}
-
-
-void lerSenha(){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
-	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
-	teclaG = acao_tecla(teclaDebouce());// mantendo a global ??
-	short contador = 0;
-	char flagOutConfirma = 0;
-	writeInstruction(lcd_LineTwo | lcd_SetCursor);
-	while (!flagOutConfirma || contador ==0){
-		flagOutConfirma = 0;
-		teclaG = teclaDebouce();
-		if(teclaG!= TECLA_INVALIDA && teclaG!=KEY_CONFIRMA && teclaG !=KEY_APAGAR && contador < N_CARACSENHA){
-			senhaLida[contador] = teclaG+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
-			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
-			// # é 35 e * é 42, mas acho q deixamos mostrando a senha mesmo para facilitar 
-			contador++;
-		}
-		else if(teclaG == KEY_APAGAR){
-			if(contador>0){
-				uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
-			    writeInstruction(lcd_LineTwo | aux);
-				writeString(" "); //TROCAR POR CARACTERE DE ESPACO
-				writeInstruction(lcd_LineTwo | aux);
-				contador --;
-			}
-			senhaLida[contador] = 'F';
-		}
-		else if (teclaG == KEY_CONFIRMA){
-			flagOutConfirma = 1;
-		}
-	}
-	teclaG = TECLA_INVALIDA; //limpa a teclaG
-}
-
-
-
 int main(){
 	
 	//USART_INIT(UBRR);
-	short i;
 	setup_lcd();
 	setupBotoes();
 	setTimer1_UmSeg();
@@ -150,42 +98,26 @@ int main(){
 	
 	*/
 	
+	//rotina para ligar 1° vez
+	// ...
+	
+	writeInstruction(lcd_DisplayOn);
+	writeString("Bloqueado"); //ficar mais fiel ao pdf
+	_delay_ms(2000);
+	writeInstruction(lcd_Home | lcd_Clear);
+	
 	while(1){
 		//while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
 		//	teclaG = teclaDebouce();
 		//}
-		writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
+		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		teclaG =TECLA_INVALIDA;
-		writeString("Insira a Senha"); //chamada de senha inicial
-		char senhaValida = 0;
-		while(!senhaValida){
-			lerSenha();
-			for (i =0;i<3 ; i++){
-				if(senhaValida == 0 ){
-					senhaValida = validarSenha(senhaLida,senhas[i]);
-				}
-				if (senhaValida){
-					userIndex = i; //0 -> adm , 1 e 2 vendedores (?)
-					break;
-				}
-			}
-		}
-		writeInstruction(lcd_Clear);
-		writeInstruction(lcd_LineOne | lcd_SetCursor);
-		writeString("Bem Vindo");
+		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial
+
 		while(1); // só para parar aqui
 	}
 	
 }
-
-
-	//teclaLida = varrerTeclado();
-	//if (teclaLida!=TECLA_INVALIDA){
-	//	execCmdTecla(teclaLida);
-	//	//USART_envia(freq);
-	//	writeCharacter(freq);
-	//	//testeAAAAAAAAAAAAAAAAAAAAA
-	//}
 	
 	
 	/*
