@@ -1,5 +1,5 @@
 //#define F_CPU 16000000	//freq CPU (16Mhz) JA ESTOU DEFININDO NO LCD
-#define BAUD 9600		//baud rate
+#define BAUD 19200		//baud rate
 #define UBRR F_CPU/16/BAUD-1
 #include "../Headers/serial.h"
 

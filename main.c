@@ -10,9 +10,12 @@
 #include "Modulos/delayT1.c"
 #include "Modulos/serial.c"
 #include "Modulos/lcd.c"
+#include "Modulos/vendas.c"
 #include "Modulos/senha.c"
+
 #include "Headers/botoes.h"
 #include "Headers/senha.h"
+
 #include <util/delay.h>
 
 #define N_CARACSENHA 6 // todas as senhas com 4 caracteres? REVER ISSO
@@ -29,6 +32,7 @@ char contTelaOnOff = 0; //para segurar o botão por 3 segundos
 char telaOnOf = 0; //para saber o estado da tela (inicia Desligada)
 
  char userIndex= 10;
+ short controle = 1;
 
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
@@ -75,7 +79,7 @@ void setTimer1_UmSeg(){
 
 int main(){
 	
-	//USART_INIT(UBRR);
+	USART_INIT(UBRR);
 	setup_lcd();
 	setupBotoes();
 	setTimer1_UmSeg();
@@ -113,8 +117,24 @@ int main(){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		teclaG =TECLA_INVALIDA;
 		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
-
-		while(1); // só para parar aqui
+		
+		if(userIndex != 0){
+			while(1){
+				_delay_ms(3000);
+				menu_vendas();
+				while(teclaG+49 > 51){
+					teclaG = teclaDebouce();
+				}
+				processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
+				break;
+			}
+		}
+		
+		if(userIndex == 0){
+			// MODO ADM....
+		}
+		
+		//while(1); // só para parar aqui
 	}
 	
 }

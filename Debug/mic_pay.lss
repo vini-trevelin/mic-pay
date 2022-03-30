@@ -3,31 +3,31 @@ mic_pay.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000064  00800100  000005b4  00000648  2**0
+  0 .data         00000126  00800100  00000b50  00000be4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000005b4  00000000  00000000  00000094  2**1
+  1 .text         00000b50  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800164  00800164  000006ac  2**0
+  2 .bss          00000002  00800226  00800226  00000d0a  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000006ac  2**0
+  3 .comment      00000030  00000000  00000000  00000d0a  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000006dc  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000d3c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000b8  00000000  00000000  0000071c  2**0
+  5 .debug_aranges 00000130  00000000  00000000  00000d7c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000107f  00000000  00000000  000007d4  2**0
+  6 .debug_info   00001b52  00000000  00000000  00000eac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000824  00000000  00000000  00001853  2**0
+  7 .debug_abbrev 000008af  00000000  00000000  000029fe  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000008cc  00000000  00000000  00002077  2**0
+  8 .debug_line   00000e17  00000000  00000000  000032ad  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000234  00000000  00000000  00002944  2**2
+  9 .debug_frame  000003a4  00000000  00000000  000040c4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000054c  00000000  00000000  00002b78  2**0
+ 10 .debug_str    0000065d  00000000  00000000  00004468  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000a5e  00000000  00000000  000030c4  2**0
+ 11 .debug_loc    000012a8  00000000  00000000  00004ac5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000a8  00000000  00000000  00003b22  2**0
+ 12 .debug_ranges 00000120  00000000  00000000  00005d6d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -44,7 +44,7 @@ Disassembly of section .text:
   20:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   24:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   28:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
-  2c:	0c 94 51 02 	jmp	0x4a2	; 0x4a2 <__vector_11>
+  2c:	0c 94 00 05 	jmp	0xa00	; 0xa00 <__vector_11>
   30:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   34:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
   38:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
@@ -81,43 +81,44 @@ Disassembly of section .text:
   8a:	cd bf       	out	0x3d, r28	; 61
 
 0000008c <__do_copy_data>:
-  8c:	11 e0       	ldi	r17, 0x01	; 1
+  8c:	12 e0       	ldi	r17, 0x02	; 2
   8e:	a0 e0       	ldi	r26, 0x00	; 0
   90:	b1 e0       	ldi	r27, 0x01	; 1
-  92:	e4 eb       	ldi	r30, 0xB4	; 180
-  94:	f5 e0       	ldi	r31, 0x05	; 5
+  92:	e0 e5       	ldi	r30, 0x50	; 80
+  94:	fb e0       	ldi	r31, 0x0B	; 11
   96:	02 c0       	rjmp	.+4      	; 0x9c <__do_copy_data+0x10>
   98:	05 90       	lpm	r0, Z+
   9a:	0d 92       	st	X+, r0
-  9c:	a4 36       	cpi	r26, 0x64	; 100
+  9c:	a6 32       	cpi	r26, 0x26	; 38
   9e:	b1 07       	cpc	r27, r17
   a0:	d9 f7       	brne	.-10     	; 0x98 <__do_copy_data+0xc>
 
 000000a2 <__do_clear_bss>:
-  a2:	21 e0       	ldi	r18, 0x01	; 1
-  a4:	a4 e6       	ldi	r26, 0x64	; 100
-  a6:	b1 e0       	ldi	r27, 0x01	; 1
+  a2:	22 e0       	ldi	r18, 0x02	; 2
+  a4:	a6 e2       	ldi	r26, 0x26	; 38
+  a6:	b2 e0       	ldi	r27, 0x02	; 2
   a8:	01 c0       	rjmp	.+2      	; 0xac <.do_clear_bss_start>
 
 000000aa <.do_clear_bss_loop>:
   aa:	1d 92       	st	X+, r1
 
 000000ac <.do_clear_bss_start>:
-  ac:	a6 36       	cpi	r26, 0x66	; 102
+  ac:	a8 32       	cpi	r26, 0x28	; 40
   ae:	b2 07       	cpc	r27, r18
   b0:	e1 f7       	brne	.-8      	; 0xaa <.do_clear_bss_loop>
-  b2:	0e 94 b1 02 	call	0x562	; 0x562 <main>
-  b6:	0c 94 d8 02 	jmp	0x5b0	; 0x5b0 <_exit>
+  b2:	0e 94 60 05 	call	0xac0	; 0xac0 <main>
+  b6:	0c 94 a6 05 	jmp	0xb4c	; 0xb4c <_exit>
 
 000000ba <__bad_interrupt>:
   ba:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000be <tecla_lida>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
 
-// Função para receber 8bits dados 2 bits parada
-unsigned char USART_recebe(void){
-	while(!(UCSR0A & (1<<RXC0)));							// espera algum dado ser recebido (registrador)
-	return UDR0;											// retorna dado recebido
+	__builtin_avr_delay_cycles(__ticks_dc);
   be:	87 b1       	in	r24, 0x07	; 7
   c0:	80 7f       	andi	r24, 0xF0	; 240
   c2:	87 b9       	out	0x07, r24	; 7
@@ -210,7 +211,7 @@ unsigned char USART_recebe(void){
  16c:	fc 01       	movw	r30, r24
  16e:	ec 5c       	subi	r30, 0xCC	; 204
  170:	ff 4f       	sbci	r31, 0xFF	; 255
- 172:	0c 94 d2 02 	jmp	0x5a4	; 0x5a4 <__tablejump2__>
+ 172:	0c 94 a0 05 	jmp	0xb40	; 0xb40 <__tablejump2__>
  176:	81 e0       	ldi	r24, 0x01	; 1
  178:	08 95       	ret
  17a:	83 e0       	ldi	r24, 0x03	; 3
@@ -238,841 +239,1627 @@ unsigned char USART_recebe(void){
  1a6:	82 e0       	ldi	r24, 0x02	; 2
  1a8:	08 95       	ret
 
-000001aa <write>:
+000001aa <USART_INIT>:
+ 1aa:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+ 1ae:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+ 1b2:	88 e1       	ldi	r24, 0x18	; 24
+ 1b4:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7f80c1>
+ 1b8:	89 e0       	ldi	r24, 0x09	; 9
+ 1ba:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+ 1be:	08 95       	ret
 
+000001c0 <USART_envia>:
+ 1c0:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 1c4:	95 ff       	sbrs	r25, 5
+ 1c6:	fc cf       	rjmp	.-8      	; 0x1c0 <USART_envia>
+ 1c8:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 1cc:	08 95       	ret
 
-void write(uint8_t bitCmd)
-{
-	//coloca zero na portaD
-    lcdPort &= ~(1<<PORTB7);
- 1aa:	95 b1       	in	r25, 0x05	; 5
- 1ac:	9f 77       	andi	r25, 0x7F	; 127
- 1ae:	95 b9       	out	0x05, r25	; 5
-	lcdPort &= ~(1<<PORTB6);
- 1b0:	95 b1       	in	r25, 0x05	; 5
- 1b2:	9f 7b       	andi	r25, 0xBF	; 191
- 1b4:	95 b9       	out	0x05, r25	; 5
-	lcdPort &= ~(1<<PORTB5);
- 1b6:	95 b1       	in	r25, 0x05	; 5
- 1b8:	9f 7d       	andi	r25, 0xDF	; 223
- 1ba:	95 b9       	out	0x05, r25	; 5
-	lcdPort &= ~(1<<PORTB4);
- 1bc:	95 b1       	in	r25, 0x05	; 5
- 1be:	9f 7e       	andi	r25, 0xEF	; 239
- 1c0:	95 b9       	out	0x05, r25	; 5
-	             
-	//se tem 1 no bitRecebido na posiÃ§Ã£o de D7 .. D4 dai coloca 1 lÃ¡          
-    if (bitCmd & 1<<7) 
- 1c2:	88 23       	and	r24, r24
- 1c4:	1c f4       	brge	.+6      	; 0x1cc <write+0x22>
-		lcdPort |= (1<<PORTB7);    
- 1c6:	95 b1       	in	r25, 0x05	; 5
- 1c8:	90 68       	ori	r25, 0x80	; 128
- 1ca:	95 b9       	out	0x05, r25	; 5
-                        
-    if (bitCmd & 1<<6) 
- 1cc:	86 ff       	sbrs	r24, 6
- 1ce:	03 c0       	rjmp	.+6      	; 0x1d6 <write+0x2c>
-		lcdPort |= (1<<PORTB6);
- 1d0:	95 b1       	in	r25, 0x05	; 5
- 1d2:	90 64       	ori	r25, 0x40	; 64
- 1d4:	95 b9       	out	0x05, r25	; 5
+000001ce <USART_recebe>:
+ 1ce:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 1d2:	88 23       	and	r24, r24
+ 1d4:	e4 f7       	brge	.-8      	; 0x1ce <USART_recebe>
+ 1d6:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 1da:	08 95       	ret
 
-    if (bitCmd & 1<<5) 
- 1d6:	85 ff       	sbrs	r24, 5
- 1d8:	03 c0       	rjmp	.+6      	; 0x1e0 <write+0x36>
-		lcdPort |= (1<<PORTB5);
- 1da:	95 b1       	in	r25, 0x05	; 5
- 1dc:	90 62       	ori	r25, 0x20	; 32
- 1de:	95 b9       	out	0x05, r25	; 5
+000001dc <write>:
+ 1dc:	95 b1       	in	r25, 0x05	; 5
+ 1de:	9f 77       	andi	r25, 0x7F	; 127
+ 1e0:	95 b9       	out	0x05, r25	; 5
+ 1e2:	95 b1       	in	r25, 0x05	; 5
+ 1e4:	9f 7b       	andi	r25, 0xBF	; 191
+ 1e6:	95 b9       	out	0x05, r25	; 5
+ 1e8:	95 b1       	in	r25, 0x05	; 5
+ 1ea:	9f 7d       	andi	r25, 0xDF	; 223
+ 1ec:	95 b9       	out	0x05, r25	; 5
+ 1ee:	95 b1       	in	r25, 0x05	; 5
+ 1f0:	9f 7e       	andi	r25, 0xEF	; 239
+ 1f2:	95 b9       	out	0x05, r25	; 5
+ 1f4:	88 23       	and	r24, r24
+ 1f6:	1c f4       	brge	.+6      	; 0x1fe <write+0x22>
+ 1f8:	95 b1       	in	r25, 0x05	; 5
+ 1fa:	90 68       	ori	r25, 0x80	; 128
+ 1fc:	95 b9       	out	0x05, r25	; 5
+ 1fe:	86 ff       	sbrs	r24, 6
+ 200:	03 c0       	rjmp	.+6      	; 0x208 <write+0x2c>
+ 202:	95 b1       	in	r25, 0x05	; 5
+ 204:	90 64       	ori	r25, 0x40	; 64
+ 206:	95 b9       	out	0x05, r25	; 5
+ 208:	85 ff       	sbrs	r24, 5
+ 20a:	03 c0       	rjmp	.+6      	; 0x212 <write+0x36>
+ 20c:	95 b1       	in	r25, 0x05	; 5
+ 20e:	90 62       	ori	r25, 0x20	; 32
+ 210:	95 b9       	out	0x05, r25	; 5
+ 212:	84 ff       	sbrs	r24, 4
+ 214:	03 c0       	rjmp	.+6      	; 0x21c <write+0x40>
+ 216:	85 b1       	in	r24, 0x05	; 5
+ 218:	80 61       	ori	r24, 0x10	; 16
+ 21a:	85 b9       	out	0x05, r24	; 5
+ 21c:	85 b1       	in	r24, 0x05	; 5
+ 21e:	82 60       	ori	r24, 0x02	; 2
+ 220:	85 b9       	out	0x05, r24	; 5
+ 222:	85 e0       	ldi	r24, 0x05	; 5
+ 224:	8a 95       	dec	r24
+ 226:	f1 f7       	brne	.-4      	; 0x224 <write+0x48>
+ 228:	00 00       	nop
+ 22a:	85 b1       	in	r24, 0x05	; 5
+ 22c:	8d 7f       	andi	r24, 0xFD	; 253
+ 22e:	85 b9       	out	0x05, r24	; 5
+ 230:	85 e0       	ldi	r24, 0x05	; 5
+ 232:	8a 95       	dec	r24
+ 234:	f1 f7       	brne	.-4      	; 0x232 <write+0x56>
+ 236:	00 00       	nop
+ 238:	08 95       	ret
 
-    if (bitCmd & 1<<4) 
- 1e0:	84 ff       	sbrs	r24, 4
- 1e2:	03 c0       	rjmp	.+6      	; 0x1ea <write+0x40>
-		lcdPort |= (1<<PORTB4);
- 1e4:	85 b1       	in	r24, 0x05	; 5
- 1e6:	80 61       	ori	r24, 0x10	; 16
- 1e8:	85 b9       	out	0x05, r24	; 5
-		
-    lcdPort |= (1<<lcd_E_bit);                   // Enable 1 (escreve)
- 1ea:	85 b1       	in	r24, 0x05	; 5
- 1ec:	82 60       	ori	r24, 0x02	; 2
- 1ee:	85 b9       	out	0x05, r24	; 5
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
+0000023a <writeCharacter>:
+ 23a:	cf 93       	push	r28
+ 23c:	c8 2f       	mov	r28, r24
+ 23e:	85 b1       	in	r24, 0x05	; 5
+ 240:	81 60       	ori	r24, 0x01	; 1
+ 242:	85 b9       	out	0x05, r24	; 5
+ 244:	85 b1       	in	r24, 0x05	; 5
+ 246:	8d 7f       	andi	r24, 0xFD	; 253
+ 248:	85 b9       	out	0x05, r24	; 5
+ 24a:	8c 2f       	mov	r24, r28
+ 24c:	0e 94 ee 00 	call	0x1dc	; 0x1dc <write>
+ 250:	8c 2f       	mov	r24, r28
+ 252:	82 95       	swap	r24
+ 254:	80 7f       	andi	r24, 0xF0	; 240
+ 256:	0e 94 ee 00 	call	0x1dc	; 0x1dc <write>
+ 25a:	cf 91       	pop	r28
+ 25c:	08 95       	ret
 
-	__builtin_avr_delay_cycles(__ticks_dc);
- 1f0:	85 e0       	ldi	r24, 0x05	; 5
- 1f2:	8a 95       	dec	r24
- 1f4:	f1 f7       	brne	.-4      	; 0x1f2 <write+0x48>
- 1f6:	00 00       	nop
-    _delay_us(1);                                  
-    lcdPort &= ~(1<<lcd_E_bit);                  // Enable 0 
- 1f8:	85 b1       	in	r24, 0x05	; 5
- 1fa:	8d 7f       	andi	r24, 0xFD	; 253
- 1fc:	85 b9       	out	0x05, r24	; 5
- 1fe:	85 e0       	ldi	r24, 0x05	; 5
- 200:	8a 95       	dec	r24
- 202:	f1 f7       	brne	.-4      	; 0x200 <write+0x56>
- 204:	00 00       	nop
- 206:	08 95       	ret
+0000025e <writeString>:
+ 25e:	0f 93       	push	r16
+ 260:	1f 93       	push	r17
+ 262:	cf 93       	push	r28
+ 264:	df 93       	push	r29
+ 266:	00 d0       	rcall	.+0      	; 0x268 <writeString+0xa>
+ 268:	cd b7       	in	r28, 0x3d	; 61
+ 26a:	de b7       	in	r29, 0x3e	; 62
+ 26c:	8c 01       	movw	r16, r24
+ 26e:	1a 82       	std	Y+2, r1	; 0x02
+ 270:	19 82       	std	Y+1, r1	; 0x01
+ 272:	10 c0       	rjmp	.+32     	; 0x294 <writeString+0x36>
+ 274:	e9 81       	ldd	r30, Y+1	; 0x01
+ 276:	fa 81       	ldd	r31, Y+2	; 0x02
+ 278:	e0 0f       	add	r30, r16
+ 27a:	f1 1f       	adc	r31, r17
+ 27c:	80 81       	ld	r24, Z
+ 27e:	0e 94 1d 01 	call	0x23a	; 0x23a <writeCharacter>
+ 282:	89 81       	ldd	r24, Y+1	; 0x01
+ 284:	9a 81       	ldd	r25, Y+2	; 0x02
+ 286:	01 96       	adiw	r24, 0x01	; 1
+ 288:	9a 83       	std	Y+2, r25	; 0x02
+ 28a:	89 83       	std	Y+1, r24	; 0x01
+ 28c:	85 ed       	ldi	r24, 0xD5	; 213
+ 28e:	8a 95       	dec	r24
+ 290:	f1 f7       	brne	.-4      	; 0x28e <writeString+0x30>
+ 292:	00 00       	nop
+ 294:	e9 81       	ldd	r30, Y+1	; 0x01
+ 296:	fa 81       	ldd	r31, Y+2	; 0x02
+ 298:	e0 0f       	add	r30, r16
+ 29a:	f1 1f       	adc	r31, r17
+ 29c:	80 81       	ld	r24, Z
+ 29e:	81 11       	cpse	r24, r1
+ 2a0:	e9 cf       	rjmp	.-46     	; 0x274 <writeString+0x16>
+ 2a2:	0f 90       	pop	r0
+ 2a4:	0f 90       	pop	r0
+ 2a6:	df 91       	pop	r29
+ 2a8:	cf 91       	pop	r28
+ 2aa:	1f 91       	pop	r17
+ 2ac:	0f 91       	pop	r16
+ 2ae:	08 95       	ret
 
-00000208 <writeCharacter>:
-    }
-}
-
-
-void writeCharacter(uint8_t caracter)
-{
- 208:	cf 93       	push	r28
- 20a:	c8 2f       	mov	r28, r24
-    lcdPort |= (1<<lcd_RS_bit);                // garante RS = 0
- 20c:	85 b1       	in	r24, 0x05	; 5
- 20e:	81 60       	ori	r24, 0x01	; 1
- 210:	85 b9       	out	0x05, r24	; 5
-    lcdPort &= ~(1<<lcd_E_bit);                
- 212:	85 b1       	in	r24, 0x05	; 5
- 214:	8d 7f       	andi	r24, 0xFD	; 253
- 216:	85 b9       	out	0x05, r24	; 5
-    write(caracter);                            // primeiros 4 bits
- 218:	8c 2f       	mov	r24, r28
- 21a:	0e 94 d5 00 	call	0x1aa	; 0x1aa <write>
-    write(caracter << 4);                      // ultimos 4 bits
- 21e:	8c 2f       	mov	r24, r28
- 220:	82 95       	swap	r24
- 222:	80 7f       	andi	r24, 0xF0	; 240
- 224:	0e 94 d5 00 	call	0x1aa	; 0x1aa <write>
-}
- 228:	cf 91       	pop	r28
- 22a:	08 95       	ret
-
-0000022c <writeString>:
-	// Display On
-   // writeInstruction(lcd_DisplayOn); 
-}
-
-void writeString(char text[])
-{
- 22c:	0f 93       	push	r16
- 22e:	1f 93       	push	r17
- 230:	cf 93       	push	r28
- 232:	df 93       	push	r29
- 234:	00 d0       	rcall	.+0      	; 0x236 <writeString+0xa>
- 236:	cd b7       	in	r28, 0x3d	; 61
- 238:	de b7       	in	r29, 0x3e	; 62
- 23a:	8c 01       	movw	r16, r24
-    volatile int i = 0;                            
- 23c:	1a 82       	std	Y+2, r1	; 0x02
- 23e:	19 82       	std	Y+1, r1	; 0x01
-    while (text[i] != 0)
- 240:	10 c0       	rjmp	.+32     	; 0x262 <writeString+0x36>
-    {
-        writeCharacter(text[i]);
- 242:	e9 81       	ldd	r30, Y+1	; 0x01
- 244:	fa 81       	ldd	r31, Y+2	; 0x02
- 246:	e0 0f       	add	r30, r16
- 248:	f1 1f       	adc	r31, r17
- 24a:	80 81       	ld	r24, Z
- 24c:	0e 94 04 01 	call	0x208	; 0x208 <writeCharacter>
-        i++;
- 250:	89 81       	ldd	r24, Y+1	; 0x01
- 252:	9a 81       	ldd	r25, Y+2	; 0x02
- 254:	01 96       	adiw	r24, 0x01	; 1
- 256:	9a 83       	std	Y+2, r25	; 0x02
- 258:	89 83       	std	Y+1, r24	; 0x01
- 25a:	85 ed       	ldi	r24, 0xD5	; 213
- 25c:	8a 95       	dec	r24
- 25e:	f1 f7       	brne	.-4      	; 0x25c <writeString+0x30>
- 260:	00 00       	nop
-}
-
-void writeString(char text[])
-{
-    volatile int i = 0;                            
-    while (text[i] != 0)
- 262:	e9 81       	ldd	r30, Y+1	; 0x01
- 264:	fa 81       	ldd	r31, Y+2	; 0x02
- 266:	e0 0f       	add	r30, r16
- 268:	f1 1f       	adc	r31, r17
- 26a:	80 81       	ld	r24, Z
- 26c:	81 11       	cpse	r24, r1
- 26e:	e9 cf       	rjmp	.-46     	; 0x242 <writeString+0x16>
-    {
-        writeCharacter(text[i]);
-        i++;
-        _delay_us(40);     
-    }
-}
- 270:	0f 90       	pop	r0
- 272:	0f 90       	pop	r0
- 274:	df 91       	pop	r29
- 276:	cf 91       	pop	r28
- 278:	1f 91       	pop	r17
- 27a:	0f 91       	pop	r16
- 27c:	08 95       	ret
-
-0000027e <writeInstruction>:
-    write(caracter << 4);                      // ultimos 4 bits
-}
-
-
-void writeInstruction(uint8_t instruction)
-{
- 27e:	cf 93       	push	r28
- 280:	c8 2f       	mov	r28, r24
-    lcdPort &= ~(1<<lcd_RS_bit);                // garante RS = 0
- 282:	85 b1       	in	r24, 0x05	; 5
- 284:	8e 7f       	andi	r24, 0xFE	; 254
- 286:	85 b9       	out	0x05, r24	; 5
-    lcdPort &= ~(1<<lcd_E_bit);                
- 288:	85 b1       	in	r24, 0x05	; 5
- 28a:	8d 7f       	andi	r24, 0xFD	; 253
- 28c:	85 b9       	out	0x05, r24	; 5
-    write(instruction);                    // primeiros 4 bits
- 28e:	8c 2f       	mov	r24, r28
- 290:	0e 94 d5 00 	call	0x1aa	; 0x1aa <write>
-    write(instruction << 4);               // ultimos 4 bits
- 294:	8c 2f       	mov	r24, r28
- 296:	82 95       	swap	r24
- 298:	80 7f       	andi	r24, 0xF0	; 240
- 29a:	0e 94 d5 00 	call	0x1aa	; 0x1aa <write>
- 29e:	85 ed       	ldi	r24, 0xD5	; 213
- 2a0:	8a 95       	dec	r24
- 2a2:	f1 f7       	brne	.-4      	; 0x2a0 <writeInstruction+0x22>
- 2a4:	00 00       	nop
-	 _delay_us(40); 
-}
- 2a6:	cf 91       	pop	r28
- 2a8:	08 95       	ret
-
-000002aa <setup_lcd>:
-
-void setup_lcd(){
-	
-	//configura os pinos da porta B para saida
-	//f3 = 1111 0011 = B7 B6 ... B1 B0
-	DDRB = 0xf3;
- 2aa:	83 ef       	ldi	r24, 0xF3	; 243
- 2ac:	84 b9       	out	0x04, r24	; 4
-	
-    lcdPort &= ~(1<<lcd_RS_bit);                //RS = 0 -> setar parametros de config
- 2ae:	85 b1       	in	r24, 0x05	; 5
- 2b0:	8e 7f       	andi	r24, 0xFE	; 254
- 2b2:	85 b9       	out	0x05, r24	; 5
-    lcdPort &= ~(1<<lcd_E_bit);                  // enable 0
+000002b0 <writeInstruction>:
+ 2b0:	cf 93       	push	r28
+ 2b2:	c8 2f       	mov	r28, r24
  2b4:	85 b1       	in	r24, 0x05	; 5
- 2b6:	8d 7f       	andi	r24, 0xFD	; 253
+ 2b6:	8e 7f       	andi	r24, 0xFE	; 254
  2b8:	85 b9       	out	0x05, r24	; 5
+ 2ba:	85 b1       	in	r24, 0x05	; 5
+ 2bc:	8d 7f       	andi	r24, 0xFD	; 253
+ 2be:	85 b9       	out	0x05, r24	; 5
+ 2c0:	8c 2f       	mov	r24, r28
+ 2c2:	0e 94 ee 00 	call	0x1dc	; 0x1dc <write>
+ 2c6:	8c 2f       	mov	r24, r28
+ 2c8:	82 95       	swap	r24
+ 2ca:	80 7f       	andi	r24, 0xF0	; 240
+ 2cc:	0e 94 ee 00 	call	0x1dc	; 0x1dc <write>
+ 2d0:	85 ed       	ldi	r24, 0xD5	; 213
+ 2d2:	8a 95       	dec	r24
+ 2d4:	f1 f7       	brne	.-4      	; 0x2d2 <writeInstruction+0x22>
+ 2d6:	00 00       	nop
+ 2d8:	cf 91       	pop	r28
+ 2da:	08 95       	ret
 
-	//Reset
-    write(lcd_FunctionReset);
- 2ba:	80 e3       	ldi	r24, 0x30	; 48
- 2bc:	0e 94 d5 00 	call	0x1aa	; 0x1aa <write>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
+000002dc <setup_lcd>:
+ 2dc:	83 ef       	ldi	r24, 0xF3	; 243
+ 2de:	84 b9       	out	0x04, r24	; 4
+ 2e0:	85 b1       	in	r24, 0x05	; 5
+ 2e2:	8e 7f       	andi	r24, 0xFE	; 254
+ 2e4:	85 b9       	out	0x05, r24	; 5
+ 2e6:	85 b1       	in	r24, 0x05	; 5
+ 2e8:	8d 7f       	andi	r24, 0xFD	; 253
+ 2ea:	85 b9       	out	0x05, r24	; 5
+ 2ec:	80 e3       	ldi	r24, 0x30	; 48
+ 2ee:	0e 94 ee 00 	call	0x1dc	; 0x1dc <write>
+ 2f2:	8f e3       	ldi	r24, 0x3F	; 63
+ 2f4:	9c e9       	ldi	r25, 0x9C	; 156
+ 2f6:	01 97       	sbiw	r24, 0x01	; 1
+ 2f8:	f1 f7       	brne	.-4      	; 0x2f6 <setup_lcd+0x1a>
+ 2fa:	00 c0       	rjmp	.+0      	; 0x2fc <setup_lcd+0x20>
+ 2fc:	00 00       	nop
+ 2fe:	88 e2       	ldi	r24, 0x28	; 40
+ 300:	0e 94 ee 00 	call	0x1dc	; 0x1dc <write>
+ 304:	95 ed       	ldi	r25, 0xD5	; 213
+ 306:	9a 95       	dec	r25
+ 308:	f1 f7       	brne	.-4      	; 0x306 <setup_lcd+0x2a>
+ 30a:	00 00       	nop
+ 30c:	88 e2       	ldi	r24, 0x28	; 40
+ 30e:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 312:	88 e0       	ldi	r24, 0x08	; 8
+ 314:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 318:	81 e0       	ldi	r24, 0x01	; 1
+ 31a:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 31e:	86 e0       	ldi	r24, 0x06	; 6
+ 320:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 324:	08 95       	ret
 
-	__builtin_avr_delay_cycles(__ticks_dc);
- 2c0:	8f e3       	ldi	r24, 0x3F	; 63
- 2c2:	9c e9       	ldi	r25, 0x9C	; 156
- 2c4:	01 97       	sbiw	r24, 0x01	; 1
- 2c6:	f1 f7       	brne	.-4      	; 0x2c4 <setup_lcd+0x1a>
- 2c8:	00 c0       	rjmp	.+0      	; 0x2ca <setup_lcd+0x20>
- 2ca:	00 00       	nop
-    _delay_ms(10);
- 
-    write(lcd_FunctionSet4bit);
- 2cc:	88 e2       	ldi	r24, 0x28	; 40
- 2ce:	0e 94 d5 00 	call	0x1aa	; 0x1aa <write>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
+00000326 <formata_valor>:
+ 326:	fc 01       	movw	r30, r24
+ 328:	22 81       	ldd	r18, Z+2	; 0x02
+ 32a:	20 33       	cpi	r18, 0x30	; 48
+ 32c:	51 f4       	brne	.+20     	; 0x342 <formata_valor+0x1c>
+ 32e:	21 81       	ldd	r18, Z+1	; 0x01
+ 330:	20 33       	cpi	r18, 0x30	; 48
+ 332:	39 f4       	brne	.+14     	; 0x342 <formata_valor+0x1c>
+ 334:	20 81       	ld	r18, Z
+ 336:	20 33       	cpi	r18, 0x30	; 48
+ 338:	21 f4       	brne	.+8      	; 0x342 <formata_valor+0x1c>
+ 33a:	23 81       	ldd	r18, Z+3	; 0x03
+ 33c:	22 83       	std	Z+2, r18	; 0x02
+ 33e:	20 e3       	ldi	r18, 0x30	; 48
+ 340:	23 83       	std	Z+3, r18	; 0x03
+ 342:	08 95       	ret
 
-	__builtin_avr_delay_cycles(__ticks_dc);
- 2d2:	95 ed       	ldi	r25, 0xD5	; 213
- 2d4:	9a 95       	dec	r25
- 2d6:	f1 f7       	brne	.-4      	; 0x2d4 <setup_lcd+0x2a>
- 2d8:	00 00       	nop
-    _delay_us(40);                                
+00000344 <menu_vendas>:
+ 344:	81 e0       	ldi	r24, 0x01	; 1
+ 346:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 34a:	80 e8       	ldi	r24, 0x80	; 128
+ 34c:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 350:	80 e2       	ldi	r24, 0x20	; 32
+ 352:	91 e0       	ldi	r25, 0x01	; 1
+ 354:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 358:	80 ec       	ldi	r24, 0xC0	; 192
+ 35a:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 35e:	8e e2       	ldi	r24, 0x2E	; 46
+ 360:	91 e0       	ldi	r25, 0x01	; 1
+ 362:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 366:	08 95       	ret
 
-	// Coloca modo 4 bits
-    writeInstruction(lcd_FunctionSet4bit);
- 2da:	88 e2       	ldi	r24, 0x28	; 40
- 2dc:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+00000368 <menu_pagamento>:
+ 368:	81 e0       	ldi	r24, 0x01	; 1
+ 36a:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 36e:	80 e8       	ldi	r24, 0x80	; 128
+ 370:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 374:	8a e3       	ldi	r24, 0x3A	; 58
+ 376:	91 e0       	ldi	r25, 0x01	; 1
+ 378:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 37c:	80 ec       	ldi	r24, 0xC0	; 192
+ 37e:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 382:	8a e4       	ldi	r24, 0x4A	; 74
+ 384:	91 e0       	ldi	r25, 0x01	; 1
+ 386:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 38a:	08 95       	ret
 
-	//Display Off
-    writeInstruction(lcd_DisplayOff); 
- 2e0:	88 e0       	ldi	r24, 0x08	; 8
- 2e2:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+0000038c <metodo_pagamento>:
+ 38c:	0e 94 b4 01 	call	0x368	; 0x368 <menu_pagamento>
+ 390:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 394:	89 31       	cpi	r24, 0x19	; 25
+ 396:	e1 f3       	breq	.-8      	; 0x390 <metodo_pagamento+0x4>
+ 398:	8f 5f       	subi	r24, 0xFF	; 255
+ 39a:	08 95       	ret
+
+0000039c <menu_cartao>:
+ 39c:	81 e0       	ldi	r24, 0x01	; 1
+ 39e:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 3a2:	80 e8       	ldi	r24, 0x80	; 128
+ 3a4:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 3a8:	8b e5       	ldi	r24, 0x5B	; 91
+ 3aa:	91 e0       	ldi	r25, 0x01	; 1
+ 3ac:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 3b0:	80 ec       	ldi	r24, 0xC0	; 192
+ 3b2:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 3b6:	89 e6       	ldi	r24, 0x69	; 105
+ 3b8:	91 e0       	ldi	r25, 0x01	; 1
+ 3ba:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 3be:	08 95       	ret
+
+000003c0 <aguarda_cartao>:
+ 3c0:	cf 93       	push	r28
+ 3c2:	0e 94 ce 01 	call	0x39c	; 0x39c <menu_cartao>
+ 3c6:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 3ca:	c8 2f       	mov	r28, r24
+ 3cc:	0e 94 e7 00 	call	0x1ce	; 0x1ce <USART_recebe>
+ 3d0:	83 34       	cpi	r24, 0x43	; 67
+ 3d2:	51 f4       	brne	.+20     	; 0x3e8 <aguarda_cartao+0x28>
+ 3d4:	0e 94 e7 00 	call	0x1ce	; 0x1ce <USART_recebe>
+ 3d8:	8d 34       	cpi	r24, 0x4D	; 77
+ 3da:	19 f0       	breq	.+6      	; 0x3e2 <aguarda_cartao+0x22>
+ 3dc:	87 35       	cpi	r24, 0x57	; 87
+ 3de:	49 f0       	breq	.+18     	; 0x3f2 <aguarda_cartao+0x32>
+ 3e0:	f2 cf       	rjmp	.-28     	; 0x3c6 <aguarda_cartao+0x6>
+ 3e2:	81 e0       	ldi	r24, 0x01	; 1
+ 3e4:	90 e0       	ldi	r25, 0x00	; 0
+ 3e6:	07 c0       	rjmp	.+14     	; 0x3f6 <aguarda_cartao+0x36>
+ 3e8:	c9 31       	cpi	r28, 0x19	; 25
+ 3ea:	69 f3       	breq	.-38     	; 0x3c6 <aguarda_cartao+0x6>
+ 3ec:	83 e0       	ldi	r24, 0x03	; 3
+ 3ee:	90 e0       	ldi	r25, 0x00	; 0
+ 3f0:	02 c0       	rjmp	.+4      	; 0x3f6 <aguarda_cartao+0x36>
+ 3f2:	82 e0       	ldi	r24, 0x02	; 2
+ 3f4:	90 e0       	ldi	r25, 0x00	; 0
+ 3f6:	cf 91       	pop	r28
+ 3f8:	08 95       	ret
+
+000003fa <tela_OK>:
+ 3fa:	81 e0       	ldi	r24, 0x01	; 1
+ 3fc:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 400:	80 e8       	ldi	r24, 0x80	; 128
+ 402:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 406:	87 e7       	ldi	r24, 0x77	; 119
+ 408:	91 e0       	ldi	r25, 0x01	; 1
+ 40a:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 40e:	80 ec       	ldi	r24, 0xC0	; 192
+ 410:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+ 414:	85 e8       	ldi	r24, 0x85	; 133
+ 416:	91 e0       	ldi	r25, 0x01	; 1
+ 418:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 41c:	2f ef       	ldi	r18, 0xFF	; 255
+ 41e:	8b e7       	ldi	r24, 0x7B	; 123
+ 420:	92 e9       	ldi	r25, 0x92	; 146
+ 422:	21 50       	subi	r18, 0x01	; 1
+ 424:	80 40       	sbci	r24, 0x00	; 0
+ 426:	90 40       	sbci	r25, 0x00	; 0
+ 428:	e1 f7       	brne	.-8      	; 0x422 <__EEPROM_REGION_LENGTH__+0x22>
+ 42a:	00 c0       	rjmp	.+0      	; 0x42c <__EEPROM_REGION_LENGTH__+0x2c>
+ 42c:	00 00       	nop
+ 42e:	08 95       	ret
+
+00000430 <tela_SI>:
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Conta com falha");
+	_delay_ms(3000);
+}
+void tela_SI(){
+	writeInstruction(lcd_Clear);
+ 430:	81 e0       	ldi	r24, 0x01	; 1
+ 432:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+ 436:	80 e8       	ldi	r24, 0x80	; 128
+ 438:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeString("Op. negada");
+ 43c:	81 e9       	ldi	r24, 0x91	; 145
+ 43e:	91 e0       	ldi	r25, 0x01	; 1
+ 440:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+ 444:	80 ec       	ldi	r24, 0xC0	; 192
+ 446:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeString("Saldo insfc.");
+ 44a:	8c ea       	ldi	r24, 0xAC	; 172
+ 44c:	91 e0       	ldi	r25, 0x01	; 1
+ 44e:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 452:	2f ef       	ldi	r18, 0xFF	; 255
+ 454:	8b e7       	ldi	r24, 0x7B	; 123
+ 456:	92 e9       	ldi	r25, 0x92	; 146
+ 458:	21 50       	subi	r18, 0x01	; 1
+ 45a:	80 40       	sbci	r24, 0x00	; 0
+ 45c:	90 40       	sbci	r25, 0x00	; 0
+ 45e:	e1 f7       	brne	.-8      	; 0x458 <tela_SI+0x28>
+ 460:	00 c0       	rjmp	.+0      	; 0x462 <tela_SI+0x32>
+ 462:	00 00       	nop
+ 464:	08 95       	ret
+
+00000466 <tela_SF>:
+	_delay_ms(3000);
+}
+void tela_SF(){
+	writeInstruction(lcd_Clear);
+ 466:	81 e0       	ldi	r24, 0x01	; 1
+ 468:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+ 46c:	80 e8       	ldi	r24, 0x80	; 128
+ 46e:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeString("Op. negada");
+ 472:	81 e9       	ldi	r24, 0x91	; 145
+ 474:	91 e0       	ldi	r25, 0x01	; 1
+ 476:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+ 47a:	80 ec       	ldi	r24, 0xC0	; 192
+ 47c:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeString("Senha com falha");
+ 480:	89 eb       	ldi	r24, 0xB9	; 185
+ 482:	91 e0       	ldi	r25, 0x01	; 1
+ 484:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 488:	2f ef       	ldi	r18, 0xFF	; 255
+ 48a:	8b e7       	ldi	r24, 0x7B	; 123
+ 48c:	92 e9       	ldi	r25, 0x92	; 146
+ 48e:	21 50       	subi	r18, 0x01	; 1
+ 490:	80 40       	sbci	r24, 0x00	; 0
+ 492:	90 40       	sbci	r25, 0x00	; 0
+ 494:	e1 f7       	brne	.-8      	; 0x48e <tela_SF+0x28>
+ 496:	00 c0       	rjmp	.+0      	; 0x498 <tela_SF+0x32>
+ 498:	00 00       	nop
+ 49a:	08 95       	ret
+
+0000049c <requisicao_externa>:
 	
-	//Limpa display
-    writeInstruction(lcd_Clear);
- 2e6:	81 e0       	ldi	r24, 0x01	; 1
- 2e8:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+	if(tipo_cartao == 3){ // digitar nº e senha
+			
+	}
+}
+void requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){		// por enquanto só funciona pra venda parcelada e a vista
+ 49c:	cf 93       	push	r28
+ 49e:	df 93       	push	r29
+ 4a0:	cd b7       	in	r28, 0x3d	; 61
+ 4a2:	de b7       	in	r29, 0x3e	; 62
+ 4a4:	64 97       	sbiw	r28, 0x14	; 20
+ 4a6:	0f b6       	in	r0, 0x3f	; 63
+ 4a8:	f8 94       	cli
+ 4aa:	de bf       	out	0x3e, r29	; 62
+ 4ac:	0f be       	out	0x3f, r0	; 63
+ 4ae:	cd bf       	out	0x3d, r28	; 61
+	char req[20];
+	short i, retorna=0;
 	
-	//modo para escrita
-    writeInstruction(lcd_EntryMode);
- 2ec:	86 e0       	ldi	r24, 0x06	; 6
- 2ee:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
- 2f2:	08 95       	ret
+	if(parcelas == 1){
+ 4b0:	21 30       	cpi	r18, 0x01	; 1
+ 4b2:	31 05       	cpc	r19, r1
+ 4b4:	09 f0       	breq	.+2      	; 0x4b8 <requisicao_externa+0x1c>
+ 4b6:	52 c0       	rjmp	.+164    	; 0x55c <requisicao_externa+0xc0>
+		req[0] = 0x56;	// V em ascii
+ 4b8:	26 e5       	ldi	r18, 0x56	; 86
+ 4ba:	29 83       	std	Y+1, r18	; 0x01
+		req[1] = 0x56;	// V em ascii
+ 4bc:	2a 83       	std	Y+2, r18	; 0x02
+			for(i=2;i<18;i++){								// tem q melhorar fiz a moda caralha
+ 4be:	22 e0       	ldi	r18, 0x02	; 2
+ 4c0:	30 e0       	ldi	r19, 0x00	; 0
+ 4c2:	34 c0       	rjmp	.+104    	; 0x52c <requisicao_externa+0x90>
+				if(i<8){req[i] = cartao [i-2];}				// armazena cartao na requisicao
+ 4c4:	28 30       	cpi	r18, 0x08	; 8
+ 4c6:	31 05       	cpc	r19, r1
+ 4c8:	64 f4       	brge	.+24     	; 0x4e2 <requisicao_externa+0x46>
+ 4ca:	fc 01       	movw	r30, r24
+ 4cc:	e2 0f       	add	r30, r18
+ 4ce:	f3 1f       	adc	r31, r19
+ 4d0:	32 97       	sbiw	r30, 0x02	; 2
+ 4d2:	a0 81       	ld	r26, Z
+ 4d4:	e1 e0       	ldi	r30, 0x01	; 1
+ 4d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 4d8:	ec 0f       	add	r30, r28
+ 4da:	fd 1f       	adc	r31, r29
+ 4dc:	e2 0f       	add	r30, r18
+ 4de:	f3 1f       	adc	r31, r19
+ 4e0:	a0 83       	st	Z, r26
+				if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+ 4e2:	d9 01       	movw	r26, r18
+ 4e4:	f9 01       	movw	r30, r18
+ 4e6:	38 97       	sbiw	r30, 0x08	; 8
+ 4e8:	e6 30       	cpi	r30, 0x06	; 6
+ 4ea:	f1 05       	cpc	r31, r1
+ 4ec:	50 f4       	brcc	.+20     	; 0x502 <requisicao_externa+0x66>
+ 4ee:	e6 0f       	add	r30, r22
+ 4f0:	f7 1f       	adc	r31, r23
+ 4f2:	10 81       	ld	r17, Z
+ 4f4:	e1 e0       	ldi	r30, 0x01	; 1
+ 4f6:	f0 e0       	ldi	r31, 0x00	; 0
+ 4f8:	ec 0f       	add	r30, r28
+ 4fa:	fd 1f       	adc	r31, r29
+ 4fc:	e2 0f       	add	r30, r18
+ 4fe:	f3 1f       	adc	r31, r19
+ 500:	10 83       	st	Z, r17
+				if(i>13){ req[i] = valor[17-i];}			// armazena valor na requisicao
+ 502:	2e 30       	cpi	r18, 0x0E	; 14
+ 504:	31 05       	cpc	r19, r1
+ 506:	7c f0       	brlt	.+30     	; 0x526 <requisicao_externa+0x8a>
+ 508:	e1 e1       	ldi	r30, 0x11	; 17
+ 50a:	f0 e0       	ldi	r31, 0x00	; 0
+ 50c:	e2 1b       	sub	r30, r18
+ 50e:	f3 0b       	sbc	r31, r19
+ 510:	e4 0f       	add	r30, r20
+ 512:	f5 1f       	adc	r31, r21
+ 514:	f0 80       	ld	r15, Z
+ 516:	01 e0       	ldi	r16, 0x01	; 1
+ 518:	10 e0       	ldi	r17, 0x00	; 0
+ 51a:	0c 0f       	add	r16, r28
+ 51c:	1d 1f       	adc	r17, r29
+ 51e:	20 0f       	add	r18, r16
+ 520:	31 1f       	adc	r19, r17
+ 522:	f9 01       	movw	r30, r18
+ 524:	f0 82       	st	Z, r15
+	short i, retorna=0;
+	
+	if(parcelas == 1){
+		req[0] = 0x56;	// V em ascii
+		req[1] = 0x56;	// V em ascii
+			for(i=2;i<18;i++){								// tem q melhorar fiz a moda caralha
+ 526:	9d 01       	movw	r18, r26
+ 528:	2f 5f       	subi	r18, 0xFF	; 255
+ 52a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 52c:	22 31       	cpi	r18, 0x12	; 18
+ 52e:	31 05       	cpc	r19, r1
+ 530:	4c f2       	brlt	.-110    	; 0x4c4 <requisicao_externa+0x28>
+ 532:	00 e0       	ldi	r16, 0x00	; 0
+ 534:	10 e0       	ldi	r17, 0x00	; 0
+ 536:	0b c0       	rjmp	.+22     	; 0x54e <requisicao_externa+0xb2>
+				if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+				if(i>13){ req[i] = valor[17-i];}			// armazena valor na requisicao
+			}
+			
+			for(i=0;i<18;i++){								//envia pra serial
+				USART_envia(req[i]);
+ 538:	e1 e0       	ldi	r30, 0x01	; 1
+ 53a:	f0 e0       	ldi	r31, 0x00	; 0
+ 53c:	ec 0f       	add	r30, r28
+ 53e:	fd 1f       	adc	r31, r29
+ 540:	e0 0f       	add	r30, r16
+ 542:	f1 1f       	adc	r31, r17
+ 544:	80 81       	ld	r24, Z
+ 546:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+				if(i<8){req[i] = cartao [i-2];}				// armazena cartao na requisicao
+				if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+				if(i>13){ req[i] = valor[17-i];}			// armazena valor na requisicao
+			}
+			
+			for(i=0;i<18;i++){								//envia pra serial
+ 54a:	0f 5f       	subi	r16, 0xFF	; 255
+ 54c:	1f 4f       	sbci	r17, 0xFF	; 255
+ 54e:	02 31       	cpi	r16, 0x12	; 18
+ 550:	11 05       	cpc	r17, r1
+ 552:	94 f3       	brlt	.-28     	; 0x538 <requisicao_externa+0x9c>
+				USART_envia(req[i]);
+			}
+			
+		USART_envia(0x0d);								// \r final
+ 554:	8d e0       	ldi	r24, 0x0D	; 13
+ 556:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+ 55a:	59 c0       	rjmp	.+178    	; 0x60e <requisicao_externa+0x172>
+	}else{
+		req[0] = 0x56;	// V em ascii
+ 55c:	e6 e5       	ldi	r30, 0x56	; 86
+ 55e:	e9 83       	std	Y+1, r30	; 0x01
+		req[1] = 0x50;	// P em ascii
+ 560:	e0 e5       	ldi	r30, 0x50	; 80
+ 562:	ea 83       	std	Y+2, r30	; 0x02
+			for(i=2;i<19;i++){								// tem q melhorar fiz a moda caralha
+ 564:	e2 e0       	ldi	r30, 0x02	; 2
+ 566:	f0 e0       	ldi	r31, 0x00	; 0
+ 568:	3b c0       	rjmp	.+118    	; 0x5e0 <requisicao_externa+0x144>
+				if(i<8){req[i] = cartao [i-2];}				// armazena cartao na requisicao
+ 56a:	e8 30       	cpi	r30, 0x08	; 8
+ 56c:	f1 05       	cpc	r31, r1
+ 56e:	64 f4       	brge	.+24     	; 0x588 <requisicao_externa+0xec>
+ 570:	dc 01       	movw	r26, r24
+ 572:	ae 0f       	add	r26, r30
+ 574:	bf 1f       	adc	r27, r31
+ 576:	12 97       	sbiw	r26, 0x02	; 2
+ 578:	1c 91       	ld	r17, X
+ 57a:	a1 e0       	ldi	r26, 0x01	; 1
+ 57c:	b0 e0       	ldi	r27, 0x00	; 0
+ 57e:	ac 0f       	add	r26, r28
+ 580:	bd 1f       	adc	r27, r29
+ 582:	ae 0f       	add	r26, r30
+ 584:	bf 1f       	adc	r27, r31
+ 586:	1c 93       	st	X, r17
+				if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+ 588:	8f 01       	movw	r16, r30
+ 58a:	df 01       	movw	r26, r30
+ 58c:	18 97       	sbiw	r26, 0x08	; 8
+ 58e:	a6 30       	cpi	r26, 0x06	; 6
+ 590:	b1 05       	cpc	r27, r1
+ 592:	50 f4       	brcc	.+20     	; 0x5a8 <requisicao_externa+0x10c>
+ 594:	a6 0f       	add	r26, r22
+ 596:	b7 1f       	adc	r27, r23
+ 598:	fc 90       	ld	r15, X
+ 59a:	a1 e0       	ldi	r26, 0x01	; 1
+ 59c:	b0 e0       	ldi	r27, 0x00	; 0
+ 59e:	ac 0f       	add	r26, r28
+ 5a0:	bd 1f       	adc	r27, r29
+ 5a2:	ae 0f       	add	r26, r30
+ 5a4:	bf 1f       	adc	r27, r31
+ 5a6:	fc 92       	st	X, r15
+				if(i==14){ req[i] = parcelas;}				// armazena qtd de parcelas
+ 5a8:	ee 30       	cpi	r30, 0x0E	; 14
+ 5aa:	f1 05       	cpc	r31, r1
+ 5ac:	39 f4       	brne	.+14     	; 0x5bc <requisicao_externa+0x120>
+ 5ae:	a1 e0       	ldi	r26, 0x01	; 1
+ 5b0:	b0 e0       	ldi	r27, 0x00	; 0
+ 5b2:	ac 0f       	add	r26, r28
+ 5b4:	bd 1f       	adc	r27, r29
+ 5b6:	ae 0f       	add	r26, r30
+ 5b8:	bf 1f       	adc	r27, r31
+ 5ba:	2c 93       	st	X, r18
+				if(i>14){ req[i] = valor[i-15];}			// armazena valor na requisicao
+ 5bc:	ef 30       	cpi	r30, 0x0F	; 15
+ 5be:	f1 05       	cpc	r31, r1
+ 5c0:	6c f0       	brlt	.+26     	; 0x5dc <requisicao_externa+0x140>
+ 5c2:	da 01       	movw	r26, r20
+ 5c4:	a0 0f       	add	r26, r16
+ 5c6:	b1 1f       	adc	r27, r17
+ 5c8:	1f 97       	sbiw	r26, 0x0f	; 15
+ 5ca:	ac 91       	ld	r26, X
+ 5cc:	ee 24       	eor	r14, r14
+ 5ce:	e3 94       	inc	r14
+ 5d0:	f1 2c       	mov	r15, r1
+ 5d2:	ec 0e       	add	r14, r28
+ 5d4:	fd 1e       	adc	r15, r29
+ 5d6:	ee 0d       	add	r30, r14
+ 5d8:	ff 1d       	adc	r31, r15
+ 5da:	a0 83       	st	Z, r26
+			
+		USART_envia(0x0d);								// \r final
+	}else{
+		req[0] = 0x56;	// V em ascii
+		req[1] = 0x50;	// P em ascii
+			for(i=2;i<19;i++){								// tem q melhorar fiz a moda caralha
+ 5dc:	f8 01       	movw	r30, r16
+ 5de:	31 96       	adiw	r30, 0x01	; 1
+ 5e0:	e3 31       	cpi	r30, 0x13	; 19
+ 5e2:	f1 05       	cpc	r31, r1
+ 5e4:	14 f2       	brlt	.-124    	; 0x56a <requisicao_externa+0xce>
+ 5e6:	00 e0       	ldi	r16, 0x00	; 0
+ 5e8:	10 e0       	ldi	r17, 0x00	; 0
+ 5ea:	0b c0       	rjmp	.+22     	; 0x602 <requisicao_externa+0x166>
+				if(i==14){ req[i] = parcelas;}				// armazena qtd de parcelas
+				if(i>14){ req[i] = valor[i-15];}			// armazena valor na requisicao
+			}
+			
+			for(i=0;i<19;i++){								//envia pra serial
+				USART_envia(req[i]);
+ 5ec:	e1 e0       	ldi	r30, 0x01	; 1
+ 5ee:	f0 e0       	ldi	r31, 0x00	; 0
+ 5f0:	ec 0f       	add	r30, r28
+ 5f2:	fd 1f       	adc	r31, r29
+ 5f4:	e0 0f       	add	r30, r16
+ 5f6:	f1 1f       	adc	r31, r17
+ 5f8:	80 81       	ld	r24, Z
+ 5fa:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+				if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+				if(i==14){ req[i] = parcelas;}				// armazena qtd de parcelas
+				if(i>14){ req[i] = valor[i-15];}			// armazena valor na requisicao
+			}
+			
+			for(i=0;i<19;i++){								//envia pra serial
+ 5fe:	0f 5f       	subi	r16, 0xFF	; 255
+ 600:	1f 4f       	sbci	r17, 0xFF	; 255
+ 602:	03 31       	cpi	r16, 0x13	; 19
+ 604:	11 05       	cpc	r17, r1
+ 606:	94 f3       	brlt	.-28     	; 0x5ec <requisicao_externa+0x150>
+				USART_envia(req[i]);
+			}
+			USART_envia(0x0d);								// \r final
+ 608:	8d e0       	ldi	r24, 0x0D	; 13
+ 60a:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+	}
+	
+	while(1){
+		
+		switch(USART_recebe() ){
+ 60e:	0e 94 e7 00 	call	0x1ce	; 0x1ce <USART_recebe>
+ 612:	8f 34       	cpi	r24, 0x4F	; 79
+ 614:	29 f0       	breq	.+10     	; 0x620 <requisicao_externa+0x184>
+ 616:	83 35       	cpi	r24, 0x53	; 83
+ 618:	49 f0       	breq	.+18     	; 0x62c <requisicao_externa+0x190>
+ 61a:	83 34       	cpi	r24, 0x43	; 67
+ 61c:	c1 f7       	brne	.-16     	; 0x60e <requisicao_externa+0x172>
+ 61e:	03 c0       	rjmp	.+6      	; 0x626 <requisicao_externa+0x18a>
+			case 0x4f: tela_OK();retorna = 0;break;				//O(K) em ascii
+ 620:	0e 94 fd 01 	call	0x3fa	; 0x3fa <tela_OK>
+ 624:	f4 cf       	rjmp	.-24     	; 0x60e <requisicao_externa+0x172>
+			case 0x43: tela_SF();retorna = 0;break;				//C(F) em ascii faz algo diferente
+ 626:	0e 94 33 02 	call	0x466	; 0x466 <tela_SF>
+ 62a:	f1 cf       	rjmp	.-30     	; 0x60e <requisicao_externa+0x172>
+			case 0x53:											// S em ascii
+				switch (USART_recebe()){
+ 62c:	0e 94 e7 00 	call	0x1ce	; 0x1ce <USART_recebe>
+ 630:	86 34       	cpi	r24, 0x46	; 70
+ 632:	19 f0       	breq	.+6      	; 0x63a <requisicao_externa+0x19e>
+ 634:	89 34       	cpi	r24, 0x49	; 73
+ 636:	21 f0       	breq	.+8      	; 0x640 <requisicao_externa+0x1a4>
+ 638:	ea cf       	rjmp	.-44     	; 0x60e <requisicao_externa+0x172>
+				case 0x46:										// F em ascii
+					tela_SF();
+ 63a:	0e 94 33 02 	call	0x466	; 0x466 <tela_SF>
+					retorna = 0;
+					break;
+ 63e:	e7 cf       	rjmp	.-50     	; 0x60e <requisicao_externa+0x172>
+				case 0x49:					// I em ascii
+					tela_SI();
+ 640:	0e 94 18 02 	call	0x430	; 0x430 <tela_SI>
+					retorna = 0;
+					break;
+ 644:	e4 cf       	rjmp	.-56     	; 0x60e <requisicao_externa+0x172>
 
-000002f4 <validarSenha>:
+00000646 <processa_pagamento>:
+	tipo_cartao = aguarda_cartao();
+	//USART_envia(tipo_cartao+48);	//printa tipo do cartão
+	processa_pagamento(1,tipo_cartao,metodo_pgmt,valor,senha,cartao); // se enviar 1 como parametro de parcelas == venda a vista
+	
+}
+void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]){
+ 646:	8f 92       	push	r8
+ 648:	9f 92       	push	r9
+ 64a:	af 92       	push	r10
+ 64c:	bf 92       	push	r11
+ 64e:	cf 92       	push	r12
+ 650:	df 92       	push	r13
+ 652:	ef 92       	push	r14
+ 654:	ff 92       	push	r15
+ 656:	0f 93       	push	r16
+ 658:	1f 93       	push	r17
+ 65a:	cf 93       	push	r28
+ 65c:	df 93       	push	r29
+	short i;
+	if(tipo_cartao == 1){ // cartão magnetico - vai cartão e pede senha
+		
+	}
+	
+	if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r)
+ 65e:	62 30       	cpi	r22, 0x02	; 2
+ 660:	71 05       	cpc	r23, r1
+ 662:	29 f5       	brne	.+74     	; 0x6ae <processa_pagamento+0x68>
+ 664:	16 c0       	rjmp	.+44     	; 0x692 <processa_pagamento+0x4c>
+		for(i=0;i<12;i++){
+			if(i<6){cartao [i] = USART_recebe();} // preenche cartao
+ 666:	86 e0       	ldi	r24, 0x06	; 6
+ 668:	c8 16       	cp	r12, r24
+ 66a:	d1 04       	cpc	r13, r1
+ 66c:	3c f4       	brge	.+14     	; 0x67c <processa_pagamento+0x36>
+ 66e:	0e 94 e7 00 	call	0x1ce	; 0x1ce <USART_recebe>
+ 672:	f7 01       	movw	r30, r14
+ 674:	ec 0d       	add	r30, r12
+ 676:	fd 1d       	adc	r31, r13
+ 678:	80 83       	st	Z, r24
+ 67a:	07 c0       	rjmp	.+14     	; 0x68a <processa_pagamento+0x44>
+			else{senha [i-6] = USART_recebe();}	// preenche senha
+ 67c:	e6 01       	movw	r28, r12
+ 67e:	26 97       	sbiw	r28, 0x06	; 6
+ 680:	c0 0f       	add	r28, r16
+ 682:	d1 1f       	adc	r29, r17
+ 684:	0e 94 e7 00 	call	0x1ce	; 0x1ce <USART_recebe>
+ 688:	88 83       	st	Y, r24
+	if(tipo_cartao == 1){ // cartão magnetico - vai cartão e pede senha
+		
+	}
+	
+	if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r)
+		for(i=0;i<12;i++){
+ 68a:	8f ef       	ldi	r24, 0xFF	; 255
+ 68c:	c8 1a       	sub	r12, r24
+ 68e:	d8 0a       	sbc	r13, r24
+ 690:	04 c0       	rjmp	.+8      	; 0x69a <processa_pagamento+0x54>
+ 692:	59 01       	movw	r10, r18
+ 694:	4c 01       	movw	r8, r24
+ 696:	c1 2c       	mov	r12, r1
+ 698:	d1 2c       	mov	r13, r1
+ 69a:	8c e0       	ldi	r24, 0x0C	; 12
+ 69c:	c8 16       	cp	r12, r24
+ 69e:	d1 04       	cpc	r13, r1
+ 6a0:	14 f3       	brlt	.-60     	; 0x666 <processa_pagamento+0x20>
+			if(i<6){cartao [i] = USART_recebe();} // preenche cartao
+			else{senha [i-6] = USART_recebe();}	// preenche senha
+		}
+		requisicao_externa(cartao,senha,valor,parcelas);
+ 6a2:	94 01       	movw	r18, r8
+ 6a4:	a5 01       	movw	r20, r10
+ 6a6:	b8 01       	movw	r22, r16
+ 6a8:	c7 01       	movw	r24, r14
+ 6aa:	0e 94 4e 02 	call	0x49c	; 0x49c <requisicao_externa>
+	}
+	
+	if(tipo_cartao == 3){ // digitar nº e senha
+			
+	}
+}
+ 6ae:	df 91       	pop	r29
+ 6b0:	cf 91       	pop	r28
+ 6b2:	1f 91       	pop	r17
+ 6b4:	0f 91       	pop	r16
+ 6b6:	ff 90       	pop	r15
+ 6b8:	ef 90       	pop	r14
+ 6ba:	df 90       	pop	r13
+ 6bc:	cf 90       	pop	r12
+ 6be:	bf 90       	pop	r11
+ 6c0:	af 90       	pop	r10
+ 6c2:	9f 90       	pop	r9
+ 6c4:	8f 90       	pop	r8
+ 6c6:	08 95       	ret
+
+000006c8 <venda_avista>:
+				return 3;
+			}
+	}
+}
+
+void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
+ 6c8:	df 92       	push	r13
+ 6ca:	ef 92       	push	r14
+ 6cc:	ff 92       	push	r15
+ 6ce:	0f 93       	push	r16
+ 6d0:	1f 93       	push	r17
+ 6d2:	cf 93       	push	r28
+ 6d4:	df 93       	push	r29
+ 6d6:	cd b7       	in	r28, 0x3d	; 61
+ 6d8:	de b7       	in	r29, 0x3e	; 62
+ 6da:	60 97       	sbiw	r28, 0x10	; 16
+ 6dc:	0f b6       	in	r0, 0x3f	; 63
+ 6de:	f8 94       	cli
+ 6e0:	de bf       	out	0x3e, r29	; 62
+ 6e2:	0f be       	out	0x3f, r0	; 63
+ 6e4:	cd bf       	out	0x3d, r28	; 61
+	char senha[] = {'0', '0', '0' ,'0', '0', '0'};	// to declarando aq pq n sei onde vou usar
+ 6e6:	86 e0       	ldi	r24, 0x06	; 6
+ 6e8:	ea e1       	ldi	r30, 0x1A	; 26
+ 6ea:	f1 e0       	ldi	r31, 0x01	; 1
+ 6ec:	de 01       	movw	r26, r28
+ 6ee:	11 96       	adiw	r26, 0x01	; 1
+ 6f0:	01 90       	ld	r0, Z+
+ 6f2:	0d 92       	st	X+, r0
+ 6f4:	8a 95       	dec	r24
+ 6f6:	e1 f7       	brne	.-8      	; 0x6f0 <venda_avista+0x28>
+	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
+ 6f8:	86 e0       	ldi	r24, 0x06	; 6
+ 6fa:	ea e1       	ldi	r30, 0x1A	; 26
+ 6fc:	f1 e0       	ldi	r31, 0x01	; 1
+ 6fe:	de 01       	movw	r26, r28
+ 700:	17 96       	adiw	r26, 0x07	; 7
+ 702:	01 90       	ld	r0, Z+
+ 704:	0d 92       	st	X+, r0
+ 706:	8a 95       	dec	r24
+ 708:	e1 f7       	brne	.-8      	; 0x702 <venda_avista+0x3a>
+	
+	char tecla = TECLA_INVALIDA,metodo_pgmt,tipo_cartao;
+	short contador = 0;
+	char valor[] = {'0', '0', '0' ,'0'};
+ 70a:	80 e3       	ldi	r24, 0x30	; 48
+ 70c:	8d 87       	std	Y+13, r24	; 0x0d
+ 70e:	8e 87       	std	Y+14, r24	; 0x0e
+ 710:	8f 87       	std	Y+15, r24	; 0x0f
+ 712:	88 8b       	std	Y+16, r24	; 0x10
+	short pos=3;
+	writeInstruction(lcd_Clear);
+ 714:	81 e0       	ldi	r24, 0x01	; 1
+ 716:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+ 71a:	80 e8       	ldi	r24, 0x80	; 128
+ 71c:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeString("Valor (a vista):");
+ 720:	89 ec       	ldi	r24, 0xC9	; 201
+ 722:	91 e0       	ldi	r25, 0x01	; 1
+ 724:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+ 728:	80 ec       	ldi	r24, 0xC0	; 192
+ 72a:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+	writeString("R$ ");
+ 72e:	8a ed       	ldi	r24, 0xDA	; 218
+ 730:	91 e0       	ldi	r25, 0x01	; 1
+ 732:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
+	char senha[] = {'0', '0', '0' ,'0', '0', '0'};	// to declarando aq pq n sei onde vou usar
+	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
+	
+	char tecla = TECLA_INVALIDA,metodo_pgmt,tipo_cartao;
+	short contador = 0;
+ 736:	e1 2c       	mov	r14, r1
+ 738:	f1 2c       	mov	r15, r1
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Valor (a vista):");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("R$ ");
+	
+	while (contador != 4){
+ 73a:	45 c0       	rjmp	.+138    	; 0x7c6 <venda_avista+0xfe>
+		tecla = teclaDebouce();
+ 73c:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+		if(tecla!= TECLA_INVALIDA){
+ 740:	89 31       	cpi	r24, 0x19	; 25
+ 742:	09 f4       	brne	.+2      	; 0x746 <venda_avista+0x7e>
+ 744:	40 c0       	rjmp	.+128    	; 0x7c6 <venda_avista+0xfe>
+			tecla = tecla+49;
+ 746:	11 e3       	ldi	r17, 0x31	; 49
+ 748:	18 0f       	add	r17, r24
+			//USART_envia(tecla);
+			if(tecla == KEY_APAGAR_ASCII){
+ 74a:	1c 33       	cpi	r17, 0x3C	; 60
+ 74c:	01 f5       	brne	.+64     	; 0x78e <venda_avista+0xc6>
+					if(contador>0){
+ 74e:	1e 14       	cp	r1, r14
+ 750:	1f 04       	cpc	r1, r15
+ 752:	cc f5       	brge	.+114    	; 0x7c6 <venda_avista+0xfe>
+						uint8_t aux = lcd_SetCursor | (uint8_t)(contador+2);
+ 754:	12 e0       	ldi	r17, 0x02	; 2
+ 756:	1e 0d       	add	r17, r14
+						writeInstruction(lcd_LineTwo | aux);
+ 758:	10 6c       	ori	r17, 0xC0	; 192
+ 75a:	81 2f       	mov	r24, r17
+ 75c:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+						writeString(" "); 
+ 760:	8c ed       	ldi	r24, 0xDC	; 220
+ 762:	91 e0       	ldi	r25, 0x01	; 1
+ 764:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+						writeInstruction(lcd_LineTwo | aux);
+ 768:	81 2f       	mov	r24, r17
+ 76a:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+						valor[pos-contador+1] = '0';
+ 76e:	e4 e0       	ldi	r30, 0x04	; 4
+ 770:	f0 e0       	ldi	r31, 0x00	; 0
+ 772:	ee 19       	sub	r30, r14
+ 774:	ff 09       	sbc	r31, r15
+ 776:	8d e0       	ldi	r24, 0x0D	; 13
+ 778:	90 e0       	ldi	r25, 0x00	; 0
+ 77a:	8c 0f       	add	r24, r28
+ 77c:	9d 1f       	adc	r25, r29
+ 77e:	e8 0f       	add	r30, r24
+ 780:	f9 1f       	adc	r31, r25
+ 782:	80 e3       	ldi	r24, 0x30	; 48
+ 784:	80 83       	st	Z, r24
+						contador --;
+ 786:	91 e0       	ldi	r25, 0x01	; 1
+ 788:	e9 1a       	sub	r14, r25
+ 78a:	f1 08       	sbc	r15, r1
+ 78c:	1c c0       	rjmp	.+56     	; 0x7c6 <venda_avista+0xfe>
+					}
+			}else if(tecla == KEY_CONFIRMA_ASCII){
+ 78e:	1a 33       	cpi	r17, 0x3A	; 58
+ 790:	f9 f0       	breq	.+62     	; 0x7d0 <venda_avista+0x108>
+				contador = 4;
+				break;							
+			}else{
+				valor[pos-contador] = (tecla);
+ 792:	e3 e0       	ldi	r30, 0x03	; 3
+ 794:	f0 e0       	ldi	r31, 0x00	; 0
+ 796:	ee 19       	sub	r30, r14
+ 798:	ff 09       	sbc	r31, r15
+ 79a:	8d e0       	ldi	r24, 0x0D	; 13
+ 79c:	90 e0       	ldi	r25, 0x00	; 0
+ 79e:	8c 0f       	add	r24, r28
+ 7a0:	9d 1f       	adc	r25, r29
+ 7a2:	e8 0f       	add	r30, r24
+ 7a4:	f9 1f       	adc	r31, r25
+ 7a6:	10 83       	st	Z, r17
+				uint8_t aux = lcd_SetCursor | (uint8_t)(contador+3);
+ 7a8:	03 e0       	ldi	r16, 0x03	; 3
+ 7aa:	0e 0d       	add	r16, r14
+				writeInstruction(lcd_LineTwo | aux);
+ 7ac:	00 6c       	ori	r16, 0xC0	; 192
+ 7ae:	80 2f       	mov	r24, r16
+ 7b0:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+				writeCharacter(tecla);
+ 7b4:	81 2f       	mov	r24, r17
+ 7b6:	0e 94 1d 01 	call	0x23a	; 0x23a <writeCharacter>
+				writeInstruction(lcd_LineTwo | aux);
+ 7ba:	80 2f       	mov	r24, r16
+ 7bc:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
+				contador++;
+ 7c0:	9f ef       	ldi	r25, 0xFF	; 255
+ 7c2:	e9 1a       	sub	r14, r25
+ 7c4:	f9 0a       	sbc	r15, r25
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Valor (a vista):");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("R$ ");
+	
+	while (contador != 4){
+ 7c6:	24 e0       	ldi	r18, 0x04	; 4
+ 7c8:	e2 16       	cp	r14, r18
+ 7ca:	f1 04       	cpc	r15, r1
+ 7cc:	09 f0       	breq	.+2      	; 0x7d0 <venda_avista+0x108>
+ 7ce:	b6 cf       	rjmp	.-148    	; 0x73c <venda_avista+0x74>
+			}
+		}
+	}
+	
+	// print do valor 
+	formata_valor(valor);
+ 7d0:	ce 01       	movw	r24, r28
+ 7d2:	0d 96       	adiw	r24, 0x0d	; 13
+ 7d4:	0e 94 93 01 	call	0x326	; 0x326 <formata_valor>
+	USART_envia(valor[3]);
+ 7d8:	88 89       	ldd	r24, Y+16	; 0x10
+ 7da:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+	USART_envia(valor[2]);
+ 7de:	8f 85       	ldd	r24, Y+15	; 0x0f
+ 7e0:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+	USART_envia(valor[1]);
+ 7e4:	8e 85       	ldd	r24, Y+14	; 0x0e
+ 7e6:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+	USART_envia(valor[0]);
+ 7ea:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 7ec:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <USART_envia>
+ 7f0:	8f ef       	ldi	r24, 0xFF	; 255
+ 7f2:	97 ea       	ldi	r25, 0xA7	; 167
+ 7f4:	21 e6       	ldi	r18, 0x61	; 97
+ 7f6:	81 50       	subi	r24, 0x01	; 1
+ 7f8:	90 40       	sbci	r25, 0x00	; 0
+ 7fa:	20 40       	sbci	r18, 0x00	; 0
+ 7fc:	e1 f7       	brne	.-8      	; 0x7f6 <venda_avista+0x12e>
+ 7fe:	00 c0       	rjmp	.+0      	; 0x800 <__DATA_REGION_LENGTH__>
+ 800:	00 00       	nop
+	//
+	_delay_ms(2000);
+	
+	metodo_pgmt = metodo_pagamento();
+ 802:	0e 94 c6 01 	call	0x38c	; 0x38c <metodo_pagamento>
+ 806:	d8 2e       	mov	r13, r24
+	tipo_cartao = aguarda_cartao();
+ 808:	0e 94 e0 01 	call	0x3c0	; 0x3c0 <aguarda_cartao>
+	//USART_envia(tipo_cartao+48);	//printa tipo do cartão
+	processa_pagamento(1,tipo_cartao,metodo_pgmt,valor,senha,cartao); // se enviar 1 como parametro de parcelas == venda a vista
+ 80c:	bc 01       	movw	r22, r24
+ 80e:	77 27       	eor	r23, r23
+ 810:	ce 01       	movw	r24, r28
+ 812:	07 96       	adiw	r24, 0x07	; 7
+ 814:	7c 01       	movw	r14, r24
+ 816:	8e 01       	movw	r16, r28
+ 818:	0f 5f       	subi	r16, 0xFF	; 255
+ 81a:	1f 4f       	sbci	r17, 0xFF	; 255
+ 81c:	9e 01       	movw	r18, r28
+ 81e:	23 5f       	subi	r18, 0xF3	; 243
+ 820:	3f 4f       	sbci	r19, 0xFF	; 255
+ 822:	4d 2d       	mov	r20, r13
+ 824:	81 e0       	ldi	r24, 0x01	; 1
+ 826:	90 e0       	ldi	r25, 0x00	; 0
+ 828:	0e 94 23 03 	call	0x646	; 0x646 <processa_pagamento>
+	
+}
+ 82c:	60 96       	adiw	r28, 0x10	; 16
+ 82e:	0f b6       	in	r0, 0x3f	; 63
+ 830:	f8 94       	cli
+ 832:	de bf       	out	0x3e, r29	; 62
+ 834:	0f be       	out	0x3f, r0	; 63
+ 836:	cd bf       	out	0x3d, r28	; 61
+ 838:	df 91       	pop	r29
+ 83a:	cf 91       	pop	r28
+ 83c:	1f 91       	pop	r17
+ 83e:	0f 91       	pop	r16
+ 840:	ff 90       	pop	r15
+ 842:	ef 90       	pop	r14
+ 844:	df 90       	pop	r13
+ 846:	08 95       	ret
+
+00000848 <processa_venda>:
+#include <math.h>
+#include "../Headers/vendas.h"
+
+void processa_venda(int opcao){
+		
+	if(opcao == '1'){
+ 848:	c1 97       	sbiw	r24, 0x31	; 49
+ 84a:	11 f4       	brne	.+4      	; 0x850 <processa_venda+0x8>
+		venda_avista();
+ 84c:	0e 94 64 03 	call	0x6c8	; 0x6c8 <venda_avista>
+ 850:	08 95       	ret
+
+00000852 <validarSenha>:
 									{3,3,3,3,3,3}, //op 2
 													};
 
 char senhaLida[N_CARACSENHA] =  {'F','F','F','F','F','F'}; 				
 
 char validarSenha(char senha1[],char senha2[]){
- 2f4:	ef 92       	push	r14
- 2f6:	ff 92       	push	r15
- 2f8:	0f 93       	push	r16
- 2fa:	1f 93       	push	r17
- 2fc:	cf 93       	push	r28
- 2fe:	df 93       	push	r29
- 300:	7c 01       	movw	r14, r24
- 302:	8b 01       	movw	r16, r22
+ 852:	ef 92       	push	r14
+ 854:	ff 92       	push	r15
+ 856:	0f 93       	push	r16
+ 858:	1f 93       	push	r17
+ 85a:	cf 93       	push	r28
+ 85c:	df 93       	push	r29
+ 85e:	7c 01       	movw	r14, r24
+ 860:	8b 01       	movw	r16, r22
 	short i = 0;
 	char result =1;
- 304:	81 e0       	ldi	r24, 0x01	; 1
+ 862:	81 e0       	ldi	r24, 0x01	; 1
 	for (i =0;i < N_CARACSENHA;i++){
- 306:	20 e0       	ldi	r18, 0x00	; 0
- 308:	30 e0       	ldi	r19, 0x00	; 0
- 30a:	12 c0       	rjmp	.+36     	; 0x330 <validarSenha+0x3c>
+ 864:	20 e0       	ldi	r18, 0x00	; 0
+ 866:	30 e0       	ldi	r19, 0x00	; 0
+ 868:	12 c0       	rjmp	.+36     	; 0x88e <validarSenha+0x3c>
 		if (senha1[i] != senha2[i])
- 30c:	e9 01       	movw	r28, r18
- 30e:	f7 01       	movw	r30, r14
- 310:	e2 0f       	add	r30, r18
- 312:	f3 1f       	adc	r31, r19
- 314:	40 81       	ld	r20, Z
- 316:	f8 01       	movw	r30, r16
- 318:	e2 0f       	add	r30, r18
- 31a:	f3 1f       	adc	r31, r19
- 31c:	90 81       	ld	r25, Z
- 31e:	49 17       	cp	r20, r25
- 320:	21 f0       	breq	.+8      	; 0x32a <validarSenha+0x36>
+ 86a:	e9 01       	movw	r28, r18
+ 86c:	f7 01       	movw	r30, r14
+ 86e:	e2 0f       	add	r30, r18
+ 870:	f3 1f       	adc	r31, r19
+ 872:	40 81       	ld	r20, Z
+ 874:	f8 01       	movw	r30, r16
+ 876:	e2 0f       	add	r30, r18
+ 878:	f3 1f       	adc	r31, r19
+ 87a:	90 81       	ld	r25, Z
+ 87c:	49 17       	cp	r20, r25
+ 87e:	21 f0       	breq	.+8      	; 0x888 <validarSenha+0x36>
 		{
 			writeCharacter(65);
- 322:	81 e4       	ldi	r24, 0x41	; 65
- 324:	0e 94 04 01 	call	0x208	; 0x208 <writeCharacter>
+ 880:	81 e4       	ldi	r24, 0x41	; 65
+ 882:	0e 94 1d 01 	call	0x23a	; 0x23a <writeCharacter>
 			result = 0; // se for falso da exit
- 328:	80 e0       	ldi	r24, 0x00	; 0
+ 886:	80 e0       	ldi	r24, 0x00	; 0
 char senhaLida[N_CARACSENHA] =  {'F','F','F','F','F','F'}; 				
 
 char validarSenha(char senha1[],char senha2[]){
 	short i = 0;
 	char result =1;
 	for (i =0;i < N_CARACSENHA;i++){
- 32a:	9e 01       	movw	r18, r28
- 32c:	2f 5f       	subi	r18, 0xFF	; 255
- 32e:	3f 4f       	sbci	r19, 0xFF	; 255
- 330:	26 30       	cpi	r18, 0x06	; 6
- 332:	31 05       	cpc	r19, r1
- 334:	5c f3       	brlt	.-42     	; 0x30c <validarSenha+0x18>
+ 888:	9e 01       	movw	r18, r28
+ 88a:	2f 5f       	subi	r18, 0xFF	; 255
+ 88c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 88e:	26 30       	cpi	r18, 0x06	; 6
+ 890:	31 05       	cpc	r19, r1
+ 892:	5c f3       	brlt	.-42     	; 0x86a <validarSenha+0x18>
 			writeCharacter(65);
 			result = 0; // se for falso da exit
 		}
 	}
 	return result; // retorna Verdadeiro se for igual
 }									
- 336:	df 91       	pop	r29
- 338:	cf 91       	pop	r28
- 33a:	1f 91       	pop	r17
- 33c:	0f 91       	pop	r16
- 33e:	ff 90       	pop	r15
- 340:	ef 90       	pop	r14
- 342:	08 95       	ret
+ 894:	df 91       	pop	r29
+ 896:	cf 91       	pop	r28
+ 898:	1f 91       	pop	r17
+ 89a:	0f 91       	pop	r16
+ 89c:	ff 90       	pop	r15
+ 89e:	ef 90       	pop	r14
+ 8a0:	08 95       	ret
 
-00000344 <lerSenha>:
+000008a2 <lerSenha>:
 
 //tenho que passar por referencia pq pode se querer desligar a maquina nesse momento
 void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
- 344:	ff 92       	push	r15
- 346:	0f 93       	push	r16
- 348:	1f 93       	push	r17
- 34a:	cf 93       	push	r28
- 34c:	df 93       	push	r29
- 34e:	8c 01       	movw	r16, r24
+ 8a2:	ff 92       	push	r15
+ 8a4:	0f 93       	push	r16
+ 8a6:	1f 93       	push	r17
+ 8a8:	cf 93       	push	r28
+ 8aa:	df 93       	push	r29
+ 8ac:	8c 01       	movw	r16, r24
 	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
 	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
- 350:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
- 354:	0e 94 b2 00 	call	0x164	; 0x164 <acao_tecla>
- 358:	f8 01       	movw	r30, r16
- 35a:	80 83       	st	Z, r24
+ 8ae:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 8b2:	0e 94 b2 00 	call	0x164	; 0x164 <acao_tecla>
+ 8b6:	f8 01       	movw	r30, r16
+ 8b8:	80 83       	st	Z, r24
 	short contador = 0;
 	char flagOutConfirma = 0;
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
- 35c:	80 ec       	ldi	r24, 0xC0	; 192
- 35e:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ 8ba:	80 ec       	ldi	r24, 0xC0	; 192
+ 8bc:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 //tenho que passar por referencia pq pode se querer desligar a maquina nesse momento
 void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
 	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
 	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
 	short contador = 0;
 	char flagOutConfirma = 0;
- 362:	80 e0       	ldi	r24, 0x00	; 0
+ 8c0:	80 e0       	ldi	r24, 0x00	; 0
 
 //tenho que passar por referencia pq pode se querer desligar a maquina nesse momento
 void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se passar tudo para inteiro é a melhor forma de montar a senha
 	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
 	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
 	short contador = 0;
- 364:	c0 e0       	ldi	r28, 0x00	; 0
- 366:	d0 e0       	ldi	r29, 0x00	; 0
-	char flagOutConfirma = 0;
-	writeInstruction(lcd_LineTwo | lcd_SetCursor);
-	while (!flagOutConfirma || contador ==0){
- 368:	38 c0       	rjmp	.+112    	; 0x3da <lerSenha+0x96>
-		flagOutConfirma = 0;
-		(*teclaG) = teclaDebouce();
- 36a:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
- 36e:	f8 01       	movw	r30, r16
- 370:	80 83       	st	Z, r24
-		if((*teclaG)!= TECLA_INVALIDA && (*teclaG)!=KEY_CONFIRMA && (*teclaG) !=KEY_APAGAR && contador < N_CARACSENHA){
- 372:	89 31       	cpi	r24, 0x19	; 25
- 374:	99 f0       	breq	.+38     	; 0x39c <lerSenha+0x58>
- 376:	8b 30       	cpi	r24, 0x0B	; 11
- 378:	89 f0       	breq	.+34     	; 0x39c <lerSenha+0x58>
- 37a:	89 30       	cpi	r24, 0x09	; 9
- 37c:	79 f0       	breq	.+30     	; 0x39c <lerSenha+0x58>
- 37e:	c6 30       	cpi	r28, 0x06	; 6
- 380:	d1 05       	cpc	r29, r1
- 382:	64 f4       	brge	.+24     	; 0x39c <lerSenha+0x58>
-			senhaLida[contador] = (*teclaG)+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
- 384:	91 e0       	ldi	r25, 0x01	; 1
- 386:	98 0f       	add	r25, r24
- 388:	fe 01       	movw	r30, r28
- 38a:	ee 5f       	subi	r30, 0xFE	; 254
- 38c:	fe 4f       	sbci	r31, 0xFE	; 254
- 38e:	90 83       	st	Z, r25
-			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
- 390:	8f 5c       	subi	r24, 0xCF	; 207
- 392:	0e 94 04 01 	call	0x208	; 0x208 <writeCharacter>
-			// # é 35 e * é 42, mas acho q deixamos mostrando a senha por enquanto pra facilitar
-			contador++;
- 396:	21 96       	adiw	r28, 0x01	; 1
-	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
-	short contador = 0;
+ 8c2:	c0 e0       	ldi	r28, 0x00	; 0
+ 8c4:	d0 e0       	ldi	r29, 0x00	; 0
 	char flagOutConfirma = 0;
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	while (!flagOutConfirma || contador ==0){
+ 8c6:	38 c0       	rjmp	.+112    	; 0x938 <__stack+0x39>
 		flagOutConfirma = 0;
- 398:	80 e0       	ldi	r24, 0x00	; 0
+		(*teclaG) = teclaDebouce();
+ 8c8:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ 8cc:	f8 01       	movw	r30, r16
+ 8ce:	80 83       	st	Z, r24
+		if((*teclaG)!= TECLA_INVALIDA && (*teclaG)!=KEY_CONFIRMA && (*teclaG) !=KEY_APAGAR && contador < N_CARACSENHA){
+ 8d0:	89 31       	cpi	r24, 0x19	; 25
+ 8d2:	99 f0       	breq	.+38     	; 0x8fa <lerSenha+0x58>
+ 8d4:	8b 30       	cpi	r24, 0x0B	; 11
+ 8d6:	89 f0       	breq	.+34     	; 0x8fa <lerSenha+0x58>
+ 8d8:	89 30       	cpi	r24, 0x09	; 9
+ 8da:	79 f0       	breq	.+30     	; 0x8fa <lerSenha+0x58>
+ 8dc:	c6 30       	cpi	r28, 0x06	; 6
+ 8de:	d1 05       	cpc	r29, r1
+ 8e0:	64 f4       	brge	.+24     	; 0x8fa <lerSenha+0x58>
+			senhaLida[contador] = (*teclaG)+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
+ 8e2:	91 e0       	ldi	r25, 0x01	; 1
+ 8e4:	98 0f       	add	r25, r24
+ 8e6:	fe 01       	movw	r30, r28
+ 8e8:	ee 5f       	subi	r30, 0xFE	; 254
+ 8ea:	fe 4f       	sbci	r31, 0xFE	; 254
+ 8ec:	90 83       	st	Z, r25
+			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
+ 8ee:	8f 5c       	subi	r24, 0xCF	; 207
+ 8f0:	0e 94 1d 01 	call	0x23a	; 0x23a <writeCharacter>
+			// # é 35 e * é 42, mas acho q deixamos mostrando a senha por enquanto pra facilitar
+			contador++;
+ 8f4:	21 96       	adiw	r28, 0x01	; 1
+	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
+	short contador = 0;
+	char flagOutConfirma = 0;
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	while (!flagOutConfirma || contador ==0){
+		flagOutConfirma = 0;
+ 8f6:	80 e0       	ldi	r24, 0x00	; 0
 		(*teclaG) = teclaDebouce();
 		if((*teclaG)!= TECLA_INVALIDA && (*teclaG)!=KEY_CONFIRMA && (*teclaG) !=KEY_APAGAR && contador < N_CARACSENHA){
 			senhaLida[contador] = (*teclaG)+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
 			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
 			// # é 35 e * é 42, mas acho q deixamos mostrando a senha por enquanto pra facilitar
 			contador++;
- 39a:	1f c0       	rjmp	.+62     	; 0x3da <lerSenha+0x96>
+ 8f8:	1f c0       	rjmp	.+62     	; 0x938 <__stack+0x39>
 		}
 		else if((*teclaG) == KEY_APAGAR){
- 39c:	89 30       	cpi	r24, 0x09	; 9
- 39e:	c1 f4       	brne	.+48     	; 0x3d0 <lerSenha+0x8c>
+ 8fa:	89 30       	cpi	r24, 0x09	; 9
+ 8fc:	c1 f4       	brne	.+48     	; 0x92e <__stack+0x2f>
 			if(contador>0){
- 3a0:	1c 16       	cp	r1, r28
- 3a2:	1d 06       	cpc	r1, r29
- 3a4:	74 f4       	brge	.+28     	; 0x3c2 <lerSenha+0x7e>
+ 8fe:	1c 16       	cp	r1, r28
+ 900:	1d 06       	cpc	r1, r29
+ 902:	74 f4       	brge	.+28     	; 0x920 <__stack+0x21>
 				uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
- 3a6:	8c 2f       	mov	r24, r28
- 3a8:	81 50       	subi	r24, 0x01	; 1
+ 904:	8c 2f       	mov	r24, r28
+ 906:	81 50       	subi	r24, 0x01	; 1
 				writeInstruction(lcd_LineTwo | aux);
- 3aa:	80 6c       	ori	r24, 0xC0	; 192
- 3ac:	f8 2e       	mov	r15, r24
- 3ae:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ 908:	80 6c       	ori	r24, 0xC0	; 192
+ 90a:	f8 2e       	mov	r15, r24
+ 90c:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 				writeString(" "); //TROCAR POR CARACTERE DE ESPACO
- 3b2:	8a e1       	ldi	r24, 0x1A	; 26
- 3b4:	91 e0       	ldi	r25, 0x01	; 1
- 3b6:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+ 910:	8c ed       	ldi	r24, 0xDC	; 220
+ 912:	91 e0       	ldi	r25, 0x01	; 1
+ 914:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
 				writeInstruction(lcd_LineTwo | aux);
- 3ba:	8f 2d       	mov	r24, r15
- 3bc:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ 918:	8f 2d       	mov	r24, r15
+ 91a:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 				contador --;
- 3c0:	21 97       	sbiw	r28, 0x01	; 1
+ 91e:	21 97       	sbiw	r28, 0x01	; 1
 			}
 			senhaLida[contador] = 'F';
- 3c2:	86 e4       	ldi	r24, 0x46	; 70
- 3c4:	fe 01       	movw	r30, r28
- 3c6:	ee 5f       	subi	r30, 0xFE	; 254
- 3c8:	fe 4f       	sbci	r31, 0xFE	; 254
- 3ca:	80 83       	st	Z, r24
+ 920:	86 e4       	ldi	r24, 0x46	; 70
+ 922:	fe 01       	movw	r30, r28
+ 924:	ee 5f       	subi	r30, 0xFE	; 254
+ 926:	fe 4f       	sbci	r31, 0xFE	; 254
+ 928:	80 83       	st	Z, r24
 	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
 	short contador = 0;
 	char flagOutConfirma = 0;
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	while (!flagOutConfirma || contador ==0){
 		flagOutConfirma = 0;
- 3cc:	80 e0       	ldi	r24, 0x00	; 0
- 3ce:	05 c0       	rjmp	.+10     	; 0x3da <lerSenha+0x96>
+ 92a:	80 e0       	ldi	r24, 0x00	; 0
+ 92c:	05 c0       	rjmp	.+10     	; 0x938 <__stack+0x39>
 				writeInstruction(lcd_LineTwo | aux);
 				contador --;
 			}
 			senhaLida[contador] = 'F';
 		}
 		else if ((*teclaG) == KEY_CONFIRMA){
- 3d0:	8b 30       	cpi	r24, 0x0B	; 11
- 3d2:	11 f0       	breq	.+4      	; 0x3d8 <lerSenha+0x94>
+ 92e:	8b 30       	cpi	r24, 0x0B	; 11
+ 930:	11 f0       	breq	.+4      	; 0x936 <__stack+0x37>
 	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
 	short contador = 0;
 	char flagOutConfirma = 0;
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	while (!flagOutConfirma || contador ==0){
 		flagOutConfirma = 0;
- 3d4:	80 e0       	ldi	r24, 0x00	; 0
- 3d6:	01 c0       	rjmp	.+2      	; 0x3da <lerSenha+0x96>
+ 932:	80 e0       	ldi	r24, 0x00	; 0
+ 934:	01 c0       	rjmp	.+2      	; 0x938 <__stack+0x39>
 				contador --;
 			}
 			senhaLida[contador] = 'F';
 		}
 		else if ((*teclaG) == KEY_CONFIRMA){
 			flagOutConfirma = 1;
- 3d8:	81 e0       	ldi	r24, 0x01	; 1
+ 936:	81 e0       	ldi	r24, 0x01	; 1
 	//também tem questão dos numeros de digitos na senha e a parte de apagar o caractere que não está funcionando 100% (não estou limpando onde estou pagando no display)
 	(*teclaG) = acao_tecla(teclaDebouce());// mantendo a global ??
 	short contador = 0;
 	char flagOutConfirma = 0;
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	while (!flagOutConfirma || contador ==0){
- 3da:	88 23       	and	r24, r24
- 3dc:	31 f2       	breq	.-116    	; 0x36a <lerSenha+0x26>
- 3de:	20 97       	sbiw	r28, 0x00	; 0
- 3e0:	21 f2       	breq	.-120    	; 0x36a <lerSenha+0x26>
+ 938:	88 23       	and	r24, r24
+ 93a:	31 f2       	breq	.-116    	; 0x8c8 <lerSenha+0x26>
+ 93c:	20 97       	sbiw	r28, 0x00	; 0
+ 93e:	21 f2       	breq	.-120    	; 0x8c8 <lerSenha+0x26>
 		}
 		else if ((*teclaG) == KEY_CONFIRMA){
 			flagOutConfirma = 1;
 		}
 	}
 	(*teclaG) = TECLA_INVALIDA; //limpa a teclaG
- 3e2:	89 e1       	ldi	r24, 0x19	; 25
- 3e4:	f8 01       	movw	r30, r16
- 3e6:	80 83       	st	Z, r24
+ 940:	89 e1       	ldi	r24, 0x19	; 25
+ 942:	f8 01       	movw	r30, r16
+ 944:	80 83       	st	Z, r24
 }
- 3e8:	df 91       	pop	r29
- 3ea:	cf 91       	pop	r28
- 3ec:	1f 91       	pop	r17
- 3ee:	0f 91       	pop	r16
- 3f0:	ff 90       	pop	r15
- 3f2:	08 95       	ret
+ 946:	df 91       	pop	r29
+ 948:	cf 91       	pop	r28
+ 94a:	1f 91       	pop	r17
+ 94c:	0f 91       	pop	r16
+ 94e:	ff 90       	pop	r15
+ 950:	08 95       	ret
 
-000003f4 <login>:
+00000952 <login>:
 
 char login(char *teclaG){
- 3f4:	ef 92       	push	r14
- 3f6:	ff 92       	push	r15
- 3f8:	0f 93       	push	r16
- 3fa:	1f 93       	push	r17
- 3fc:	cf 93       	push	r28
- 3fe:	df 93       	push	r29
- 400:	7c 01       	movw	r14, r24
+ 952:	ef 92       	push	r14
+ 954:	ff 92       	push	r15
+ 956:	0f 93       	push	r16
+ 958:	1f 93       	push	r17
+ 95a:	cf 93       	push	r28
+ 95c:	df 93       	push	r29
+ 95e:	7c 01       	movw	r14, r24
 	writeString("Insira a Senha"); //chamada de senha inicial
- 402:	8c e1       	ldi	r24, 0x1C	; 28
- 404:	91 e0       	ldi	r25, 0x01	; 1
- 406:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+ 960:	8e ed       	ldi	r24, 0xDE	; 222
+ 962:	91 e0       	ldi	r25, 0x01	; 1
+ 964:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
 	char senhaValida = 0;
 	char userIndex = -1;
- 40a:	0f ef       	ldi	r16, 0xFF	; 255
+ 968:	0f ef       	ldi	r16, 0xFF	; 255
 	(*teclaG) = TECLA_INVALIDA; //limpa a teclaG
 }
 
 char login(char *teclaG){
 	writeString("Insira a Senha"); //chamada de senha inicial
 	char senhaValida = 0;
- 40c:	10 e0       	ldi	r17, 0x00	; 0
-	char userIndex = -1;
+ 96a:	10 e0       	ldi	r17, 0x00	; 0
 	short i;
+	// para testar mais rapido
+	//userIndex = 1;
+	//return userIndex;
+	///
 	while(!senhaValida){
- 40e:	1e c0       	rjmp	.+60     	; 0x44c <__EEPROM_REGION_LENGTH__+0x4c>
+ 96c:	1e c0       	rjmp	.+60     	; 0x9aa <login+0x58>
 		lerSenha(teclaG); //estou passando o local da memoria de teclaG aqui, cabe a lerSenha usar *teclaG
- 410:	c7 01       	movw	r24, r14
- 412:	0e 94 a2 01 	call	0x344	; 0x344 <lerSenha>
+ 96e:	c7 01       	movw	r24, r14
+ 970:	0e 94 51 04 	call	0x8a2	; 0x8a2 <lerSenha>
 		for (i =0;i<3 ; i++){
- 416:	c0 e0       	ldi	r28, 0x00	; 0
- 418:	d0 e0       	ldi	r29, 0x00	; 0
- 41a:	15 c0       	rjmp	.+42     	; 0x446 <__EEPROM_REGION_LENGTH__+0x46>
+ 974:	c0 e0       	ldi	r28, 0x00	; 0
+ 976:	d0 e0       	ldi	r29, 0x00	; 0
+ 978:	15 c0       	rjmp	.+42     	; 0x9a4 <login+0x52>
 			if(senhaValida == 0 ){
- 41c:	11 11       	cpse	r17, r1
- 41e:	0e c0       	rjmp	.+28     	; 0x43c <__EEPROM_REGION_LENGTH__+0x3c>
+ 97a:	11 11       	cpse	r17, r1
+ 97c:	0e c0       	rjmp	.+28     	; 0x99a <login+0x48>
 				senhaValida = validarSenha(senhaLida,senhas[i]);
- 420:	be 01       	movw	r22, r28
- 422:	66 0f       	add	r22, r22
- 424:	77 1f       	adc	r23, r23
- 426:	6c 0f       	add	r22, r28
- 428:	7d 1f       	adc	r23, r29
- 42a:	66 0f       	add	r22, r22
- 42c:	77 1f       	adc	r23, r23
- 42e:	68 5f       	subi	r22, 0xF8	; 248
- 430:	7e 4f       	sbci	r23, 0xFE	; 254
- 432:	82 e0       	ldi	r24, 0x02	; 2
- 434:	91 e0       	ldi	r25, 0x01	; 1
- 436:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <validarSenha>
- 43a:	18 2f       	mov	r17, r24
+ 97e:	be 01       	movw	r22, r28
+ 980:	66 0f       	add	r22, r22
+ 982:	77 1f       	adc	r23, r23
+ 984:	6c 0f       	add	r22, r28
+ 986:	7d 1f       	adc	r23, r29
+ 988:	66 0f       	add	r22, r22
+ 98a:	77 1f       	adc	r23, r23
+ 98c:	68 5f       	subi	r22, 0xF8	; 248
+ 98e:	7e 4f       	sbci	r23, 0xFE	; 254
+ 990:	82 e0       	ldi	r24, 0x02	; 2
+ 992:	91 e0       	ldi	r25, 0x01	; 1
+ 994:	0e 94 29 04 	call	0x852	; 0x852 <validarSenha>
+ 998:	18 2f       	mov	r17, r24
 			}
 			if (senhaValida){
- 43c:	11 23       	and	r17, r17
- 43e:	11 f0       	breq	.+4      	; 0x444 <__EEPROM_REGION_LENGTH__+0x44>
+ 99a:	11 23       	and	r17, r17
+ 99c:	11 f0       	breq	.+4      	; 0x9a2 <login+0x50>
 				userIndex = i; //0 -> adm , 1 e 2 vendedores
- 440:	0c 2f       	mov	r16, r28
+ 99e:	0c 2f       	mov	r16, r28
 				break;
- 442:	04 c0       	rjmp	.+8      	; 0x44c <__EEPROM_REGION_LENGTH__+0x4c>
-	char senhaValida = 0;
-	char userIndex = -1;
-	short i;
+ 9a0:	04 c0       	rjmp	.+8      	; 0x9aa <login+0x58>
+	//userIndex = 1;
+	//return userIndex;
+	///
 	while(!senhaValida){
 		lerSenha(teclaG); //estou passando o local da memoria de teclaG aqui, cabe a lerSenha usar *teclaG
 		for (i =0;i<3 ; i++){
- 444:	21 96       	adiw	r28, 0x01	; 1
- 446:	c3 30       	cpi	r28, 0x03	; 3
- 448:	d1 05       	cpc	r29, r1
- 44a:	44 f3       	brlt	.-48     	; 0x41c <__EEPROM_REGION_LENGTH__+0x1c>
-char login(char *teclaG){
-	writeString("Insira a Senha"); //chamada de senha inicial
-	char senhaValida = 0;
-	char userIndex = -1;
+ 9a2:	21 96       	adiw	r28, 0x01	; 1
+ 9a4:	c3 30       	cpi	r28, 0x03	; 3
+ 9a6:	d1 05       	cpc	r29, r1
+ 9a8:	44 f3       	brlt	.-48     	; 0x97a <login+0x28>
 	short i;
+	// para testar mais rapido
+	//userIndex = 1;
+	//return userIndex;
+	///
 	while(!senhaValida){
- 44c:	11 23       	and	r17, r17
- 44e:	01 f3       	breq	.-64     	; 0x410 <__EEPROM_REGION_LENGTH__+0x10>
+ 9aa:	11 23       	and	r17, r17
+ 9ac:	01 f3       	breq	.-64     	; 0x96e <login+0x1c>
 				userIndex = i; //0 -> adm , 1 e 2 vendedores
 				break;
 			}
 		}
 	}
 	writeInstruction(lcd_Clear);
- 450:	81 e0       	ldi	r24, 0x01	; 1
- 452:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ 9ae:	81 e0       	ldi	r24, 0x01	; 1
+ 9b0:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
- 456:	80 e8       	ldi	r24, 0x80	; 128
- 458:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ 9b4:	80 e8       	ldi	r24, 0x80	; 128
+ 9b6:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 	writeString("Bem Vindo");
- 45c:	8b e2       	ldi	r24, 0x2B	; 43
- 45e:	91 e0       	ldi	r25, 0x01	; 1
- 460:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+ 9ba:	8d ee       	ldi	r24, 0xED	; 237
+ 9bc:	91 e0       	ldi	r25, 0x01	; 1
+ 9be:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
 	writeInstruction(lcd_SetCursor | lcd_LineTwo);
- 464:	80 ec       	ldi	r24, 0xC0	; 192
- 466:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ 9c2:	80 ec       	ldi	r24, 0xC0	; 192
+ 9c4:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 	
 	if(userIndex == 0)
- 46a:	01 11       	cpse	r16, r1
- 46c:	05 c0       	rjmp	.+10     	; 0x478 <__EEPROM_REGION_LENGTH__+0x78>
+ 9c8:	01 11       	cpse	r16, r1
+ 9ca:	05 c0       	rjmp	.+10     	; 0x9d6 <login+0x84>
 		writeString("Administrador");
- 46e:	85 e3       	ldi	r24, 0x35	; 53
- 470:	91 e0       	ldi	r25, 0x01	; 1
- 472:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
- 476:	0d c0       	rjmp	.+26     	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
+ 9cc:	87 ef       	ldi	r24, 0xF7	; 247
+ 9ce:	91 e0       	ldi	r25, 0x01	; 1
+ 9d0:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 9d4:	0d c0       	rjmp	.+26     	; 0x9f0 <login+0x9e>
 	else if(userIndex == 1)
- 478:	01 30       	cpi	r16, 0x01	; 1
- 47a:	29 f4       	brne	.+10     	; 0x486 <__EEPROM_REGION_LENGTH__+0x86>
+ 9d6:	01 30       	cpi	r16, 0x01	; 1
+ 9d8:	29 f4       	brne	.+10     	; 0x9e4 <login+0x92>
 		writeString("Operador 1");
- 47c:	83 e4       	ldi	r24, 0x43	; 67
- 47e:	91 e0       	ldi	r25, 0x01	; 1
- 480:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
- 484:	06 c0       	rjmp	.+12     	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
+ 9da:	85 e0       	ldi	r24, 0x05	; 5
+ 9dc:	92 e0       	ldi	r25, 0x02	; 2
+ 9de:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ 9e2:	06 c0       	rjmp	.+12     	; 0x9f0 <login+0x9e>
 	else if(userIndex == 2)
- 486:	02 30       	cpi	r16, 0x02	; 2
- 488:	21 f4       	brne	.+8      	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
+ 9e4:	02 30       	cpi	r16, 0x02	; 2
+ 9e6:	21 f4       	brne	.+8      	; 0x9f0 <login+0x9e>
 		writeString("Operador 2");
- 48a:	8e e4       	ldi	r24, 0x4E	; 78
- 48c:	91 e0       	ldi	r25, 0x01	; 1
- 48e:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
+ 9e8:	80 e1       	ldi	r24, 0x10	; 16
+ 9ea:	92 e0       	ldi	r25, 0x02	; 2
+ 9ec:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+	
 	return userIndex;
 	
 }
- 492:	80 2f       	mov	r24, r16
- 494:	df 91       	pop	r29
- 496:	cf 91       	pop	r28
- 498:	1f 91       	pop	r17
- 49a:	0f 91       	pop	r16
- 49c:	ff 90       	pop	r15
- 49e:	ef 90       	pop	r14
- 4a0:	08 95       	ret
+ 9f0:	80 2f       	mov	r24, r16
+ 9f2:	df 91       	pop	r29
+ 9f4:	cf 91       	pop	r28
+ 9f6:	1f 91       	pop	r17
+ 9f8:	0f 91       	pop	r16
+ 9fa:	ff 90       	pop	r15
+ 9fc:	ef 90       	pop	r14
+ 9fe:	08 95       	ret
 
-000004a2 <__vector_11>:
+00000a00 <__vector_11>:
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
 //////////////////////////////////////////////////////////////////////////
 
 
 ISR(TIMER1_COMPA_vect){
- 4a2:	1f 92       	push	r1
- 4a4:	0f 92       	push	r0
- 4a6:	0f b6       	in	r0, 0x3f	; 63
- 4a8:	0f 92       	push	r0
- 4aa:	11 24       	eor	r1, r1
- 4ac:	2f 93       	push	r18
- 4ae:	3f 93       	push	r19
- 4b0:	4f 93       	push	r20
- 4b2:	5f 93       	push	r21
- 4b4:	6f 93       	push	r22
- 4b6:	7f 93       	push	r23
- 4b8:	8f 93       	push	r24
- 4ba:	9f 93       	push	r25
- 4bc:	af 93       	push	r26
- 4be:	bf 93       	push	r27
- 4c0:	ef 93       	push	r30
- 4c2:	ff 93       	push	r31
+ a00:	1f 92       	push	r1
+ a02:	0f 92       	push	r0
+ a04:	0f b6       	in	r0, 0x3f	; 63
+ a06:	0f 92       	push	r0
+ a08:	11 24       	eor	r1, r1
+ a0a:	2f 93       	push	r18
+ a0c:	3f 93       	push	r19
+ a0e:	4f 93       	push	r20
+ a10:	5f 93       	push	r21
+ a12:	6f 93       	push	r22
+ a14:	7f 93       	push	r23
+ a16:	8f 93       	push	r24
+ a18:	9f 93       	push	r25
+ a1a:	af 93       	push	r26
+ a1c:	bf 93       	push	r27
+ a1e:	ef 93       	push	r30
+ a20:	ff 93       	push	r31
 	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
 	if (teclaG == KEY_CONFIRMA)
- 4c4:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <teclaG>
- 4c8:	8b 30       	cpi	r24, 0x0B	; 11
- 4ca:	31 f4       	brne	.+12     	; 0x4d8 <__vector_11+0x36>
+ a22:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <teclaG>
+ a26:	8b 30       	cpi	r24, 0x0B	; 11
+ a28:	31 f4       	brne	.+12     	; 0xa36 <__vector_11+0x36>
 	contTelaOnOff++;
- 4cc:	80 91 65 01 	lds	r24, 0x0165	; 0x800165 <contTelaOnOff>
- 4d0:	8f 5f       	subi	r24, 0xFF	; 255
- 4d2:	80 93 65 01 	sts	0x0165, r24	; 0x800165 <contTelaOnOff>
- 4d6:	02 c0       	rjmp	.+4      	; 0x4dc <__vector_11+0x3a>
+ a2a:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <contTelaOnOff>
+ a2e:	8f 5f       	subi	r24, 0xFF	; 255
+ a30:	80 93 27 02 	sts	0x0227, r24	; 0x800227 <contTelaOnOff>
+ a34:	02 c0       	rjmp	.+4      	; 0xa3a <__vector_11+0x3a>
 	else
 	contTelaOnOff = 0;
- 4d8:	10 92 65 01 	sts	0x0165, r1	; 0x800165 <contTelaOnOff>
+ a36:	10 92 27 02 	sts	0x0227, r1	; 0x800227 <contTelaOnOff>
 	
 	if(contTelaOnOff == 3){ // se for # por 3 segundos
- 4dc:	80 91 65 01 	lds	r24, 0x0165	; 0x800165 <contTelaOnOff>
- 4e0:	83 30       	cpi	r24, 0x03	; 3
- 4e2:	c1 f4       	brne	.+48     	; 0x514 <__vector_11+0x72>
+ a3a:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <contTelaOnOff>
+ a3e:	83 30       	cpi	r24, 0x03	; 3
+ a40:	c1 f4       	brne	.+48     	; 0xa72 <__vector_11+0x72>
 		if (telaOnOf){
- 4e4:	80 91 64 01 	lds	r24, 0x0164	; 0x800164 <__data_end>
- 4e8:	88 23       	and	r24, r24
- 4ea:	49 f0       	breq	.+18     	; 0x4fe <__vector_11+0x5c>
+ a42:	80 91 26 02 	lds	r24, 0x0226	; 0x800226 <__data_end>
+ a46:	88 23       	and	r24, r24
+ a48:	49 f0       	breq	.+18     	; 0xa5c <__vector_11+0x5c>
 				writeInstruction(lcd_LineOne | lcd_SetCursor);
- 4ec:	80 e8       	ldi	r24, 0x80	; 128
- 4ee:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ a4a:	80 e8       	ldi	r24, 0x80	; 128
+ a4c:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 				writeInstruction(lcd_DisplayOff); //desliga se tiver ligada
- 4f2:	88 e0       	ldi	r24, 0x08	; 8
- 4f4:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ a50:	88 e0       	ldi	r24, 0x08	; 8
+ a52:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 				telaOnOf = 0;
- 4f8:	10 92 64 01 	sts	0x0164, r1	; 0x800164 <__data_end>
- 4fc:	09 c0       	rjmp	.+18     	; 0x510 <__vector_11+0x6e>
+ a56:	10 92 26 02 	sts	0x0226, r1	; 0x800226 <__data_end>
+ a5a:	09 c0       	rjmp	.+18     	; 0xa6e <__vector_11+0x6e>
 			}else{
 				writeInstruction(lcd_LineOne | lcd_SetCursor);
- 4fe:	80 e8       	ldi	r24, 0x80	; 128
- 500:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ a5c:	80 e8       	ldi	r24, 0x80	; 128
+ a5e:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 				writeInstruction(lcd_DisplayOn); //liga se tiver desligada
- 504:	8c e0       	ldi	r24, 0x0C	; 12
- 506:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ a62:	8c e0       	ldi	r24, 0x0C	; 12
+ a64:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 				telaOnOf = 1;
- 50a:	81 e0       	ldi	r24, 0x01	; 1
- 50c:	80 93 64 01 	sts	0x0164, r24	; 0x800164 <__data_end>
+ a68:	81 e0       	ldi	r24, 0x01	; 1
+ a6a:	80 93 26 02 	sts	0x0226, r24	; 0x800226 <__data_end>
 		}
 		contTelaOnOff = 0;
- 510:	10 92 65 01 	sts	0x0165, r1	; 0x800165 <contTelaOnOff>
+ a6e:	10 92 27 02 	sts	0x0227, r1	; 0x800227 <contTelaOnOff>
 	}
 }
- 514:	ff 91       	pop	r31
- 516:	ef 91       	pop	r30
- 518:	bf 91       	pop	r27
- 51a:	af 91       	pop	r26
- 51c:	9f 91       	pop	r25
- 51e:	8f 91       	pop	r24
- 520:	7f 91       	pop	r23
- 522:	6f 91       	pop	r22
- 524:	5f 91       	pop	r21
- 526:	4f 91       	pop	r20
- 528:	3f 91       	pop	r19
- 52a:	2f 91       	pop	r18
- 52c:	0f 90       	pop	r0
- 52e:	0f be       	out	0x3f, r0	; 63
- 530:	0f 90       	pop	r0
- 532:	1f 90       	pop	r1
- 534:	18 95       	reti
+ a72:	ff 91       	pop	r31
+ a74:	ef 91       	pop	r30
+ a76:	bf 91       	pop	r27
+ a78:	af 91       	pop	r26
+ a7a:	9f 91       	pop	r25
+ a7c:	8f 91       	pop	r24
+ a7e:	7f 91       	pop	r23
+ a80:	6f 91       	pop	r22
+ a82:	5f 91       	pop	r21
+ a84:	4f 91       	pop	r20
+ a86:	3f 91       	pop	r19
+ a88:	2f 91       	pop	r18
+ a8a:	0f 90       	pop	r0
+ a8c:	0f be       	out	0x3f, r0	; 63
+ a8e:	0f 90       	pop	r0
+ a90:	1f 90       	pop	r1
+ a92:	18 95       	reti
 
-00000536 <setTimer1_UmSeg>:
+00000a94 <setTimer1_UmSeg>:
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
 	// Pre scaler de 256 -> 62500Hz logo 62500 contagens para 1 seg
 
 	TCCR1A = 4; //modo comparação
- 536:	84 e0       	ldi	r24, 0x04	; 4
- 538:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+ a94:	84 e0       	ldi	r24, 0x04	; 4
+ a96:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
 	TCCR1B = 0x4; //pre scaler de 256
- 53c:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+ a9a:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
 	TCNT1 = 0;  //contagem começa do zero
- 540:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
- 544:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
+ a9e:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
+ aa2:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
 	OCR1A = 62500; //até onde tem q contar
- 548:	84 e2       	ldi	r24, 0x24	; 36
- 54a:	94 ef       	ldi	r25, 0xF4	; 244
- 54c:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
- 550:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+ aa6:	84 e2       	ldi	r24, 0x24	; 36
+ aa8:	94 ef       	ldi	r25, 0xF4	; 244
+ aaa:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ aae:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
 	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em 
- 554:	ef e6       	ldi	r30, 0x6F	; 111
- 556:	f0 e0       	ldi	r31, 0x00	; 0
- 558:	80 81       	ld	r24, Z
- 55a:	82 60       	ori	r24, 0x02	; 2
- 55c:	80 83       	st	Z, r24
+ ab2:	ef e6       	ldi	r30, 0x6F	; 111
+ ab4:	f0 e0       	ldi	r31, 0x00	; 0
+ ab6:	80 81       	ld	r24, Z
+ ab8:	82 60       	ori	r24, 0x02	; 2
+ aba:	80 83       	st	Z, r24
 	sei(); // talvez colocar no mais ??
- 55e:	78 94       	sei
- 560:	08 95       	ret
+ abc:	78 94       	sei
+ abe:	08 95       	ret
 
-00000562 <main>:
+00000ac0 <main>:
 }
 
 int main(){
 	
-	//USART_INIT(UBRR);
+	USART_INIT(UBRR);
+ ac0:	83 e3       	ldi	r24, 0x33	; 51
+ ac2:	90 e0       	ldi	r25, 0x00	; 0
+ ac4:	0e 94 d5 00 	call	0x1aa	; 0x1aa <USART_INIT>
 	setup_lcd();
- 562:	0e 94 55 01 	call	0x2aa	; 0x2aa <setup_lcd>
+ ac8:	0e 94 6e 01 	call	0x2dc	; 0x2dc <setup_lcd>
 	setupBotoes();
 	setTimer1_UmSeg();
- 566:	0e 94 9b 02 	call	0x536	; 0x536 <setTimer1_UmSeg>
+ acc:	0e 94 4a 05 	call	0xa94	; 0xa94 <setTimer1_UmSeg>
 	*/
 	
 	//rotina para ligar 1° vez
 	// ...
 	
 	writeInstruction(lcd_DisplayOn);
- 56a:	8c e0       	ldi	r24, 0x0C	; 12
- 56c:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ ad0:	8c e0       	ldi	r24, 0x0C	; 12
+ ad2:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 	writeString("Bloqueado"); //ficar mais fiel ao pdf
- 570:	89 e5       	ldi	r24, 0x59	; 89
- 572:	91 e0       	ldi	r25, 0x01	; 1
- 574:	0e 94 16 01 	call	0x22c	; 0x22c <writeString>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
- 578:	2f ef       	ldi	r18, 0xFF	; 255
- 57a:	87 ea       	ldi	r24, 0xA7	; 167
- 57c:	91 e6       	ldi	r25, 0x61	; 97
- 57e:	21 50       	subi	r18, 0x01	; 1
- 580:	80 40       	sbci	r24, 0x00	; 0
- 582:	90 40       	sbci	r25, 0x00	; 0
- 584:	e1 f7       	brne	.-8      	; 0x57e <main+0x1c>
- 586:	00 c0       	rjmp	.+0      	; 0x588 <main+0x26>
- 588:	00 00       	nop
+ ad6:	8b e1       	ldi	r24, 0x1B	; 27
+ ad8:	92 e0       	ldi	r25, 0x02	; 2
+ ada:	0e 94 2f 01 	call	0x25e	; 0x25e <writeString>
+ ade:	2f ef       	ldi	r18, 0xFF	; 255
+ ae0:	87 ea       	ldi	r24, 0xA7	; 167
+ ae2:	91 e6       	ldi	r25, 0x61	; 97
+ ae4:	21 50       	subi	r18, 0x01	; 1
+ ae6:	80 40       	sbci	r24, 0x00	; 0
+ ae8:	90 40       	sbci	r25, 0x00	; 0
+ aea:	e1 f7       	brne	.-8      	; 0xae4 <main+0x24>
+ aec:	00 c0       	rjmp	.+0      	; 0xaee <main+0x2e>
+ aee:	00 00       	nop
 	_delay_ms(2000);
 	writeInstruction(lcd_Home | lcd_Clear);
- 58a:	83 e0       	ldi	r24, 0x03	; 3
- 58c:	0e 94 3f 01 	call	0x27e	; 0x27e <writeInstruction>
+ af0:	83 e0       	ldi	r24, 0x03	; 3
+ af2:	0e 94 58 01 	call	0x2b0	; 0x2b0 <writeInstruction>
 	while(1){
 		//while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
 		//	teclaG = teclaDebouce();
 		//}
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		teclaG =TECLA_INVALIDA;
- 590:	89 e1       	ldi	r24, 0x19	; 25
- 592:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <teclaG>
+ af6:	89 e1       	ldi	r24, 0x19	; 25
+ af8:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <teclaG>
 		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
- 596:	81 e0       	ldi	r24, 0x01	; 1
- 598:	91 e0       	ldi	r25, 0x01	; 1
- 59a:	0e 94 fa 01 	call	0x3f4	; 0x3f4 <login>
- 59e:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
- 5a2:	ff cf       	rjmp	.-2      	; 0x5a2 <main+0x40>
+ afc:	81 e0       	ldi	r24, 0x01	; 1
+ afe:	91 e0       	ldi	r25, 0x01	; 1
+ b00:	0e 94 a9 04 	call	0x952	; 0x952 <login>
+ b04:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+		
+		if(userIndex != 0){
+ b08:	88 23       	and	r24, r24
+ b0a:	a9 f3       	breq	.-22     	; 0xaf6 <main+0x36>
+ b0c:	2f ef       	ldi	r18, 0xFF	; 255
+ b0e:	8b e7       	ldi	r24, 0x7B	; 123
+ b10:	92 e9       	ldi	r25, 0x92	; 146
+ b12:	21 50       	subi	r18, 0x01	; 1
+ b14:	80 40       	sbci	r24, 0x00	; 0
+ b16:	90 40       	sbci	r25, 0x00	; 0
+ b18:	e1 f7       	brne	.-8      	; 0xb12 <main+0x52>
+ b1a:	00 c0       	rjmp	.+0      	; 0xb1c <main+0x5c>
+ b1c:	00 00       	nop
+			while(1){
+				_delay_ms(3000);
+				menu_vendas();
+ b1e:	0e 94 a2 01 	call	0x344	; 0x344 <menu_vendas>
+				while(teclaG+49 > 51){
+ b22:	04 c0       	rjmp	.+8      	; 0xb2c <main+0x6c>
+					teclaG = teclaDebouce();
+ b24:	0e 94 94 00 	call	0x128	; 0x128 <teclaDebouce>
+ b28:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <teclaG>
+		
+		if(userIndex != 0){
+			while(1){
+				_delay_ms(3000);
+				menu_vendas();
+				while(teclaG+49 > 51){
+ b2c:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <teclaG>
+ b30:	90 e0       	ldi	r25, 0x00	; 0
+ b32:	c1 96       	adiw	r24, 0x31	; 49
+ b34:	84 33       	cpi	r24, 0x34	; 52
+ b36:	91 05       	cpc	r25, r1
+ b38:	ac f7       	brge	.-22     	; 0xb24 <main+0x64>
+					teclaG = teclaDebouce();
+				}
+				processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
+ b3a:	0e 94 24 04 	call	0x848	; 0x848 <processa_venda>
+		if(userIndex == 0){
+			// MODO ADM....
+		}
+		
+		//while(1); // só para parar aqui
+	}
+ b3e:	db cf       	rjmp	.-74     	; 0xaf6 <main+0x36>
 
-000005a4 <__tablejump2__>:
- 5a4:	ee 0f       	add	r30, r30
- 5a6:	ff 1f       	adc	r31, r31
- 5a8:	05 90       	lpm	r0, Z+
- 5aa:	f4 91       	lpm	r31, Z
- 5ac:	e0 2d       	mov	r30, r0
- 5ae:	09 94       	ijmp
+00000b40 <__tablejump2__>:
+ b40:	ee 0f       	add	r30, r30
+ b42:	ff 1f       	adc	r31, r31
+ b44:	05 90       	lpm	r0, Z+
+ b46:	f4 91       	lpm	r31, Z
+ b48:	e0 2d       	mov	r30, r0
+ b4a:	09 94       	ijmp
 
-000005b0 <_exit>:
- 5b0:	f8 94       	cli
+00000b4c <_exit>:
+ b4c:	f8 94       	cli
 
-000005b2 <__stop_program>:
- 5b2:	ff cf       	rjmp	.-2      	; 0x5b2 <__stop_program>
+00000b4e <__stop_program>:
+ b4e:	ff cf       	rjmp	.-2      	; 0xb4e <__stop_program>

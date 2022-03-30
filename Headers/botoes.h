@@ -12,6 +12,9 @@
 #define KEY_APAGAR 9
 #define KEY_0 10
 #define KEY_CONFIRMA 11
+#define KEY_CONFIRMA_ASCII 58
+#define KEY_APAGAR_ASCII 60
+#define TECLA_INVALIDA_ASCII  123
 
 
 uint8_t tecla_lida();
