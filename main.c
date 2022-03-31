@@ -12,6 +12,7 @@
 #include "Modulos/lcd.c"
 #include "Modulos/vendas.c"
 #include "Modulos/senha.c"
+#include "Modulos/telas.c"
 
 #include "Headers/botoes.h"
 #include "Headers/senha.h"
@@ -120,7 +121,7 @@ int main(){
 		
 		if(userIndex != 0){
 			while(1){
-				_delay_ms(3000);
+				writeInstruction(lcd_Home | lcd_Clear);
 				menu_vendas();
 				while(teclaG+49 > 51){
 					teclaG = teclaDebouce();

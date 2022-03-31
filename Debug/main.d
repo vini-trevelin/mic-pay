@@ -22,8 +22,9 @@ main.d main.o: .././main.c \
  .././Modulos/delayT1.c .././Modulos/serial.c \
  .././Modulos/../Headers/serial.h .././Modulos/lcd.c \
  .././Modulos/vendas.c .././Modulos/../Headers/vendas.h \
- .././Modulos/senha.c .././Modulos/../Headers/senha.h \
- .././Headers/botoes.h .././Headers/senha.h
+ .././Modulos/../Headers/telas.h .././Modulos/../Headers/senha.h \
+ .././Modulos/senha.c .././Modulos/telas.c .././Headers/botoes.h \
+ .././Headers/senha.h
 
 d:\microchip\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -81,9 +82,13 @@ d:\microchip\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 .././Modulos/../Headers/vendas.h:
 
-.././Modulos/senha.c:
+.././Modulos/../Headers/telas.h:
 
 .././Modulos/../Headers/senha.h:
+
+.././Modulos/senha.c:
+
+.././Modulos/telas.c:
 
 .././Headers/botoes.h:
 

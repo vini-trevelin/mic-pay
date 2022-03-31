@@ -64,8 +64,8 @@ char login(char *teclaG){
 	char userIndex = -1;
 	short i;
 	// para testar mais rapido
-	//userIndex = 1;
-	//return userIndex;
+	userIndex = 1;
+	return userIndex;
 	///
 	while(!senhaValida){
 		lerSenha(teclaG); //estou passando o local da memoria de teclaG aqui, cabe a lerSenha usar *teclaG
