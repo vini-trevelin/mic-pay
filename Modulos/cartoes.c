@@ -16,12 +16,7 @@
 #include "../Headers/lcd.h"
 
 
-//static para manterem os valores durante as incializações
-static char numCartoesLocais [LOCALCARDNUM][CARDSIZE]; // indices correspondentes entre os 3  elementos 
-static char senhasLocais[LOCALCARDNUM][SENHASIZE];
-static char cashBackCounter[LOCALCARDNUM];
-static char saldosLocais[LOCALCARDNUM][DIGITOS]; // armazenados na forma mais significativo -> indice 0;
-unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
+
 
 void atualizaSenha(char indice,char novaSenha[]){ // recebe o indice obtido por verificaContasLocais
 	unsigned char i=0;
@@ -70,7 +65,7 @@ void adicionaSaldo(char indice,char valorAdd[]){ // verificar como receberei o v
 		inteiros = inteiros+1;
 		centavos =centavos -100;
 	}
-	if(inteiro>=1000){
+	if(inteiros>=1000){
 		return FALSE;
 	}
 	else{
@@ -104,7 +99,7 @@ char verificarContasLocais(char cartaoLido[]){ // verificada
 
 char verificaCashBack (char indice,char valorVenda[]){
 	if(valorVenda[4]>=0 || valorVenda[3]>=5){
-		if(cashBackCounter[indice-1] == 2){ // -1 para a correção do indice externo, conforme já foi comentado{
+		if(cashBackCounter[indice-1] == 3){ // -1 para a correção do indice externo, conforme já foi comentado{
 			
 			return TRUE;
 		}
@@ -178,15 +173,15 @@ char executarVendaInterna(char indice,char valor[], char senha[]){ // acho que c
 		auxiliar = verificaSaldo(indice,valor);
 		if (auxiliar) {
 			subtraiSaldo(indice,valor);
-			return TRUE;
+			return 1;			// op realizada
 		}
 		else{
-			return FALSE;
+			return 0;		// erro sem saldo
 		}
 	
 	}
 	else{
-		return FALSE;
+		return 2;				// erro senha invalida
 	}
 	
 }
@@ -272,4 +267,17 @@ char verificaSaldo (char indice, char valorVenda[]){ // Retorna TRUE ou FALSE de
 		}
 	}
 	return TRUE;
+}
+void mostraSaldoNaSerial(char indice){
+	short k;
+	for(k=0;k<cartoesCadastrados;k++){
+
+		USART_envia(saldosLocais[k][0]);
+		USART_envia(saldosLocais[k][1]);
+		USART_envia(saldosLocais[k][2]);
+		USART_envia(saldosLocais[k][3]);
+		USART_envia(saldosLocais[k][4]);
+		USART_envia(0x0D);
+	}
+
 }

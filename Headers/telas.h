@@ -19,3 +19,4 @@ void tela_status_oper();
 void tela_instrucoes_configOper();
 void tela_continuar_modo_atual();
 void tela_bloqueio_inicial();
+void tela_vendaInterna(int aux);

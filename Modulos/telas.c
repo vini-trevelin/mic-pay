@@ -108,6 +108,24 @@ void tela_vendaParcelada(){
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("R$ ");
 }
+void tela_vendaInterna(int aux){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	if(aux==1){
+		writeString("Venda interna");
+		writeInstruction(lcd_LineTwo | lcd_SetCursor);
+		writeString("realizada ");
+		_delay_ms(2000);
+	}else if(aux==0){
+		writeString("Venda cancelada");
+		writeInstruction(lcd_LineTwo | lcd_SetCursor);
+		writeString("Limite atingido ");
+		_delay_ms(2000);
+	}else{
+		tela_SF();
+	}
+	
+}
 void tela_nParcelas(){
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);

@@ -2,6 +2,7 @@
 #include "../Headers/lcd.h"
 #include "../Headers/botoes.h"
 #include "../Headers/senha.h"
+#include "../Headers/telas.h"
 
 
 

@@ -6,23 +6,16 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "Modulos/botoes.c"
-#include "Modulos/delayT1.c"
-#include "Modulos/serial.c"
-#include "Modulos/lcd.c"
-#include "Modulos/vendas.c"
-#include "Modulos/senha.c"
-#include "Modulos/telas.c"
-#include "Modulos/modoAdm.c"
 
 #include "Headers/botoes.h"
 #include "Headers/senha.h"
+#include "Headers/cartoes.h"
+#include "Headers/lcd.h"
+#include "Headers/serial.h"
 
 #include <util/delay.h>
 
 #define N_CARACSENHA 6 // todas as senhas com 4 caracteres? REVER ISSO
-
-
 
 //////////////////////////////////////////////////////////////////////////
 //GLOBAIS//
@@ -33,8 +26,31 @@ char teclaG = TECLA_INVALIDA;
 char contTelaOnOff = 0; //para segurar o botão por 3 segundos
 char telaOnOf = 0; //para saber o estado da tela (inicia Desligada)
 
- char userIndex= 10;
- short controle = 1;
+char userIndex= 10;
+short controle = 1;
+
+//static para manterem os valores durante as incializações
+static char numCartoesLocais [LOCALCARDNUM][CARDSIZE]; // indices correspondentes entre os 3  elementos
+static char senhasLocais[LOCALCARDNUM][SENHASIZE];
+static char cashBackCounter[LOCALCARDNUM];
+static char saldosLocais[LOCALCARDNUM][DIGITOS]; // armazenados na forma mais significativo -> indice 0;
+unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
+
+//////////////////////////////////////////////////////////////////////////
+//INCLUDES MÓDULOS//
+//////////////////////////////////////////////////////////////////////////
+
+#include "Modulos/cartoes.c"
+#include "Modulos/vendas.c"
+#include "Modulos/botoes.c"
+#include "Modulos/delayT1.c"
+#include "Modulos/serial.c"
+#include "Modulos/lcd.c"
+#include "Modulos/senha.c"
+#include "Modulos/telas.c"
+#include "Modulos/modoAdm.c"
+
+
 
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
@@ -112,6 +128,15 @@ int main(){
 	writeInstruction(lcd_DisplayOn);
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
 	
+	
+	// inserindo cartões pra teste
+	char cartao_teste[] = {8+48,0+48,0+48,0+48,0+48,0+48};
+	char cartao_teste_2[] = {0+48,0+48,2+48,0+48,0+48,0+48};
+	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
+	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
+	/////
+	
+	
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		if(loop1){
@@ -146,13 +171,3 @@ int main(){
 	}
 	
 }
-	
-	
-	/*
-		sprintf(sfinal,"%d",i); //codigozinho pra escrever as variaves no lcd
-		writeString(s2);
-		writeInstruction(lcd_LineTwo | lcd_SetCursor);
-		writeString(sfinal);
-		*/
-	
-	

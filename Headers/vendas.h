@@ -13,6 +13,7 @@ void processa_estorno(int tipo_cartao, char valor[],char cartao[]);
 void formata_valor(char valor[]);
 char metodo_pagamento();
 int aguarda_cartao();
+int aguarda_servidor();
 
 // recebimento de dados do usuario
 void recebe_senha(char senha[]);

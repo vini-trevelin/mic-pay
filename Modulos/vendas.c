@@ -3,6 +3,7 @@
 #include "../Headers/vendas.h"
 #include "../Headers/telas.h"
 #include "../Headers/senha.h"
+#include "../Headers/cartoes.h"
 
 
 
@@ -177,6 +178,7 @@ void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
 	
 	tela_vendaAvista();
 	recebe_valor(valor);
+	formata_valor(valor);
 	
 	metodo_pgmt = metodo_pagamento();
 	tipo_cartao = aguarda_cartao();
@@ -211,7 +213,8 @@ void processa_estorno(int tipo_cartao, char valor[],char cartao[]){
 }
 
 void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]){
-	short i, req=0;
+	short i, req=0, aux;
+	char cartao_local=0;
 	
 	while(req != 1){
 
@@ -240,7 +243,28 @@ void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valo
 			recebe_senha(senha);
 			
 		}
-		req = requisicao_externa(cartao,senha,valor,parcelas);
+		
+		if(metodo_pgmt == 2){										// se o pagamento for no cartão de crédito, verifica pra ver se for cartão da FIRMA
+			cartao_local = verificarContasLocais(cartao);
+		}
+			
+		
+		if(!cartao_local){											// se o cartão não for do tipo local, faz requisição externa
+			req = requisicao_externa(cartao,senha,valor,parcelas);
+		}else{
+			aux = executarVendaInterna(cartao_local,valor,senha);	
+			if(aux==1){
+				req=1;
+			}else if(aux==2){
+				req=2;												// vai perguntar denovo a senha
+			}else{
+				req=1;
+			}
+			tela_vendaInterna(aux);
+			mostraSaldoNaSerial(cartao_local);
+			
+		}
+			
 	}
 }
 
