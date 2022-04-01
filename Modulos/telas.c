@@ -21,6 +21,13 @@ void menu_vendas(){
 	//writeInstruction(lcd_LineOne | lcd_SetCursor);
 	//writeString("[3] Estorno");
 }
+void tela_bloqueio_inicial(){
+	writeString("     MicPay"); //ficar mais fiel ao pdf
+	writeInstruction(lcd_SetCursor | lcd_LineTwo);
+	writeString("       :)");
+	_delay_ms(1000); 
+	writeInstruction(lcd_Home | lcd_Clear);
+}
 void menu_pagamento(){
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
@@ -125,4 +132,33 @@ void tela_processandoVenda(){
 	writeString("Aguardando ");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("servidor... ");
+}
+void menuADM(){
+	_delay_ms(750);
+	writeInstruction(lcd_Clear | lcd_Home);
+	writeString("Selecione o que");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("quer configurar:");
+	_delay_ms(1500);
+	
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("1-Hora 2-Ver.Pen");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("3-Oper 4-Des.Pen");
+}
+void tela_instrucoes_configOper(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Selecione o oper");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("p/ hab/deshab:");
+	_delay_ms(1500);	
+}
+void tela_continuar_modo_atual(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Deseja mudar de");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("modo? *:N  #:S");
 }

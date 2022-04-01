@@ -59,13 +59,15 @@ void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se
 }
 
 char login(char *teclaG){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_Home);
 	writeString("Insira a Senha"); //chamada de senha inicial
 	char senhaValida = 0;
 	char userIndex = -1;
 	short i;
 	// para testar mais rapido
-	userIndex = 1;
-	return userIndex;
+// 	userIndex = 0;
+// 	return userIndex;
 	///
 	while(!senhaValida){
 		lerSenha(teclaG); //estou passando o local da memoria de teclaG aqui, cabe a lerSenha usar *teclaG
@@ -93,6 +95,16 @@ char login(char *teclaG){
 	
 	return userIndex;
 	
+}
+
+char continuar_modo_atual(char *tecla){
+	tela_continuar_modo_atual();
+	*tecla = TECLA_INVALIDA;
+	while((*tecla)!=KEY_CONFIRMA && (*tecla)!=KEY_APAGAR )
+		*tecla = teclaDebouce();
+	
+	return !((*tecla)==KEY_CONFIRMA);
+		
 }
 
 

@@ -13,6 +13,7 @@
 #include "Modulos/vendas.c"
 #include "Modulos/senha.c"
 #include "Modulos/telas.c"
+#include "Modulos/modoAdm.c"
 
 #include "Headers/botoes.h"
 #include "Headers/senha.h"
@@ -84,6 +85,8 @@ int main(){
 	setup_lcd();
 	setupBotoes();
 	setTimer1_UmSeg();
+	char loop1 = 1; //para ele agir diferente no 1 loop
+	char continuar;
 	//char str[3];	
 	
 	/*
@@ -107,18 +110,19 @@ int main(){
 	// ...
 	
 	writeInstruction(lcd_DisplayOn);
-	writeString("Bloqueado"); //ficar mais fiel ao pdf
-	_delay_ms(2000);
-	writeInstruction(lcd_Home | lcd_Clear);
+	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
 	
 	while(1){
-		//while (!telaOnOf){// lcd incia desligado e fico lendo a tecla caso # por 3s mais liga o LCD
-		//	teclaG = teclaDebouce();
-		//}
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
-		teclaG =TECLA_INVALIDA;
-		userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
-		
+		if(loop1){
+			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
+			loop1 = 0;
+		}else{
+			continuar = continuar_modo_atual(&teclaG);
+			if(!continuar)
+				userIndex = login(&teclaG); //pode mudar o modo adm <-> oper
+		}
+		teclaG = TECLA_INVALIDA;
 		if(userIndex != 0){
 			while(1){
 				writeInstruction(lcd_Home | lcd_Clear);
@@ -132,10 +136,13 @@ int main(){
 		}
 		
 		if(userIndex == 0){
-			// MODO ADM....
+			menuADM();
+			teclaG = TECLA_INVALIDA;
+			while(teclaG == TECLA_INVALIDA){
+				teclaG = teclaDebouce();
+			}
+			modoADM(&teclaG);
 		}
-		
-		//while(1); // só para parar aqui
 	}
 	
 }
