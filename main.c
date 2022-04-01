@@ -12,6 +12,7 @@
 #include "Headers/cartoes.h"
 #include "Headers/lcd.h"
 #include "Headers/serial.h"
+#include "Headers/relogio.h"
 
 #include <util/delay.h>
 
@@ -49,6 +50,7 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 #include "Modulos/senha.c"
 #include "Modulos/telas.c"
 #include "Modulos/modoAdm.c"
+#include "Modulos/relogio.c"
 
 
 
@@ -76,17 +78,40 @@ ISR(TIMER1_COMPA_vect){
 		}
 		contTelaOnOff = 0;
 	}
+	updateDate();
+	AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
 }
 
 //////////////////////////////////////////////////////////////////////////
 //FUNÇÔES//
 //////////////////////////////////////////////////////////////////////////
 
+		
+		/*void testaRelogio(){
+			writeInstruction(lcd_DisplayOn);
+
+			writeString(stringHORA);
+			char ArrNovoDia[] ={'0','1'};
+			char ArrNovoMes[] ={'0','4'};
+			char ArrNovoAno[] = {'2','2'};
+			char ArrNovaHora[] = {'1','7'};
+			char ArrNovoMinuto[] = {'2','2'};
+			char ArrNovoSegundo[] = {'1','0'};
+			changeDate( ArrNovoDia, ArrNovoMes, ArrNovoAno,  ArrNovaHora, ArrNovoMinuto, ArrNovoSegundo);
+			while (1){
+			writeInstruction(lcd_LineOne | lcd_SetCursor);
+			writeString(stringDATA);
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			writeString(stringHORA);
+			}
+		}
+		*/
+
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
 	// Pre scaler de 256 -> 62500Hz logo 62500 contagens para 1 seg
-
+	
 	TCCR1A = 4; //modo comparação
 	TCCR1B = 0x4; //pre scaler de 256
 	TCNT1 = 0;  //contagem começa do zero
@@ -96,7 +121,7 @@ void setTimer1_UmSeg(){
 }
 
 int main(){
-	
+	anoZero(); // inicia o relogio
 	USART_INIT(UBRR);
 	setup_lcd();
 	setupBotoes();
@@ -104,7 +129,7 @@ int main(){
 	char loop1 = 1; //para ele agir diferente no 1 loop
 	char continuar;
 	//char str[3];	
-	
+	//testaRelogio();
 	/*
 	Antes do while(1) teremos um setupMaquina();
 		Limpa e desliga a tela
