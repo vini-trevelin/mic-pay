@@ -17,6 +17,6 @@ void subtraiSaldo(char indice,char venda[]);					    // verificada
 char verificaSaldo (char indice, char valorVenda[]);				// verificada
 char verificaSenha(char indice, char senhaRecebida[]);				// verificada
 void atualizaSenha(char indice,char novaSenha[]); 					// REVISAR FORMA DE ENTRADA DOS DADOS
-void adicionaSaldo(char indice,char valorAdd[]);					// REVISAR FORMA DE ENTRADA DOS DADOS
+char adicionaSaldo(char indice,char valorAdd[]);					// REVISAR FORMA DE ENTRADA DOS DADOS
 
 void mostraSaldoNaSerial(char indice)	;							// SÓ PRA TESTE

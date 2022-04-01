@@ -161,7 +161,7 @@ void menuADM(){
 	
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
-	writeString("1-Hora 2-Ver.Pen");
+	writeString("1-Data 2-Ver.Pen");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("3-Oper 4-Des.Pen");
 }
@@ -179,4 +179,46 @@ void tela_continuar_modo_atual(){
 	writeString("Deseja mudar de");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("modo? *:N  #:S");
+}
+void tela_instrucoes_configDiaMesAno(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("formato: ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("    dd/mm/yy");
+	_delay_ms(1500);
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("insira a nova");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("data: ");
+}
+void tela_instrucoes_configHoraMinSeg(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("formato: ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("    hh/mm/ss");
+	_delay_ms(1500);
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("insira a nova");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("hora: ");
+}
+void tela_operacaoConcluida(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Operacao");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Concluida!");
+	_delay_ms(1000);
+}
+void tela_dataInvalida(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Data INVALIDA!");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Data inalterada");
+	_delay_ms(1000);
 }

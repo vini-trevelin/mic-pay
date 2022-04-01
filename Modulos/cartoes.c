@@ -26,7 +26,7 @@ void atualizaSenha(char indice,char novaSenha[]){ // recebe o indice obtido por 
 	}
 }
 
-void adicionaSaldo(char indice,char valorAdd[]){ // verificar como receberei o vetor do saldo a adicionar (se será igual a um valor de venda ou não ??)
+char adicionaSaldo(char indice,char valorAdd[]){ // verificar como receberei o vetor do saldo a adicionar (se será igual a um valor de venda ou não ??)
 	//fiz como se não fosse
 	unsigned char k = indice -1,i;
 	int centavos=0;

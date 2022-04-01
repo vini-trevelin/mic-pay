@@ -20,3 +20,7 @@ void tela_instrucoes_configOper();
 void tela_continuar_modo_atual();
 void tela_bloqueio_inicial();
 void tela_vendaInterna(int aux);
+void tela_instrucoes_configDiaMesAno();
+void tela_instrucoes_configHoraMinSeg();
+void tela_operacaoConcluida();
+void tela_dataInvalida();

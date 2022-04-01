@@ -3,7 +3,6 @@
 						//INCLUDES//
 //////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -24,8 +23,9 @@
 
 
 char teclaG = TECLA_INVALIDA;
-char contTelaOnOff = 0; //para segurar o botão por 3 segundos
-char telaOnOf = 0; //para saber o estado da tela (inicia Desligada)
+char contTelaOn = 0; //para segurar o botão por 3 segundos
+char contTelaOff = 0;
+char telaOnOff = 0; //para saber o estado da tela (inicia Desligada)
 
 char userIndex= 10;
 short controle = 1;
@@ -61,25 +61,31 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 
 ISR(TIMER1_COMPA_vect){
 	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
-	if (teclaG == KEY_CONFIRMA)
-	contTelaOnOff++;
-	else
-	contTelaOnOff = 0;
-	
-	if(contTelaOnOff == 3){ // se for # por 3 segundos
-		if (telaOnOf){
-				writeInstruction(lcd_LineOne | lcd_SetCursor);
-				writeInstruction(lcd_DisplayOff); //desliga se tiver ligada
-				telaOnOf = 0;
-			}else{
-				writeInstruction(lcd_LineOne | lcd_SetCursor);
-				writeInstruction(lcd_DisplayOn); //liga se tiver desligada
-				telaOnOf = 1;
-		}
-		contTelaOnOff = 0;
-	}
+// 	if (teclaG == KEY_CONFIRMA)
+// 		contTelaOn++;
+// 	else
+// 		contTelaOn = 0;
+// 	
+// 	if (teclaG == KEY_APAGAR)
+// 		contTelaOff++;
+// 	else
+// 		contTelaOff = 0;
+// 	
+// 	if(contTelaOn == 3 && telaOnOff==0){ // se for # por 3 segundos e tiver desligada -> liga tela
+// 		writeInstruction(lcd_DisplayOn);
+// 		contTelaOn = 0;
+// 		telaOnOff = 1;
+// 	}
+// 	if (contTelaOff == 4 && telaOnOff==1) //se * por 4 segs e tiver ligada -> desliga
+// 	{
+// 		writeInstruction(lcd_DisplayOff);
+// 		contTelaOff = 0;
+// 		telaOnOff = 0;
+// 	}
 	updateDate();
-	AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
+	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
+									//acho q vamos usar ela no modo adm pra guardar o momento das pendencias 
+								 
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -128,28 +134,10 @@ int main(){
 	setTimer1_UmSeg();
 	char loop1 = 1; //para ele agir diferente no 1 loop
 	char continuar;
-	//char str[3];	
-	//testaRelogio();
-	/*
-	Antes do while(1) teremos um setupMaquina();
-		Limpa e desliga a tela
-		vamos precisar de uma varivael global bool para ver se a tela esta on ou off
-		
-		
-	Talvez para a primeira  ligada não precisaria fazer o esquema com timer
-	só deixar um 
-	while(flag){
-		if(tecla_lida == #) 
-			flag = 0;	
-		_delay_ms(2000); //ou 3000, não lembro o que ele pediu
-		} 
-	e dai dps vem o while grande q vai controlar tudo
-	
-	*/
-	
-	//rotina para ligar 1° vez
-	// ...
-	
+
+// 	writeInstruction(lcd_DisplayOff);
+// 	while(telaOnOff==0)
+// 		teclaG = teclaDebouce();
 	writeInstruction(lcd_DisplayOn);
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
 	
