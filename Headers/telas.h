@@ -24,3 +24,4 @@ void tela_instrucoes_configDiaMesAno();
 void tela_instrucoes_configHoraMinSeg();
 void tela_operacaoConcluida();
 void tela_dataInvalida();
+void tela_operadorDesabilitado(char oper);

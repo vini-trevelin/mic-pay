@@ -215,10 +215,21 @@ void tela_operacaoConcluida(){
 	_delay_ms(1000);
 }
 void tela_dataInvalida(){
+	
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
 	writeString("Data INVALIDA!");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("Data inalterada");
+	_delay_ms(1000);
+
+}
+void tela_operadorDesabilitado(char oper){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Operador ");
+	writeCharacter(oper+48);
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Desabilitado");
 	_delay_ms(1000);
 }

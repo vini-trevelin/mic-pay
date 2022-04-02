@@ -152,6 +152,7 @@ int main(){
 	
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
+		
 		if(loop1){
 			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
 			loop1 = 0;
@@ -160,17 +161,22 @@ int main(){
 			if(!continuar)
 				userIndex = login(&teclaG); //pode mudar o modo adm <-> oper
 		}
+		
 		teclaG = TECLA_INVALIDA;
 		if(userIndex != 0){
-			while(1){
-				writeInstruction(lcd_Home | lcd_Clear);
-				menu_vendas();
-				while(teclaG+49 > 51){
-					teclaG = teclaDebouce();
+			if(getOperStatus(userIndex))
+				while(1){
+					writeInstruction(lcd_Home | lcd_Clear);
+					menu_vendas();
+					while(teclaG+49 > 51){
+						teclaG = teclaDebouce();
+					}
+					processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
+					break;
 				}
-				processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
-				break;
-			}
+			else{
+				tela_operadorDesabilitado(userIndex);
+				}
 		}
 		
 		if(userIndex == 0){

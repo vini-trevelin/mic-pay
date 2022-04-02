@@ -31,8 +31,6 @@ Discarded input sections
  .text.enableDelayT1
                 0x00000000       0x1e main.o
  .text.delay    0x00000000       0x16 main.o
- .text.getOperStatus
-                0x00000000        0xc main.o
  .text.AtualizaStringHora
                 0x00000000        0x2 main.o
  .text.AtualizaStringData
@@ -265,7 +263,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2104
+.text           0x00000000     0x2166
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -542,53 +540,59 @@ END GROUP
  .text.tela_dataInvalida
                 0x00001942       0x36 main.o
                 0x00001942                tela_dataInvalida
+ .text.tela_operadorDesabilitado
+                0x00001978       0x44 main.o
+                0x00001978                tela_operadorDesabilitado
  .text.mudarStatusOper
-                0x00001978       0x2c main.o
-                0x00001978                mudarStatusOper
+                0x000019bc       0x2c main.o
+                0x000019bc                mudarStatusOper
  .text.tela_status_oper
-                0x000019a4       0x52 main.o
-                0x000019a4                tela_status_oper
+                0x000019e8       0x52 main.o
+                0x000019e8                tela_status_oper
+ .text.getOperStatus
+                0x00001a3a        0xc main.o
+                0x00001a3a                getOperStatus
  .text.getDiaMesAno
-                0x000019f6      0x102 main.o
-                0x000019f6                getDiaMesAno
+                0x00001a46      0x102 main.o
+                0x00001a46                getDiaMesAno
  .text.getHoraMinSeg
-                0x00001af8      0x102 main.o
-                0x00001af8                getHoraMinSeg
- .text.anoZero  0x00001bfa       0x1e main.o
-                0x00001bfa                anoZero
+                0x00001b48      0x102 main.o
+                0x00001b48                getHoraMinSeg
+ .text.anoZero  0x00001c4a       0x1e main.o
+                0x00001c4a                anoZero
  .text.changeDate
-                0x00001c18      0x144 main.o
-                0x00001c18                changeDate
- .text.modoADM  0x00001d5c      0x112 main.o
-                0x00001d5c                modoADM
+                0x00001c68      0x144 main.o
+                0x00001c68                changeDate
+ .text.modoADM  0x00001dac      0x112 main.o
+                0x00001dac                modoADM
  .text.atualizaMesAno
-                0x00001e6e       0x2e main.o
-                0x00001e6e                atualizaMesAno
+                0x00001ebe       0x2e main.o
+                0x00001ebe                atualizaMesAno
  .text.updateDate
-                0x00001e9c       0x8c main.o
-                0x00001e9c                updateDate
+                0x00001eec       0x8c main.o
+                0x00001eec                updateDate
  .text.__vector_11
-                0x00001f28       0x48 main.o
-                0x00001f28                __vector_11
+                0x00001f78       0x48 main.o
+                0x00001f78                __vector_11
  .text.setTimer1_UmSeg
-                0x00001f70       0x2c main.o
-                0x00001f70                setTimer1_UmSeg
- .text.main     0x00001f9c      0x108 main.o
-                0x00001f9c                main
+                0x00001fc0       0x2c main.o
+                0x00001fc0                setTimer1_UmSeg
+ .text.main     0x00001fec      0x11a main.o
+                0x00001fec                main
  .text.libgcc.div
-                0x000020a4       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
-                0x000020a4                _div
-                0x000020a4                __divmodhi4
- .text.libgcc   0x000020cc        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x000020cc                __tablejump2__
+                0x00002106       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+                0x00002106                _div
+                0x00002106                __divmodhi4
+ .text.libgcc   0x0000212e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x0000212e                __tablejump2__
  .text.libgcc.div
-                0x000020d8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                0x000020d8                __udivmodhi4
-                0x00002100                . = ALIGN (0x2)
+                0x0000213a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000213a                __udivmodhi4
+                0x00002162                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00002100                _exit
-                0x00002100                exit
+ .fini9         0x00002162        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00002162                _exit
+                0x00002162                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -607,11 +611,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002100        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00002162        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00002104                _etext = .
+                0x00002166                _etext = .
 
-.data           0x00800100      0x36e load address 0x00002104
+.data           0x00800100      0x386 load address 0x00002166
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -632,43 +636,44 @@ END GROUP
  .rodata        0x0080011c       0x29 main.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800145      0x329 main.o
-                                0x32d (size before relaxing)
+                0x00800145      0x340 main.o
+                                0x344 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x0080046e                . = ALIGN (0x2)
-                0x0080046e                _edata = .
-                0x0080046e                PROVIDE (__data_end, .)
+                0x00800486                . = ALIGN (0x2)
+ *fill*         0x00800485        0x1 
+                0x00800486                _edata = .
+                0x00800486                PROVIDE (__data_end, .)
 
-.bss            0x0080046e       0x61
-                0x0080046e                PROVIDE (__bss_start, .)
+.bss            0x00800486       0x61
+                0x00800486                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.ano       0x0080046e        0x1 main.o
- .bss.mes       0x0080046f        0x1 main.o
- .bss.dia       0x00800470        0x1 main.o
- .bss.segundos  0x00800471        0x1 main.o
- .bss.minutos   0x00800472        0x1 main.o
- .bss.horas     0x00800473        0x1 main.o
+ .bss.ano       0x00800486        0x1 main.o
+ .bss.mes       0x00800487        0x1 main.o
+ .bss.dia       0x00800488        0x1 main.o
+ .bss.segundos  0x00800489        0x1 main.o
+ .bss.minutos   0x0080048a        0x1 main.o
+ .bss.horas     0x0080048b        0x1 main.o
  .bss.cartoesCadastrados
-                0x00800474        0x1 main.o
+                0x0080048c        0x1 main.o
  .bss.saldosLocais
-                0x00800475       0x19 main.o
+                0x0080048d       0x19 main.o
  .bss.cashBackCounter
-                0x0080048e        0x5 main.o
+                0x008004a6        0x5 main.o
  .bss.senhasLocais
-                0x00800493       0x1e main.o
+                0x008004ab       0x1e main.o
  .bss.numCartoesLocais
-                0x008004b1       0x1e main.o
+                0x008004c9       0x1e main.o
  *(COMMON)
-                0x008004cf                PROVIDE (__bss_end, .)
-                0x00002104                __data_load_start = LOADADDR (.data)
-                0x00002472                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008004e7                PROVIDE (__bss_end, .)
+                0x00002166                __data_load_start = LOADADDR (.data)
+                0x000024ec                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008004cf        0x0
+.noinit         0x008004e7        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008004cf                _end = .
+                0x008004e7                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -733,42 +738,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2d0
+.debug_aranges  0x00000000      0x2d8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000      0x2d0 main.o
+                0x00000000      0x2d8 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3d2d
+.debug_info     0x00000000     0x3e3b
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4     0x3739 main.o
+ .debug_info    0x000005f4     0x3847 main.o
 
 .debug_abbrev   0x00000000      0x953
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x3b1 main.o
 
-.debug_line     0x00000000     0x2279
+.debug_line     0x00000000     0x22cc
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134     0x2145 main.o
+ .debug_line    0x00000134     0x2198 main.o
 
-.debug_frame    0x00000000      0x948
+.debug_frame    0x00000000      0x960
  *(.debug_frame)
- .debug_frame   0x00000000      0x948 main.o
+ .debug_frame   0x00000000      0x960 main.o
 
-.debug_str      0x00000000      0xb82
+.debug_str      0x00000000      0xb9c
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x97a main.o
-                                0x9fd (size before relaxing)
+ .debug_str     0x00000208      0x994 main.o
+                                0xa17 (size before relaxing)
 
-.debug_loc      0x00000000     0x2f3e
+.debug_loc      0x00000000     0x2fd4
  *(.debug_loc)
- .debug_loc     0x00000000     0x2f3e main.o
+ .debug_loc     0x00000000     0x2fd4 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -788,9 +793,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x2d8
+.debug_ranges   0x00000000      0x2e0
  *(.debug_ranges)
- .debug_ranges  0x00000000      0x2d8 main.o
+ .debug_ranges  0x00000000      0x2e0 main.o
 
 .debug_macro
  *(.debug_macro)
