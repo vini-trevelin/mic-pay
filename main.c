@@ -61,27 +61,28 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 
 ISR(TIMER1_COMPA_vect){
 	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
-// 	if (teclaG == KEY_CONFIRMA)
-// 		contTelaOn++;
-// 	else
-// 		contTelaOn = 0;
-// 	
-// 	if (teclaG == KEY_APAGAR)
-// 		contTelaOff++;
-// 	else
-// 		contTelaOff = 0;
-// 	
-// 	if(contTelaOn == 3 && telaOnOff==0){ // se for # por 3 segundos e tiver desligada -> liga tela
-// 		writeInstruction(lcd_DisplayOn);
-// 		contTelaOn = 0;
-// 		telaOnOff = 1;
-// 	}
-// 	if (contTelaOff == 4 && telaOnOff==1) //se * por 4 segs e tiver ligada -> desliga
-// 	{
-// 		writeInstruction(lcd_DisplayOff);
-// 		contTelaOff = 0;
-// 		telaOnOff = 0;
-// 	}
+	if (teclaG == KEY_CONFIRMA)
+		contTelaOn++;
+	else
+		contTelaOn = 0;
+	
+	if (teclaG == KEY_APAGAR)
+		contTelaOff++;
+	else
+		contTelaOff = 0;
+	
+	if(contTelaOn == 3 && telaOnOff==0){ // se for # por 3 segundos e tiver desligada -> liga tela
+		writeInstruction(lcd_DisplayOn);
+		contTelaOn = 0;
+		telaOnOff = 1;
+		
+	}
+	if (contTelaOff == 4 && telaOnOff==1){ //se * por 4 segs e tiver ligada -> desliga
+		writeInstruction(lcd_DisplayOff);
+		contTelaOff = 0;
+		telaOnOff = 0;
+	}
+	
 	updateDate();
 	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
 									//acho q vamos usar ela no modo adm pra guardar o momento das pendencias 
@@ -135,9 +136,10 @@ int main(){
 	char loop1 = 1; //para ele agir diferente no 1 loop
 	char continuar;
 
-// 	writeInstruction(lcd_DisplayOff);
-// 	while(telaOnOff==0)
-// 		teclaG = teclaDebouce();
+	writeInstruction(lcd_DisplayOff);
+	while(telaOnOff==0)
+		teclaG = teclaDebouce();
+
 	writeInstruction(lcd_DisplayOn);
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
 	
@@ -149,6 +151,9 @@ int main(){
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
 	/////
 	
+	while(1){
+		teclaG = teclaDebouce();
+	}
 	
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela

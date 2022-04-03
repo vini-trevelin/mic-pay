@@ -24,32 +24,150 @@ Discarded input sections
                 0x00000000       0x3c main.o
  .text.adicionaSaldo
                 0x00000000        0x2 main.o
+ .text.verificarContasLocais
+                0x00000000       0x52 main.o
+ .text.verificaCashBack
+                0x00000000       0x16 main.o
+ .text.subtraiSaldo
+                0x00000000      0x162 main.o
+ .text.verificaSaldo
+                0x00000000      0x17a main.o
+ .text.verificaSenha
+                0x00000000       0x4e main.o
+ .text.executarVendaInterna
+                0x00000000       0x68 main.o
+ .text.formata_valor
+                0x00000000       0xa6 main.o
  .text.transforma_int
                 0x00000000       0x12 main.o
  .text.setupBotoes
                 0x00000000        0x2 main.o
+ .text.acao_tecla
+                0x00000000       0x46 main.o
+ .progmem.gcc_sw_table.acao_tecla
+                0x00000000       0x18 main.o
  .text.enableDelayT1
                 0x00000000       0x1e main.o
  .text.delay    0x00000000       0x16 main.o
+ .text.USART_envia
+                0x00000000        0xe main.o
+ .text.mostraSaldoNaSerial
+                0x00000000       0x5e main.o
+ .text.USART_recebe
+                0x00000000        0xe main.o
+ .text.recebe_valor
+                0x00000000       0xac main.o
+ .text.validarSenha
+                0x00000000       0x50 main.o
+ .text.lerSenha
+                0x00000000       0xb0 main.o
+ .text.login    0x00000000       0xba main.o
+ .text.menu_vendas
+                0x00000000       0x24 main.o
+ .text.menu_pagamento
+                0x00000000       0x24 main.o
+ .text.metodo_pagamento
+                0x00000000       0x10 main.o
+ .text.menu_cartao
+                0x00000000       0x24 main.o
+ .text.aguarda_cartao
+                0x00000000       0x46 main.o
+ .text.tela_OK  0x00000000       0x36 main.o
+ .text.tela_CF  0x00000000       0x36 main.o
+ .text.tela_SI  0x00000000       0x36 main.o
+ .text.tela_SF  0x00000000       0x36 main.o
+ .text.tela_cartaoEstorno
+                0x00000000       0x1c main.o
+ .text.tela_valorEstorno
+                0x00000000       0x24 main.o
+ .text.tela_estorno
+                0x00000000       0x1c main.o
+ .text.tela_vendaAvista
+                0x00000000       0x24 main.o
+ .text.tela_vendaParcelada
+                0x00000000       0x24 main.o
+ .text.tela_vendaInterna
+                0x00000000       0x7a main.o
+ .text.tela_nParcelas
+                0x00000000       0x1c main.o
+ .text.n_parcelas
+                0x00000000       0x8c main.o
+ .text.tela_senhaCartao
+                0x00000000       0x1c main.o
+ .text.recebe_senha
+                0x00000000       0x90 main.o
+ .text.tela_numCartao
+                0x00000000       0x1c main.o
+ .text.recebe_cartao
+                0x00000000       0x98 main.o
+ .text.tela_processandoVenda
+                0x00000000       0x24 main.o
+ .text.requisicao_externa
+                0x00000000      0x236 main.o
+ .text.processa_estorno
+                0x00000000       0xa8 main.o
+ .text.estorno  0x00000000      0x108 main.o
+ .text.processa_pagamento
+                0x00000000      0x154 main.o
+ .text.venda_parcelada
+                0x00000000       0xb8 main.o
+ .text.venda_avista
+                0x00000000       0xae main.o
+ .text.processa_venda
+                0x00000000       0x22 main.o
+ .text.menuADM  0x00000000       0x64 main.o
+ .text.tela_instrucoes_configOper
+                0x00000000       0x36 main.o
+ .text.tela_continuar_modo_atual
+                0x00000000       0x24 main.o
+ .text.continuar_modo_atual
+                0x00000000       0x2e main.o
+ .text.tela_instrucoes_configDiaMesAno
+                0x00000000       0x58 main.o
+ .text.tela_instrucoes_configHoraMinSeg
+                0x00000000       0x58 main.o
+ .text.tela_operacaoConcluida
+                0x00000000       0x36 main.o
+ .text.tela_dataInvalida
+                0x00000000       0x36 main.o
+ .text.tela_operadorDesabilitado
+                0x00000000       0x44 main.o
+ .text.mudarStatusOper
+                0x00000000       0x2c main.o
+ .text.tela_status_oper
+                0x00000000       0x52 main.o
+ .text.getOperStatus
+                0x00000000        0xc main.o
+ .text.getDiaMesAno
+                0x00000000      0x102 main.o
+ .text.getHoraMinSeg
+                0x00000000      0x102 main.o
+ .text.changeDate
+                0x00000000      0x144 main.o
+ .text.modoADM  0x00000000      0x118 main.o
+ .text.sumDate  0x00000000       0x68 main.o
  .text.AtualizaStringHora
                 0x00000000        0x2 main.o
  .text.AtualizaStringData
                 0x00000000        0x2 main.o
  .text.AtualizaStringDataHora
                 0x00000000        0x2 main.o
+ .data.statusOperadores
+                0x00000000        0x2 main.o
+ .data.senhaLida
+                0x00000000        0x6 main.o
+ .data.senhas   0x00000000       0x12 main.o
  .data.controle
                 0x00000000        0x2 main.o
- .bss.telaOnOff
-                0x00000000        0x1 main.o
- .bss.contTelaOff
-                0x00000000        0x1 main.o
- .bss.contTelaOn
+ .data.userIndex
                 0x00000000        0x1 main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+ .text.libgcc.div
+                0x00000000       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
@@ -127,6 +245,8 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.div
+                0x00000000       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
@@ -263,55 +383,53 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2166
+.text           0x00000000      0x64c
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
                 0x00000000                __vectors
  *(.vectors)
  *(.progmem.gcc*)
- .progmem.gcc_sw_table.acao_tecla
-                0x00000068       0x18 main.o
  .progmem.gcc_sw_table.updateDate
-                0x00000080       0x18 main.o
-                0x00000098                . = ALIGN (0x2)
-                0x00000098                __trampolines_start = .
+                0x00000068       0x18 main.o
+                0x00000080                . = ALIGN (0x2)
+                0x00000080                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x00000098        0x0 linker stubs
+ .trampolines   0x00000080        0x0 linker stubs
  *(.trampolines*)
-                0x00000098                __trampolines_end = .
+                0x00000080                __trampolines_end = .
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
  *(.progmem*)
-                0x00000098                . = ALIGN (0x2)
+                0x00000080                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000098                __ctors_start = .
+                0x00000080                __ctors_start = .
  *(.ctors)
-                0x00000098                __ctors_end = .
-                0x00000098                __dtors_start = .
+                0x00000080                __ctors_end = .
+                0x00000080                __dtors_start = .
  *(.dtors)
-                0x00000098                __dtors_end = .
+                0x00000080                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000098        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
-                0x00000098                __init
+ .init0         0x00000080        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
+                0x00000080                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000098        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
+ .init2         0x00000080        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x000000a4       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                0x000000a4                __do_copy_data
- .init4         0x000000ba       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                0x000000ba                __do_clear_bss
+ .init4         0x0000008c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x0000008c                __do_copy_data
+ .init4         0x000000a2       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x000000a2                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -322,277 +440,98 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x000000ca        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
+ .init9         0x000000b2        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  *(.init9)
  *(.text)
- .text          0x000000d2        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
-                0x000000d2                __vector_22
-                0x000000d2                __vector_1
-                0x000000d2                __vector_24
-                0x000000d2                __vector_12
-                0x000000d2                __bad_interrupt
-                0x000000d2                __vector_6
-                0x000000d2                __vector_3
-                0x000000d2                __vector_23
-                0x000000d2                __vector_25
-                0x000000d2                __vector_13
-                0x000000d2                __vector_17
-                0x000000d2                __vector_19
-                0x000000d2                __vector_7
-                0x000000d2                __vector_5
-                0x000000d2                __vector_4
-                0x000000d2                __vector_9
-                0x000000d2                __vector_2
-                0x000000d2                __vector_21
-                0x000000d2                __vector_15
-                0x000000d2                __vector_8
-                0x000000d2                __vector_14
-                0x000000d2                __vector_10
-                0x000000d2                __vector_16
-                0x000000d2                __vector_18
-                0x000000d2                __vector_20
-                0x000000d6                . = ALIGN (0x2)
+ .text          0x000000ba        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
+                0x000000ba                __vector_22
+                0x000000ba                __vector_1
+                0x000000ba                __vector_24
+                0x000000ba                __vector_12
+                0x000000ba                __bad_interrupt
+                0x000000ba                __vector_6
+                0x000000ba                __vector_3
+                0x000000ba                __vector_23
+                0x000000ba                __vector_25
+                0x000000ba                __vector_13
+                0x000000ba                __vector_17
+                0x000000ba                __vector_19
+                0x000000ba                __vector_7
+                0x000000ba                __vector_5
+                0x000000ba                __vector_4
+                0x000000ba                __vector_9
+                0x000000ba                __vector_2
+                0x000000ba                __vector_21
+                0x000000ba                __vector_15
+                0x000000ba                __vector_8
+                0x000000ba                __vector_14
+                0x000000ba                __vector_10
+                0x000000ba                __vector_16
+                0x000000ba                __vector_18
+                0x000000ba                __vector_20
+                0x000000be                . = ALIGN (0x2)
  *(.text.*)
- .text.verificarContasLocais
-                0x000000d6       0x52 main.o
-                0x000000d6                verificarContasLocais
- .text.verificaCashBack
-                0x00000128       0x16 main.o
-                0x00000128                verificaCashBack
  .text.carregaSaldo
-                0x0000013e       0x3a main.o
-                0x0000013e                carregaSaldo
+                0x000000be       0x3a main.o
+                0x000000be                carregaSaldo
  .text.carregaNumCartao
-                0x00000178       0x3a main.o
-                0x00000178                carregaNumCartao
+                0x000000f8       0x3a main.o
+                0x000000f8                carregaNumCartao
  .text.carregaSenha
-                0x000001b2       0x3a main.o
-                0x000001b2                carregaSenha
+                0x00000132       0x3a main.o
+                0x00000132                carregaSenha
  .text.addCartao
-                0x000001ec       0x4a main.o
-                0x000001ec                addCartao
- .text.subtraiSaldo
-                0x00000236      0x162 main.o
-                0x00000236                subtraiSaldo
- .text.verificaSaldo
-                0x00000398      0x17a main.o
-                0x00000398                verificaSaldo
- .text.verificaSenha
-                0x00000512       0x4e main.o
-                0x00000512                verificaSenha
- .text.executarVendaInterna
-                0x00000560       0x68 main.o
-                0x00000560                executarVendaInterna
- .text.formata_valor
-                0x000005c8       0xa6 main.o
-                0x000005c8                formata_valor
+                0x0000016c       0x4a main.o
+                0x0000016c                addCartao
  .text.tecla_lida
-                0x0000066e       0x6a main.o
-                0x0000066e                tecla_lida
+                0x000001b6       0x6a main.o
+                0x000001b6                tecla_lida
  .text.teclaDebouce
-                0x000006d8       0x3c main.o
-                0x000006d8                teclaDebouce
- .text.acao_tecla
-                0x00000714       0x46 main.o
-                0x00000714                acao_tecla
+                0x00000220       0x3c main.o
+                0x00000220                teclaDebouce
  .text.USART_INIT
-                0x0000075a       0x16 main.o
-                0x0000075a                USART_INIT
- .text.USART_envia
-                0x00000770        0xe main.o
-                0x00000770                USART_envia
- .text.mostraSaldoNaSerial
-                0x0000077e       0x5e main.o
-                0x0000077e                mostraSaldoNaSerial
- .text.USART_recebe
-                0x000007dc        0xe main.o
-                0x000007dc                USART_recebe
- .text.write    0x000007ea       0x5e main.o
-                0x000007ea                write
+                0x0000025c       0x16 main.o
+                0x0000025c                USART_INIT
+ .text.write    0x00000272       0x5e main.o
+                0x00000272                write
  .text.writeCharacter
-                0x00000848       0x24 main.o
-                0x00000848                writeCharacter
+                0x000002d0       0x24 main.o
+                0x000002d0                writeCharacter
  .text.writeString
-                0x0000086c       0x52 main.o
-                0x0000086c                writeString
+                0x000002f4       0x52 main.o
+                0x000002f4                writeString
  .text.writeInstruction
-                0x000008be       0x2c main.o
-                0x000008be                writeInstruction
- .text.recebe_valor
-                0x000008ea       0xac main.o
-                0x000008ea                recebe_valor
+                0x00000346       0x2c main.o
+                0x00000346                writeInstruction
  .text.setup_lcd
-                0x00000996       0x4a main.o
-                0x00000996                setup_lcd
- .text.validarSenha
-                0x000009e0       0x50 main.o
-                0x000009e0                validarSenha
- .text.lerSenha
-                0x00000a30       0xb0 main.o
-                0x00000a30                lerSenha
- .text.login    0x00000ae0       0xba main.o
-                0x00000ae0                login
- .text.menu_vendas
-                0x00000b9a       0x24 main.o
-                0x00000b9a                menu_vendas
+                0x00000372       0x4a main.o
+                0x00000372                setup_lcd
  .text.tela_bloqueio_inicial
-                0x00000bbe       0x30 main.o
-                0x00000bbe                tela_bloqueio_inicial
- .text.menu_pagamento
-                0x00000bee       0x24 main.o
-                0x00000bee                menu_pagamento
- .text.metodo_pagamento
-                0x00000c12       0x10 main.o
-                0x00000c12                metodo_pagamento
- .text.menu_cartao
-                0x00000c22       0x24 main.o
-                0x00000c22                menu_cartao
- .text.aguarda_cartao
-                0x00000c46       0x46 main.o
-                0x00000c46                aguarda_cartao
- .text.tela_OK  0x00000c8c       0x36 main.o
-                0x00000c8c                tela_OK
- .text.tela_CF  0x00000cc2       0x36 main.o
-                0x00000cc2                tela_CF
- .text.tela_SI  0x00000cf8       0x36 main.o
-                0x00000cf8                tela_SI
- .text.tela_SF  0x00000d2e       0x36 main.o
-                0x00000d2e                tela_SF
- .text.tela_cartaoEstorno
-                0x00000d64       0x1c main.o
-                0x00000d64                tela_cartaoEstorno
- .text.tela_valorEstorno
-                0x00000d80       0x24 main.o
-                0x00000d80                tela_valorEstorno
- .text.tela_estorno
-                0x00000da4       0x1c main.o
-                0x00000da4                tela_estorno
- .text.tela_vendaAvista
-                0x00000dc0       0x24 main.o
-                0x00000dc0                tela_vendaAvista
- .text.tela_vendaParcelada
-                0x00000de4       0x24 main.o
-                0x00000de4                tela_vendaParcelada
- .text.tela_vendaInterna
-                0x00000e08       0x7a main.o
-                0x00000e08                tela_vendaInterna
- .text.tela_nParcelas
-                0x00000e82       0x1c main.o
-                0x00000e82                tela_nParcelas
- .text.n_parcelas
-                0x00000e9e       0x8c main.o
-                0x00000e9e                n_parcelas
- .text.tela_senhaCartao
-                0x00000f2a       0x1c main.o
-                0x00000f2a                tela_senhaCartao
- .text.recebe_senha
-                0x00000f46       0x90 main.o
-                0x00000f46                recebe_senha
- .text.tela_numCartao
-                0x00000fd6       0x1c main.o
-                0x00000fd6                tela_numCartao
- .text.recebe_cartao
-                0x00000ff2       0x98 main.o
-                0x00000ff2                recebe_cartao
- .text.tela_processandoVenda
-                0x0000108a       0x24 main.o
-                0x0000108a                tela_processandoVenda
- .text.requisicao_externa
-                0x000010ae      0x236 main.o
-                0x000010ae                requisicao_externa
- .text.processa_estorno
-                0x000012e4       0xa8 main.o
-                0x000012e4                processa_estorno
- .text.estorno  0x0000138c      0x108 main.o
-                0x0000138c                estorno
- .text.processa_pagamento
-                0x00001494      0x154 main.o
-                0x00001494                processa_pagamento
- .text.venda_parcelada
-                0x000015e8       0xb8 main.o
-                0x000015e8                venda_parcelada
- .text.venda_avista
-                0x000016a0       0xae main.o
-                0x000016a0                venda_avista
- .text.processa_venda
-                0x0000174e       0x22 main.o
-                0x0000174e                processa_venda
- .text.menuADM  0x00001770       0x64 main.o
-                0x00001770                menuADM
- .text.tela_instrucoes_configOper
-                0x000017d4       0x36 main.o
-                0x000017d4                tela_instrucoes_configOper
- .text.tela_continuar_modo_atual
-                0x0000180a       0x24 main.o
-                0x0000180a                tela_continuar_modo_atual
- .text.continuar_modo_atual
-                0x0000182e       0x2e main.o
-                0x0000182e                continuar_modo_atual
- .text.tela_instrucoes_configDiaMesAno
-                0x0000185c       0x58 main.o
-                0x0000185c                tela_instrucoes_configDiaMesAno
- .text.tela_instrucoes_configHoraMinSeg
-                0x000018b4       0x58 main.o
-                0x000018b4                tela_instrucoes_configHoraMinSeg
- .text.tela_operacaoConcluida
-                0x0000190c       0x36 main.o
-                0x0000190c                tela_operacaoConcluida
- .text.tela_dataInvalida
-                0x00001942       0x36 main.o
-                0x00001942                tela_dataInvalida
- .text.tela_operadorDesabilitado
-                0x00001978       0x44 main.o
-                0x00001978                tela_operadorDesabilitado
- .text.mudarStatusOper
-                0x000019bc       0x2c main.o
-                0x000019bc                mudarStatusOper
- .text.tela_status_oper
-                0x000019e8       0x52 main.o
-                0x000019e8                tela_status_oper
- .text.getOperStatus
-                0x00001a3a        0xc main.o
-                0x00001a3a                getOperStatus
- .text.getDiaMesAno
-                0x00001a46      0x102 main.o
-                0x00001a46                getDiaMesAno
- .text.getHoraMinSeg
-                0x00001b48      0x102 main.o
-                0x00001b48                getHoraMinSeg
- .text.anoZero  0x00001c4a       0x1e main.o
-                0x00001c4a                anoZero
- .text.changeDate
-                0x00001c68      0x144 main.o
-                0x00001c68                changeDate
- .text.modoADM  0x00001dac      0x112 main.o
-                0x00001dac                modoADM
+                0x000003bc       0x30 main.o
+                0x000003bc                tela_bloqueio_inicial
+ .text.anoZero  0x000003ec       0x1e main.o
+                0x000003ec                anoZero
  .text.atualizaMesAno
-                0x00001ebe       0x2e main.o
-                0x00001ebe                atualizaMesAno
+                0x0000040a       0x2e main.o
+                0x0000040a                atualizaMesAno
  .text.updateDate
-                0x00001eec       0x8c main.o
-                0x00001eec                updateDate
+                0x00000438       0x8c main.o
+                0x00000438                updateDate
  .text.__vector_11
-                0x00001f78       0x48 main.o
-                0x00001f78                __vector_11
+                0x000004c4       0xb2 main.o
+                0x000004c4                __vector_11
  .text.setTimer1_UmSeg
-                0x00001fc0       0x2c main.o
-                0x00001fc0                setTimer1_UmSeg
- .text.main     0x00001fec      0x11a main.o
-                0x00001fec                main
- .text.libgcc.div
-                0x00002106       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
-                0x00002106                _div
-                0x00002106                __divmodhi4
- .text.libgcc   0x0000212e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x0000212e                __tablejump2__
- .text.libgcc.div
-                0x0000213a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                0x0000213a                __udivmodhi4
-                0x00002162                . = ALIGN (0x2)
+                0x00000576       0x2c main.o
+                0x00000576                setTimer1_UmSeg
+ .text.main     0x000005a2       0x9a main.o
+                0x000005a2                main
+ .text.libgcc   0x0000063c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x0000063c                __tablejump2__
+                0x00000648                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002162        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00002162                _exit
-                0x00002162                exit
+ .fini9         0x00000648        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000648                _exit
+                0x00000648                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -611,69 +550,67 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002162        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000648        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00002166                _etext = .
+                0x0000064c                _etext = .
 
-.data           0x00800100      0x386 load address 0x00002166
+.data           0x00800100      0x36a load address 0x0000064c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.statusOperadores
-                0x00800100        0x2 main.o
- .data.senhaLida
-                0x00800102        0x6 main.o
-                0x00800102                senhaLida
- .data.senhas   0x00800108       0x12 main.o
-                0x00800108                senhas
- .data.userIndex
-                0x0080011a        0x1 main.o
-                0x0080011a                userIndex
- .data.teclaG   0x0080011b        0x1 main.o
-                0x0080011b                teclaG
+ .data.teclaG   0x00800100        0x1 main.o
+                0x00800100                teclaG
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x0080011c       0x29 main.o
+ .rodata        0x00800101       0x29 main.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800145      0x340 main.o
+                0x0080012a      0x340 main.o
                                 0x344 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x00800486                . = ALIGN (0x2)
- *fill*         0x00800485        0x1 
-                0x00800486                _edata = .
-                0x00800486                PROVIDE (__data_end, .)
+                0x0080046a                . = ALIGN (0x2)
+                0x0080046a                _edata = .
+                0x0080046a                PROVIDE (__data_end, .)
 
-.bss            0x00800486       0x61
-                0x00800486                PROVIDE (__bss_start, .)
+.bss            0x0080046a       0x64
+                0x0080046a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.ano       0x00800486        0x1 main.o
- .bss.mes       0x00800487        0x1 main.o
- .bss.dia       0x00800488        0x1 main.o
- .bss.segundos  0x00800489        0x1 main.o
- .bss.minutos   0x0080048a        0x1 main.o
- .bss.horas     0x0080048b        0x1 main.o
+ .bss.ano       0x0080046a        0x1 main.o
+ .bss.mes       0x0080046b        0x1 main.o
+ .bss.dia       0x0080046c        0x1 main.o
+ .bss.segundos  0x0080046d        0x1 main.o
+ .bss.minutos   0x0080046e        0x1 main.o
+ .bss.horas     0x0080046f        0x1 main.o
  .bss.cartoesCadastrados
-                0x0080048c        0x1 main.o
+                0x00800470        0x1 main.o
  .bss.saldosLocais
-                0x0080048d       0x19 main.o
+                0x00800471       0x19 main.o
  .bss.cashBackCounter
-                0x008004a6        0x5 main.o
+                0x0080048a        0x5 main.o
  .bss.senhasLocais
-                0x008004ab       0x1e main.o
+                0x0080048f       0x1e main.o
  .bss.numCartoesLocais
-                0x008004c9       0x1e main.o
+                0x008004ad       0x1e main.o
+ .bss.telaOnOff
+                0x008004cb        0x1 main.o
+                0x008004cb                telaOnOff
+ .bss.contTelaOff
+                0x008004cc        0x1 main.o
+                0x008004cc                contTelaOff
+ .bss.contTelaOn
+                0x008004cd        0x1 main.o
+                0x008004cd                contTelaOn
  *(COMMON)
-                0x008004e7                PROVIDE (__bss_end, .)
-                0x00002166                __data_load_start = LOADADDR (.data)
-                0x000024ec                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008004ce                PROVIDE (__bss_end, .)
+                0x0000064c                __data_load_start = LOADADDR (.data)
+                0x000009b6                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008004e7        0x0
+.noinit         0x008004ce        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008004e7                _end = .
+                0x008004ce                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -738,42 +675,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2d8
+.debug_aranges  0x00000000      0x2e0
  *(.debug_aranges)
  .debug_aranges
-                0x00000000      0x2d8 main.o
+                0x00000000      0x2e0 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3e3b
+.debug_info     0x00000000     0x3e08
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4     0x3847 main.o
+ .debug_info    0x000005f4     0x3814 main.o
 
-.debug_abbrev   0x00000000      0x953
+.debug_abbrev   0x00000000      0x962
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2      0x3b1 main.o
+ .debug_abbrev  0x000005a2      0x3c0 main.o
 
-.debug_line     0x00000000     0x22cc
+.debug_line     0x00000000     0x2372
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134     0x2198 main.o
+ .debug_line    0x00000134     0x223e main.o
 
-.debug_frame    0x00000000      0x960
+.debug_frame    0x00000000      0x970
  *(.debug_frame)
- .debug_frame   0x00000000      0x960 main.o
+ .debug_frame   0x00000000      0x970 main.o
 
-.debug_str      0x00000000      0xb9c
+.debug_str      0x00000000      0xbd4
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x994 main.o
-                                0xa17 (size before relaxing)
+ .debug_str     0x00000208      0x9cc main.o
+                                0xa4f (size before relaxing)
 
-.debug_loc      0x00000000     0x2fd4
+.debug_loc      0x00000000     0x3078
  *(.debug_loc)
- .debug_loc     0x00000000     0x2fd4 main.o
+ .debug_loc     0x00000000     0x3078 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -793,9 +730,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x2e0
+.debug_ranges   0x00000000      0x2e8
  *(.debug_ranges)
- .debug_ranges  0x00000000      0x2e0 main.o
+ .debug_ranges  0x00000000      0x2e8 main.o
 
 .debug_macro
  *(.debug_macro)

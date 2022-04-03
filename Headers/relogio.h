@@ -17,7 +17,8 @@
 //static char stringHORA[9]; sempre depois de uma chamada de atualiza hora ou atualiza datahOra
 //static char stringDATA[9]; sempre depois de uma chamada de atualiza hora ou atualiza datahOra
 // serão strings  de argumento de um writeString() da biblioteca lcd
-
+// static char dataFUTURA[6]; sempre depois de uma chamada de sumDate
+//	static char stringDATAFUTURA[9]; // sempre depois de uma chamada de sumDate para teste 
 
 void anoZero(); //so pra inicializar o relogio em uma dataPradroa
 char changeDate(char ArrNovoDia[],char ArrNovoMes[],char ArrNovoAno[], char ArrNovaHora[],char ArrNovoMinuto[],char ArrNovoSegundo[]);// retorna 1 se foi possivel efetuar a troca se não ERRO_DATA (0)
@@ -29,8 +30,7 @@ void updateDate(); // CHAMAR DENTRO DO INTERRUP DE 1 SEGUNDO PARA SEMPRE ATUALIZ
 void AtualizaStringHora(); // atualiza somente a string de hora no formato HH:MM:SS
 void AtualizaStringData();// atualiza somente a string de data no formato DD/MM/YY
 void AtualizaStringDataHora(); // chama as duas funções acima
-
-
+char sumDate(char numMesesAdd);// deve ser chamada pra calcular a data de uma parela futura
 
 
 void atualizaMesAno(); // função interna, não chamar externamente

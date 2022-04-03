@@ -1,27 +1,13 @@
 
 
 #include <avr/io.h>
-#include <stdio.h>
 #include "../Headers/lcd.h"
 #include "../Headers/botoes.h"
 #include "../Headers/modoAdm.h"
 #include "../Headers/relogio.h"
 
 static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
-	
-/*
-Matriz de pagamentos pendentes
-ex:
-| N° Cartão | Val. Parcela | data vencimento 1 | data vencimento 2 | data vencimento 3 |
-   524184       4252	         130222                130322              130422
-   335678       13456	         260222                260322              9?????
-   O cartão 524184 tem 3 parcelas de R$42,52 reais que vão vencer em 13/02/22, 13/03/22 e 13/03/22
-   O cartão 335678 tem 2 parcelas de R$134,56 reais que vão vencer em 26/02/22 e 26/03/22
-   
-   O 9????? é para mostrar que não tem mais parcelas, então não importa o que em dps do 9  
-*/
-//tem q ver quantas colunas vai ter aqui, to pensando em um jeito de não ficar tão grande
-static char pagPendentes[NDEPAGSPENDENTES][2];
+
 void modoADM(char *tecla){
 	if((*tecla) == KEY_1){
 		//mudar hora
@@ -58,8 +44,8 @@ void modoADM(char *tecla){
 		*tecla = TECLA_INVALIDA;
 	}else if((*tecla) == KEY_4){
 		//des pendencia
+		*tecla = TECLA_INVALIDA;
 	}
-	*tecla = TECLA_INVALIDA;
 }
 
 void mudarStatusOper(char *tecla){

@@ -198,7 +198,7 @@ void tela_instrucoes_configHoraMinSeg(){
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
 	writeString("formato: ");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
-	writeString("    hh/mm/ss");
+	writeString("    hh:mm:ss");
 	_delay_ms(1500);
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);

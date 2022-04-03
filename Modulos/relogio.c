@@ -5,6 +5,8 @@
  *	static char stringHORA[9]; sempre depois de uma chamada de atualiza hora ou atualiza datahOra
  *	static char stringDATA[9]; sempre depois de uma chamada de atualiza hora ou atualiza datahOra
  *   Serão strings  de argumento de um writeString() da biblioteca lcd
+ *  static char dataFUTURA[6]; sempre depois de uma chamada de sumDate
+ *	static char stringDATAFUTURA[9]; // sempre depois de uma chamada de sumDate para teste 
  *----------------------------------------------------------------------------------
  * FUNÇÕES
  * void anoZero(); -> só pra inicializar o relogio em uma dataPradroa
@@ -16,6 +18,7 @@
  * void AtualizaStringHora(); // atualiza somente a string de hora no formato HH:MM:SS
  *void AtualizaStringData();// atualiza somente a string de data no formato DD/MM/YY
  *void AtualizaStringDataHora(); // chama as duas funções acima
+ * char sumDate(char numMesesAdd) deve ser chamada pra calcular a data de uma parela futura
  *
  */
  #include "../Headers/relogio.h"
@@ -27,6 +30,8 @@ unsigned static char mes;
 unsigned static char ano; // de 2000 (00) até (2099) (99)
 static char stringHORA[9];
 static char stringDATA[9];
+static char dataFUTURA[6];
+static char stringDATAFUTURA[9]; // para teste 
 // Relógio estilo 0 -  23 horas
 // software não preve anos bissextos
 void anoZero(){
@@ -39,6 +44,9 @@ void anoZero(){
 	stringDATA[2] = '/';
 	stringDATA[5] = '/';
 	stringDATA[8] = '\0'; 
+	stringDATAFUTURA[2] = '/';
+	stringDATAFUTURA[5] = '/';
+	stringDATAFUTURA[8] = '\0'; 
 	stringHORA[2] = ':';
 	stringHORA[5] = ':';
 	stringHORA[8] =  '\0'; 
@@ -126,6 +134,60 @@ void updateDate(){
 				}
 			}	
 }
+
+char sumDate(char numMesesAdd) {
+	char diaFut = dia;
+	char mesFut = mes;
+	char anoFut = ano;
+	char i =0;
+	while(i < numMesesAdd){
+		mesFut ++;
+		if (mesFut >= 13) {
+			mesFut = mesFut-12;
+			anoFut = anoFut +1;
+			if (anoFut> 99) return 0;
+		}
+		switch(mesFut){
+			case ABR:
+			case JUN:
+			case SET:
+			case NOV:
+			if(diaFut==31){
+				mesFut = mesFut+1;
+				diaFut = 1;
+			}
+				break;
+			case FEV:
+				if(diaFut >28 ){
+					if((ano%4)==0){
+						diaFut = diaFut - 28 ;
+					}
+					else{
+						diaFut = diaFut -27;
+					}
+					mesFut++;
+				}
+				break;
+			default: 
+				break;
+		}
+	i++;
+	}
+	dataFUTURA[0] = diaFut/10 + 48;
+	dataFUTURA[1] = diaFut%10 + 48;
+	dataFUTURA[2] = mesFut/10 + 48;
+	dataFUTURA[3] = mesFut%10 + 48;
+	dataFUTURA[4] = anoFut/10 + 48;
+	dataFUTURA[5] = anoFut%10 + 48;
+	
+	stringDATAFUTURA[0] = dataFUTURA[0];
+	stringDATAFUTURA[1] = dataFUTURA[1];
+	stringDATAFUTURA[3] = dataFUTURA[2];
+	stringDATAFUTURA[4] = dataFUTURA[3];
+	stringDATAFUTURA[6] = dataFUTURA[4];
+	stringDATAFUTURA[7] = dataFUTURA[5];
+	return 1;
+}	
 
 void atualizaMesAno(){
 	dia =1;
