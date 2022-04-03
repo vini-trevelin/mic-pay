@@ -6,12 +6,12 @@
 
 
 
-char senhas[3][N_CARACSENHA] =  {	{1,1,1,1,1,1}, //adm
-									{2,2,2,2,2,2}, //op 1
-									{3,3,3,3,3,3}, //op 2
+char senhas[3][N_CARACSENHA] =  {	{'0','1','2','3'}, //adm
+									{'1','2','3','4'}, //op 1
+									{'2','3','4','5'}, //op 2
 													};
 
-char senhaLida[N_CARACSENHA] =  {'F','F','F','F','F','F'}; 				
+char senhaLida[N_CARACSENHA] =  {'F','F','F','F'}; 				
 
 char validarSenha(char senha1[],char senha2[]){
 	short i = 0;
@@ -19,7 +19,6 @@ char validarSenha(char senha1[],char senha2[]){
 	for (i =0;i < N_CARACSENHA;i++){
 		if (senha1[i] != senha2[i])
 		{
-			writeCharacter(65);
 			result = 0; // se for falso da exit
 		}
 	}
@@ -37,8 +36,12 @@ void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se
 		flagOutConfirma = 0;
 		(*teclaG) = teclaDebouce();
 		if((*teclaG)!= TECLA_INVALIDA && (*teclaG)!=KEY_CONFIRMA && (*teclaG) !=KEY_APAGAR && contador < N_CARACSENHA){
-			senhaLida[contador] = (*teclaG)+1; // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
-			writeCharacter(senhaLida[contador]+48); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
+			*(teclaG) = *(teclaG)+49;
+			if(*(teclaG) == KEY_0_ASCII){
+				*(teclaG) = 48;
+			}
+			senhaLida[contador] = (*teclaG); // função debounce ta retornando n-1 pro valor da tecla. Eventualmente corrigiir isso ??
+			writeString("*"); // para otimizar um pouco procurar se o # ou o * estão definidos em ASCII
 			// # é 35 e * é 42, mas acho q deixamos mostrando a senha por enquanto pra facilitar
 			contador++;
 		}
@@ -60,9 +63,7 @@ void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se
 }
 
 char login(char *teclaG){
-	writeInstruction(lcd_Clear);
-	writeInstruction(lcd_Home);
-	writeString("Insira a Senha"); //chamada de senha inicial
+
 	char senhaValida = 0;
 	char userIndex = -1;
 	short i;
@@ -71,6 +72,10 @@ char login(char *teclaG){
 // 	return userIndex;
 	///
 	while(!senhaValida){
+		writeInstruction(lcd_Clear);
+		writeInstruction(lcd_Home);
+		writeString("Insira a Senha"); //chamada de senha inicial
+		
 		lerSenha(teclaG); //estou passando o local da memoria de teclaG aqui, cabe a lerSenha usar *teclaG
 		for (i =0;i<3 ; i++){
 			if(senhaValida == 0 ){
@@ -78,24 +83,26 @@ char login(char *teclaG){
 			}
 			if (senhaValida){
 				userIndex = i; //0 -> adm , 1 e 2 vendedores
-				break;
+				writeInstruction(lcd_Clear);
+				writeInstruction(lcd_LineOne | lcd_SetCursor);
+				writeString("Bem Vindo");
+				writeInstruction(lcd_SetCursor | lcd_LineTwo);
+				
+				if(userIndex == 0)
+				writeString("Administrador");
+				else if(userIndex == 1)
+				writeString("Operador 1");
+				else if(userIndex == 2)
+				writeString("Operador 2");
+				
+				_delay_ms(2000);
+				return userIndex;
 			}
+		
 		}
+	tela_SF();
 	}
-	writeInstruction(lcd_Clear);
-	writeInstruction(lcd_LineOne | lcd_SetCursor);
-	writeString("Bem Vindo");
-	writeInstruction(lcd_SetCursor | lcd_LineTwo);
-	
-	if(userIndex == 0)
-		writeString("Administrador");
-	else if(userIndex == 1)
-		writeString("Operador 1");
-	else if(userIndex == 2)
-		writeString("Operador 2");
-	
 	return userIndex;
-	
 }
 
 char continuar_modo_atual(char *tecla){

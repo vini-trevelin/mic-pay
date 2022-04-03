@@ -114,10 +114,12 @@ void estorno(){
 	char tipo_cartao; // parcelas = 0 = estorno
 	
 	// declarei denovo pq n sei se vai ficar global ou oq ---- MUDAR
-	char senhas[3][N_CARACSENHA] =  {	{'1','1','1','1','1','1'}, //adm
-	{'2','2','2','2','2','2'}, //op 1
-	{'3','3','3','3','3','3'}, //op 2
+
+	char senhas[3][N_CARACSENHA] =  {	{0,1,2,3}, //adm
+	{1,2,3,4}, //op 1
+	{2,3,4,5}, //op 2
 	};
+
 	/// ----------------------------------------------------------
 	
 	tela_estorno();
@@ -261,7 +263,7 @@ void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valo
 				req=1;
 			}
 			tela_vendaInterna(aux);
-			mostraSaldoNaSerial(cartao_local);
+			//mostraSaldoNaSerial(cartao_local);
 			
 		}
 			

@@ -15,7 +15,8 @@
 
 #include <util/delay.h>
 
-#define N_CARACSENHA 6 // todas as senhas com 4 caracteres? REVER ISSO
+#define N_CARACSENHA 4 // todas as senhas com 4 caracteres? REVER ISSO
+#define TEMPO_COMUNICACAO 120 // todas as senhas com 4 caracteres? REVER ISSO
 
 //////////////////////////////////////////////////////////////////////////
 //GLOBAIS//
@@ -26,6 +27,7 @@ char teclaG = TECLA_INVALIDA;
 char contTelaOn = 0; //para segurar o botão por 3 segundos
 char contTelaOff = 0;
 char telaOnOff = 0; //para saber o estado da tela (inicia Desligada)
+static char contSerial = 0; //para saber quanto tempo a serial esta sem comunicação
 
 char userIndex= 10;
 short controle = 1;
@@ -61,6 +63,13 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 
 ISR(TIMER1_COMPA_vect){
 	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
+	contSerial = verificaSerial(contSerial);
+
+	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
+		contSerial = 0;
+		PORTC ^= (1 << PORTC4);
+	}
+	
 	if (teclaG == KEY_CONFIRMA)
 		contTelaOn++;
 	else
@@ -128,11 +137,12 @@ void setTimer1_UmSeg(){
 }
 
 int main(){
-	anoZero(); // inicia o relogio
-	USART_INIT(UBRR);
-	setup_lcd();
-	setupBotoes();
-	setTimer1_UmSeg();
+	
+	anoZero();							// inicia o relogio
+	USART_INIT(UBRR);					// inicia serial
+	setup_lcd();						// inicia lcd
+	setupBotoes();						// inicia teclado
+	setTimer1_UmSeg();					
 	char loop1 = 1; //para ele agir diferente no 1 loop
 	char continuar;
 

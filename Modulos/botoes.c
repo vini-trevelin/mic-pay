@@ -17,9 +17,11 @@ void setupBotoes(){
 
 uint8_t tecla_lida(){
 	uint8_t linha,coluna;
-	
+
 	DDRC &=~(0x0F);
 	DDRD &=~(0x70);
+	
+	DDRC |= (1 << PORTC4)  ;	//PINO PC4 como saida
 
 	PORTC |= 0x0F;					// coloca todas linhas em 1
 
