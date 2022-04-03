@@ -136,9 +136,9 @@ int main(){
 	char loop1 = 1; //para ele agir diferente no 1 loop
 	char continuar;
 
-	writeInstruction(lcd_DisplayOff);
-	while(telaOnOff==0)
-		teclaG = teclaDebouce();
+// 	writeInstruction(lcd_DisplayOff);
+// 	while(telaOnOff==0)
+// 		teclaG = teclaDebouce();
 
 	writeInstruction(lcd_DisplayOn);
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
@@ -150,10 +150,6 @@ int main(){
 	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
 	/////
-	
-	while(1){
-		teclaG = teclaDebouce();
-	}
 	
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
