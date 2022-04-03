@@ -81,11 +81,12 @@ char getOperStatus(char oper){
 
 void getDiaMesAno(char dia[], char mes[], char ano[]){
 	char tecla = TECLA_INVALIDA;
-	unsigned char cont=0;
+	short cont=0;
 	uint8_t offset = 6;
+	unsigned char i=0;
 	writeString("  /  /  ");
 	writeInstruction(lcd_SetCursor | (uint8_t)6 | lcd_LineTwo);
-	while(cont<6){
+	while(cont<7){
 		if(cont<2){
 			tecla = teclaDebouce();
 			if(tecla != TECLA_INVALIDA && tecla != KEY_APAGAR && tecla != KEY_CONFIRMA){
@@ -93,7 +94,8 @@ void getDiaMesAno(char dia[], char mes[], char ano[]){
 					tecla = -1;
 				tecla += 49;
 				writeCharacter(tecla);
-				dia[cont] = tecla;
+				i = (char) cont;
+				dia[i] = tecla;
 				cont++;
 			}
 			else if (tecla == KEY_APAGAR && cont>0){
@@ -109,18 +111,23 @@ void getDiaMesAno(char dia[], char mes[], char ano[]){
 		//writeString("/");
 		tecla = TECLA_INVALIDA;
 		if(cont>=2 &&cont <4){
-			if (cont ==2) writeInstruction(lcd_SetCursor | (uint8_t)(cont+1+offset) | lcd_LineTwo);
+			if (cont ==2) {
+				writeInstruction(lcd_SetCursor | (uint8_t)(cont+1+offset) | lcd_LineTwo);
+				i =0;
+			}
 			tecla = teclaDebouce();
 			if(tecla != TECLA_INVALIDA && tecla != KEY_APAGAR && tecla != KEY_CONFIRMA){
 				if(tecla == KEY_0)
 					tecla = -1;
 				tecla +=49 ;
 				writeCharacter(tecla);
-				mes[cont-2] = tecla;
+				i = (char) cont-2;
+				mes[i] = tecla;
 				cont++;
+				i++;
 			}
 			else if (tecla == KEY_APAGAR){
-				uint8_t aux = (cont%2 == 0 && cont!=0) ? lcd_SetCursor | ((uint8_t)(cont-1)+offset) : lcd_SetCursor | ((uint8_t)(cont)+offset) ;
+				uint8_t aux = (cont%2 == 0) ? lcd_SetCursor | ((uint8_t)(cont-1)+offset) : lcd_SetCursor | ((uint8_t)(cont)+offset) ;
 				writeInstruction(lcd_LineTwo | aux);
 				writeString(" "); //TROCAR POR CARACTERE DE ESPACO
 				writeInstruction(lcd_LineTwo | aux);
@@ -131,14 +138,18 @@ void getDiaMesAno(char dia[], char mes[], char ano[]){
 		//cont = 0;
 		//writeString("/");
 		if(cont>=4){
-			if (cont ==4 ) writeInstruction(lcd_SetCursor | (uint8_t)(cont+2+offset)  | lcd_LineTwo);
+			if (cont ==4 ) {
+				writeInstruction(lcd_SetCursor | (uint8_t)(cont+2+offset)  | lcd_LineTwo);
+				i=0;
+			}
 			tecla = teclaDebouce();
 			if(tecla != TECLA_INVALIDA && tecla != KEY_APAGAR && tecla != KEY_CONFIRMA){
 				if(tecla == KEY_0)
 					tecla = -1;
 				tecla += 49;
+				i = (char) cont-4;
 				writeCharacter(tecla);
-				ano[cont-4] = tecla;
+				ano[i] = tecla;
 				cont++;
 			}
 			else if (tecla == KEY_APAGAR){
@@ -150,19 +161,28 @@ void getDiaMesAno(char dia[], char mes[], char ano[]){
 			}
 			tecla = TECLA_INVALIDA;
 		}
+		if (cont == 6)
+		{
+			tecla = teclaDebouce();
+			if (tecla == KEY_CONFIRMA){
+				cont++;
+			}
+		}
 	}
+	
 	_delay_ms(750);
 }
 
 
 void getHoraMinSeg(char hora[], char min[], char seg[]){
 	char tecla = TECLA_INVALIDA;
-	unsigned char cont=0;
+	short cont=0;
+	unsigned char i=0;
 	writeString("  :  :  ");
 	uint8_t offset = 6;
 	//writeInstruction(lcd_SetCursor | lcd_LineTwo);
 	writeInstruction(lcd_SetCursor | (uint8_t)6 | lcd_LineTwo);
-	while (cont<6){
+	while (cont<7){
 		if(cont<2){
 			tecla = teclaDebouce();
 			if(tecla != TECLA_INVALIDA && tecla != KEY_APAGAR && tecla != KEY_CONFIRMA){
@@ -170,7 +190,8 @@ void getHoraMinSeg(char hora[], char min[], char seg[]){
 					tecla = -1;
 				tecla += 49;
 				writeCharacter(tecla);
-				hora[cont] = tecla;
+				i = (char) cont;
+				hora[i] = tecla;
 				cont++;
 			}
 			else if (tecla == KEY_APAGAR && cont>0){
@@ -186,14 +207,18 @@ void getHoraMinSeg(char hora[], char min[], char seg[]){
 		//writeString(":");
 		tecla = TECLA_INVALIDA;
 		if(cont>=2 &&cont <4){
-			if (cont ==2) writeInstruction(lcd_SetCursor | (uint8_t)(cont+1+offset) | lcd_LineTwo);
+			if (cont ==2){ 
+				writeInstruction(lcd_SetCursor | (uint8_t)(cont+1+offset) | lcd_LineTwo);
+				i=0;
+			}
 			tecla = teclaDebouce();
 			if(tecla != TECLA_INVALIDA && tecla != KEY_APAGAR && tecla != KEY_CONFIRMA){
 				if(tecla == KEY_0)
 					tecla = -1;
 				tecla += 49;
 				writeCharacter(tecla);
-				min[cont] = tecla;
+				i = (char) cont-2;
+				min[i] = tecla;
 				cont++;
 			}
 			else if (tecla == KEY_APAGAR){
@@ -215,7 +240,8 @@ void getHoraMinSeg(char hora[], char min[], char seg[]){
 					tecla = -1;
 				tecla += 49;
 				writeCharacter(tecla);
-				seg[cont] = tecla;
+				i = (char) cont-4;
+				seg[i] = tecla;
 				cont++;
 			}
 			else if (tecla == KEY_APAGAR){
@@ -226,6 +252,13 @@ void getHoraMinSeg(char hora[], char min[], char seg[]){
 				cont --;
 			}
 			tecla = TECLA_INVALIDA;
+		}
+		if (cont == 6)
+		{
+			tecla = teclaDebouce();
+			if (tecla == KEY_CONFIRMA){
+				cont++;
+			}
 		}
 	}
 	_delay_ms(750);
