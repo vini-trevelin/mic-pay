@@ -3,31 +3,31 @@ mic_pay.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000388  00800100  00002344  000023d8  2**0
+  0 .data         00000388  00800100  000023c2  00002456  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00002344  00000000  00000000  00000094  2**1
+  1 .text         000023c2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000065  00800488  00800488  00002760  2**0
+  2 .bss          00000065  00800488  00800488  000027de  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00002760  2**0
+  3 .comment      00000030  00000000  00000000  000027de  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00002790  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00002810  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000002e8  00000000  00000000  000027d0  2**0
+  5 .debug_aranges 000002e8  00000000  00000000  00002850  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000041ef  00000000  00000000  00002ab8  2**0
+  6 .debug_info   00004212  00000000  00000000  00002b38  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000973  00000000  00000000  00006ca7  2**0
+  7 .debug_abbrev 00000973  00000000  00000000  00006d4a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000026a7  00000000  00000000  0000761a  2**0
+  8 .debug_line   00002748  00000000  00000000  000076bd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000970  00000000  00000000  00009cc4  2**2
+  9 .debug_frame  00000980  00000000  00000000  00009e08  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000bf3  00000000  00000000  0000a634  2**0
+ 10 .debug_str    00000bfa  00000000  00000000  0000a788  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000032a0  00000000  00000000  0000b227  2**0
+ 11 .debug_loc    00003390  00000000  00000000  0000b382  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000002f0  00000000  00000000  0000e4c7  2**0
+ 12 .debug_ranges 00000308  00000000  00000000  0000e712  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -44,7 +44,7 @@ Disassembly of section .text:
       20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
-      2c:	0c 94 67 10 	jmp	0x20ce	; 0x20ce <__vector_11>
+      2c:	0c 94 a6 10 	jmp	0x214c	; 0x214c <__vector_11>
       30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
@@ -71,18 +71,18 @@ Disassembly of section .text:
       7a:	a6 03       	fmuls	r18, r22
       7c:	a8 03       	fmulsu	r18, r16
       7e:	aa 03       	fmulsu	r18, r18
-      80:	52 10       	cpse	r5, r2
-      82:	57 10       	cpse	r5, r7
-      84:	52 10       	cpse	r5, r2
-      86:	62 10       	cpse	r6, r2
-      88:	52 10       	cpse	r5, r2
-      8a:	62 10       	cpse	r6, r2
-      8c:	52 10       	cpse	r5, r2
-      8e:	52 10       	cpse	r5, r2
-      90:	62 10       	cpse	r6, r2
-      92:	52 10       	cpse	r5, r2
-      94:	62 10       	cpse	r6, r2
-      96:	52 10       	cpse	r5, r2
+      80:	91 10       	cpse	r9, r1
+      82:	96 10       	cpse	r9, r6
+      84:	91 10       	cpse	r9, r1
+      86:	a1 10       	cpse	r10, r1
+      88:	91 10       	cpse	r9, r1
+      8a:	a1 10       	cpse	r10, r1
+      8c:	91 10       	cpse	r9, r1
+      8e:	91 10       	cpse	r9, r1
+      90:	a1 10       	cpse	r10, r1
+      92:	91 10       	cpse	r9, r1
+      94:	a1 10       	cpse	r10, r1
+      96:	91 10       	cpse	r9, r1
 
 00000098 <__ctors_end>:
       98:	11 24       	eor	r1, r1
@@ -96,7 +96,7 @@ Disassembly of section .text:
       a4:	14 e0       	ldi	r17, 0x04	; 4
       a6:	a0 e0       	ldi	r26, 0x00	; 0
       a8:	b1 e0       	ldi	r27, 0x01	; 1
-      aa:	e4 e4       	ldi	r30, 0x44	; 68
+      aa:	e2 ec       	ldi	r30, 0xC2	; 194
       ac:	f3 e2       	ldi	r31, 0x23	; 35
       ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
       b0:	05 90       	lpm	r0, Z+
@@ -118,8 +118,8 @@ Disassembly of section .text:
       c4:	ad 3e       	cpi	r26, 0xED	; 237
       c6:	b2 07       	cpc	r27, r18
       c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
-      ca:	0e 94 e5 10 	call	0x21ca	; 0x21ca <main>
-      ce:	0c 94 a0 11 	jmp	0x2340	; 0x2340 <_exit>
+      ca:	0e 94 24 11 	call	0x2248	; 0x2248 <main>
+      ce:	0c 94 df 11 	jmp	0x23be	; 0x23be <_exit>
 
 000000d2 <__bad_interrupt>:
       d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -443,7 +443,7 @@ void AtualizaStringDataHora(){
      33a:	30 e0       	ldi	r19, 0x00	; 0
      33c:	c6 01       	movw	r24, r12
      33e:	b9 01       	movw	r22, r18
-     340:	0e 94 72 11 	call	0x22e4	; 0x22e4 <__divmodhi4>
+     340:	0e 94 b1 11 	call	0x2362	; 0x2362 <__divmodhi4>
      344:	ae 01       	movw	r20, r28
      346:	44 0f       	add	r20, r20
      348:	55 1f       	adc	r21, r21
@@ -460,7 +460,7 @@ void AtualizaStringDataHora(){
      35e:	cf 01       	movw	r24, r30
      360:	64 e6       	ldi	r22, 0x64	; 100
      362:	70 e0       	ldi	r23, 0x00	; 0
-     364:	0e 94 72 11 	call	0x22e4	; 0x22e4 <__divmodhi4>
+     364:	0e 94 b1 11 	call	0x2362	; 0x2362 <__divmodhi4>
      368:	cf 01       	movw	r24, r30
      36a:	44 e6       	ldi	r20, 0x64	; 100
      36c:	64 9f       	mul	r22, r20
@@ -470,7 +470,7 @@ void AtualizaStringDataHora(){
      374:	60 5d       	subi	r22, 0xD0	; 208
      376:	68 83       	st	Y, r22
      378:	b9 01       	movw	r22, r18
-     37a:	0e 94 72 11 	call	0x22e4	; 0x22e4 <__divmodhi4>
+     37a:	0e 94 b1 11 	call	0x2362	; 0x2362 <__divmodhi4>
      37e:	60 5d       	subi	r22, 0xD0	; 208
      380:	69 83       	std	Y+1, r22	; 0x01
      382:	80 5d       	subi	r24, 0xD0	; 208
@@ -948,7 +948,7 @@ void AtualizaStringDataHora(){
      722:	fc 01       	movw	r30, r24
      724:	ec 5c       	subi	r30, 0xCC	; 204
      726:	ff 4f       	sbci	r31, 0xFF	; 255
-     728:	0c 94 86 11 	jmp	0x230c	; 0x230c <__tablejump2__>
+     728:	0c 94 c5 11 	jmp	0x238a	; 0x238a <__tablejump2__>
      72c:	81 e0       	ldi	r24, 0x01	; 1
      72e:	08 95       	ret
      730:	83 e0       	ldi	r24, 0x03	; 3
@@ -3213,10 +3213,10 @@ void AtualizaStringDataHora(){
     1a32:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
     1a36:	c0 e0       	ldi	r28, 0x00	; 0
     1a38:	d0 e0       	ldi	r29, 0x00	; 0
-    1a3a:	b2 c0       	rjmp	.+356    	; 0x1ba0 <getDiaMesAno+0x192>
+    1a3a:	b6 c0       	rjmp	.+364    	; 0x1ba8 <getDiaMesAno+0x19a>
     1a3c:	c2 30       	cpi	r28, 0x02	; 2
     1a3e:	d1 05       	cpc	r29, r1
-    1a40:	94 f5       	brge	.+100    	; 0x1aa6 <getDiaMesAno+0x98>
+    1a40:	b4 f5       	brge	.+108    	; 0x1aae <getDiaMesAno+0xa0>
     1a42:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
     1a46:	89 31       	cpi	r24, 0x19	; 25
     1a48:	91 f0       	breq	.+36     	; 0x1a6e <getDiaMesAno+0x60>
@@ -3236,12 +3236,12 @@ void AtualizaStringDataHora(){
     1a66:	f1 1d       	adc	r31, r1
     1a68:	10 83       	st	Z, r17
     1a6a:	21 96       	adiw	r28, 0x01	; 1
-    1a6c:	1c c0       	rjmp	.+56     	; 0x1aa6 <getDiaMesAno+0x98>
+    1a6c:	20 c0       	rjmp	.+64     	; 0x1aae <getDiaMesAno+0xa0>
     1a6e:	89 30       	cpi	r24, 0x09	; 9
-    1a70:	d1 f4       	brne	.+52     	; 0x1aa6 <getDiaMesAno+0x98>
+    1a70:	d9 f4       	brne	.+54     	; 0x1aa8 <getDiaMesAno+0x9a>
     1a72:	1c 16       	cp	r1, r28
     1a74:	1d 06       	cpc	r1, r29
-    1a76:	bc f4       	brge	.+46     	; 0x1aa6 <getDiaMesAno+0x98>
+    1a76:	c4 f4       	brge	.+48     	; 0x1aa8 <getDiaMesAno+0x9a>
     1a78:	8e 01       	movw	r16, r28
     1a7a:	c0 fd       	sbrc	r28, 0
     1a7c:	05 c0       	rjmp	.+10     	; 0x1a88 <getDiaMesAno+0x7a>
@@ -3262,1134 +3262,1197 @@ void AtualizaStringDataHora(){
     1a9e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
     1aa2:	e8 01       	movw	r28, r16
     1aa4:	21 97       	sbiw	r28, 0x01	; 1
-    1aa6:	8e 01       	movw	r16, r28
-    1aa8:	ce 01       	movw	r24, r28
-    1aaa:	02 97       	sbiw	r24, 0x02	; 2
-    1aac:	82 30       	cpi	r24, 0x02	; 2
-    1aae:	91 05       	cpc	r25, r1
-    1ab0:	a8 f5       	brcc	.+106    	; 0x1b1c <getDiaMesAno+0x10e>
-    1ab2:	c2 30       	cpi	r28, 0x02	; 2
-    1ab4:	d1 05       	cpc	r29, r1
-    1ab6:	21 f4       	brne	.+8      	; 0x1ac0 <getDiaMesAno+0xb2>
-    1ab8:	87 5f       	subi	r24, 0xF7	; 247
-    1aba:	80 6c       	ori	r24, 0xC0	; 192
-    1abc:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1ac0:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1ac4:	89 31       	cpi	r24, 0x19	; 25
-    1ac6:	a1 f0       	breq	.+40     	; 0x1af0 <getDiaMesAno+0xe2>
-    1ac8:	89 30       	cpi	r24, 0x09	; 9
-    1aca:	91 f0       	breq	.+36     	; 0x1af0 <getDiaMesAno+0xe2>
-    1acc:	8b 30       	cpi	r24, 0x0B	; 11
-    1ace:	81 f0       	breq	.+32     	; 0x1af0 <getDiaMesAno+0xe2>
-    1ad0:	8a 30       	cpi	r24, 0x0A	; 10
-    1ad2:	09 f4       	brne	.+2      	; 0x1ad6 <getDiaMesAno+0xc8>
-    1ad4:	8f ef       	ldi	r24, 0xFF	; 255
-    1ad6:	d1 e3       	ldi	r29, 0x31	; 49
-    1ad8:	d8 0f       	add	r29, r24
-    1ada:	8d 2f       	mov	r24, r29
-    1adc:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    1ae0:	c2 50       	subi	r28, 0x02	; 2
-    1ae2:	f6 01       	movw	r30, r12
-    1ae4:	ec 0f       	add	r30, r28
-    1ae6:	f1 1d       	adc	r31, r1
-    1ae8:	d0 83       	st	Z, r29
-    1aea:	e8 01       	movw	r28, r16
-    1aec:	21 96       	adiw	r28, 0x01	; 1
-    1aee:	16 c0       	rjmp	.+44     	; 0x1b1c <getDiaMesAno+0x10e>
-    1af0:	89 30       	cpi	r24, 0x09	; 9
-    1af2:	a1 f4       	brne	.+40     	; 0x1b1c <getDiaMesAno+0x10e>
-    1af4:	00 fd       	sbrc	r16, 0
-    1af6:	03 c0       	rjmp	.+6      	; 0x1afe <getDiaMesAno+0xf0>
-    1af8:	cb 5f       	subi	r28, 0xFB	; 251
-    1afa:	c0 68       	ori	r28, 0x80	; 128
-    1afc:	02 c0       	rjmp	.+4      	; 0x1b02 <getDiaMesAno+0xf4>
-    1afe:	ca 5f       	subi	r28, 0xFA	; 250
-    1b00:	c0 68       	ori	r28, 0x80	; 128
-    1b02:	c0 64       	ori	r28, 0x40	; 64
-    1b04:	8c 2f       	mov	r24, r28
-    1b06:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1b0a:	88 e5       	ldi	r24, 0x58	; 88
-    1b0c:	94 e0       	ldi	r25, 0x04	; 4
-    1b0e:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1b12:	8c 2f       	mov	r24, r28
-    1b14:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1b18:	e8 01       	movw	r28, r16
-    1b1a:	21 97       	sbiw	r28, 0x01	; 1
-    1b1c:	c4 30       	cpi	r28, 0x04	; 4
-    1b1e:	d1 05       	cpc	r29, r1
-    1b20:	bc f1       	brlt	.+110    	; 0x1b90 <getDiaMesAno+0x182>
-    1b22:	c4 30       	cpi	r28, 0x04	; 4
-    1b24:	d1 05       	cpc	r29, r1
-    1b26:	29 f4       	brne	.+10     	; 0x1b32 <getDiaMesAno+0x124>
-    1b28:	8c 2f       	mov	r24, r28
-    1b2a:	88 5f       	subi	r24, 0xF8	; 248
-    1b2c:	80 6c       	ori	r24, 0xC0	; 192
-    1b2e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1b32:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1b36:	89 31       	cpi	r24, 0x19	; 25
-    1b38:	a1 f0       	breq	.+40     	; 0x1b62 <getDiaMesAno+0x154>
-    1b3a:	89 30       	cpi	r24, 0x09	; 9
-    1b3c:	91 f0       	breq	.+36     	; 0x1b62 <getDiaMesAno+0x154>
-    1b3e:	8b 30       	cpi	r24, 0x0B	; 11
-    1b40:	81 f0       	breq	.+32     	; 0x1b62 <getDiaMesAno+0x154>
-    1b42:	8a 30       	cpi	r24, 0x0A	; 10
-    1b44:	09 f4       	brne	.+2      	; 0x1b48 <getDiaMesAno+0x13a>
-    1b46:	8f ef       	ldi	r24, 0xFF	; 255
-    1b48:	11 e3       	ldi	r17, 0x31	; 49
-    1b4a:	18 0f       	add	r17, r24
-    1b4c:	0c 2f       	mov	r16, r28
-    1b4e:	04 50       	subi	r16, 0x04	; 4
-    1b50:	81 2f       	mov	r24, r17
-    1b52:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    1b56:	f7 01       	movw	r30, r14
-    1b58:	e0 0f       	add	r30, r16
-    1b5a:	f1 1d       	adc	r31, r1
-    1b5c:	10 83       	st	Z, r17
-    1b5e:	21 96       	adiw	r28, 0x01	; 1
-    1b60:	17 c0       	rjmp	.+46     	; 0x1b90 <getDiaMesAno+0x182>
-    1b62:	89 30       	cpi	r24, 0x09	; 9
-    1b64:	a9 f4       	brne	.+42     	; 0x1b90 <getDiaMesAno+0x182>
-    1b66:	8e 01       	movw	r16, r28
-    1b68:	c0 fd       	sbrc	r28, 0
-    1b6a:	03 c0       	rjmp	.+6      	; 0x1b72 <getDiaMesAno+0x164>
-    1b6c:	ca 5f       	subi	r28, 0xFA	; 250
-    1b6e:	c0 68       	ori	r28, 0x80	; 128
-    1b70:	02 c0       	rjmp	.+4      	; 0x1b76 <getDiaMesAno+0x168>
-    1b72:	c9 5f       	subi	r28, 0xF9	; 249
-    1b74:	c0 68       	ori	r28, 0x80	; 128
-    1b76:	c0 64       	ori	r28, 0x40	; 64
-    1b78:	8c 2f       	mov	r24, r28
-    1b7a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1b7e:	88 e5       	ldi	r24, 0x58	; 88
-    1b80:	94 e0       	ldi	r25, 0x04	; 4
-    1b82:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1b86:	8c 2f       	mov	r24, r28
-    1b88:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1b8c:	e8 01       	movw	r28, r16
-    1b8e:	21 97       	sbiw	r28, 0x01	; 1
-    1b90:	c6 30       	cpi	r28, 0x06	; 6
-    1b92:	d1 05       	cpc	r29, r1
-    1b94:	29 f4       	brne	.+10     	; 0x1ba0 <getDiaMesAno+0x192>
-    1b96:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1b9a:	8b 30       	cpi	r24, 0x0B	; 11
-    1b9c:	09 f4       	brne	.+2      	; 0x1ba0 <getDiaMesAno+0x192>
-    1b9e:	21 96       	adiw	r28, 0x01	; 1
-    1ba0:	c7 30       	cpi	r28, 0x07	; 7
-    1ba2:	d1 05       	cpc	r29, r1
-    1ba4:	0c f4       	brge	.+2      	; 0x1ba8 <getDiaMesAno+0x19a>
-    1ba6:	4a cf       	rjmp	.-364    	; 0x1a3c <getDiaMesAno+0x2e>
-    1ba8:	2f ef       	ldi	r18, 0xFF	; 255
-    1baa:	8e e9       	ldi	r24, 0x9E	; 158
-    1bac:	94 e2       	ldi	r25, 0x24	; 36
-    1bae:	21 50       	subi	r18, 0x01	; 1
-    1bb0:	80 40       	sbci	r24, 0x00	; 0
-    1bb2:	90 40       	sbci	r25, 0x00	; 0
-    1bb4:	e1 f7       	brne	.-8      	; 0x1bae <getDiaMesAno+0x1a0>
-    1bb6:	00 c0       	rjmp	.+0      	; 0x1bb8 <getDiaMesAno+0x1aa>
-    1bb8:	00 00       	nop
-    1bba:	df 91       	pop	r29
-    1bbc:	cf 91       	pop	r28
-    1bbe:	1f 91       	pop	r17
-    1bc0:	0f 91       	pop	r16
-    1bc2:	ff 90       	pop	r15
-    1bc4:	ef 90       	pop	r14
-    1bc6:	df 90       	pop	r13
-    1bc8:	cf 90       	pop	r12
-    1bca:	bf 90       	pop	r11
-    1bcc:	af 90       	pop	r10
-    1bce:	08 95       	ret
+    1aa6:	03 c0       	rjmp	.+6      	; 0x1aae <getDiaMesAno+0xa0>
+    1aa8:	89 30       	cpi	r24, 0x09	; 9
+    1aaa:	09 f4       	brne	.+2      	; 0x1aae <getDiaMesAno+0xa0>
+    1aac:	8c c0       	rjmp	.+280    	; 0x1bc6 <getDiaMesAno+0x1b8>
+    1aae:	8e 01       	movw	r16, r28
+    1ab0:	ce 01       	movw	r24, r28
+    1ab2:	02 97       	sbiw	r24, 0x02	; 2
+    1ab4:	82 30       	cpi	r24, 0x02	; 2
+    1ab6:	91 05       	cpc	r25, r1
+    1ab8:	a8 f5       	brcc	.+106    	; 0x1b24 <getDiaMesAno+0x116>
+    1aba:	c2 30       	cpi	r28, 0x02	; 2
+    1abc:	d1 05       	cpc	r29, r1
+    1abe:	21 f4       	brne	.+8      	; 0x1ac8 <getDiaMesAno+0xba>
+    1ac0:	87 5f       	subi	r24, 0xF7	; 247
+    1ac2:	80 6c       	ori	r24, 0xC0	; 192
+    1ac4:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1ac8:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1acc:	89 31       	cpi	r24, 0x19	; 25
+    1ace:	a1 f0       	breq	.+40     	; 0x1af8 <getDiaMesAno+0xea>
+    1ad0:	89 30       	cpi	r24, 0x09	; 9
+    1ad2:	91 f0       	breq	.+36     	; 0x1af8 <getDiaMesAno+0xea>
+    1ad4:	8b 30       	cpi	r24, 0x0B	; 11
+    1ad6:	81 f0       	breq	.+32     	; 0x1af8 <getDiaMesAno+0xea>
+    1ad8:	8a 30       	cpi	r24, 0x0A	; 10
+    1ada:	09 f4       	brne	.+2      	; 0x1ade <getDiaMesAno+0xd0>
+    1adc:	8f ef       	ldi	r24, 0xFF	; 255
+    1ade:	d1 e3       	ldi	r29, 0x31	; 49
+    1ae0:	d8 0f       	add	r29, r24
+    1ae2:	8d 2f       	mov	r24, r29
+    1ae4:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+    1ae8:	c2 50       	subi	r28, 0x02	; 2
+    1aea:	f6 01       	movw	r30, r12
+    1aec:	ec 0f       	add	r30, r28
+    1aee:	f1 1d       	adc	r31, r1
+    1af0:	d0 83       	st	Z, r29
+    1af2:	e8 01       	movw	r28, r16
+    1af4:	21 96       	adiw	r28, 0x01	; 1
+    1af6:	16 c0       	rjmp	.+44     	; 0x1b24 <getDiaMesAno+0x116>
+    1af8:	89 30       	cpi	r24, 0x09	; 9
+    1afa:	a1 f4       	brne	.+40     	; 0x1b24 <getDiaMesAno+0x116>
+    1afc:	00 fd       	sbrc	r16, 0
+    1afe:	03 c0       	rjmp	.+6      	; 0x1b06 <getDiaMesAno+0xf8>
+    1b00:	cb 5f       	subi	r28, 0xFB	; 251
+    1b02:	c0 68       	ori	r28, 0x80	; 128
+    1b04:	02 c0       	rjmp	.+4      	; 0x1b0a <getDiaMesAno+0xfc>
+    1b06:	ca 5f       	subi	r28, 0xFA	; 250
+    1b08:	c0 68       	ori	r28, 0x80	; 128
+    1b0a:	c0 64       	ori	r28, 0x40	; 64
+    1b0c:	8c 2f       	mov	r24, r28
+    1b0e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1b12:	88 e5       	ldi	r24, 0x58	; 88
+    1b14:	94 e0       	ldi	r25, 0x04	; 4
+    1b16:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    1b1a:	8c 2f       	mov	r24, r28
+    1b1c:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1b20:	e8 01       	movw	r28, r16
+    1b22:	21 97       	sbiw	r28, 0x01	; 1
+    1b24:	c4 30       	cpi	r28, 0x04	; 4
+    1b26:	d1 05       	cpc	r29, r1
+    1b28:	bc f1       	brlt	.+110    	; 0x1b98 <getDiaMesAno+0x18a>
+    1b2a:	c4 30       	cpi	r28, 0x04	; 4
+    1b2c:	d1 05       	cpc	r29, r1
+    1b2e:	29 f4       	brne	.+10     	; 0x1b3a <getDiaMesAno+0x12c>
+    1b30:	8c 2f       	mov	r24, r28
+    1b32:	88 5f       	subi	r24, 0xF8	; 248
+    1b34:	80 6c       	ori	r24, 0xC0	; 192
+    1b36:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1b3a:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1b3e:	89 31       	cpi	r24, 0x19	; 25
+    1b40:	a1 f0       	breq	.+40     	; 0x1b6a <getDiaMesAno+0x15c>
+    1b42:	89 30       	cpi	r24, 0x09	; 9
+    1b44:	91 f0       	breq	.+36     	; 0x1b6a <getDiaMesAno+0x15c>
+    1b46:	8b 30       	cpi	r24, 0x0B	; 11
+    1b48:	81 f0       	breq	.+32     	; 0x1b6a <getDiaMesAno+0x15c>
+    1b4a:	8a 30       	cpi	r24, 0x0A	; 10
+    1b4c:	09 f4       	brne	.+2      	; 0x1b50 <getDiaMesAno+0x142>
+    1b4e:	8f ef       	ldi	r24, 0xFF	; 255
+    1b50:	11 e3       	ldi	r17, 0x31	; 49
+    1b52:	18 0f       	add	r17, r24
+    1b54:	0c 2f       	mov	r16, r28
+    1b56:	04 50       	subi	r16, 0x04	; 4
+    1b58:	81 2f       	mov	r24, r17
+    1b5a:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+    1b5e:	f7 01       	movw	r30, r14
+    1b60:	e0 0f       	add	r30, r16
+    1b62:	f1 1d       	adc	r31, r1
+    1b64:	10 83       	st	Z, r17
+    1b66:	21 96       	adiw	r28, 0x01	; 1
+    1b68:	17 c0       	rjmp	.+46     	; 0x1b98 <getDiaMesAno+0x18a>
+    1b6a:	89 30       	cpi	r24, 0x09	; 9
+    1b6c:	a9 f4       	brne	.+42     	; 0x1b98 <getDiaMesAno+0x18a>
+    1b6e:	8e 01       	movw	r16, r28
+    1b70:	c0 fd       	sbrc	r28, 0
+    1b72:	03 c0       	rjmp	.+6      	; 0x1b7a <getDiaMesAno+0x16c>
+    1b74:	ca 5f       	subi	r28, 0xFA	; 250
+    1b76:	c0 68       	ori	r28, 0x80	; 128
+    1b78:	02 c0       	rjmp	.+4      	; 0x1b7e <getDiaMesAno+0x170>
+    1b7a:	c9 5f       	subi	r28, 0xF9	; 249
+    1b7c:	c0 68       	ori	r28, 0x80	; 128
+    1b7e:	c0 64       	ori	r28, 0x40	; 64
+    1b80:	8c 2f       	mov	r24, r28
+    1b82:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1b86:	88 e5       	ldi	r24, 0x58	; 88
+    1b88:	94 e0       	ldi	r25, 0x04	; 4
+    1b8a:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    1b8e:	8c 2f       	mov	r24, r28
+    1b90:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1b94:	e8 01       	movw	r28, r16
+    1b96:	21 97       	sbiw	r28, 0x01	; 1
+    1b98:	c6 30       	cpi	r28, 0x06	; 6
+    1b9a:	d1 05       	cpc	r29, r1
+    1b9c:	29 f4       	brne	.+10     	; 0x1ba8 <getDiaMesAno+0x19a>
+    1b9e:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1ba2:	8b 30       	cpi	r24, 0x0B	; 11
+    1ba4:	09 f4       	brne	.+2      	; 0x1ba8 <getDiaMesAno+0x19a>
+    1ba6:	21 96       	adiw	r28, 0x01	; 1
+    1ba8:	c7 30       	cpi	r28, 0x07	; 7
+    1baa:	d1 05       	cpc	r29, r1
+    1bac:	0c f4       	brge	.+2      	; 0x1bb0 <getDiaMesAno+0x1a2>
+    1bae:	46 cf       	rjmp	.-372    	; 0x1a3c <getDiaMesAno+0x2e>
+    1bb0:	2f ef       	ldi	r18, 0xFF	; 255
+    1bb2:	8e e9       	ldi	r24, 0x9E	; 158
+    1bb4:	94 e2       	ldi	r25, 0x24	; 36
+    1bb6:	21 50       	subi	r18, 0x01	; 1
+    1bb8:	80 40       	sbci	r24, 0x00	; 0
+    1bba:	90 40       	sbci	r25, 0x00	; 0
+    1bbc:	e1 f7       	brne	.-8      	; 0x1bb6 <getDiaMesAno+0x1a8>
+    1bbe:	00 c0       	rjmp	.+0      	; 0x1bc0 <getDiaMesAno+0x1b2>
+    1bc0:	00 00       	nop
+    1bc2:	81 e0       	ldi	r24, 0x01	; 1
+    1bc4:	01 c0       	rjmp	.+2      	; 0x1bc8 <getDiaMesAno+0x1ba>
+    1bc6:	80 e0       	ldi	r24, 0x00	; 0
+    1bc8:	df 91       	pop	r29
+    1bca:	cf 91       	pop	r28
+    1bcc:	1f 91       	pop	r17
+    1bce:	0f 91       	pop	r16
+    1bd0:	ff 90       	pop	r15
+    1bd2:	ef 90       	pop	r14
+    1bd4:	df 90       	pop	r13
+    1bd6:	cf 90       	pop	r12
+    1bd8:	bf 90       	pop	r11
+    1bda:	af 90       	pop	r10
+    1bdc:	08 95       	ret
 
-00001bd0 <getHoraMinSeg>:
-    1bd0:	af 92       	push	r10
-    1bd2:	bf 92       	push	r11
-    1bd4:	cf 92       	push	r12
-    1bd6:	df 92       	push	r13
-    1bd8:	ef 92       	push	r14
-    1bda:	ff 92       	push	r15
-    1bdc:	0f 93       	push	r16
-    1bde:	1f 93       	push	r17
-    1be0:	cf 93       	push	r28
-    1be2:	df 93       	push	r29
-    1be4:	5c 01       	movw	r10, r24
-    1be6:	6b 01       	movw	r12, r22
-    1be8:	7a 01       	movw	r14, r20
-    1bea:	8a e5       	ldi	r24, 0x5A	; 90
-    1bec:	94 e0       	ldi	r25, 0x04	; 4
-    1bee:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1bf2:	86 ec       	ldi	r24, 0xC6	; 198
-    1bf4:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1bf8:	c0 e0       	ldi	r28, 0x00	; 0
-    1bfa:	d0 e0       	ldi	r29, 0x00	; 0
-    1bfc:	b6 c0       	rjmp	.+364    	; 0x1d6a <getHoraMinSeg+0x19a>
-    1bfe:	c2 30       	cpi	r28, 0x02	; 2
-    1c00:	d1 05       	cpc	r29, r1
-    1c02:	94 f5       	brge	.+100    	; 0x1c68 <getHoraMinSeg+0x98>
-    1c04:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1c08:	89 31       	cpi	r24, 0x19	; 25
-    1c0a:	91 f0       	breq	.+36     	; 0x1c30 <getHoraMinSeg+0x60>
-    1c0c:	89 30       	cpi	r24, 0x09	; 9
-    1c0e:	81 f0       	breq	.+32     	; 0x1c30 <getHoraMinSeg+0x60>
-    1c10:	8b 30       	cpi	r24, 0x0B	; 11
-    1c12:	71 f0       	breq	.+28     	; 0x1c30 <getHoraMinSeg+0x60>
-    1c14:	8a 30       	cpi	r24, 0x0A	; 10
-    1c16:	09 f4       	brne	.+2      	; 0x1c1a <getHoraMinSeg+0x4a>
-    1c18:	8f ef       	ldi	r24, 0xFF	; 255
-    1c1a:	11 e3       	ldi	r17, 0x31	; 49
-    1c1c:	18 0f       	add	r17, r24
-    1c1e:	81 2f       	mov	r24, r17
-    1c20:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    1c24:	f5 01       	movw	r30, r10
-    1c26:	ec 0f       	add	r30, r28
-    1c28:	f1 1d       	adc	r31, r1
-    1c2a:	10 83       	st	Z, r17
-    1c2c:	21 96       	adiw	r28, 0x01	; 1
-    1c2e:	1c c0       	rjmp	.+56     	; 0x1c68 <getHoraMinSeg+0x98>
-    1c30:	89 30       	cpi	r24, 0x09	; 9
-    1c32:	d1 f4       	brne	.+52     	; 0x1c68 <getHoraMinSeg+0x98>
-    1c34:	1c 16       	cp	r1, r28
-    1c36:	1d 06       	cpc	r1, r29
-    1c38:	bc f4       	brge	.+46     	; 0x1c68 <getHoraMinSeg+0x98>
-    1c3a:	8e 01       	movw	r16, r28
-    1c3c:	c0 fd       	sbrc	r28, 0
-    1c3e:	05 c0       	rjmp	.+10     	; 0x1c4a <getHoraMinSeg+0x7a>
-    1c40:	20 97       	sbiw	r28, 0x00	; 0
-    1c42:	19 f0       	breq	.+6      	; 0x1c4a <getHoraMinSeg+0x7a>
-    1c44:	cc 5f       	subi	r28, 0xFC	; 252
-    1c46:	c0 68       	ori	r28, 0x80	; 128
-    1c48:	02 c0       	rjmp	.+4      	; 0x1c4e <getHoraMinSeg+0x7e>
-    1c4a:	cb 5f       	subi	r28, 0xFB	; 251
-    1c4c:	c0 68       	ori	r28, 0x80	; 128
-    1c4e:	c0 64       	ori	r28, 0x40	; 64
-    1c50:	8c 2f       	mov	r24, r28
-    1c52:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1c56:	88 e5       	ldi	r24, 0x58	; 88
-    1c58:	94 e0       	ldi	r25, 0x04	; 4
-    1c5a:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+00001bde <getHoraMinSeg>:
+    1bde:	af 92       	push	r10
+    1be0:	bf 92       	push	r11
+    1be2:	cf 92       	push	r12
+    1be4:	df 92       	push	r13
+    1be6:	ef 92       	push	r14
+    1be8:	ff 92       	push	r15
+    1bea:	0f 93       	push	r16
+    1bec:	1f 93       	push	r17
+    1bee:	cf 93       	push	r28
+    1bf0:	df 93       	push	r29
+    1bf2:	5c 01       	movw	r10, r24
+    1bf4:	6b 01       	movw	r12, r22
+    1bf6:	7a 01       	movw	r14, r20
+    1bf8:	8a e5       	ldi	r24, 0x5A	; 90
+    1bfa:	94 e0       	ldi	r25, 0x04	; 4
+    1bfc:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    1c00:	86 ec       	ldi	r24, 0xC6	; 198
+    1c02:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1c06:	c0 e0       	ldi	r28, 0x00	; 0
+    1c08:	d0 e0       	ldi	r29, 0x00	; 0
+    1c0a:	ba c0       	rjmp	.+372    	; 0x1d80 <getHoraMinSeg+0x1a2>
+    1c0c:	c2 30       	cpi	r28, 0x02	; 2
+    1c0e:	d1 05       	cpc	r29, r1
+    1c10:	b4 f5       	brge	.+108    	; 0x1c7e <getHoraMinSeg+0xa0>
+    1c12:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1c16:	89 31       	cpi	r24, 0x19	; 25
+    1c18:	91 f0       	breq	.+36     	; 0x1c3e <getHoraMinSeg+0x60>
+    1c1a:	89 30       	cpi	r24, 0x09	; 9
+    1c1c:	81 f0       	breq	.+32     	; 0x1c3e <getHoraMinSeg+0x60>
+    1c1e:	8b 30       	cpi	r24, 0x0B	; 11
+    1c20:	71 f0       	breq	.+28     	; 0x1c3e <getHoraMinSeg+0x60>
+    1c22:	8a 30       	cpi	r24, 0x0A	; 10
+    1c24:	09 f4       	brne	.+2      	; 0x1c28 <getHoraMinSeg+0x4a>
+    1c26:	8f ef       	ldi	r24, 0xFF	; 255
+    1c28:	11 e3       	ldi	r17, 0x31	; 49
+    1c2a:	18 0f       	add	r17, r24
+    1c2c:	81 2f       	mov	r24, r17
+    1c2e:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+    1c32:	f5 01       	movw	r30, r10
+    1c34:	ec 0f       	add	r30, r28
+    1c36:	f1 1d       	adc	r31, r1
+    1c38:	10 83       	st	Z, r17
+    1c3a:	21 96       	adiw	r28, 0x01	; 1
+    1c3c:	20 c0       	rjmp	.+64     	; 0x1c7e <getHoraMinSeg+0xa0>
+    1c3e:	89 30       	cpi	r24, 0x09	; 9
+    1c40:	d9 f4       	brne	.+54     	; 0x1c78 <getHoraMinSeg+0x9a>
+    1c42:	1c 16       	cp	r1, r28
+    1c44:	1d 06       	cpc	r1, r29
+    1c46:	c4 f4       	brge	.+48     	; 0x1c78 <getHoraMinSeg+0x9a>
+    1c48:	8e 01       	movw	r16, r28
+    1c4a:	c0 fd       	sbrc	r28, 0
+    1c4c:	05 c0       	rjmp	.+10     	; 0x1c58 <getHoraMinSeg+0x7a>
+    1c4e:	20 97       	sbiw	r28, 0x00	; 0
+    1c50:	19 f0       	breq	.+6      	; 0x1c58 <getHoraMinSeg+0x7a>
+    1c52:	cc 5f       	subi	r28, 0xFC	; 252
+    1c54:	c0 68       	ori	r28, 0x80	; 128
+    1c56:	02 c0       	rjmp	.+4      	; 0x1c5c <getHoraMinSeg+0x7e>
+    1c58:	cb 5f       	subi	r28, 0xFB	; 251
+    1c5a:	c0 68       	ori	r28, 0x80	; 128
+    1c5c:	c0 64       	ori	r28, 0x40	; 64
     1c5e:	8c 2f       	mov	r24, r28
     1c60:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1c64:	e8 01       	movw	r28, r16
-    1c66:	21 97       	sbiw	r28, 0x01	; 1
-    1c68:	8e 01       	movw	r16, r28
-    1c6a:	ce 01       	movw	r24, r28
-    1c6c:	02 97       	sbiw	r24, 0x02	; 2
-    1c6e:	82 30       	cpi	r24, 0x02	; 2
-    1c70:	91 05       	cpc	r25, r1
-    1c72:	b8 f5       	brcc	.+110    	; 0x1ce2 <getHoraMinSeg+0x112>
-    1c74:	c2 30       	cpi	r28, 0x02	; 2
-    1c76:	d1 05       	cpc	r29, r1
-    1c78:	21 f4       	brne	.+8      	; 0x1c82 <getHoraMinSeg+0xb2>
-    1c7a:	87 5f       	subi	r24, 0xF7	; 247
-    1c7c:	80 6c       	ori	r24, 0xC0	; 192
-    1c7e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1c82:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1c86:	89 31       	cpi	r24, 0x19	; 25
-    1c88:	a1 f0       	breq	.+40     	; 0x1cb2 <getHoraMinSeg+0xe2>
-    1c8a:	89 30       	cpi	r24, 0x09	; 9
-    1c8c:	91 f0       	breq	.+36     	; 0x1cb2 <getHoraMinSeg+0xe2>
-    1c8e:	8b 30       	cpi	r24, 0x0B	; 11
-    1c90:	81 f0       	breq	.+32     	; 0x1cb2 <getHoraMinSeg+0xe2>
-    1c92:	8a 30       	cpi	r24, 0x0A	; 10
-    1c94:	09 f4       	brne	.+2      	; 0x1c98 <getHoraMinSeg+0xc8>
-    1c96:	8f ef       	ldi	r24, 0xFF	; 255
-    1c98:	d1 e3       	ldi	r29, 0x31	; 49
-    1c9a:	d8 0f       	add	r29, r24
-    1c9c:	8d 2f       	mov	r24, r29
-    1c9e:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    1ca2:	c2 50       	subi	r28, 0x02	; 2
-    1ca4:	f6 01       	movw	r30, r12
-    1ca6:	ec 0f       	add	r30, r28
-    1ca8:	f1 1d       	adc	r31, r1
-    1caa:	d0 83       	st	Z, r29
-    1cac:	e8 01       	movw	r28, r16
-    1cae:	21 96       	adiw	r28, 0x01	; 1
-    1cb0:	18 c0       	rjmp	.+48     	; 0x1ce2 <getHoraMinSeg+0x112>
-    1cb2:	89 30       	cpi	r24, 0x09	; 9
-    1cb4:	b1 f4       	brne	.+44     	; 0x1ce2 <getHoraMinSeg+0x112>
-    1cb6:	00 fd       	sbrc	r16, 0
-    1cb8:	05 c0       	rjmp	.+10     	; 0x1cc4 <getHoraMinSeg+0xf4>
-    1cba:	20 97       	sbiw	r28, 0x00	; 0
-    1cbc:	19 f0       	breq	.+6      	; 0x1cc4 <getHoraMinSeg+0xf4>
-    1cbe:	cb 5f       	subi	r28, 0xFB	; 251
-    1cc0:	c0 68       	ori	r28, 0x80	; 128
-    1cc2:	02 c0       	rjmp	.+4      	; 0x1cc8 <getHoraMinSeg+0xf8>
-    1cc4:	ca 5f       	subi	r28, 0xFA	; 250
-    1cc6:	c0 68       	ori	r28, 0x80	; 128
-    1cc8:	c0 64       	ori	r28, 0x40	; 64
-    1cca:	8c 2f       	mov	r24, r28
-    1ccc:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1cd0:	88 e5       	ldi	r24, 0x58	; 88
-    1cd2:	94 e0       	ldi	r25, 0x04	; 4
-    1cd4:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1cd8:	8c 2f       	mov	r24, r28
-    1cda:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1cde:	e8 01       	movw	r28, r16
-    1ce0:	21 97       	sbiw	r28, 0x01	; 1
-    1ce2:	c4 30       	cpi	r28, 0x04	; 4
-    1ce4:	d1 05       	cpc	r29, r1
-    1ce6:	cc f1       	brlt	.+114    	; 0x1d5a <getHoraMinSeg+0x18a>
-    1ce8:	c4 30       	cpi	r28, 0x04	; 4
-    1cea:	d1 05       	cpc	r29, r1
-    1cec:	29 f4       	brne	.+10     	; 0x1cf8 <getHoraMinSeg+0x128>
+    1c64:	88 e5       	ldi	r24, 0x58	; 88
+    1c66:	94 e0       	ldi	r25, 0x04	; 4
+    1c68:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    1c6c:	8c 2f       	mov	r24, r28
+    1c6e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1c72:	e8 01       	movw	r28, r16
+    1c74:	21 97       	sbiw	r28, 0x01	; 1
+    1c76:	03 c0       	rjmp	.+6      	; 0x1c7e <getHoraMinSeg+0xa0>
+    1c78:	89 30       	cpi	r24, 0x09	; 9
+    1c7a:	09 f4       	brne	.+2      	; 0x1c7e <getHoraMinSeg+0xa0>
+    1c7c:	90 c0       	rjmp	.+288    	; 0x1d9e <getHoraMinSeg+0x1c0>
+    1c7e:	8e 01       	movw	r16, r28
+    1c80:	ce 01       	movw	r24, r28
+    1c82:	02 97       	sbiw	r24, 0x02	; 2
+    1c84:	82 30       	cpi	r24, 0x02	; 2
+    1c86:	91 05       	cpc	r25, r1
+    1c88:	b8 f5       	brcc	.+110    	; 0x1cf8 <getHoraMinSeg+0x11a>
+    1c8a:	c2 30       	cpi	r28, 0x02	; 2
+    1c8c:	d1 05       	cpc	r29, r1
+    1c8e:	21 f4       	brne	.+8      	; 0x1c98 <getHoraMinSeg+0xba>
+    1c90:	87 5f       	subi	r24, 0xF7	; 247
+    1c92:	80 6c       	ori	r24, 0xC0	; 192
+    1c94:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1c98:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1c9c:	89 31       	cpi	r24, 0x19	; 25
+    1c9e:	a1 f0       	breq	.+40     	; 0x1cc8 <getHoraMinSeg+0xea>
+    1ca0:	89 30       	cpi	r24, 0x09	; 9
+    1ca2:	91 f0       	breq	.+36     	; 0x1cc8 <getHoraMinSeg+0xea>
+    1ca4:	8b 30       	cpi	r24, 0x0B	; 11
+    1ca6:	81 f0       	breq	.+32     	; 0x1cc8 <getHoraMinSeg+0xea>
+    1ca8:	8a 30       	cpi	r24, 0x0A	; 10
+    1caa:	09 f4       	brne	.+2      	; 0x1cae <getHoraMinSeg+0xd0>
+    1cac:	8f ef       	ldi	r24, 0xFF	; 255
+    1cae:	d1 e3       	ldi	r29, 0x31	; 49
+    1cb0:	d8 0f       	add	r29, r24
+    1cb2:	8d 2f       	mov	r24, r29
+    1cb4:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+    1cb8:	c2 50       	subi	r28, 0x02	; 2
+    1cba:	f6 01       	movw	r30, r12
+    1cbc:	ec 0f       	add	r30, r28
+    1cbe:	f1 1d       	adc	r31, r1
+    1cc0:	d0 83       	st	Z, r29
+    1cc2:	e8 01       	movw	r28, r16
+    1cc4:	21 96       	adiw	r28, 0x01	; 1
+    1cc6:	18 c0       	rjmp	.+48     	; 0x1cf8 <getHoraMinSeg+0x11a>
+    1cc8:	89 30       	cpi	r24, 0x09	; 9
+    1cca:	b1 f4       	brne	.+44     	; 0x1cf8 <getHoraMinSeg+0x11a>
+    1ccc:	00 fd       	sbrc	r16, 0
+    1cce:	05 c0       	rjmp	.+10     	; 0x1cda <getHoraMinSeg+0xfc>
+    1cd0:	20 97       	sbiw	r28, 0x00	; 0
+    1cd2:	19 f0       	breq	.+6      	; 0x1cda <getHoraMinSeg+0xfc>
+    1cd4:	cb 5f       	subi	r28, 0xFB	; 251
+    1cd6:	c0 68       	ori	r28, 0x80	; 128
+    1cd8:	02 c0       	rjmp	.+4      	; 0x1cde <getHoraMinSeg+0x100>
+    1cda:	ca 5f       	subi	r28, 0xFA	; 250
+    1cdc:	c0 68       	ori	r28, 0x80	; 128
+    1cde:	c0 64       	ori	r28, 0x40	; 64
+    1ce0:	8c 2f       	mov	r24, r28
+    1ce2:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1ce6:	88 e5       	ldi	r24, 0x58	; 88
+    1ce8:	94 e0       	ldi	r25, 0x04	; 4
+    1cea:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
     1cee:	8c 2f       	mov	r24, r28
-    1cf0:	88 5f       	subi	r24, 0xF8	; 248
-    1cf2:	80 6c       	ori	r24, 0xC0	; 192
-    1cf4:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1cf8:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1cfc:	89 31       	cpi	r24, 0x19	; 25
-    1cfe:	a1 f0       	breq	.+40     	; 0x1d28 <getHoraMinSeg+0x158>
-    1d00:	89 30       	cpi	r24, 0x09	; 9
-    1d02:	91 f0       	breq	.+36     	; 0x1d28 <getHoraMinSeg+0x158>
-    1d04:	8b 30       	cpi	r24, 0x0B	; 11
-    1d06:	81 f0       	breq	.+32     	; 0x1d28 <getHoraMinSeg+0x158>
-    1d08:	8a 30       	cpi	r24, 0x0A	; 10
-    1d0a:	09 f4       	brne	.+2      	; 0x1d0e <getHoraMinSeg+0x13e>
-    1d0c:	8f ef       	ldi	r24, 0xFF	; 255
-    1d0e:	11 e3       	ldi	r17, 0x31	; 49
-    1d10:	18 0f       	add	r17, r24
-    1d12:	81 2f       	mov	r24, r17
-    1d14:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    1d18:	8c 2f       	mov	r24, r28
-    1d1a:	84 50       	subi	r24, 0x04	; 4
-    1d1c:	f7 01       	movw	r30, r14
-    1d1e:	e8 0f       	add	r30, r24
-    1d20:	f1 1d       	adc	r31, r1
-    1d22:	10 83       	st	Z, r17
-    1d24:	21 96       	adiw	r28, 0x01	; 1
-    1d26:	19 c0       	rjmp	.+50     	; 0x1d5a <getHoraMinSeg+0x18a>
-    1d28:	89 30       	cpi	r24, 0x09	; 9
-    1d2a:	b9 f4       	brne	.+46     	; 0x1d5a <getHoraMinSeg+0x18a>
-    1d2c:	8e 01       	movw	r16, r28
-    1d2e:	c0 fd       	sbrc	r28, 0
-    1d30:	05 c0       	rjmp	.+10     	; 0x1d3c <getHoraMinSeg+0x16c>
-    1d32:	20 97       	sbiw	r28, 0x00	; 0
-    1d34:	19 f0       	breq	.+6      	; 0x1d3c <getHoraMinSeg+0x16c>
-    1d36:	ca 5f       	subi	r28, 0xFA	; 250
-    1d38:	c0 68       	ori	r28, 0x80	; 128
-    1d3a:	02 c0       	rjmp	.+4      	; 0x1d40 <getHoraMinSeg+0x170>
-    1d3c:	c9 5f       	subi	r28, 0xF9	; 249
-    1d3e:	c0 68       	ori	r28, 0x80	; 128
-    1d40:	c0 64       	ori	r28, 0x40	; 64
-    1d42:	8c 2f       	mov	r24, r28
-    1d44:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1d48:	88 e5       	ldi	r24, 0x58	; 88
-    1d4a:	94 e0       	ldi	r25, 0x04	; 4
-    1d4c:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1d50:	8c 2f       	mov	r24, r28
-    1d52:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1d56:	e8 01       	movw	r28, r16
-    1d58:	21 97       	sbiw	r28, 0x01	; 1
-    1d5a:	c6 30       	cpi	r28, 0x06	; 6
-    1d5c:	d1 05       	cpc	r29, r1
-    1d5e:	29 f4       	brne	.+10     	; 0x1d6a <getHoraMinSeg+0x19a>
-    1d60:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1d64:	8b 30       	cpi	r24, 0x0B	; 11
-    1d66:	09 f4       	brne	.+2      	; 0x1d6a <getHoraMinSeg+0x19a>
-    1d68:	21 96       	adiw	r28, 0x01	; 1
-    1d6a:	c7 30       	cpi	r28, 0x07	; 7
-    1d6c:	d1 05       	cpc	r29, r1
-    1d6e:	0c f4       	brge	.+2      	; 0x1d72 <getHoraMinSeg+0x1a2>
-    1d70:	46 cf       	rjmp	.-372    	; 0x1bfe <getHoraMinSeg+0x2e>
-    1d72:	2f ef       	ldi	r18, 0xFF	; 255
-    1d74:	8e e9       	ldi	r24, 0x9E	; 158
-    1d76:	94 e2       	ldi	r25, 0x24	; 36
-    1d78:	21 50       	subi	r18, 0x01	; 1
-    1d7a:	80 40       	sbci	r24, 0x00	; 0
-    1d7c:	90 40       	sbci	r25, 0x00	; 0
-    1d7e:	e1 f7       	brne	.-8      	; 0x1d78 <getHoraMinSeg+0x1a8>
-    1d80:	00 c0       	rjmp	.+0      	; 0x1d82 <getHoraMinSeg+0x1b2>
-    1d82:	00 00       	nop
-    1d84:	df 91       	pop	r29
-    1d86:	cf 91       	pop	r28
-    1d88:	1f 91       	pop	r17
-    1d8a:	0f 91       	pop	r16
-    1d8c:	ff 90       	pop	r15
-    1d8e:	ef 90       	pop	r14
-    1d90:	df 90       	pop	r13
-    1d92:	cf 90       	pop	r12
-    1d94:	bf 90       	pop	r11
-    1d96:	af 90       	pop	r10
-    1d98:	08 95       	ret
+    1cf0:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1cf4:	e8 01       	movw	r28, r16
+    1cf6:	21 97       	sbiw	r28, 0x01	; 1
+    1cf8:	c4 30       	cpi	r28, 0x04	; 4
+    1cfa:	d1 05       	cpc	r29, r1
+    1cfc:	cc f1       	brlt	.+114    	; 0x1d70 <getHoraMinSeg+0x192>
+    1cfe:	c4 30       	cpi	r28, 0x04	; 4
+    1d00:	d1 05       	cpc	r29, r1
+    1d02:	29 f4       	brne	.+10     	; 0x1d0e <getHoraMinSeg+0x130>
+    1d04:	8c 2f       	mov	r24, r28
+    1d06:	88 5f       	subi	r24, 0xF8	; 248
+    1d08:	80 6c       	ori	r24, 0xC0	; 192
+    1d0a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1d0e:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1d12:	89 31       	cpi	r24, 0x19	; 25
+    1d14:	a1 f0       	breq	.+40     	; 0x1d3e <getHoraMinSeg+0x160>
+    1d16:	89 30       	cpi	r24, 0x09	; 9
+    1d18:	91 f0       	breq	.+36     	; 0x1d3e <getHoraMinSeg+0x160>
+    1d1a:	8b 30       	cpi	r24, 0x0B	; 11
+    1d1c:	81 f0       	breq	.+32     	; 0x1d3e <getHoraMinSeg+0x160>
+    1d1e:	8a 30       	cpi	r24, 0x0A	; 10
+    1d20:	09 f4       	brne	.+2      	; 0x1d24 <getHoraMinSeg+0x146>
+    1d22:	8f ef       	ldi	r24, 0xFF	; 255
+    1d24:	11 e3       	ldi	r17, 0x31	; 49
+    1d26:	18 0f       	add	r17, r24
+    1d28:	81 2f       	mov	r24, r17
+    1d2a:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+    1d2e:	8c 2f       	mov	r24, r28
+    1d30:	84 50       	subi	r24, 0x04	; 4
+    1d32:	f7 01       	movw	r30, r14
+    1d34:	e8 0f       	add	r30, r24
+    1d36:	f1 1d       	adc	r31, r1
+    1d38:	10 83       	st	Z, r17
+    1d3a:	21 96       	adiw	r28, 0x01	; 1
+    1d3c:	19 c0       	rjmp	.+50     	; 0x1d70 <getHoraMinSeg+0x192>
+    1d3e:	89 30       	cpi	r24, 0x09	; 9
+    1d40:	b9 f4       	brne	.+46     	; 0x1d70 <getHoraMinSeg+0x192>
+    1d42:	8e 01       	movw	r16, r28
+    1d44:	c0 fd       	sbrc	r28, 0
+    1d46:	05 c0       	rjmp	.+10     	; 0x1d52 <getHoraMinSeg+0x174>
+    1d48:	20 97       	sbiw	r28, 0x00	; 0
+    1d4a:	19 f0       	breq	.+6      	; 0x1d52 <getHoraMinSeg+0x174>
+    1d4c:	ca 5f       	subi	r28, 0xFA	; 250
+    1d4e:	c0 68       	ori	r28, 0x80	; 128
+    1d50:	02 c0       	rjmp	.+4      	; 0x1d56 <getHoraMinSeg+0x178>
+    1d52:	c9 5f       	subi	r28, 0xF9	; 249
+    1d54:	c0 68       	ori	r28, 0x80	; 128
+    1d56:	c0 64       	ori	r28, 0x40	; 64
+    1d58:	8c 2f       	mov	r24, r28
+    1d5a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1d5e:	88 e5       	ldi	r24, 0x58	; 88
+    1d60:	94 e0       	ldi	r25, 0x04	; 4
+    1d62:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    1d66:	8c 2f       	mov	r24, r28
+    1d68:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    1d6c:	e8 01       	movw	r28, r16
+    1d6e:	21 97       	sbiw	r28, 0x01	; 1
+    1d70:	c6 30       	cpi	r28, 0x06	; 6
+    1d72:	d1 05       	cpc	r29, r1
+    1d74:	29 f4       	brne	.+10     	; 0x1d80 <getHoraMinSeg+0x1a2>
+    1d76:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    1d7a:	8b 30       	cpi	r24, 0x0B	; 11
+    1d7c:	09 f4       	brne	.+2      	; 0x1d80 <getHoraMinSeg+0x1a2>
+    1d7e:	21 96       	adiw	r28, 0x01	; 1
+    1d80:	c7 30       	cpi	r28, 0x07	; 7
+    1d82:	d1 05       	cpc	r29, r1
+    1d84:	0c f4       	brge	.+2      	; 0x1d88 <getHoraMinSeg+0x1aa>
+    1d86:	42 cf       	rjmp	.-380    	; 0x1c0c <getHoraMinSeg+0x2e>
+    1d88:	2f ef       	ldi	r18, 0xFF	; 255
+    1d8a:	8e e9       	ldi	r24, 0x9E	; 158
+    1d8c:	94 e2       	ldi	r25, 0x24	; 36
+    1d8e:	21 50       	subi	r18, 0x01	; 1
+    1d90:	80 40       	sbci	r24, 0x00	; 0
+    1d92:	90 40       	sbci	r25, 0x00	; 0
+    1d94:	e1 f7       	brne	.-8      	; 0x1d8e <getHoraMinSeg+0x1b0>
+    1d96:	00 c0       	rjmp	.+0      	; 0x1d98 <getHoraMinSeg+0x1ba>
+    1d98:	00 00       	nop
+    1d9a:	81 e0       	ldi	r24, 0x01	; 1
+    1d9c:	01 c0       	rjmp	.+2      	; 0x1da0 <getHoraMinSeg+0x1c2>
+    1d9e:	80 e0       	ldi	r24, 0x00	; 0
+    1da0:	df 91       	pop	r29
+    1da2:	cf 91       	pop	r28
+    1da4:	1f 91       	pop	r17
+    1da6:	0f 91       	pop	r16
+    1da8:	ff 90       	pop	r15
+    1daa:	ef 90       	pop	r14
+    1dac:	df 90       	pop	r13
+    1dae:	cf 90       	pop	r12
+    1db0:	bf 90       	pop	r11
+    1db2:	af 90       	pop	r10
+    1db4:	08 95       	ret
 
-00001d9a <anoZero>:
-    1d9a:	10 92 8d 04 	sts	0x048D, r1	; 0x80048d <horas>
-    1d9e:	10 92 8c 04 	sts	0x048C, r1	; 0x80048c <minutos>
-    1da2:	10 92 8b 04 	sts	0x048B, r1	; 0x80048b <segundos>
-    1da6:	81 e0       	ldi	r24, 0x01	; 1
-    1da8:	80 93 8a 04 	sts	0x048A, r24	; 0x80048a <dia>
-    1dac:	80 93 89 04 	sts	0x0489, r24	; 0x800489 <mes>
-    1db0:	86 e1       	ldi	r24, 0x16	; 22
-    1db2:	80 93 88 04 	sts	0x0488, r24	; 0x800488 <__data_end>
-    1db6:	08 95       	ret
+00001db6 <anoZero>:
+    1db6:	10 92 8d 04 	sts	0x048D, r1	; 0x80048d <horas>
+    1dba:	10 92 8c 04 	sts	0x048C, r1	; 0x80048c <minutos>
+    1dbe:	10 92 8b 04 	sts	0x048B, r1	; 0x80048b <segundos>
+    1dc2:	81 e0       	ldi	r24, 0x01	; 1
+    1dc4:	80 93 8a 04 	sts	0x048A, r24	; 0x80048a <dia>
+    1dc8:	80 93 89 04 	sts	0x0489, r24	; 0x800489 <mes>
+    1dcc:	86 e1       	ldi	r24, 0x16	; 22
+    1dce:	80 93 88 04 	sts	0x0488, r24	; 0x800488 <__data_end>
+    1dd2:	08 95       	ret
 
-00001db8 <changeDate>:
-    1db8:	cf 92       	push	r12
-    1dba:	df 92       	push	r13
-    1dbc:	ef 92       	push	r14
-    1dbe:	ff 92       	push	r15
-    1dc0:	0f 93       	push	r16
-    1dc2:	1f 93       	push	r17
-    1dc4:	cf 93       	push	r28
-    1dc6:	df 93       	push	r29
-    1dc8:	6b 01       	movw	r12, r22
-    1dca:	ea 01       	movw	r28, r20
-    1dcc:	d8 01       	movw	r26, r16
-    1dce:	fc 01       	movw	r30, r24
-    1dd0:	40 81       	ld	r20, Z
-    1dd2:	50 e0       	ldi	r21, 0x00	; 0
-    1dd4:	40 53       	subi	r20, 0x30	; 48
-    1dd6:	51 09       	sbc	r21, r1
-    1dd8:	81 81       	ldd	r24, Z+1	; 0x01
-    1dda:	44 0f       	add	r20, r20
-    1ddc:	74 2f       	mov	r23, r20
-    1dde:	77 0f       	add	r23, r23
-    1de0:	77 0f       	add	r23, r23
-    1de2:	47 0f       	add	r20, r23
-    1de4:	74 2f       	mov	r23, r20
-    1de6:	78 0f       	add	r23, r24
-    1de8:	70 53       	subi	r23, 0x30	; 48
-    1dea:	f6 01       	movw	r30, r12
-    1dec:	80 81       	ld	r24, Z
-    1dee:	90 e0       	ldi	r25, 0x00	; 0
-    1df0:	c0 97       	sbiw	r24, 0x30	; 48
-    1df2:	91 81       	ldd	r25, Z+1	; 0x01
-    1df4:	88 0f       	add	r24, r24
-    1df6:	58 2f       	mov	r21, r24
-    1df8:	55 0f       	add	r21, r21
-    1dfa:	55 0f       	add	r21, r21
-    1dfc:	85 0f       	add	r24, r21
-    1dfe:	58 2f       	mov	r21, r24
-    1e00:	59 0f       	add	r21, r25
-    1e02:	50 53       	subi	r21, 0x30	; 48
-    1e04:	88 81       	ld	r24, Y
-    1e06:	90 e0       	ldi	r25, 0x00	; 0
-    1e08:	c0 97       	sbiw	r24, 0x30	; 48
-    1e0a:	99 81       	ldd	r25, Y+1	; 0x01
-    1e0c:	88 0f       	add	r24, r24
-    1e0e:	48 2f       	mov	r20, r24
-    1e10:	44 0f       	add	r20, r20
-    1e12:	44 0f       	add	r20, r20
-    1e14:	84 0f       	add	r24, r20
-    1e16:	48 2f       	mov	r20, r24
-    1e18:	49 0f       	add	r20, r25
-    1e1a:	40 53       	subi	r20, 0x30	; 48
-    1e1c:	8c 91       	ld	r24, X
-    1e1e:	90 e0       	ldi	r25, 0x00	; 0
-    1e20:	c0 97       	sbiw	r24, 0x30	; 48
-    1e22:	11 96       	adiw	r26, 0x01	; 1
-    1e24:	9c 91       	ld	r25, X
-    1e26:	88 0f       	add	r24, r24
-    1e28:	68 2f       	mov	r22, r24
-    1e2a:	66 0f       	add	r22, r22
-    1e2c:	66 0f       	add	r22, r22
-    1e2e:	86 0f       	add	r24, r22
-    1e30:	89 0f       	add	r24, r25
-    1e32:	60 ed       	ldi	r22, 0xD0	; 208
-    1e34:	68 0f       	add	r22, r24
-    1e36:	f9 01       	movw	r30, r18
-    1e38:	80 81       	ld	r24, Z
+00001dd4 <changeDate>:
+    1dd4:	cf 92       	push	r12
+    1dd6:	df 92       	push	r13
+    1dd8:	ef 92       	push	r14
+    1dda:	ff 92       	push	r15
+    1ddc:	0f 93       	push	r16
+    1dde:	1f 93       	push	r17
+    1de0:	cf 93       	push	r28
+    1de2:	df 93       	push	r29
+    1de4:	6b 01       	movw	r12, r22
+    1de6:	ea 01       	movw	r28, r20
+    1de8:	d8 01       	movw	r26, r16
+    1dea:	fc 01       	movw	r30, r24
+    1dec:	40 81       	ld	r20, Z
+    1dee:	50 e0       	ldi	r21, 0x00	; 0
+    1df0:	40 53       	subi	r20, 0x30	; 48
+    1df2:	51 09       	sbc	r21, r1
+    1df4:	81 81       	ldd	r24, Z+1	; 0x01
+    1df6:	44 0f       	add	r20, r20
+    1df8:	74 2f       	mov	r23, r20
+    1dfa:	77 0f       	add	r23, r23
+    1dfc:	77 0f       	add	r23, r23
+    1dfe:	47 0f       	add	r20, r23
+    1e00:	74 2f       	mov	r23, r20
+    1e02:	78 0f       	add	r23, r24
+    1e04:	70 53       	subi	r23, 0x30	; 48
+    1e06:	f6 01       	movw	r30, r12
+    1e08:	80 81       	ld	r24, Z
+    1e0a:	90 e0       	ldi	r25, 0x00	; 0
+    1e0c:	c0 97       	sbiw	r24, 0x30	; 48
+    1e0e:	91 81       	ldd	r25, Z+1	; 0x01
+    1e10:	88 0f       	add	r24, r24
+    1e12:	58 2f       	mov	r21, r24
+    1e14:	55 0f       	add	r21, r21
+    1e16:	55 0f       	add	r21, r21
+    1e18:	85 0f       	add	r24, r21
+    1e1a:	58 2f       	mov	r21, r24
+    1e1c:	59 0f       	add	r21, r25
+    1e1e:	50 53       	subi	r21, 0x30	; 48
+    1e20:	88 81       	ld	r24, Y
+    1e22:	90 e0       	ldi	r25, 0x00	; 0
+    1e24:	c0 97       	sbiw	r24, 0x30	; 48
+    1e26:	99 81       	ldd	r25, Y+1	; 0x01
+    1e28:	88 0f       	add	r24, r24
+    1e2a:	48 2f       	mov	r20, r24
+    1e2c:	44 0f       	add	r20, r20
+    1e2e:	44 0f       	add	r20, r20
+    1e30:	84 0f       	add	r24, r20
+    1e32:	48 2f       	mov	r20, r24
+    1e34:	49 0f       	add	r20, r25
+    1e36:	40 53       	subi	r20, 0x30	; 48
+    1e38:	8c 91       	ld	r24, X
     1e3a:	90 e0       	ldi	r25, 0x00	; 0
     1e3c:	c0 97       	sbiw	r24, 0x30	; 48
-    1e3e:	91 81       	ldd	r25, Z+1	; 0x01
-    1e40:	88 0f       	add	r24, r24
-    1e42:	28 2f       	mov	r18, r24
-    1e44:	22 0f       	add	r18, r18
-    1e46:	22 0f       	add	r18, r18
-    1e48:	82 0f       	add	r24, r18
-    1e4a:	89 0f       	add	r24, r25
-    1e4c:	20 ed       	ldi	r18, 0xD0	; 208
-    1e4e:	28 0f       	add	r18, r24
-    1e50:	f7 01       	movw	r30, r14
-    1e52:	80 81       	ld	r24, Z
-    1e54:	90 e0       	ldi	r25, 0x00	; 0
-    1e56:	c0 97       	sbiw	r24, 0x30	; 48
-    1e58:	91 81       	ldd	r25, Z+1	; 0x01
-    1e5a:	88 0f       	add	r24, r24
-    1e5c:	38 2f       	mov	r19, r24
-    1e5e:	33 0f       	add	r19, r19
-    1e60:	33 0f       	add	r19, r19
-    1e62:	83 0f       	add	r24, r19
-    1e64:	89 0f       	add	r24, r25
-    1e66:	80 53       	subi	r24, 0x30	; 48
-    1e68:	44 36       	cpi	r20, 0x64	; 100
-    1e6a:	70 f5       	brcc	.+92     	; 0x1ec8 <changeDate+0x110>
-    1e6c:	5d 30       	cpi	r21, 0x0D	; 13
-    1e6e:	70 f5       	brcc	.+92     	; 0x1ecc <changeDate+0x114>
-    1e70:	70 32       	cpi	r23, 0x20	; 32
-    1e72:	70 f5       	brcc	.+92     	; 0x1ed0 <changeDate+0x118>
-    1e74:	7d 31       	cpi	r23, 0x1D	; 29
-    1e76:	40 f0       	brcs	.+16     	; 0x1e88 <changeDate+0xd0>
-    1e78:	52 30       	cpi	r21, 0x02	; 2
-    1e7a:	31 f4       	brne	.+12     	; 0x1e88 <changeDate+0xd0>
-    1e7c:	94 2f       	mov	r25, r20
-    1e7e:	93 70       	andi	r25, 0x03	; 3
-    1e80:	49 f5       	brne	.+82     	; 0x1ed4 <changeDate+0x11c>
-    1e82:	7d 31       	cpi	r23, 0x1D	; 29
-    1e84:	49 f5       	brne	.+82     	; 0x1ed8 <changeDate+0x120>
-    1e86:	0c c0       	rjmp	.+24     	; 0x1ea0 <changeDate+0xe8>
-    1e88:	7f 31       	cpi	r23, 0x1F	; 31
-    1e8a:	51 f4       	brne	.+20     	; 0x1ea0 <changeDate+0xe8>
-    1e8c:	56 30       	cpi	r21, 0x06	; 6
-    1e8e:	31 f1       	breq	.+76     	; 0x1edc <changeDate+0x124>
-    1e90:	18 f4       	brcc	.+6      	; 0x1e98 <changeDate+0xe0>
-    1e92:	54 30       	cpi	r21, 0x04	; 4
-    1e94:	29 f4       	brne	.+10     	; 0x1ea0 <changeDate+0xe8>
-    1e96:	22 c0       	rjmp	.+68     	; 0x1edc <changeDate+0x124>
-    1e98:	59 30       	cpi	r21, 0x09	; 9
-    1e9a:	01 f1       	breq	.+64     	; 0x1edc <changeDate+0x124>
-    1e9c:	5b 30       	cpi	r21, 0x0B	; 11
-    1e9e:	f1 f0       	breq	.+60     	; 0x1edc <changeDate+0x124>
-    1ea0:	8c 33       	cpi	r24, 0x3C	; 60
-    1ea2:	f0 f4       	brcc	.+60     	; 0x1ee0 <changeDate+0x128>
-    1ea4:	6c 33       	cpi	r22, 0x3C	; 60
-    1ea6:	f0 f4       	brcc	.+60     	; 0x1ee4 <changeDate+0x12c>
-    1ea8:	28 31       	cpi	r18, 0x18	; 24
-    1eaa:	f0 f4       	brcc	.+60     	; 0x1ee8 <changeDate+0x130>
-    1eac:	70 93 8a 04 	sts	0x048A, r23	; 0x80048a <dia>
-    1eb0:	50 93 89 04 	sts	0x0489, r21	; 0x800489 <mes>
-    1eb4:	40 93 88 04 	sts	0x0488, r20	; 0x800488 <__data_end>
-    1eb8:	20 93 8d 04 	sts	0x048D, r18	; 0x80048d <horas>
-    1ebc:	60 93 8c 04 	sts	0x048C, r22	; 0x80048c <minutos>
-    1ec0:	80 93 8b 04 	sts	0x048B, r24	; 0x80048b <segundos>
-    1ec4:	81 e0       	ldi	r24, 0x01	; 1
-    1ec6:	11 c0       	rjmp	.+34     	; 0x1eea <changeDate+0x132>
-    1ec8:	80 e0       	ldi	r24, 0x00	; 0
-    1eca:	0f c0       	rjmp	.+30     	; 0x1eea <changeDate+0x132>
-    1ecc:	80 e0       	ldi	r24, 0x00	; 0
-    1ece:	0d c0       	rjmp	.+26     	; 0x1eea <changeDate+0x132>
-    1ed0:	80 e0       	ldi	r24, 0x00	; 0
-    1ed2:	0b c0       	rjmp	.+22     	; 0x1eea <changeDate+0x132>
-    1ed4:	80 e0       	ldi	r24, 0x00	; 0
-    1ed6:	09 c0       	rjmp	.+18     	; 0x1eea <changeDate+0x132>
-    1ed8:	80 e0       	ldi	r24, 0x00	; 0
-    1eda:	07 c0       	rjmp	.+14     	; 0x1eea <changeDate+0x132>
-    1edc:	80 e0       	ldi	r24, 0x00	; 0
-    1ede:	05 c0       	rjmp	.+10     	; 0x1eea <changeDate+0x132>
-    1ee0:	80 e0       	ldi	r24, 0x00	; 0
-    1ee2:	03 c0       	rjmp	.+6      	; 0x1eea <changeDate+0x132>
+    1e3e:	11 96       	adiw	r26, 0x01	; 1
+    1e40:	9c 91       	ld	r25, X
+    1e42:	88 0f       	add	r24, r24
+    1e44:	68 2f       	mov	r22, r24
+    1e46:	66 0f       	add	r22, r22
+    1e48:	66 0f       	add	r22, r22
+    1e4a:	86 0f       	add	r24, r22
+    1e4c:	89 0f       	add	r24, r25
+    1e4e:	60 ed       	ldi	r22, 0xD0	; 208
+    1e50:	68 0f       	add	r22, r24
+    1e52:	f9 01       	movw	r30, r18
+    1e54:	80 81       	ld	r24, Z
+    1e56:	90 e0       	ldi	r25, 0x00	; 0
+    1e58:	c0 97       	sbiw	r24, 0x30	; 48
+    1e5a:	91 81       	ldd	r25, Z+1	; 0x01
+    1e5c:	88 0f       	add	r24, r24
+    1e5e:	28 2f       	mov	r18, r24
+    1e60:	22 0f       	add	r18, r18
+    1e62:	22 0f       	add	r18, r18
+    1e64:	82 0f       	add	r24, r18
+    1e66:	89 0f       	add	r24, r25
+    1e68:	20 ed       	ldi	r18, 0xD0	; 208
+    1e6a:	28 0f       	add	r18, r24
+    1e6c:	f7 01       	movw	r30, r14
+    1e6e:	80 81       	ld	r24, Z
+    1e70:	90 e0       	ldi	r25, 0x00	; 0
+    1e72:	c0 97       	sbiw	r24, 0x30	; 48
+    1e74:	91 81       	ldd	r25, Z+1	; 0x01
+    1e76:	88 0f       	add	r24, r24
+    1e78:	38 2f       	mov	r19, r24
+    1e7a:	33 0f       	add	r19, r19
+    1e7c:	33 0f       	add	r19, r19
+    1e7e:	83 0f       	add	r24, r19
+    1e80:	89 0f       	add	r24, r25
+    1e82:	80 53       	subi	r24, 0x30	; 48
+    1e84:	44 36       	cpi	r20, 0x64	; 100
+    1e86:	70 f5       	brcc	.+92     	; 0x1ee4 <changeDate+0x110>
+    1e88:	5d 30       	cpi	r21, 0x0D	; 13
+    1e8a:	70 f5       	brcc	.+92     	; 0x1ee8 <changeDate+0x114>
+    1e8c:	70 32       	cpi	r23, 0x20	; 32
+    1e8e:	70 f5       	brcc	.+92     	; 0x1eec <changeDate+0x118>
+    1e90:	7d 31       	cpi	r23, 0x1D	; 29
+    1e92:	40 f0       	brcs	.+16     	; 0x1ea4 <changeDate+0xd0>
+    1e94:	52 30       	cpi	r21, 0x02	; 2
+    1e96:	31 f4       	brne	.+12     	; 0x1ea4 <changeDate+0xd0>
+    1e98:	94 2f       	mov	r25, r20
+    1e9a:	93 70       	andi	r25, 0x03	; 3
+    1e9c:	49 f5       	brne	.+82     	; 0x1ef0 <changeDate+0x11c>
+    1e9e:	7d 31       	cpi	r23, 0x1D	; 29
+    1ea0:	49 f5       	brne	.+82     	; 0x1ef4 <changeDate+0x120>
+    1ea2:	0c c0       	rjmp	.+24     	; 0x1ebc <changeDate+0xe8>
+    1ea4:	7f 31       	cpi	r23, 0x1F	; 31
+    1ea6:	51 f4       	brne	.+20     	; 0x1ebc <changeDate+0xe8>
+    1ea8:	56 30       	cpi	r21, 0x06	; 6
+    1eaa:	31 f1       	breq	.+76     	; 0x1ef8 <changeDate+0x124>
+    1eac:	18 f4       	brcc	.+6      	; 0x1eb4 <changeDate+0xe0>
+    1eae:	54 30       	cpi	r21, 0x04	; 4
+    1eb0:	29 f4       	brne	.+10     	; 0x1ebc <changeDate+0xe8>
+    1eb2:	22 c0       	rjmp	.+68     	; 0x1ef8 <changeDate+0x124>
+    1eb4:	59 30       	cpi	r21, 0x09	; 9
+    1eb6:	01 f1       	breq	.+64     	; 0x1ef8 <changeDate+0x124>
+    1eb8:	5b 30       	cpi	r21, 0x0B	; 11
+    1eba:	f1 f0       	breq	.+60     	; 0x1ef8 <changeDate+0x124>
+    1ebc:	8c 33       	cpi	r24, 0x3C	; 60
+    1ebe:	f0 f4       	brcc	.+60     	; 0x1efc <changeDate+0x128>
+    1ec0:	6c 33       	cpi	r22, 0x3C	; 60
+    1ec2:	f0 f4       	brcc	.+60     	; 0x1f00 <changeDate+0x12c>
+    1ec4:	28 31       	cpi	r18, 0x18	; 24
+    1ec6:	f0 f4       	brcc	.+60     	; 0x1f04 <changeDate+0x130>
+    1ec8:	70 93 8a 04 	sts	0x048A, r23	; 0x80048a <dia>
+    1ecc:	50 93 89 04 	sts	0x0489, r21	; 0x800489 <mes>
+    1ed0:	40 93 88 04 	sts	0x0488, r20	; 0x800488 <__data_end>
+    1ed4:	20 93 8d 04 	sts	0x048D, r18	; 0x80048d <horas>
+    1ed8:	60 93 8c 04 	sts	0x048C, r22	; 0x80048c <minutos>
+    1edc:	80 93 8b 04 	sts	0x048B, r24	; 0x80048b <segundos>
+    1ee0:	81 e0       	ldi	r24, 0x01	; 1
+    1ee2:	11 c0       	rjmp	.+34     	; 0x1f06 <changeDate+0x132>
     1ee4:	80 e0       	ldi	r24, 0x00	; 0
-    1ee6:	01 c0       	rjmp	.+2      	; 0x1eea <changeDate+0x132>
+    1ee6:	0f c0       	rjmp	.+30     	; 0x1f06 <changeDate+0x132>
     1ee8:	80 e0       	ldi	r24, 0x00	; 0
-    1eea:	df 91       	pop	r29
-    1eec:	cf 91       	pop	r28
-    1eee:	1f 91       	pop	r17
-    1ef0:	0f 91       	pop	r16
-    1ef2:	ff 90       	pop	r15
-    1ef4:	ef 90       	pop	r14
-    1ef6:	df 90       	pop	r13
-    1ef8:	cf 90       	pop	r12
-    1efa:	08 95       	ret
+    1eea:	0d c0       	rjmp	.+26     	; 0x1f06 <changeDate+0x132>
+    1eec:	80 e0       	ldi	r24, 0x00	; 0
+    1eee:	0b c0       	rjmp	.+22     	; 0x1f06 <changeDate+0x132>
+    1ef0:	80 e0       	ldi	r24, 0x00	; 0
+    1ef2:	09 c0       	rjmp	.+18     	; 0x1f06 <changeDate+0x132>
+    1ef4:	80 e0       	ldi	r24, 0x00	; 0
+    1ef6:	07 c0       	rjmp	.+14     	; 0x1f06 <changeDate+0x132>
+    1ef8:	80 e0       	ldi	r24, 0x00	; 0
+    1efa:	05 c0       	rjmp	.+10     	; 0x1f06 <changeDate+0x132>
+    1efc:	80 e0       	ldi	r24, 0x00	; 0
+    1efe:	03 c0       	rjmp	.+6      	; 0x1f06 <changeDate+0x132>
+    1f00:	80 e0       	ldi	r24, 0x00	; 0
+    1f02:	01 c0       	rjmp	.+2      	; 0x1f06 <changeDate+0x132>
+    1f04:	80 e0       	ldi	r24, 0x00	; 0
+    1f06:	df 91       	pop	r29
+    1f08:	cf 91       	pop	r28
+    1f0a:	1f 91       	pop	r17
+    1f0c:	0f 91       	pop	r16
+    1f0e:	ff 90       	pop	r15
+    1f10:	ef 90       	pop	r14
+    1f12:	df 90       	pop	r13
+    1f14:	cf 90       	pop	r12
+    1f16:	08 95       	ret
 
-00001efc <modoADM>:
-    1efc:	cf 92       	push	r12
-    1efe:	df 92       	push	r13
-    1f00:	ef 92       	push	r14
-    1f02:	ff 92       	push	r15
-    1f04:	0f 93       	push	r16
-    1f06:	1f 93       	push	r17
-    1f08:	cf 93       	push	r28
-    1f0a:	df 93       	push	r29
-    1f0c:	cd b7       	in	r28, 0x3d	; 61
-    1f0e:	de b7       	in	r29, 0x3e	; 62
-    1f10:	2c 97       	sbiw	r28, 0x0c	; 12
-    1f12:	0f b6       	in	r0, 0x3f	; 63
-    1f14:	f8 94       	cli
-    1f16:	de bf       	out	0x3e, r29	; 62
-    1f18:	0f be       	out	0x3f, r0	; 63
-    1f1a:	cd bf       	out	0x3d, r28	; 61
-    1f1c:	6c 01       	movw	r12, r24
-    1f1e:	fc 01       	movw	r30, r24
-    1f20:	80 81       	ld	r24, Z
-    1f22:	81 11       	cpse	r24, r1
-    1f24:	35 c0       	rjmp	.+106    	; 0x1f90 <modoADM+0x94>
-    1f26:	0e 94 12 0c 	call	0x1824	; 0x1824 <tela_instrucoes_configDiaMesAno>
-    1f2a:	ae 01       	movw	r20, r28
-    1f2c:	49 5f       	subi	r20, 0xF9	; 249
-    1f2e:	5f 4f       	sbci	r21, 0xFF	; 255
-    1f30:	be 01       	movw	r22, r28
-    1f32:	67 5f       	subi	r22, 0xF7	; 247
-    1f34:	7f 4f       	sbci	r23, 0xFF	; 255
-    1f36:	ce 01       	movw	r24, r28
-    1f38:	0b 96       	adiw	r24, 0x0b	; 11
-    1f3a:	0e 94 07 0d 	call	0x1a0e	; 0x1a0e <getDiaMesAno>
-    1f3e:	0e 94 3e 0c 	call	0x187c	; 0x187c <tela_instrucoes_configHoraMinSeg>
-    1f42:	ae 01       	movw	r20, r28
-    1f44:	4f 5f       	subi	r20, 0xFF	; 255
-    1f46:	5f 4f       	sbci	r21, 0xFF	; 255
-    1f48:	be 01       	movw	r22, r28
-    1f4a:	6d 5f       	subi	r22, 0xFD	; 253
-    1f4c:	7f 4f       	sbci	r23, 0xFF	; 255
-    1f4e:	ce 01       	movw	r24, r28
-    1f50:	05 96       	adiw	r24, 0x05	; 5
-    1f52:	0e 94 e8 0d 	call	0x1bd0	; 0x1bd0 <getHoraMinSeg>
-    1f56:	ce 01       	movw	r24, r28
-    1f58:	01 96       	adiw	r24, 0x01	; 1
-    1f5a:	7c 01       	movw	r14, r24
-    1f5c:	8e 01       	movw	r16, r28
-    1f5e:	0d 5f       	subi	r16, 0xFD	; 253
-    1f60:	1f 4f       	sbci	r17, 0xFF	; 255
-    1f62:	9e 01       	movw	r18, r28
-    1f64:	2b 5f       	subi	r18, 0xFB	; 251
-    1f66:	3f 4f       	sbci	r19, 0xFF	; 255
-    1f68:	ae 01       	movw	r20, r28
-    1f6a:	49 5f       	subi	r20, 0xF9	; 249
-    1f6c:	5f 4f       	sbci	r21, 0xFF	; 255
-    1f6e:	be 01       	movw	r22, r28
-    1f70:	67 5f       	subi	r22, 0xF7	; 247
-    1f72:	7f 4f       	sbci	r23, 0xFF	; 255
-    1f74:	0a 96       	adiw	r24, 0x0a	; 10
-    1f76:	0e 94 dc 0e 	call	0x1db8	; 0x1db8 <changeDate>
-    1f7a:	88 23       	and	r24, r24
-    1f7c:	19 f0       	breq	.+6      	; 0x1f84 <modoADM+0x88>
-    1f7e:	0e 94 6a 0c 	call	0x18d4	; 0x18d4 <tela_operacaoConcluida>
-    1f82:	02 c0       	rjmp	.+4      	; 0x1f88 <modoADM+0x8c>
-    1f84:	0e 94 85 0c 	call	0x190a	; 0x190a <tela_dataInvalida>
-    1f88:	89 e1       	ldi	r24, 0x19	; 25
-    1f8a:	f6 01       	movw	r30, r12
-    1f8c:	80 83       	st	Z, r24
-    1f8e:	33 c0       	rjmp	.+102    	; 0x1ff6 <modoADM+0xfa>
-    1f90:	81 30       	cpi	r24, 0x01	; 1
-    1f92:	89 f1       	breq	.+98     	; 0x1ff6 <modoADM+0xfa>
-    1f94:	82 30       	cpi	r24, 0x02	; 2
-    1f96:	51 f5       	brne	.+84     	; 0x1fec <modoADM+0xf0>
-    1f98:	0e 94 ce 0b 	call	0x179c	; 0x179c <tela_instrucoes_configOper>
-    1f9c:	0e 94 d8 0c 	call	0x19b0	; 0x19b0 <tela_status_oper>
-    1fa0:	89 e1       	ldi	r24, 0x19	; 25
-    1fa2:	f6 01       	movw	r30, r12
-    1fa4:	80 83       	st	Z, r24
-    1fa6:	04 c0       	rjmp	.+8      	; 0x1fb0 <modoADM+0xb4>
-    1fa8:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    1fac:	f6 01       	movw	r30, r12
-    1fae:	80 83       	st	Z, r24
-    1fb0:	f6 01       	movw	r30, r12
-    1fb2:	80 81       	ld	r24, Z
-    1fb4:	89 31       	cpi	r24, 0x19	; 25
-    1fb6:	c1 f3       	breq	.-16     	; 0x1fa8 <modoADM+0xac>
-    1fb8:	82 30       	cpi	r24, 0x02	; 2
-    1fba:	20 f4       	brcc	.+8      	; 0x1fc4 <modoADM+0xc8>
-    1fbc:	c6 01       	movw	r24, r12
-    1fbe:	0e 94 c2 0c 	call	0x1984	; 0x1984 <mudarStatusOper>
-    1fc2:	10 c0       	rjmp	.+32     	; 0x1fe4 <modoADM+0xe8>
-    1fc4:	83 e0       	ldi	r24, 0x03	; 3
-    1fc6:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    1fca:	83 e6       	ldi	r24, 0x63	; 99
-    1fcc:	94 e0       	ldi	r25, 0x04	; 4
-    1fce:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1fd2:	ff ef       	ldi	r31, 0xFF	; 255
-    1fd4:	23 ed       	ldi	r18, 0xD3	; 211
-    1fd6:	80 e3       	ldi	r24, 0x30	; 48
-    1fd8:	f1 50       	subi	r31, 0x01	; 1
-    1fda:	20 40       	sbci	r18, 0x00	; 0
-    1fdc:	80 40       	sbci	r24, 0x00	; 0
-    1fde:	e1 f7       	brne	.-8      	; 0x1fd8 <modoADM+0xdc>
-    1fe0:	00 c0       	rjmp	.+0      	; 0x1fe2 <modoADM+0xe6>
-    1fe2:	00 00       	nop
-    1fe4:	89 e1       	ldi	r24, 0x19	; 25
-    1fe6:	f6 01       	movw	r30, r12
-    1fe8:	80 83       	st	Z, r24
-    1fea:	05 c0       	rjmp	.+10     	; 0x1ff6 <modoADM+0xfa>
-    1fec:	83 30       	cpi	r24, 0x03	; 3
-    1fee:	19 f4       	brne	.+6      	; 0x1ff6 <modoADM+0xfa>
-    1ff0:	89 e1       	ldi	r24, 0x19	; 25
-    1ff2:	f6 01       	movw	r30, r12
-    1ff4:	80 83       	st	Z, r24
-    1ff6:	2c 96       	adiw	r28, 0x0c	; 12
-    1ff8:	0f b6       	in	r0, 0x3f	; 63
-    1ffa:	f8 94       	cli
-    1ffc:	de bf       	out	0x3e, r29	; 62
-    1ffe:	0f be       	out	0x3f, r0	; 63
-    2000:	cd bf       	out	0x3d, r28	; 61
-    2002:	df 91       	pop	r29
-    2004:	cf 91       	pop	r28
-    2006:	1f 91       	pop	r17
-    2008:	0f 91       	pop	r16
-    200a:	ff 90       	pop	r15
-    200c:	ef 90       	pop	r14
-    200e:	df 90       	pop	r13
-    2010:	cf 90       	pop	r12
-    2012:	08 95       	ret
+00001f18 <modoADM>:
+    1f18:	8f 92       	push	r8
+    1f1a:	9f 92       	push	r9
+    1f1c:	af 92       	push	r10
+    1f1e:	bf 92       	push	r11
+    1f20:	df 92       	push	r13
+    1f22:	ef 92       	push	r14
+    1f24:	ff 92       	push	r15
+    1f26:	0f 93       	push	r16
+    1f28:	1f 93       	push	r17
+    1f2a:	cf 93       	push	r28
+    1f2c:	df 93       	push	r29
+    1f2e:	cd b7       	in	r28, 0x3d	; 61
+    1f30:	de b7       	in	r29, 0x3e	; 62
+    1f32:	2c 97       	sbiw	r28, 0x0c	; 12
+    1f34:	0f b6       	in	r0, 0x3f	; 63
+    1f36:	f8 94       	cli
+    1f38:	de bf       	out	0x3e, r29	; 62
+    1f3a:	0f be       	out	0x3f, r0	; 63
+    1f3c:	cd bf       	out	0x3d, r28	; 61
+    1f3e:	4c 01       	movw	r8, r24
+    1f40:	fc 01       	movw	r30, r24
+    1f42:	80 81       	ld	r24, Z
+    1f44:	88 23       	and	r24, r24
+    1f46:	09 f4       	brne	.+2      	; 0x1f4a <modoADM+0x32>
+    1f48:	53 c0       	rjmp	.+166    	; 0x1ff0 <modoADM+0xd8>
+    1f4a:	5e c0       	rjmp	.+188    	; 0x2008 <modoADM+0xf0>
+    1f4c:	0e 94 12 0c 	call	0x1824	; 0x1824 <tela_instrucoes_configDiaMesAno>
+    1f50:	ae 01       	movw	r20, r28
+    1f52:	49 5f       	subi	r20, 0xF9	; 249
+    1f54:	5f 4f       	sbci	r21, 0xFF	; 255
+    1f56:	be 01       	movw	r22, r28
+    1f58:	67 5f       	subi	r22, 0xF7	; 247
+    1f5a:	7f 4f       	sbci	r23, 0xFF	; 255
+    1f5c:	ce 01       	movw	r24, r28
+    1f5e:	0b 96       	adiw	r24, 0x0b	; 11
+    1f60:	0e 94 07 0d 	call	0x1a0e	; 0x1a0e <getDiaMesAno>
+    1f64:	d8 2e       	mov	r13, r24
+    1f66:	88 23       	and	r24, r24
+    1f68:	29 f1       	breq	.+74     	; 0x1fb4 <modoADM+0x9c>
+    1f6a:	ff ef       	ldi	r31, 0xFF	; 255
+    1f6c:	af 1a       	sub	r10, r31
+    1f6e:	bf 0a       	sbc	r11, r31
+    1f70:	0e 94 3e 0c 	call	0x187c	; 0x187c <tela_instrucoes_configHoraMinSeg>
+    1f74:	ae 01       	movw	r20, r28
+    1f76:	4f 5f       	subi	r20, 0xFF	; 255
+    1f78:	5f 4f       	sbci	r21, 0xFF	; 255
+    1f7a:	be 01       	movw	r22, r28
+    1f7c:	6d 5f       	subi	r22, 0xFD	; 253
+    1f7e:	7f 4f       	sbci	r23, 0xFF	; 255
+    1f80:	ce 01       	movw	r24, r28
+    1f82:	05 96       	adiw	r24, 0x05	; 5
+    1f84:	0e 94 ef 0d 	call	0x1bde	; 0x1bde <getHoraMinSeg>
+    1f88:	d8 2e       	mov	r13, r24
+    1f8a:	88 23       	and	r24, r24
+    1f8c:	c1 f0       	breq	.+48     	; 0x1fbe <modoADM+0xa6>
+    1f8e:	ce 01       	movw	r24, r28
+    1f90:	01 96       	adiw	r24, 0x01	; 1
+    1f92:	7c 01       	movw	r14, r24
+    1f94:	8e 01       	movw	r16, r28
+    1f96:	0d 5f       	subi	r16, 0xFD	; 253
+    1f98:	1f 4f       	sbci	r17, 0xFF	; 255
+    1f9a:	9e 01       	movw	r18, r28
+    1f9c:	2b 5f       	subi	r18, 0xFB	; 251
+    1f9e:	3f 4f       	sbci	r19, 0xFF	; 255
+    1fa0:	ae 01       	movw	r20, r28
+    1fa2:	49 5f       	subi	r20, 0xF9	; 249
+    1fa4:	5f 4f       	sbci	r21, 0xFF	; 255
+    1fa6:	be 01       	movw	r22, r28
+    1fa8:	67 5f       	subi	r22, 0xF7	; 247
+    1faa:	7f 4f       	sbci	r23, 0xFF	; 255
+    1fac:	0a 96       	adiw	r24, 0x0a	; 10
+    1fae:	0e 94 ea 0e 	call	0x1dd4	; 0x1dd4 <changeDate>
+    1fb2:	06 c0       	rjmp	.+12     	; 0x1fc0 <modoADM+0xa8>
+    1fb4:	80 e0       	ldi	r24, 0x00	; 0
+    1fb6:	aa 24       	eor	r10, r10
+    1fb8:	aa 94       	dec	r10
+    1fba:	ba 2c       	mov	r11, r10
+    1fbc:	01 c0       	rjmp	.+2      	; 0x1fc0 <modoADM+0xa8>
+    1fbe:	80 e0       	ldi	r24, 0x00	; 0
+    1fc0:	88 23       	and	r24, r24
+    1fc2:	29 f0       	breq	.+10     	; 0x1fce <modoADM+0xb6>
+    1fc4:	dd 20       	and	r13, r13
+    1fc6:	19 f0       	breq	.+6      	; 0x1fce <modoADM+0xb6>
+    1fc8:	0e 94 6a 0c 	call	0x18d4	; 0x18d4 <tela_operacaoConcluida>
+    1fcc:	0d c0       	rjmp	.+26     	; 0x1fe8 <modoADM+0xd0>
+    1fce:	dd 20       	and	r13, r13
+    1fd0:	19 f0       	breq	.+6      	; 0x1fd8 <modoADM+0xc0>
+    1fd2:	0e 94 85 0c 	call	0x190a	; 0x190a <tela_dataInvalida>
+    1fd6:	08 c0       	rjmp	.+16     	; 0x1fe8 <modoADM+0xd0>
+    1fd8:	d1 10       	cpse	r13, r1
+    1fda:	06 c0       	rjmp	.+12     	; 0x1fe8 <modoADM+0xd0>
+    1fdc:	9f ef       	ldi	r25, 0xFF	; 255
+    1fde:	a9 16       	cp	r10, r25
+    1fe0:	b9 06       	cpc	r11, r25
+    1fe2:	11 f0       	breq	.+4      	; 0x1fe8 <modoADM+0xd0>
+    1fe4:	a1 2c       	mov	r10, r1
+    1fe6:	b1 2c       	mov	r11, r1
+    1fe8:	89 e1       	ldi	r24, 0x19	; 25
+    1fea:	f4 01       	movw	r30, r8
+    1fec:	80 83       	st	Z, r24
+    1fee:	02 c0       	rjmp	.+4      	; 0x1ff4 <modoADM+0xdc>
+    1ff0:	a1 2c       	mov	r10, r1
+    1ff2:	b1 2c       	mov	r11, r1
+    1ff4:	f2 e0       	ldi	r31, 0x02	; 2
+    1ff6:	af 16       	cp	r10, r31
+    1ff8:	b1 04       	cpc	r11, r1
+    1ffa:	cc f5       	brge	.+114    	; 0x206e <modoADM+0x156>
+    1ffc:	2f ef       	ldi	r18, 0xFF	; 255
+    1ffe:	a2 16       	cp	r10, r18
+    2000:	b2 06       	cpc	r11, r18
+    2002:	09 f0       	breq	.+2      	; 0x2006 <modoADM+0xee>
+    2004:	a3 cf       	rjmp	.-186    	; 0x1f4c <modoADM+0x34>
+    2006:	33 c0       	rjmp	.+102    	; 0x206e <modoADM+0x156>
+    2008:	81 30       	cpi	r24, 0x01	; 1
+    200a:	89 f1       	breq	.+98     	; 0x206e <modoADM+0x156>
+    200c:	82 30       	cpi	r24, 0x02	; 2
+    200e:	51 f5       	brne	.+84     	; 0x2064 <modoADM+0x14c>
+    2010:	0e 94 ce 0b 	call	0x179c	; 0x179c <tela_instrucoes_configOper>
+    2014:	0e 94 d8 0c 	call	0x19b0	; 0x19b0 <tela_status_oper>
+    2018:	89 e1       	ldi	r24, 0x19	; 25
+    201a:	f4 01       	movw	r30, r8
+    201c:	80 83       	st	Z, r24
+    201e:	04 c0       	rjmp	.+8      	; 0x2028 <modoADM+0x110>
+    2020:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    2024:	f4 01       	movw	r30, r8
+    2026:	80 83       	st	Z, r24
+    2028:	f4 01       	movw	r30, r8
+    202a:	80 81       	ld	r24, Z
+    202c:	89 31       	cpi	r24, 0x19	; 25
+    202e:	c1 f3       	breq	.-16     	; 0x2020 <modoADM+0x108>
+    2030:	82 30       	cpi	r24, 0x02	; 2
+    2032:	20 f4       	brcc	.+8      	; 0x203c <modoADM+0x124>
+    2034:	c4 01       	movw	r24, r8
+    2036:	0e 94 c2 0c 	call	0x1984	; 0x1984 <mudarStatusOper>
+    203a:	10 c0       	rjmp	.+32     	; 0x205c <modoADM+0x144>
+    203c:	83 e0       	ldi	r24, 0x03	; 3
+    203e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2042:	83 e6       	ldi	r24, 0x63	; 99
+    2044:	94 e0       	ldi	r25, 0x04	; 4
+    2046:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    204a:	ff ef       	ldi	r31, 0xFF	; 255
+    204c:	23 ed       	ldi	r18, 0xD3	; 211
+    204e:	80 e3       	ldi	r24, 0x30	; 48
+    2050:	f1 50       	subi	r31, 0x01	; 1
+    2052:	20 40       	sbci	r18, 0x00	; 0
+    2054:	80 40       	sbci	r24, 0x00	; 0
+    2056:	e1 f7       	brne	.-8      	; 0x2050 <modoADM+0x138>
+    2058:	00 c0       	rjmp	.+0      	; 0x205a <modoADM+0x142>
+    205a:	00 00       	nop
+    205c:	89 e1       	ldi	r24, 0x19	; 25
+    205e:	f4 01       	movw	r30, r8
+    2060:	80 83       	st	Z, r24
+    2062:	05 c0       	rjmp	.+10     	; 0x206e <modoADM+0x156>
+    2064:	83 30       	cpi	r24, 0x03	; 3
+    2066:	19 f4       	brne	.+6      	; 0x206e <modoADM+0x156>
+    2068:	89 e1       	ldi	r24, 0x19	; 25
+    206a:	f4 01       	movw	r30, r8
+    206c:	80 83       	st	Z, r24
+    206e:	2c 96       	adiw	r28, 0x0c	; 12
+    2070:	0f b6       	in	r0, 0x3f	; 63
+    2072:	f8 94       	cli
+    2074:	de bf       	out	0x3e, r29	; 62
+    2076:	0f be       	out	0x3f, r0	; 63
+    2078:	cd bf       	out	0x3d, r28	; 61
+    207a:	df 91       	pop	r29
+    207c:	cf 91       	pop	r28
+    207e:	1f 91       	pop	r17
+    2080:	0f 91       	pop	r16
+    2082:	ff 90       	pop	r15
+    2084:	ef 90       	pop	r14
+    2086:	df 90       	pop	r13
+    2088:	bf 90       	pop	r11
+    208a:	af 90       	pop	r10
+    208c:	9f 90       	pop	r9
+    208e:	8f 90       	pop	r8
+    2090:	08 95       	ret
 
-00002014 <atualizaMesAno>:
-    2014:	81 e0       	ldi	r24, 0x01	; 1
-    2016:	80 93 8a 04 	sts	0x048A, r24	; 0x80048a <dia>
-    201a:	80 91 89 04 	lds	r24, 0x0489	; 0x800489 <mes>
-    201e:	8f 5f       	subi	r24, 0xFF	; 255
-    2020:	80 93 89 04 	sts	0x0489, r24	; 0x800489 <mes>
-    2024:	8d 30       	cpi	r24, 0x0D	; 13
-    2026:	61 f4       	brne	.+24     	; 0x2040 <atualizaMesAno+0x2c>
-    2028:	81 e0       	ldi	r24, 0x01	; 1
-    202a:	80 93 89 04 	sts	0x0489, r24	; 0x800489 <mes>
-    202e:	80 91 88 04 	lds	r24, 0x0488	; 0x800488 <__data_end>
-    2032:	8f 5f       	subi	r24, 0xFF	; 255
-    2034:	80 93 88 04 	sts	0x0488, r24	; 0x800488 <__data_end>
-    2038:	84 36       	cpi	r24, 0x64	; 100
-    203a:	11 f4       	brne	.+4      	; 0x2040 <atualizaMesAno+0x2c>
-    203c:	10 92 88 04 	sts	0x0488, r1	; 0x800488 <__data_end>
-    2040:	08 95       	ret
+00002092 <atualizaMesAno>:
+    2092:	81 e0       	ldi	r24, 0x01	; 1
+    2094:	80 93 8a 04 	sts	0x048A, r24	; 0x80048a <dia>
+    2098:	80 91 89 04 	lds	r24, 0x0489	; 0x800489 <mes>
+    209c:	8f 5f       	subi	r24, 0xFF	; 255
+    209e:	80 93 89 04 	sts	0x0489, r24	; 0x800489 <mes>
+    20a2:	8d 30       	cpi	r24, 0x0D	; 13
+    20a4:	61 f4       	brne	.+24     	; 0x20be <atualizaMesAno+0x2c>
+    20a6:	81 e0       	ldi	r24, 0x01	; 1
+    20a8:	80 93 89 04 	sts	0x0489, r24	; 0x800489 <mes>
+    20ac:	80 91 88 04 	lds	r24, 0x0488	; 0x800488 <__data_end>
+    20b0:	8f 5f       	subi	r24, 0xFF	; 255
+    20b2:	80 93 88 04 	sts	0x0488, r24	; 0x800488 <__data_end>
+    20b6:	84 36       	cpi	r24, 0x64	; 100
+    20b8:	11 f4       	brne	.+4      	; 0x20be <atualizaMesAno+0x2c>
+    20ba:	10 92 88 04 	sts	0x0488, r1	; 0x800488 <__data_end>
+    20be:	08 95       	ret
 
-00002042 <updateDate>:
-    2042:	80 91 8b 04 	lds	r24, 0x048B	; 0x80048b <segundos>
-    2046:	8f 5f       	subi	r24, 0xFF	; 255
-    2048:	80 93 8b 04 	sts	0x048B, r24	; 0x80048b <segundos>
-    204c:	8c 33       	cpi	r24, 0x3C	; 60
-    204e:	39 f4       	brne	.+14     	; 0x205e <updateDate+0x1c>
-    2050:	10 92 8b 04 	sts	0x048B, r1	; 0x80048b <segundos>
-    2054:	80 91 8c 04 	lds	r24, 0x048C	; 0x80048c <minutos>
-    2058:	8f 5f       	subi	r24, 0xFF	; 255
-    205a:	80 93 8c 04 	sts	0x048C, r24	; 0x80048c <minutos>
-    205e:	80 91 8c 04 	lds	r24, 0x048C	; 0x80048c <minutos>
-    2062:	8c 33       	cpi	r24, 0x3C	; 60
-    2064:	39 f4       	brne	.+14     	; 0x2074 <updateDate+0x32>
-    2066:	10 92 8c 04 	sts	0x048C, r1	; 0x80048c <minutos>
-    206a:	80 91 8d 04 	lds	r24, 0x048D	; 0x80048d <horas>
-    206e:	8f 5f       	subi	r24, 0xFF	; 255
-    2070:	80 93 8d 04 	sts	0x048D, r24	; 0x80048d <horas>
-    2074:	80 91 8d 04 	lds	r24, 0x048D	; 0x80048d <horas>
-    2078:	88 31       	cpi	r24, 0x18	; 24
-    207a:	41 f5       	brne	.+80     	; 0x20cc <updateDate+0x8a>
-    207c:	10 92 8d 04 	sts	0x048D, r1	; 0x80048d <horas>
-    2080:	20 91 8a 04 	lds	r18, 0x048A	; 0x80048a <dia>
-    2084:	2f 5f       	subi	r18, 0xFF	; 255
-    2086:	20 93 8a 04 	sts	0x048A, r18	; 0x80048a <dia>
-    208a:	e0 91 89 04 	lds	r30, 0x0489	; 0x800489 <mes>
-    208e:	8e 2f       	mov	r24, r30
-    2090:	90 e0       	ldi	r25, 0x00	; 0
-    2092:	fc 01       	movw	r30, r24
-    2094:	31 97       	sbiw	r30, 0x01	; 1
-    2096:	ec 30       	cpi	r30, 0x0C	; 12
-    2098:	f1 05       	cpc	r31, r1
-    209a:	a0 f4       	brcc	.+40     	; 0x20c4 <updateDate+0x82>
-    209c:	e0 5c       	subi	r30, 0xC0	; 192
-    209e:	ff 4f       	sbci	r31, 0xFF	; 255
-    20a0:	0c 94 86 11 	jmp	0x230c	; 0x230c <__tablejump2__>
-    20a4:	20 32       	cpi	r18, 0x20	; 32
-    20a6:	91 f4       	brne	.+36     	; 0x20cc <updateDate+0x8a>
-    20a8:	0e 94 0a 10 	call	0x2014	; 0x2014 <atualizaMesAno>
-    20ac:	08 95       	ret
-    20ae:	2d 31       	cpi	r18, 0x1D	; 29
-    20b0:	21 f4       	brne	.+8      	; 0x20ba <updateDate+0x78>
-    20b2:	80 91 88 04 	lds	r24, 0x0488	; 0x800488 <__data_end>
-    20b6:	83 70       	andi	r24, 0x03	; 3
-    20b8:	11 f4       	brne	.+4      	; 0x20be <updateDate+0x7c>
-    20ba:	2e 31       	cpi	r18, 0x1E	; 30
-    20bc:	39 f4       	brne	.+14     	; 0x20cc <updateDate+0x8a>
-    20be:	0e 94 0a 10 	call	0x2014	; 0x2014 <atualizaMesAno>
-    20c2:	08 95       	ret
-    20c4:	2f 31       	cpi	r18, 0x1F	; 31
-    20c6:	11 f4       	brne	.+4      	; 0x20cc <updateDate+0x8a>
-    20c8:	0e 94 0a 10 	call	0x2014	; 0x2014 <atualizaMesAno>
-    20cc:	08 95       	ret
+000020c0 <updateDate>:
+    20c0:	80 91 8b 04 	lds	r24, 0x048B	; 0x80048b <segundos>
+    20c4:	8f 5f       	subi	r24, 0xFF	; 255
+    20c6:	80 93 8b 04 	sts	0x048B, r24	; 0x80048b <segundos>
+    20ca:	8c 33       	cpi	r24, 0x3C	; 60
+    20cc:	39 f4       	brne	.+14     	; 0x20dc <updateDate+0x1c>
+    20ce:	10 92 8b 04 	sts	0x048B, r1	; 0x80048b <segundos>
+    20d2:	80 91 8c 04 	lds	r24, 0x048C	; 0x80048c <minutos>
+    20d6:	8f 5f       	subi	r24, 0xFF	; 255
+    20d8:	80 93 8c 04 	sts	0x048C, r24	; 0x80048c <minutos>
+    20dc:	80 91 8c 04 	lds	r24, 0x048C	; 0x80048c <minutos>
+    20e0:	8c 33       	cpi	r24, 0x3C	; 60
+    20e2:	39 f4       	brne	.+14     	; 0x20f2 <updateDate+0x32>
+    20e4:	10 92 8c 04 	sts	0x048C, r1	; 0x80048c <minutos>
+    20e8:	80 91 8d 04 	lds	r24, 0x048D	; 0x80048d <horas>
+    20ec:	8f 5f       	subi	r24, 0xFF	; 255
+    20ee:	80 93 8d 04 	sts	0x048D, r24	; 0x80048d <horas>
+    20f2:	80 91 8d 04 	lds	r24, 0x048D	; 0x80048d <horas>
+    20f6:	88 31       	cpi	r24, 0x18	; 24
+    20f8:	41 f5       	brne	.+80     	; 0x214a <updateDate+0x8a>
+    20fa:	10 92 8d 04 	sts	0x048D, r1	; 0x80048d <horas>
+    20fe:	20 91 8a 04 	lds	r18, 0x048A	; 0x80048a <dia>
+    2102:	2f 5f       	subi	r18, 0xFF	; 255
+    2104:	20 93 8a 04 	sts	0x048A, r18	; 0x80048a <dia>
+    2108:	e0 91 89 04 	lds	r30, 0x0489	; 0x800489 <mes>
+    210c:	8e 2f       	mov	r24, r30
+    210e:	90 e0       	ldi	r25, 0x00	; 0
+    2110:	fc 01       	movw	r30, r24
+    2112:	31 97       	sbiw	r30, 0x01	; 1
+    2114:	ec 30       	cpi	r30, 0x0C	; 12
+    2116:	f1 05       	cpc	r31, r1
+    2118:	a0 f4       	brcc	.+40     	; 0x2142 <updateDate+0x82>
+    211a:	e0 5c       	subi	r30, 0xC0	; 192
+    211c:	ff 4f       	sbci	r31, 0xFF	; 255
+    211e:	0c 94 c5 11 	jmp	0x238a	; 0x238a <__tablejump2__>
+    2122:	20 32       	cpi	r18, 0x20	; 32
+    2124:	91 f4       	brne	.+36     	; 0x214a <updateDate+0x8a>
+    2126:	0e 94 49 10 	call	0x2092	; 0x2092 <atualizaMesAno>
+    212a:	08 95       	ret
+    212c:	2d 31       	cpi	r18, 0x1D	; 29
+    212e:	21 f4       	brne	.+8      	; 0x2138 <updateDate+0x78>
+    2130:	80 91 88 04 	lds	r24, 0x0488	; 0x800488 <__data_end>
+    2134:	83 70       	andi	r24, 0x03	; 3
+    2136:	11 f4       	brne	.+4      	; 0x213c <updateDate+0x7c>
+    2138:	2e 31       	cpi	r18, 0x1E	; 30
+    213a:	39 f4       	brne	.+14     	; 0x214a <updateDate+0x8a>
+    213c:	0e 94 49 10 	call	0x2092	; 0x2092 <atualizaMesAno>
+    2140:	08 95       	ret
+    2142:	2f 31       	cpi	r18, 0x1F	; 31
+    2144:	11 f4       	brne	.+4      	; 0x214a <updateDate+0x8a>
+    2146:	0e 94 49 10 	call	0x2092	; 0x2092 <atualizaMesAno>
+    214a:	08 95       	ret
 
-000020ce <__vector_11>:
+0000214c <__vector_11>:
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
 //////////////////////////////////////////////////////////////////////////
 
 
 ISR(TIMER1_COMPA_vect){
-    20ce:	1f 92       	push	r1
-    20d0:	0f 92       	push	r0
-    20d2:	0f b6       	in	r0, 0x3f	; 63
-    20d4:	0f 92       	push	r0
-    20d6:	11 24       	eor	r1, r1
-    20d8:	2f 93       	push	r18
-    20da:	3f 93       	push	r19
-    20dc:	4f 93       	push	r20
-    20de:	5f 93       	push	r21
-    20e0:	6f 93       	push	r22
-    20e2:	7f 93       	push	r23
-    20e4:	8f 93       	push	r24
-    20e6:	9f 93       	push	r25
-    20e8:	af 93       	push	r26
-    20ea:	bf 93       	push	r27
-    20ec:	ef 93       	push	r30
-    20ee:	ff 93       	push	r31
+    214c:	1f 92       	push	r1
+    214e:	0f 92       	push	r0
+    2150:	0f b6       	in	r0, 0x3f	; 63
+    2152:	0f 92       	push	r0
+    2154:	11 24       	eor	r1, r1
+    2156:	2f 93       	push	r18
+    2158:	3f 93       	push	r19
+    215a:	4f 93       	push	r20
+    215c:	5f 93       	push	r21
+    215e:	6f 93       	push	r22
+    2160:	7f 93       	push	r23
+    2162:	8f 93       	push	r24
+    2164:	9f 93       	push	r25
+    2166:	af 93       	push	r26
+    2168:	bf 93       	push	r27
+    216a:	ef 93       	push	r30
+    216c:	ff 93       	push	r31
 	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
 	contSerial = verificaSerial(contSerial);
-    20f0:	80 91 e9 04 	lds	r24, 0x04E9	; 0x8004e9 <contSerial>
-    20f4:	90 e0       	ldi	r25, 0x00	; 0
-    20f6:	0e 94 c9 03 	call	0x792	; 0x792 <verificaSerial>
-    20fa:	80 93 e9 04 	sts	0x04E9, r24	; 0x8004e9 <contSerial>
+    216e:	80 91 e9 04 	lds	r24, 0x04E9	; 0x8004e9 <contSerial>
+    2172:	90 e0       	ldi	r25, 0x00	; 0
+    2174:	0e 94 c9 03 	call	0x792	; 0x792 <verificaSerial>
+    2178:	80 93 e9 04 	sts	0x04E9, r24	; 0x8004e9 <contSerial>
 
 	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
-    20fe:	88 37       	cpi	r24, 0x78	; 120
-    2100:	31 f4       	brne	.+12     	; 0x210e <__vector_11+0x40>
+    217c:	88 37       	cpi	r24, 0x78	; 120
+    217e:	31 f4       	brne	.+12     	; 0x218c <__vector_11+0x40>
 		contSerial = 0;
-    2102:	10 92 e9 04 	sts	0x04E9, r1	; 0x8004e9 <contSerial>
+    2180:	10 92 e9 04 	sts	0x04E9, r1	; 0x8004e9 <contSerial>
 		PORTC ^= (1 << PORTC4);
-    2106:	98 b1       	in	r25, 0x08	; 8
-    2108:	80 e1       	ldi	r24, 0x10	; 16
-    210a:	89 27       	eor	r24, r25
-    210c:	88 b9       	out	0x08, r24	; 8
+    2184:	98 b1       	in	r25, 0x08	; 8
+    2186:	80 e1       	ldi	r24, 0x10	; 16
+    2188:	89 27       	eor	r24, r25
+    218a:	88 b9       	out	0x08, r24	; 8
 	}
 	
 	if (teclaG == KEY_CONFIRMA)
-    210e:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
-    2112:	8b 30       	cpi	r24, 0x0B	; 11
-    2114:	31 f4       	brne	.+12     	; 0x2122 <__vector_11+0x54>
+    218c:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
+    2190:	8b 30       	cpi	r24, 0x0B	; 11
+    2192:	31 f4       	brne	.+12     	; 0x21a0 <__vector_11+0x54>
 		contTelaOn++;
-    2116:	90 91 ec 04 	lds	r25, 0x04EC	; 0x8004ec <contTelaOn>
-    211a:	9f 5f       	subi	r25, 0xFF	; 255
-    211c:	90 93 ec 04 	sts	0x04EC, r25	; 0x8004ec <contTelaOn>
-    2120:	02 c0       	rjmp	.+4      	; 0x2126 <__vector_11+0x58>
+    2194:	90 91 ec 04 	lds	r25, 0x04EC	; 0x8004ec <contTelaOn>
+    2198:	9f 5f       	subi	r25, 0xFF	; 255
+    219a:	90 93 ec 04 	sts	0x04EC, r25	; 0x8004ec <contTelaOn>
+    219e:	02 c0       	rjmp	.+4      	; 0x21a4 <__vector_11+0x58>
 	else
 		contTelaOn = 0;
-    2122:	10 92 ec 04 	sts	0x04EC, r1	; 0x8004ec <contTelaOn>
+    21a0:	10 92 ec 04 	sts	0x04EC, r1	; 0x8004ec <contTelaOn>
 	
 	if (teclaG == KEY_APAGAR)
-    2126:	89 30       	cpi	r24, 0x09	; 9
-    2128:	31 f4       	brne	.+12     	; 0x2136 <__vector_11+0x68>
+    21a4:	89 30       	cpi	r24, 0x09	; 9
+    21a6:	31 f4       	brne	.+12     	; 0x21b4 <__vector_11+0x68>
 		contTelaOff++;
-    212a:	80 91 eb 04 	lds	r24, 0x04EB	; 0x8004eb <contTelaOff>
-    212e:	8f 5f       	subi	r24, 0xFF	; 255
-    2130:	80 93 eb 04 	sts	0x04EB, r24	; 0x8004eb <contTelaOff>
-    2134:	02 c0       	rjmp	.+4      	; 0x213a <__vector_11+0x6c>
+    21a8:	80 91 eb 04 	lds	r24, 0x04EB	; 0x8004eb <contTelaOff>
+    21ac:	8f 5f       	subi	r24, 0xFF	; 255
+    21ae:	80 93 eb 04 	sts	0x04EB, r24	; 0x8004eb <contTelaOff>
+    21b2:	02 c0       	rjmp	.+4      	; 0x21b8 <__vector_11+0x6c>
 	else
 		contTelaOff = 0;
-    2136:	10 92 eb 04 	sts	0x04EB, r1	; 0x8004eb <contTelaOff>
+    21b4:	10 92 eb 04 	sts	0x04EB, r1	; 0x8004eb <contTelaOff>
 	
 	if(contTelaOn == 3 && telaOnOff==0){ // se for # por 3 segundos e tiver desligada -> liga tela
-    213a:	80 91 ec 04 	lds	r24, 0x04EC	; 0x8004ec <contTelaOn>
-    213e:	83 30       	cpi	r24, 0x03	; 3
-    2140:	61 f4       	brne	.+24     	; 0x215a <__vector_11+0x8c>
-    2142:	80 91 ea 04 	lds	r24, 0x04EA	; 0x8004ea <telaOnOff>
-    2146:	81 11       	cpse	r24, r1
-    2148:	08 c0       	rjmp	.+16     	; 0x215a <__vector_11+0x8c>
+    21b8:	80 91 ec 04 	lds	r24, 0x04EC	; 0x8004ec <contTelaOn>
+    21bc:	83 30       	cpi	r24, 0x03	; 3
+    21be:	61 f4       	brne	.+24     	; 0x21d8 <__vector_11+0x8c>
+    21c0:	80 91 ea 04 	lds	r24, 0x04EA	; 0x8004ea <telaOnOff>
+    21c4:	81 11       	cpse	r24, r1
+    21c6:	08 c0       	rjmp	.+16     	; 0x21d8 <__vector_11+0x8c>
 		writeInstruction(lcd_DisplayOn);
-    214a:	8c e0       	ldi	r24, 0x0C	; 12
-    214c:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    21c8:	8c e0       	ldi	r24, 0x0C	; 12
+    21ca:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 		contTelaOn = 0;
-    2150:	10 92 ec 04 	sts	0x04EC, r1	; 0x8004ec <contTelaOn>
+    21ce:	10 92 ec 04 	sts	0x04EC, r1	; 0x8004ec <contTelaOn>
 		telaOnOff = 1;
-    2154:	81 e0       	ldi	r24, 0x01	; 1
-    2156:	80 93 ea 04 	sts	0x04EA, r24	; 0x8004ea <telaOnOff>
+    21d2:	81 e0       	ldi	r24, 0x01	; 1
+    21d4:	80 93 ea 04 	sts	0x04EA, r24	; 0x8004ea <telaOnOff>
 		
 	}
 	if (contTelaOff == 4 && telaOnOff==1){ //se * por 4 segs e tiver ligada -> desliga
-    215a:	80 91 eb 04 	lds	r24, 0x04EB	; 0x8004eb <contTelaOff>
-    215e:	84 30       	cpi	r24, 0x04	; 4
-    2160:	59 f4       	brne	.+22     	; 0x2178 <__vector_11+0xaa>
-    2162:	80 91 ea 04 	lds	r24, 0x04EA	; 0x8004ea <telaOnOff>
-    2166:	81 30       	cpi	r24, 0x01	; 1
-    2168:	39 f4       	brne	.+14     	; 0x2178 <__vector_11+0xaa>
+    21d8:	80 91 eb 04 	lds	r24, 0x04EB	; 0x8004eb <contTelaOff>
+    21dc:	84 30       	cpi	r24, 0x04	; 4
+    21de:	59 f4       	brne	.+22     	; 0x21f6 <__vector_11+0xaa>
+    21e0:	80 91 ea 04 	lds	r24, 0x04EA	; 0x8004ea <telaOnOff>
+    21e4:	81 30       	cpi	r24, 0x01	; 1
+    21e6:	39 f4       	brne	.+14     	; 0x21f6 <__vector_11+0xaa>
 		writeInstruction(lcd_DisplayOff);
-    216a:	88 e0       	ldi	r24, 0x08	; 8
-    216c:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    21e8:	88 e0       	ldi	r24, 0x08	; 8
+    21ea:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 		contTelaOff = 0;
-    2170:	10 92 eb 04 	sts	0x04EB, r1	; 0x8004eb <contTelaOff>
+    21ee:	10 92 eb 04 	sts	0x04EB, r1	; 0x8004eb <contTelaOff>
 		telaOnOff = 0;
-    2174:	10 92 ea 04 	sts	0x04EA, r1	; 0x8004ea <telaOnOff>
+    21f2:	10 92 ea 04 	sts	0x04EA, r1	; 0x8004ea <telaOnOff>
 	}
 	
 	updateDate();
-    2178:	0e 94 21 10 	call	0x2042	; 0x2042 <updateDate>
+    21f6:	0e 94 60 10 	call	0x20c0	; 0x20c0 <updateDate>
 	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
 									//acho q vamos usar ela no modo adm pra guardar o momento das pendencias 
 								 
 }
-    217c:	ff 91       	pop	r31
-    217e:	ef 91       	pop	r30
-    2180:	bf 91       	pop	r27
-    2182:	af 91       	pop	r26
-    2184:	9f 91       	pop	r25
-    2186:	8f 91       	pop	r24
-    2188:	7f 91       	pop	r23
-    218a:	6f 91       	pop	r22
-    218c:	5f 91       	pop	r21
-    218e:	4f 91       	pop	r20
-    2190:	3f 91       	pop	r19
-    2192:	2f 91       	pop	r18
-    2194:	0f 90       	pop	r0
-    2196:	0f be       	out	0x3f, r0	; 63
-    2198:	0f 90       	pop	r0
-    219a:	1f 90       	pop	r1
-    219c:	18 95       	reti
+    21fa:	ff 91       	pop	r31
+    21fc:	ef 91       	pop	r30
+    21fe:	bf 91       	pop	r27
+    2200:	af 91       	pop	r26
+    2202:	9f 91       	pop	r25
+    2204:	8f 91       	pop	r24
+    2206:	7f 91       	pop	r23
+    2208:	6f 91       	pop	r22
+    220a:	5f 91       	pop	r21
+    220c:	4f 91       	pop	r20
+    220e:	3f 91       	pop	r19
+    2210:	2f 91       	pop	r18
+    2212:	0f 90       	pop	r0
+    2214:	0f be       	out	0x3f, r0	; 63
+    2216:	0f 90       	pop	r0
+    2218:	1f 90       	pop	r1
+    221a:	18 95       	reti
 
-0000219e <setTimer1_UmSeg>:
+0000221c <setTimer1_UmSeg>:
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
 	// Pre scaler de 256 -> 62500Hz logo 62500 contagens para 1 seg
 	
 	TCCR1A = 4; //modo comparação
-    219e:	84 e0       	ldi	r24, 0x04	; 4
-    21a0:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+    221c:	84 e0       	ldi	r24, 0x04	; 4
+    221e:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
 	TCCR1B = 0x4; //pre scaler de 256
-    21a4:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+    2222:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
 	TCNT1 = 0;  //contagem começa do zero
-    21a8:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
-    21ac:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
+    2226:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
+    222a:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
 	OCR1A = 62500; //até onde tem q contar
-    21b0:	84 e2       	ldi	r24, 0x24	; 36
-    21b2:	94 ef       	ldi	r25, 0xF4	; 244
-    21b4:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
-    21b8:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+    222e:	84 e2       	ldi	r24, 0x24	; 36
+    2230:	94 ef       	ldi	r25, 0xF4	; 244
+    2232:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+    2236:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
 	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em 
-    21bc:	ef e6       	ldi	r30, 0x6F	; 111
-    21be:	f0 e0       	ldi	r31, 0x00	; 0
-    21c0:	80 81       	ld	r24, Z
-    21c2:	82 60       	ori	r24, 0x02	; 2
-    21c4:	80 83       	st	Z, r24
+    223a:	ef e6       	ldi	r30, 0x6F	; 111
+    223c:	f0 e0       	ldi	r31, 0x00	; 0
+    223e:	80 81       	ld	r24, Z
+    2240:	82 60       	ori	r24, 0x02	; 2
+    2242:	80 83       	st	Z, r24
 	sei(); // talvez colocar no mais ??
-    21c6:	78 94       	sei
-    21c8:	08 95       	ret
+    2244:	78 94       	sei
+    2246:	08 95       	ret
 
-000021ca <main>:
+00002248 <main>:
 }
 
 int main(){
-    21ca:	cf 93       	push	r28
-    21cc:	df 93       	push	r29
-    21ce:	cd b7       	in	r28, 0x3d	; 61
-    21d0:	de b7       	in	r29, 0x3e	; 62
-    21d2:	2c 97       	sbiw	r28, 0x0c	; 12
-    21d4:	0f b6       	in	r0, 0x3f	; 63
-    21d6:	f8 94       	cli
-    21d8:	de bf       	out	0x3e, r29	; 62
-    21da:	0f be       	out	0x3f, r0	; 63
-    21dc:	cd bf       	out	0x3d, r28	; 61
+    2248:	cf 93       	push	r28
+    224a:	df 93       	push	r29
+    224c:	cd b7       	in	r28, 0x3d	; 61
+    224e:	de b7       	in	r29, 0x3e	; 62
+    2250:	2c 97       	sbiw	r28, 0x0c	; 12
+    2252:	0f b6       	in	r0, 0x3f	; 63
+    2254:	f8 94       	cli
+    2256:	de bf       	out	0x3e, r29	; 62
+    2258:	0f be       	out	0x3f, r0	; 63
+    225a:	cd bf       	out	0x3d, r28	; 61
 	
 	anoZero();							// inicia o relogio
-    21de:	0e 94 cd 0e 	call	0x1d9a	; 0x1d9a <anoZero>
+    225c:	0e 94 db 0e 	call	0x1db6	; 0x1db6 <anoZero>
 	USART_INIT(UBRR);					// inicia serial
-    21e2:	83 e3       	ldi	r24, 0x33	; 51
-    21e4:	90 e0       	ldi	r25, 0x00	; 0
-    21e6:	0e 94 b0 03 	call	0x760	; 0x760 <USART_INIT>
+    2260:	83 e3       	ldi	r24, 0x33	; 51
+    2262:	90 e0       	ldi	r25, 0x00	; 0
+    2264:	0e 94 b0 03 	call	0x760	; 0x760 <USART_INIT>
 	setup_lcd();						// inicia lcd
-    21ea:	0e 94 af 04 	call	0x95e	; 0x95e <setup_lcd>
+    2268:	0e 94 af 04 	call	0x95e	; 0x95e <setup_lcd>
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
-    21ee:	0e 94 cf 10 	call	0x219e	; 0x219e <setTimer1_UmSeg>
+    226c:	0e 94 0e 11 	call	0x221c	; 0x221c <setTimer1_UmSeg>
 
 // 	writeInstruction(lcd_DisplayOff);
 // 	while(telaOnOff==0)
 // 		teclaG = teclaDebouce();
 
 	writeInstruction(lcd_DisplayOn);
-    21f2:	8c e0       	ldi	r24, 0x0C	; 12
-    21f4:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2270:	8c e0       	ldi	r24, 0x0C	; 12
+    2272:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
-    21f8:	0e 94 63 05 	call	0xac6	; 0xac6 <tela_bloqueio_inicial>
+    2276:	0e 94 63 05 	call	0xac6	; 0xac6 <tela_bloqueio_inicial>
 	
 	
 	// inserindo cartões pra teste
 	char cartao_teste[] = {8+48,0+48,0+48,0+48,0+48,0+48};
-    21fc:	86 e0       	ldi	r24, 0x06	; 6
-    21fe:	eb e2       	ldi	r30, 0x2B	; 43
-    2200:	f1 e0       	ldi	r31, 0x01	; 1
-    2202:	de 01       	movw	r26, r28
-    2204:	11 96       	adiw	r26, 0x01	; 1
-    2206:	01 90       	ld	r0, Z+
-    2208:	0d 92       	st	X+, r0
-    220a:	8a 95       	dec	r24
-    220c:	e1 f7       	brne	.-8      	; 0x2206 <main+0x3c>
+    227a:	86 e0       	ldi	r24, 0x06	; 6
+    227c:	eb e2       	ldi	r30, 0x2B	; 43
+    227e:	f1 e0       	ldi	r31, 0x01	; 1
+    2280:	de 01       	movw	r26, r28
+    2282:	11 96       	adiw	r26, 0x01	; 1
+    2284:	01 90       	ld	r0, Z+
+    2286:	0d 92       	st	X+, r0
+    2288:	8a 95       	dec	r24
+    228a:	e1 f7       	brne	.-8      	; 0x2284 <main+0x3c>
 	char cartao_teste_2[] = {0+48,0+48,2+48,0+48,0+48,0+48};
-    220e:	86 e0       	ldi	r24, 0x06	; 6
-    2210:	e1 e3       	ldi	r30, 0x31	; 49
-    2212:	f1 e0       	ldi	r31, 0x01	; 1
-    2214:	de 01       	movw	r26, r28
-    2216:	17 96       	adiw	r26, 0x07	; 7
-    2218:	01 90       	ld	r0, Z+
-    221a:	0d 92       	st	X+, r0
-    221c:	8a 95       	dec	r24
-    221e:	e1 f7       	brne	.-8      	; 0x2218 <main+0x4e>
+    228c:	86 e0       	ldi	r24, 0x06	; 6
+    228e:	e1 e3       	ldi	r30, 0x31	; 49
+    2290:	f1 e0       	ldi	r31, 0x01	; 1
+    2292:	de 01       	movw	r26, r28
+    2294:	17 96       	adiw	r26, 0x07	; 7
+    2296:	01 90       	ld	r0, Z+
+    2298:	0d 92       	st	X+, r0
+    229a:	8a 95       	dec	r24
+    229c:	e1 f7       	brne	.-8      	; 0x2296 <main+0x4e>
 	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
-    2220:	ae 01       	movw	r20, r28
-    2222:	4f 5f       	subi	r20, 0xFF	; 255
-    2224:	5f 4f       	sbci	r21, 0xFF	; 255
-    2226:	62 e7       	ldi	r22, 0x72	; 114
-    2228:	74 e0       	ldi	r23, 0x04	; 4
-    222a:	cb 01       	movw	r24, r22
-    222c:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
+    229e:	ae 01       	movw	r20, r28
+    22a0:	4f 5f       	subi	r20, 0xFF	; 255
+    22a2:	5f 4f       	sbci	r21, 0xFF	; 255
+    22a4:	62 e7       	ldi	r22, 0x72	; 114
+    22a6:	74 e0       	ldi	r23, 0x04	; 4
+    22a8:	cb 01       	movw	r24, r22
+    22aa:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
-    2230:	ae 01       	movw	r20, r28
-    2232:	49 5f       	subi	r20, 0xF9	; 249
-    2234:	5f 4f       	sbci	r21, 0xFF	; 255
-    2236:	69 e7       	ldi	r22, 0x79	; 121
-    2238:	74 e0       	ldi	r23, 0x04	; 4
-    223a:	80 e8       	ldi	r24, 0x80	; 128
-    223c:	94 e0       	ldi	r25, 0x04	; 4
-    223e:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
+    22ae:	ae 01       	movw	r20, r28
+    22b0:	49 5f       	subi	r20, 0xF9	; 249
+    22b2:	5f 4f       	sbci	r21, 0xFF	; 255
+    22b4:	69 e7       	ldi	r22, 0x79	; 121
+    22b6:	74 e0       	ldi	r23, 0x04	; 4
+    22b8:	80 e8       	ldi	r24, 0x80	; 128
+    22ba:	94 e0       	ldi	r25, 0x04	; 4
+    22bc:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
 	anoZero();							// inicia o relogio
 	USART_INIT(UBRR);					// inicia serial
 	setup_lcd();						// inicia lcd
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
 	char loop1 = 1; //para ele agir diferente no 1 loop
-    2242:	01 e0       	ldi	r16, 0x01	; 1
+    22c0:	01 e0       	ldi	r16, 0x01	; 1
 	/////
 	
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		
 		if(loop1){
-    2244:	00 23       	and	r16, r16
-    2246:	41 f0       	breq	.+16     	; 0x2258 <main+0x8e>
+    22c2:	00 23       	and	r16, r16
+    22c4:	41 f0       	breq	.+16     	; 0x22d6 <main+0x8e>
 			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
-    2248:	83 e1       	ldi	r24, 0x13	; 19
-    224a:	91 e0       	ldi	r25, 0x01	; 1
-    224c:	0e 94 36 06 	call	0xc6c	; 0xc6c <login>
-    2250:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
+    22c6:	83 e1       	ldi	r24, 0x13	; 19
+    22c8:	91 e0       	ldi	r25, 0x01	; 1
+    22ca:	0e 94 36 06 	call	0xc6c	; 0xc6c <login>
+    22ce:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
 			loop1 = 0;
-    2254:	00 e0       	ldi	r16, 0x00	; 0
-    2256:	0c c0       	rjmp	.+24     	; 0x2270 <main+0xa6>
+    22d2:	00 e0       	ldi	r16, 0x00	; 0
+    22d4:	0c c0       	rjmp	.+24     	; 0x22ee <main+0xa6>
 		}else{
 			continuar = continuar_modo_atual(&teclaG);
-    2258:	83 e1       	ldi	r24, 0x13	; 19
-    225a:	91 e0       	ldi	r25, 0x01	; 1
-    225c:	0e 94 fb 0b 	call	0x17f6	; 0x17f6 <continuar_modo_atual>
+    22d6:	83 e1       	ldi	r24, 0x13	; 19
+    22d8:	91 e0       	ldi	r25, 0x01	; 1
+    22da:	0e 94 fb 0b 	call	0x17f6	; 0x17f6 <continuar_modo_atual>
 			if(!continuar)
-    2260:	81 11       	cpse	r24, r1
-    2262:	06 c0       	rjmp	.+12     	; 0x2270 <main+0xa6>
+    22de:	81 11       	cpse	r24, r1
+    22e0:	06 c0       	rjmp	.+12     	; 0x22ee <main+0xa6>
 				userIndex = login(&teclaG); //pode mudar o modo adm <-> oper
-    2264:	83 e1       	ldi	r24, 0x13	; 19
-    2266:	91 e0       	ldi	r25, 0x01	; 1
-    2268:	0e 94 36 06 	call	0xc6c	; 0xc6c <login>
-    226c:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
+    22e2:	83 e1       	ldi	r24, 0x13	; 19
+    22e4:	91 e0       	ldi	r25, 0x01	; 1
+    22e6:	0e 94 36 06 	call	0xc6c	; 0xc6c <login>
+    22ea:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
 		}
 		
 		teclaG = TECLA_INVALIDA;
-    2270:	89 e1       	ldi	r24, 0x19	; 25
-    2272:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    22ee:	89 e1       	ldi	r24, 0x19	; 25
+    22f0:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		if(userIndex != 0){
-    2276:	10 91 12 01 	lds	r17, 0x0112	; 0x800112 <userIndex>
-    227a:	11 23       	and	r17, r17
-    227c:	e1 f0       	breq	.+56     	; 0x22b6 <main+0xec>
+    22f4:	10 91 12 01 	lds	r17, 0x0112	; 0x800112 <userIndex>
+    22f8:	11 23       	and	r17, r17
+    22fa:	e1 f0       	breq	.+56     	; 0x2334 <main+0xec>
 			if(getOperStatus(userIndex))
-    227e:	81 2f       	mov	r24, r17
-    2280:	0e 94 01 0d 	call	0x1a02	; 0x1a02 <getOperStatus>
-    2284:	88 23       	and	r24, r24
-    2286:	a1 f0       	breq	.+40     	; 0x22b0 <main+0xe6>
+    22fc:	81 2f       	mov	r24, r17
+    22fe:	0e 94 01 0d 	call	0x1a02	; 0x1a02 <getOperStatus>
+    2302:	88 23       	and	r24, r24
+    2304:	a1 f0       	breq	.+40     	; 0x232e <main+0xe6>
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
-    2288:	83 e0       	ldi	r24, 0x03	; 3
-    228a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2306:	83 e0       	ldi	r24, 0x03	; 3
+    2308:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 					menu_vendas();
-    228e:	0e 94 51 05 	call	0xaa2	; 0xaa2 <menu_vendas>
+    230c:	0e 94 51 05 	call	0xaa2	; 0xaa2 <menu_vendas>
 					while(teclaG+49 > 51){
-    2292:	04 c0       	rjmp	.+8      	; 0x229c <main+0xd2>
+    2310:	04 c0       	rjmp	.+8      	; 0x231a <main+0xd2>
 						teclaG = teclaDebouce();
-    2294:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    2298:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2312:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    2316:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		if(userIndex != 0){
 			if(getOperStatus(userIndex))
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
 					menu_vendas();
 					while(teclaG+49 > 51){
-    229c:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
-    22a0:	90 e0       	ldi	r25, 0x00	; 0
-    22a2:	c1 96       	adiw	r24, 0x31	; 49
-    22a4:	84 33       	cpi	r24, 0x34	; 52
-    22a6:	91 05       	cpc	r25, r1
-    22a8:	ac f7       	brge	.-22     	; 0x2294 <main+0xca>
+    231a:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
+    231e:	90 e0       	ldi	r25, 0x00	; 0
+    2320:	c1 96       	adiw	r24, 0x31	; 49
+    2322:	84 33       	cpi	r24, 0x34	; 52
+    2324:	91 05       	cpc	r25, r1
+    2326:	ac f7       	brge	.-22     	; 0x2312 <main+0xca>
 						teclaG = teclaDebouce();
 					}
 					processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
-    22aa:	0e 94 8b 0b 	call	0x1716	; 0x1716 <processa_venda>
-    22ae:	03 c0       	rjmp	.+6      	; 0x22b6 <main+0xec>
+    2328:	0e 94 8b 0b 	call	0x1716	; 0x1716 <processa_venda>
+    232c:	03 c0       	rjmp	.+6      	; 0x2334 <main+0xec>
 					break;
 				}
 			else{
 				tela_operadorDesabilitado(userIndex);
-    22b0:	81 2f       	mov	r24, r17
-    22b2:	0e 94 a0 0c 	call	0x1940	; 0x1940 <tela_operadorDesabilitado>
+    232e:	81 2f       	mov	r24, r17
+    2330:	0e 94 a0 0c 	call	0x1940	; 0x1940 <tela_operadorDesabilitado>
 				}
 		}
 		
 		if(userIndex == 0){
-    22b6:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <userIndex>
-    22ba:	81 11       	cpse	r24, r1
-    22bc:	c3 cf       	rjmp	.-122    	; 0x2244 <main+0x7a>
+    2334:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <userIndex>
+    2338:	81 11       	cpse	r24, r1
+    233a:	c3 cf       	rjmp	.-122    	; 0x22c2 <main+0x7a>
 			menuADM();
-    22be:	0e 94 9c 0b 	call	0x1738	; 0x1738 <menuADM>
+    233c:	0e 94 9c 0b 	call	0x1738	; 0x1738 <menuADM>
 			teclaG = TECLA_INVALIDA;
-    22c2:	89 e1       	ldi	r24, 0x19	; 25
-    22c4:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2340:	89 e1       	ldi	r24, 0x19	; 25
+    2342:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 			while(teclaG == TECLA_INVALIDA){
-    22c8:	04 c0       	rjmp	.+8      	; 0x22d2 <main+0x108>
+    2346:	04 c0       	rjmp	.+8      	; 0x2350 <main+0x108>
 				teclaG = teclaDebouce();
-    22ca:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    22ce:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2348:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    234c:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		}
 		
 		if(userIndex == 0){
 			menuADM();
 			teclaG = TECLA_INVALIDA;
 			while(teclaG == TECLA_INVALIDA){
-    22d2:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
-    22d6:	89 31       	cpi	r24, 0x19	; 25
-    22d8:	c1 f3       	breq	.-16     	; 0x22ca <main+0x100>
+    2350:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
+    2354:	89 31       	cpi	r24, 0x19	; 25
+    2356:	c1 f3       	breq	.-16     	; 0x2348 <main+0x100>
 				teclaG = teclaDebouce();
 			}
 			modoADM(&teclaG);
-    22da:	83 e1       	ldi	r24, 0x13	; 19
-    22dc:	91 e0       	ldi	r25, 0x01	; 1
-    22de:	0e 94 7e 0f 	call	0x1efc	; 0x1efc <modoADM>
-    22e2:	b0 cf       	rjmp	.-160    	; 0x2244 <main+0x7a>
+    2358:	83 e1       	ldi	r24, 0x13	; 19
+    235a:	91 e0       	ldi	r25, 0x01	; 1
+    235c:	0e 94 8c 0f 	call	0x1f18	; 0x1f18 <modoADM>
+    2360:	b0 cf       	rjmp	.-160    	; 0x22c2 <main+0x7a>
 
-000022e4 <__divmodhi4>:
-    22e4:	97 fb       	bst	r25, 7
-    22e6:	07 2e       	mov	r0, r23
-    22e8:	16 f4       	brtc	.+4      	; 0x22ee <__divmodhi4+0xa>
-    22ea:	00 94       	com	r0
-    22ec:	07 d0       	rcall	.+14     	; 0x22fc <__divmodhi4_neg1>
-    22ee:	77 fd       	sbrc	r23, 7
-    22f0:	09 d0       	rcall	.+18     	; 0x2304 <__divmodhi4_neg2>
-    22f2:	0e 94 8c 11 	call	0x2318	; 0x2318 <__udivmodhi4>
-    22f6:	07 fc       	sbrc	r0, 7
-    22f8:	05 d0       	rcall	.+10     	; 0x2304 <__divmodhi4_neg2>
-    22fa:	3e f4       	brtc	.+14     	; 0x230a <__divmodhi4_exit>
+00002362 <__divmodhi4>:
+    2362:	97 fb       	bst	r25, 7
+    2364:	07 2e       	mov	r0, r23
+    2366:	16 f4       	brtc	.+4      	; 0x236c <__divmodhi4+0xa>
+    2368:	00 94       	com	r0
+    236a:	07 d0       	rcall	.+14     	; 0x237a <__divmodhi4_neg1>
+    236c:	77 fd       	sbrc	r23, 7
+    236e:	09 d0       	rcall	.+18     	; 0x2382 <__divmodhi4_neg2>
+    2370:	0e 94 cb 11 	call	0x2396	; 0x2396 <__udivmodhi4>
+    2374:	07 fc       	sbrc	r0, 7
+    2376:	05 d0       	rcall	.+10     	; 0x2382 <__divmodhi4_neg2>
+    2378:	3e f4       	brtc	.+14     	; 0x2388 <__divmodhi4_exit>
 
-000022fc <__divmodhi4_neg1>:
-    22fc:	90 95       	com	r25
-    22fe:	81 95       	neg	r24
-    2300:	9f 4f       	sbci	r25, 0xFF	; 255
-    2302:	08 95       	ret
+0000237a <__divmodhi4_neg1>:
+    237a:	90 95       	com	r25
+    237c:	81 95       	neg	r24
+    237e:	9f 4f       	sbci	r25, 0xFF	; 255
+    2380:	08 95       	ret
 
-00002304 <__divmodhi4_neg2>:
-    2304:	70 95       	com	r23
-    2306:	61 95       	neg	r22
-    2308:	7f 4f       	sbci	r23, 0xFF	; 255
+00002382 <__divmodhi4_neg2>:
+    2382:	70 95       	com	r23
+    2384:	61 95       	neg	r22
+    2386:	7f 4f       	sbci	r23, 0xFF	; 255
 
-0000230a <__divmodhi4_exit>:
-    230a:	08 95       	ret
+00002388 <__divmodhi4_exit>:
+    2388:	08 95       	ret
 
-0000230c <__tablejump2__>:
-    230c:	ee 0f       	add	r30, r30
-    230e:	ff 1f       	adc	r31, r31
-    2310:	05 90       	lpm	r0, Z+
-    2312:	f4 91       	lpm	r31, Z
-    2314:	e0 2d       	mov	r30, r0
-    2316:	09 94       	ijmp
+0000238a <__tablejump2__>:
+    238a:	ee 0f       	add	r30, r30
+    238c:	ff 1f       	adc	r31, r31
+    238e:	05 90       	lpm	r0, Z+
+    2390:	f4 91       	lpm	r31, Z
+    2392:	e0 2d       	mov	r30, r0
+    2394:	09 94       	ijmp
 
-00002318 <__udivmodhi4>:
-    2318:	aa 1b       	sub	r26, r26
-    231a:	bb 1b       	sub	r27, r27
-    231c:	51 e1       	ldi	r21, 0x11	; 17
-    231e:	07 c0       	rjmp	.+14     	; 0x232e <__udivmodhi4_ep>
+00002396 <__udivmodhi4>:
+    2396:	aa 1b       	sub	r26, r26
+    2398:	bb 1b       	sub	r27, r27
+    239a:	51 e1       	ldi	r21, 0x11	; 17
+    239c:	07 c0       	rjmp	.+14     	; 0x23ac <__udivmodhi4_ep>
 
-00002320 <__udivmodhi4_loop>:
-    2320:	aa 1f       	adc	r26, r26
-    2322:	bb 1f       	adc	r27, r27
-    2324:	a6 17       	cp	r26, r22
-    2326:	b7 07       	cpc	r27, r23
-    2328:	10 f0       	brcs	.+4      	; 0x232e <__udivmodhi4_ep>
-    232a:	a6 1b       	sub	r26, r22
-    232c:	b7 0b       	sbc	r27, r23
+0000239e <__udivmodhi4_loop>:
+    239e:	aa 1f       	adc	r26, r26
+    23a0:	bb 1f       	adc	r27, r27
+    23a2:	a6 17       	cp	r26, r22
+    23a4:	b7 07       	cpc	r27, r23
+    23a6:	10 f0       	brcs	.+4      	; 0x23ac <__udivmodhi4_ep>
+    23a8:	a6 1b       	sub	r26, r22
+    23aa:	b7 0b       	sbc	r27, r23
 
-0000232e <__udivmodhi4_ep>:
-    232e:	88 1f       	adc	r24, r24
-    2330:	99 1f       	adc	r25, r25
-    2332:	5a 95       	dec	r21
-    2334:	a9 f7       	brne	.-22     	; 0x2320 <__udivmodhi4_loop>
-    2336:	80 95       	com	r24
-    2338:	90 95       	com	r25
-    233a:	bc 01       	movw	r22, r24
-    233c:	cd 01       	movw	r24, r26
-    233e:	08 95       	ret
+000023ac <__udivmodhi4_ep>:
+    23ac:	88 1f       	adc	r24, r24
+    23ae:	99 1f       	adc	r25, r25
+    23b0:	5a 95       	dec	r21
+    23b2:	a9 f7       	brne	.-22     	; 0x239e <__udivmodhi4_loop>
+    23b4:	80 95       	com	r24
+    23b6:	90 95       	com	r25
+    23b8:	bc 01       	movw	r22, r24
+    23ba:	cd 01       	movw	r24, r26
+    23bc:	08 95       	ret
 
-00002340 <_exit>:
-    2340:	f8 94       	cli
+000023be <_exit>:
+    23be:	f8 94       	cli
 
-00002342 <__stop_program>:
-    2342:	ff cf       	rjmp	.-2      	; 0x2342 <__stop_program>
+000023c0 <__stop_program>:
+    23c0:	ff cf       	rjmp	.-2      	; 0x23c0 <__stop_program>

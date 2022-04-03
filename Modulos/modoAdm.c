@@ -9,20 +9,30 @@
 static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
 
 void modoADM(char *tecla){
+	char status;
+	short cont=0;
 	if((*tecla) == KEY_1){
 		//mudar hora
 		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
-		tela_instrucoes_configDiaMesAno();
-		getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
-		tela_instrucoes_configHoraMinSeg();
-		getHoraMinSeg(hora,min,seg);//preenche hora min e seg
-		result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
-		if(result) //informa se update foi valido
-			tela_operacaoConcluida();
-		else
-			tela_dataInvalida();
-			
-		*tecla = TECLA_INVALIDA;
+		
+		while(cont <2 && cont != -1){
+				tela_instrucoes_configDiaMesAno();
+				status = getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
+				result=0;
+			if (status){
+				cont ++;
+				tela_instrucoes_configHoraMinSeg();
+				status = getHoraMinSeg(hora,min,seg);//preenche hora min e seg
+				if (status)result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
+			}
+			else cont = -1;
+			if(result && status) //informa se update foi valido
+				tela_operacaoConcluida();
+			else if(status)
+				tela_dataInvalida();
+			else if (!status && cont !=-1)cont=0;
+			*tecla = TECLA_INVALIDA;
+		}
 	}else if((*tecla) == KEY_2){
 		//ver pagamentos pendentes
 	}else if((*tecla) == KEY_3){
@@ -79,7 +89,7 @@ char getOperStatus(char oper){
 	return statusOperadores[(int)oper - 1];
 }
 
-void getDiaMesAno(char dia[], char mes[], char ano[]){
+char getDiaMesAno(char dia[], char mes[], char ano[]){
 	char tecla = TECLA_INVALIDA;
 	short cont=0;
 	uint8_t offset = 6;
@@ -105,6 +115,7 @@ void getDiaMesAno(char dia[], char mes[], char ano[]){
 				writeInstruction(lcd_LineTwo | aux);
 				cont --;
 			}
+			else if (tecla == KEY_APAGAR) return 0;
 			tecla = TECLA_INVALIDA;
 		}
 		//cont = 0;
@@ -168,13 +179,14 @@ void getDiaMesAno(char dia[], char mes[], char ano[]){
 				cont++;
 			}
 		}
-	}
+	}	
 	
 	_delay_ms(750);
+	return 1;
 }
 
 
-void getHoraMinSeg(char hora[], char min[], char seg[]){
+char getHoraMinSeg(char hora[], char min[], char seg[]){
 	char tecla = TECLA_INVALIDA;
 	short cont=0;
 	unsigned char i=0;
@@ -201,6 +213,7 @@ void getHoraMinSeg(char hora[], char min[], char seg[]){
 				writeInstruction(lcd_LineTwo | aux);
 				cont --;
 			}
+			else if (tecla == KEY_APAGAR) return 0;
 			tecla = TECLA_INVALIDA;
 		}
 		//cont = 0;
@@ -262,4 +275,5 @@ void getHoraMinSeg(char hora[], char min[], char seg[]){
 		}
 	}
 	_delay_ms(750);
+	return 1;
 }

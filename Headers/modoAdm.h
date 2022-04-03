@@ -4,5 +4,5 @@
 
 void modoADM(char *tecla);
 void mudarStatusOper(char *tecla);
-void getDiaMesAno(char dia[], char mes[], char ano[]);
-void getHoraMinSeg(char hora[], char min[], char seg[]);
+char getDiaMesAno(char dia[], char mes[], char ano[]);
+char getHoraMinSeg(char hora[], char min[], char seg[]);
