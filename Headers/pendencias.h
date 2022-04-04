@@ -27,3 +27,4 @@ char printPendencias(char sobeDesce); //printa a tela de pendencias pro adm esco
 void printNumPendencia(short num); //printa a linha num de pendencias, uso interno
 
 short comparaCartoes(char cartao1[],char cartao2[]);//compara dois cartoes
+void testa_pendencia();

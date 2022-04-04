@@ -10,32 +10,24 @@
 static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
 
 void modoADM(char *tecla){
-	char status;
-	short cont=0;
+	//char status;
+	//short cont=0;
 	char pendenciaInvalida;
 	if((*tecla) == KEY_1){
 		//mudar hora
 		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
-		
-		while(cont <2 && cont != -1){
-				tela_instrucoes_configDiaMesAno();
-				status = getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
-				result=0;
-			if (status){
-				cont ++;
-				tela_instrucoes_configHoraMinSeg();
-				status = getHoraMinSeg(hora,min,seg);//preenche hora min e seg
-				if (status)result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
-			}
-			else cont = -1;
-			if(result && status) //informa se update foi valido
-				tela_operacaoConcluida();
-			else if(status)
-				tela_dataInvalida();
-			else if (!status && cont !=-1)cont=0;
-			*tecla = TECLA_INVALIDA;
-		}
+		tela_instrucoes_configDiaMesAno();
+		getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
+		tela_instrucoes_configHoraMinSeg();
+		getHoraMinSeg(hora,min,seg);//preenche hora min e seg
+		result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
+		if(result) //informa se update foi valido
+			tela_operacaoConcluida();
+		else
+			tela_dataInvalida();
+
 		*tecla = TECLA_INVALIDA;
+	
 	}else if((*tecla) == KEY_2){
 		//ver pendencia
 		if(existePendencia()){
@@ -65,9 +57,10 @@ void modoADM(char *tecla){
 	}else if((*tecla) == KEY_4){
 		//remover pendencia
 		if(existePendencia()){
-			*tecla = TECLA_INVALIDA;
-			while(*tecla == TECLA_INVALIDA){
-				*tecla = teclaDebouce();
+			tela_instrucoes_remPendencia();
+			(*tecla) = TECLA_INVALIDA;
+			while((*tecla) == TECLA_INVALIDA){
+				(*tecla) = teclaDebouce();
 				}
 			pendenciaInvalida = removePendencias(*tecla);
 			if(pendenciaInvalida)

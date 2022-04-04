@@ -27,3 +27,5 @@ void tela_dataInvalida();
 void tela_operadorDesabilitado(char oper);
 void tela_semPendencias();
 void tela_opcaoInvalida();
+void tela_cobrarPagAgendado();
+void tela_AguardandoPagAgendado();

@@ -26,11 +26,11 @@ static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};
 static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0};
 static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {0};
 
-static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0}; //talvez mais linhas, já que cada cartão poderia ter 2 pendencias teoricamente
-static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0};
+static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}}; //talvez mais linhas, já que cada cartão poderia ter 2 pendencias teoricamente
+static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
 
 static short numPagsAgendados = 0; // pra saber quantos pagsAgendados tem
-static short numPendecias = 0; //saber quantas pendencias temos
+static short numPendecias = 3; //saber quantas pendencias temos
 
 void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
 	// se só tiver uma parcela, datasVenci tem q ter o 1° digito da data da segunda parcela com um 9(SEMPARCELA) (ex:2008259 = 20/08/25 e 9?????)
@@ -284,7 +284,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(1); //pend 2
 		}
-		_delay_ms(1300);
+		_delay_ms(2000);
 	}else if(sobeDesce == 2 && numPendecias > 2){
 		if(numPendecias > 2){
 			writeInstruction(lcd_Clear);
@@ -295,7 +295,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(3); //pend 4
 		}
-		_delay_ms(1300);
+		_delay_ms(2000);
 	}else if(sobeDesce == 3 && numPendecias >= 4){
 		if(numPendecias > 4){
 			writeInstruction(lcd_Clear);
@@ -306,7 +306,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(5); //pend 6
 		}
-		_delay_ms(1300);
+		_delay_ms(2000);
 	}
 	return 1;
 }
@@ -321,7 +321,7 @@ void printNumPendencia(short num){
 	for(i=0;i<NUMDIGITOSVALORES;i++)
 		writeCharacter(valParcelaP[num][i]+48);
 	writeString(" -");
-	writeCharacter(num+48);
+	writeCharacter(num+49);
 }
 
 void cobrarPagementosAgendados(){
@@ -343,14 +343,14 @@ void cobrarPagementosAgendados(){
 			if(datasVenc[i][0]==diaAtual[0] && datasVenc[i][1]==diaAtual[1] && 
 			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
 			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
-				cobrar = 1;
+				cobrar = i;
 			
 			}
 		if(datasVenc[i][6] != SEMPARCELA) //verifica a segunda
 			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
 			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
 			datasVenc[i][10]==anoAtual[0] && datasVenc[i][11]==anoAtual[1]){
-				cobrar = 1;	
+				cobrar = i;	
 			}
 			
 			if(cobrar){
@@ -368,11 +368,11 @@ void enviarPedidoDePagamento(short cobrar){
 	
 	for(i=0;i<NUMDIGITOSCARTOES;i++){ //pega num do cartao e prepara o pedido
 		cartao[i] = cartoesA[cobrar][i];
-		pedido[i+2] = cartao[i];
+		pedido[i+2] = cartao[i]+48;
 	}
 	
 	for(i=0;i<NUMDIGITOSVALORES;i++){ //prepara o pedido
-		pedido[i+8] = valParcelaA[cobrar][i];
+		pedido[i+8] = valParcelaA[cobrar][i]+48;
 	}
 		
 	pedido[0] = 'A'; // finaliza o pedido
@@ -382,12 +382,17 @@ void enviarPedidoDePagamento(short cobrar){
 	//falar com vini sobre serial, perguntar tb sobre numeros em vendas estarem invertidos
 	resultado = enviarPedidoSerial(pedido);
 	
-	if(resultado)
+	if(resultado){
 		removePagamentoAgendado(cartao);
+		tela_operacaoConcluida();
+	}
 }
 
 char enviarPedidoSerial(char pedido[]){
 	short i;
+	tela_cobrarPagAgendado();
+	tela_AguardandoPagAgendado();
+	
 	for(i=0;i<13;i++)
 		USART_envia(pedido[i]);
 	
@@ -397,3 +402,9 @@ char enviarPedidoSerial(char pedido[]){
 	}else
 		return 0;
 }
+
+// void testa_pendencia(){
+// 	short 
+// 	cartoesP = {{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}};
+// 	valParcelaP = {{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
+//}

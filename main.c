@@ -168,7 +168,7 @@ int main(){
 	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
 	/////
-	
+//	testa_pendencia();
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		

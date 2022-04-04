@@ -173,9 +173,10 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	processa_pagamento(parcelas,tipo_cartao,metodo_pgmt,valor,senha,cartao);
 	
 	//calculo pra mandar o valor das parcelas pra addPagamentoAgendado
-	temp1 = (valor[4]-48)*100 + (valor[3]-48)*10 + (valor[2]-48); //val antes da virgula em numerico
-	temp2 = temp1/parcelas;
-	temp3 = temp1%parcelas;
+	temp1 = (valor[4]-48)*100 + (valor[3]-48)*10 + (valor[2]-48); //parte antes da virgula para int
+	parcelas = parcelas - 48;
+	temp2 = temp1/parcelas; //
+	temp3 = temp1%parcelas; //0
 	
 	temp1 = (valor[1]-48)*10 + (valor[0]-48); //centavos
 	temp1 = temp1/parcelas + temp3;
@@ -185,10 +186,10 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 		temp2++;
 	}
 	
-	valor[0]=temp2/100 + 48;
-	valor[1]=(temp2/10)%10 + 48;
-	valor[2]=(temp2%100)%10 + 48;
-	valor[3]=temp1/10 + 48;
+	valor[0]=temp2/100 + 48; //5/100
+	valor[1]=(temp2/10)%10 + 48; //5/10
+	valor[2]=(temp2%100)%10 + 48; // 5
+	valor[3]=temp1/10 + 48; //
 	valor[4]=temp1%10 + 48;
 	
 	sumDate(1);
@@ -204,7 +205,6 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	}
 	
 	addPagamentoAgendado(cartao,valor,dataPags);
-	
 }
 
 void venda_avista(){	// funcao para venda a vista considerando apenas 4 números

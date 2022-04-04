@@ -249,3 +249,27 @@ void tela_opcaoInvalida(){
 	writeString("INVALIDA");
 	_delay_ms(1000);
 }
+void tela_cobrarPagAgendado(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Cobrando");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Pags Agendados");
+	_delay_ms(1000);
+}
+void tela_AguardandoPagAgendado(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Aguardando");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Sistema");
+	_delay_ms(1000);
+}
+void tela_instrucoes_remPendencia(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Informe o num");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("da pendencia:");
+	_delay_ms(1000);
+}
