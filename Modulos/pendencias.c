@@ -123,8 +123,8 @@ void organizaPagamentos(short remover){
 	char temp;
 	
 	//organiza cartoes
-	for(i=remover;i<numPagsAgendados;i++){
-		for(j=0;i<NUMDIGITOSCARTOES;j++){ 
+	for(i=remover;i<numPagsAgendados-1;i++){
+		for(j=0;j<NUMDIGITOSCARTOES;j++){ 
 			temp = cartoesA[i+1][j];
 			cartoesA[i+1][j] = 0; //aqui que eu deleto a info da matriz
 			cartoesA[i][j] = temp;
@@ -132,8 +132,8 @@ void organizaPagamentos(short remover){
 		}
 		
 	//organiza valParcelas
-	for(i=remover;i<numPagsAgendados;i++){
-		for(j=0;i<NUMDIGITOSVALORES;j++){
+	for(i=remover;i<numPagsAgendados-1;i++){
+		for(j=0;j<NUMDIGITOSVALORES;j++){
 			temp = valParcelaA[i+1][j];
 			valParcelaA[i+1][j] = 0; //aqui que eu deleto a info da matriz
 			valParcelaA[i][j] = temp;
@@ -141,8 +141,8 @@ void organizaPagamentos(short remover){
 	}
 	
 	//organiza datas vencimento
-	for(i=remover;i<numPagsAgendados;i++){
-		for(j=0;i<NUMDATAS;j++){
+	for(i=remover;i<numPagsAgendados-1;i++){
+		for(j=0;j<NUMDATAS;j++){
 			temp = datasVenc[i+1][j];
 			datasVenc[i+1][j] = 0; //aqui que eu deleto a info da matriz
 			datasVenc[i][j] = temp;
@@ -158,7 +158,9 @@ char existePendencia(){
 		return 1;
 	else
 		return 0;
-	
+}
+char getNumPendecias(){
+	return (char)numPendecias;
 }
 
 void verificarPendencia(){
@@ -251,17 +253,19 @@ char removePendencias(char remover){
 	char temp;
 	
 	//remove cartoesP
-	for(i=remover;i<numPendecias;i++){
-		for(j=0;i<NUMDIGITOSCARTOES;j++){
-			temp = cartoesP[i+1][j];
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	for(i=remover;i<numPendecias-1;i++){
+		for(j=0;j<NUMDIGITOSCARTOES;j++){
+			temp = cartoesP[i+1][j];	
 			cartoesP[i+1][j] = 0; //aqui que eu deleto a info da matriz
-			cartoesP[i][j] = temp;
+			cartoesP[i][j] = temp;			
 		}
 	}
-	
+	writeCharacter('D');
 	//remove valParcelaP
-	for(i=remover;i<numPendecias;i++){
-		for(j=0;i<NUMDIGITOSVALORES;j++){
+	for(i=remover;i<numPendecias-1;i++){
+		for(j=0;j<NUMDIGITOSVALORES-1;j++){
 			temp = valParcelaP[i+1][j];
 			valParcelaP[i+1][j] = 0; //aqui que eu deleto a info da matriz
 			valParcelaP[i][j] = temp;
@@ -284,7 +288,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(1); //pend 2
 		}
-		_delay_ms(2000);
+		_delay_ms(2300);
 	}else if(sobeDesce == 2 && numPendecias > 2){
 		if(numPendecias > 2){
 			writeInstruction(lcd_Clear);
@@ -295,7 +299,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(3); //pend 4
 		}
-		_delay_ms(2000);
+		_delay_ms(2300);
 	}else if(sobeDesce == 3 && numPendecias >= 4){
 		if(numPendecias > 4){
 			writeInstruction(lcd_Clear);
@@ -306,7 +310,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(5); //pend 6
 		}
-		_delay_ms(2000);
+		_delay_ms(2300);
 	}
 	return 1;
 }
@@ -357,7 +361,7 @@ void cobrarPagementosAgendados(){
 				enviarPedidoDePagamento(cobrar);
 				cobrar = -1;
 			}
-		
+		cobrar = -1;
 		}
 }
 	
@@ -402,9 +406,3 @@ char enviarPedidoSerial(char pedido[]){
 	}else
 		return 0;
 }
-
-// void testa_pendencia(){
-// 	short 
-// 	cartoesP = {{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}};
-// 	valParcelaP = {{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
-//}

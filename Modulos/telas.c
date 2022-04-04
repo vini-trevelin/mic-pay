@@ -268,8 +268,16 @@ void tela_AguardandoPagAgendado(){
 void tela_instrucoes_remPendencia(){
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
-	writeString("Informe o num");
+	writeString("Informe o numero");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("da pendencia:");
 	_delay_ms(1000);
+}
+void tela_infos_printPend(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Ordem das infos:");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("cartao val.Pen");
+	_delay_ms(2000);
 }

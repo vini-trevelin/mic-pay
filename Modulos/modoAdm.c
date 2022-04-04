@@ -31,6 +31,7 @@ void modoADM(char *tecla){
 	}else if((*tecla) == KEY_2){
 		//ver pendencia
 		if(existePendencia()){
+			tela_infos_printPend();
 			printPendencias(1);
 			printPendencias(2); //se não tiver mais pendencias ele não faz nada
 			printPendencias(3);
@@ -53,7 +54,7 @@ void modoADM(char *tecla){
 			writeString("Opcao Invalida");	
 			_delay_ms(1000);	
 		}
-		*tecla = TECLA_INVALIDA;
+		(*tecla) = TECLA_INVALIDA;
 	}else if((*tecla) == KEY_4){
 		//remover pendencia
 		if(existePendencia()){
@@ -62,7 +63,9 @@ void modoADM(char *tecla){
 			while((*tecla) == TECLA_INVALIDA){
 				(*tecla) = teclaDebouce();
 				}
+			writeCharacter('A');
 			pendenciaValida = removePendencias(*tecla);
+			writeCharacter('B');
 			if(pendenciaValida)
 				tela_operacaoConcluida();
 			else

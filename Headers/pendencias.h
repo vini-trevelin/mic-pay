@@ -14,6 +14,7 @@ void removeSegundaParcela(short remover); //uso interno
 void organizaPagamentos(short remover); //para organizar dps q um foi removido, uso interno
 
 char existePendencia(); //olha se tem alguma pendecia, retorna se tem (as 12, 18 e 22) (func pra deixar led ligada na pratica), uso externo
+char getNumPendecias(); //retorna num de pendencias no sis, pro modo.
 void verificarPendencia(); //add um pag agendado que expirou em pendencias, rodar as 22h sempre, uso externo
 void addPendencias(short achada, char PouS); //para add pendencia, uso interno
 char removePendencias(char remover); //pro adm remover pendencias manualmente (vai receber o indice dela)
