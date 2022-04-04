@@ -281,3 +281,17 @@ void tela_infos_printPend(){
 	writeString("cartao val.Pen");
 	_delay_ms(2000);
 }
+void tela_dataAtual(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne |lcd_SetCursor);
+	writeString("Data: ");
+	writeInstruction(lcd_LineOne | (lcd_SetCursor|(uint8_t)5));
+	AtualizaStringDataHora();
+	writeString(stringDATA);
+	writeString(" E#");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Hora: ");
+	writeInstruction(lcd_LineTwo | (lcd_SetCursor+(uint8_t)5));
+	writeString(stringHORA);
+	writeString(" V*");
+}

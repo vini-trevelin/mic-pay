@@ -32,6 +32,7 @@ static char contSerial = 0; //para saber quanto tempo a serial esta sem comunica
 
 char userIndex= 10;
 short controle = 1;
+char flagRELOGIO = 0;
 
 //static para manterem os valores durante as incializações
 static char numCartoesLocais [LOCALCARDNUM][CARDSIZE]; // indices correspondentes entre os 3  elementos
@@ -61,7 +62,10 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 
 
 ISR(TIMER1_COMPA_vect){
-	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
+	updateDate();
+	if(flagRELOGIO)
+		tela_dataAtual();
+	
 	contSerial = verificaSerial(contSerial);
 
 	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
@@ -90,8 +94,7 @@ ISR(TIMER1_COMPA_vect){
 		contTelaOff = 0;
 		telaOnOff = 0;
 	}
-	
-	updateDate();				
+					
 	
 	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) {
 		cobrarPagementosAgendados();

@@ -10,23 +10,45 @@
 static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
 
 void modoADM(char *tecla){
-	//char status;
-	//short cont=0;
+	char status;
+	short cont=0;
 	char pendenciaValida;
 	if((*tecla) == KEY_1){
 		//mudar hora
+		(*tecla) = TECLA_INVALIDA;
 		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
-		tela_instrucoes_configDiaMesAno();
-		getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
-		tela_instrucoes_configHoraMinSeg();
-		getHoraMinSeg(hora,min,seg);//preenche hora min e seg
-		result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
-		if(result) //informa se update foi valido
-			tela_operacaoConcluida();
-		else
-			tela_dataInvalida();
-
-		*tecla = TECLA_INVALIDA;
+		tela_dataAtual();
+		flagRELOGIO=1;
+		while((*tecla)!= KEY_APAGAR){
+			*tecla = teclaDebouce();
+			if ((*tecla)== KEY_APAGAR) {
+				flagRELOGIO = 0;
+			}
+			else if((*tecla)== KEY_CONFIRMA){
+				flagRELOGIO=0;
+				while(cont <2 && cont != -1){
+					tela_instrucoes_configDiaMesAno();
+					status = getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
+					result=0;
+					if (status){
+						cont ++;
+						tela_instrucoes_configHoraMinSeg();
+						status = getHoraMinSeg(hora,min,seg);//preenche hora min e seg
+						if (status)result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
+					}
+					else cont = -1;
+					if(result && status) {//informa se update foi valido
+						cont=-1;
+						tela_operacaoConcluida();
+					}
+					else if(status)
+					tela_dataInvalida();
+					else if (!status && cont !=-1)cont=0;
+					*tecla = TECLA_INVALIDA;
+				}
+				*tecla = KEY_APAGAR;
+			}
+		}
 	
 	}else if((*tecla) == KEY_2){
 		//ver pendencia
@@ -63,9 +85,7 @@ void modoADM(char *tecla){
 			while((*tecla) == TECLA_INVALIDA){
 				(*tecla) = teclaDebouce();
 				}
-			writeCharacter('A');
 			pendenciaValida = removePendencias(*tecla);
-			writeCharacter('B');
 			if(pendenciaValida)
 				tela_operacaoConcluida();
 			else
@@ -74,6 +94,7 @@ void modoADM(char *tecla){
 			tela_semPendencias();
 		*tecla = TECLA_INVALIDA;
 	}
+	*tecla = TECLA_INVALIDA;
 }
 
 void mudarStatusOper(char *tecla){
@@ -166,7 +187,7 @@ char getDiaMesAno(char dia[], char mes[], char ano[]){
 		}
 		//cont = 0;
 		//writeString("/");
-		if(cont>=4){
+		if(cont>=4 && cont < 6){
 			if (cont ==4 ) {
 				writeInstruction(lcd_SetCursor | (uint8_t)(cont+2+offset)  | lcd_LineTwo);
 				i=0;
@@ -195,7 +216,14 @@ char getDiaMesAno(char dia[], char mes[], char ano[]){
 			tecla = teclaDebouce();
 			if (tecla == KEY_CONFIRMA){
 				cont++;
+			}else if(tecla == KEY_APAGAR){
+				uint8_t aux = ((uint8_t)(cont+1)+offset) | lcd_SetCursor;
+				writeInstruction(lcd_LineTwo | aux);
+				writeCharacter(' '); //TROCAR POR CARACTERE DE ESPACO
+				writeInstruction(lcd_LineTwo | aux);
+				cont --;
 			}
+			tecla = TECLA_INVALIDA;
 		}
 	}	
 	
@@ -264,7 +292,7 @@ char getHoraMinSeg(char hora[], char min[], char seg[]){
 		//cont = 0;
 		//writeString(":");
 		if(cont>=4){
-			if (cont == 4) writeInstruction(lcd_SetCursor | (uint8_t)(cont+2+offset) | lcd_LineTwo);
+			if (cont == 4 && cont < 6) writeInstruction(lcd_SetCursor | (uint8_t)(cont+2+offset) | lcd_LineTwo);
 			tecla = teclaDebouce();
 			if(tecla != TECLA_INVALIDA && tecla != KEY_APAGAR && tecla != KEY_CONFIRMA){
 				if(tecla == KEY_0)
@@ -289,7 +317,14 @@ char getHoraMinSeg(char hora[], char min[], char seg[]){
 			tecla = teclaDebouce();
 			if (tecla == KEY_CONFIRMA){
 				cont++;
+			}else if(tecla == KEY_APAGAR){
+				uint8_t aux = ((uint8_t)(cont+1)+offset) | lcd_SetCursor;
+				writeInstruction(lcd_LineTwo | aux);
+				writeCharacter(' '); //TROCAR POR CARACTERE DE ESPACO
+				writeInstruction(lcd_LineTwo | aux);
+				cont --;
 			}
+			tecla = TECLA_INVALIDA;
 		}
 	}
 	_delay_ms(750);

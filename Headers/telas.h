@@ -31,3 +31,5 @@ void tela_cobrarPagAgendado();
 void tela_AguardandoPagAgendado();
 void tela_instrucoes_remPendencia();
 void tela_infos_printPend();
+void tela_instrucoes_remPendencia();
+void tela_dataAtual();
