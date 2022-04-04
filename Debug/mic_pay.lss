@@ -3,31 +3,31 @@ mic_pay.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         000003ae  00800100  00002a2c  00002ac0  2**0
+  0 .data         000003ae  00800100  00003068  000030fc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00002a2c  00000000  00000000  00000094  2**1
+  1 .text         00003068  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000144  008004ae  008004ae  00002e6e  2**0
+  2 .bss          00000144  008004ae  008004ae  000034aa  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00002e6e  2**0
+  3 .comment      00000030  00000000  00000000  000034aa  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00002ea0  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000034dc  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000370  00000000  00000000  00002ee0  2**0
+  5 .debug_aranges 00000370  00000000  00000000  0000351c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00004d23  00000000  00000000  00003250  2**0
+  6 .debug_info   00004d5e  00000000  00000000  0000388c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009c1  00000000  00000000  00007f73  2**0
+  7 .debug_abbrev 000009c1  00000000  00000000  000085ea  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00003267  00000000  00000000  00008934  2**0
+  8 .debug_line   000032f3  00000000  00000000  00008fab  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000b1c  00000000  00000000  0000bb9c  2**2
+  9 .debug_frame  00000b30  00000000  00000000  0000c2a0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000e4b  00000000  00000000  0000c6b8  2**0
+ 10 .debug_str    00000e4b  00000000  00000000  0000cdd0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00003f01  00000000  00000000  0000d503  2**0
+ 11 .debug_loc    00003f7e  00000000  00000000  0000dc1b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000390  00000000  00000000  00011404  2**0
+ 12 .debug_ranges 00000390  00000000  00000000  00011b99  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -44,7 +44,7 @@ Disassembly of section .text:
       20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
-      2c:	0c 94 db 13 	jmp	0x27b6	; 0x27b6 <__vector_11>
+      2c:	0c 94 dc 16 	jmp	0x2db8	; 0x2db8 <__vector_11>
       30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
       38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
@@ -96,8 +96,8 @@ Disassembly of section .text:
       a4:	14 e0       	ldi	r17, 0x04	; 4
       a6:	a0 e0       	ldi	r26, 0x00	; 0
       a8:	b1 e0       	ldi	r27, 0x01	; 1
-      aa:	ec e2       	ldi	r30, 0x2C	; 44
-      ac:	fa e2       	ldi	r31, 0x2A	; 42
+      aa:	e8 e6       	ldi	r30, 0x68	; 104
+      ac:	f0 e3       	ldi	r31, 0x30	; 48
       ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
       b0:	05 90       	lpm	r0, Z+
       b2:	0d 92       	st	X+, r0
@@ -118,18 +118,18 @@ Disassembly of section .text:
       c4:	a2 3f       	cpi	r26, 0xF2	; 242
       c6:	b2 07       	cpc	r27, r18
       c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
-      ca:	0e 94 59 14 	call	0x28b2	; 0x28b2 <main>
-      ce:	0c 94 14 15 	jmp	0x2a28	; 0x2a28 <_exit>
+      ca:	0e 94 77 17 	call	0x2eee	; 0x2eee <main>
+      ce:	0c 94 32 18 	jmp	0x3064	; 0x3064 <_exit>
 
 000000d2 <__bad_interrupt>:
       d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000d6 <verificarContasLocais>:
-				enviarPedidoDePagamento(cobrar);
-				cobrar = -1;
-			}
-		
+				addPendencias(pendAchada,2); //2 diz q foi na segunda data q achou
+			
+			pendAchada = -1;
 		}
+	}
 }
       d6:	dc 01       	movw	r26, r24
       d8:	60 e0       	ldi	r22, 0x00	; 0
@@ -443,7 +443,7 @@ Disassembly of section .text:
      33a:	30 e0       	ldi	r19, 0x00	; 0
      33c:	c6 01       	movw	r24, r12
      33e:	b9 01       	movw	r22, r18
-     340:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
+     340:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
      344:	ae 01       	movw	r20, r28
      346:	44 0f       	add	r20, r20
      348:	55 1f       	adc	r21, r21
@@ -460,7 +460,7 @@ Disassembly of section .text:
      35e:	cf 01       	movw	r24, r30
      360:	64 e6       	ldi	r22, 0x64	; 100
      362:	70 e0       	ldi	r23, 0x00	; 0
-     364:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
+     364:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
      368:	cf 01       	movw	r24, r30
      36a:	44 e6       	ldi	r20, 0x64	; 100
      36c:	64 9f       	mul	r22, r20
@@ -470,7 +470,7 @@ Disassembly of section .text:
      374:	60 5d       	subi	r22, 0xD0	; 208
      376:	68 83       	st	Y, r22
      378:	b9 01       	movw	r22, r18
-     37a:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
+     37a:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
      37e:	60 5d       	subi	r22, 0xD0	; 208
      380:	69 83       	std	Y+1, r22	; 0x01
      382:	80 5d       	subi	r24, 0xD0	; 208
@@ -948,7 +948,7 @@ Disassembly of section .text:
      722:	fc 01       	movw	r30, r24
      724:	ec 5c       	subi	r30, 0xCC	; 204
      726:	ff 4f       	sbci	r31, 0xFF	; 255
-     728:	0c 94 fa 14 	jmp	0x29f4	; 0x29f4 <__tablejump2__>
+     728:	0c 94 18 18 	jmp	0x3030	; 0x3030 <__tablejump2__>
      72c:	81 e0       	ldi	r24, 0x01	; 1
      72e:	08 95       	ret
      730:	83 e0       	ldi	r24, 0x03	; 3
@@ -3101,7 +3101,7 @@ Disassembly of section .text:
     1946:	8a e3       	ldi	r24, 0x3A	; 58
     1948:	94 e0       	ldi	r25, 0x04	; 4
     194a:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    194e:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+    194e:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
     1952:	81 30       	cpi	r24, 0x01	; 1
     1954:	29 f4       	brne	.+10     	; 0x1960 <tela_status_oper+0x20>
     1956:	81 e4       	ldi	r24, 0x41	; 65
@@ -3116,7 +3116,7 @@ Disassembly of section .text:
     196e:	87 e5       	ldi	r24, 0x57	; 87
     1970:	94 e0       	ldi	r25, 0x04	; 4
     1972:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    1976:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+    1976:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <__data_start+0x1>
     197a:	81 30       	cpi	r24, 0x01	; 1
     197c:	29 f4       	brne	.+10     	; 0x1988 <tela_status_oper+0x48>
     197e:	8e e5       	ldi	r24, 0x5E	; 94
@@ -3901,7 +3901,7 @@ Disassembly of section .text:
     2010:	a0 f4       	brcc	.+40     	; 0x203a <updateDate+0x82>
     2012:	e0 5c       	subi	r30, 0xC0	; 192
     2014:	ff 4f       	sbci	r31, 0xFF	; 255
-    2016:	0c 94 fa 14 	jmp	0x29f4	; 0x29f4 <__tablejump2__>
+    2016:	0c 94 18 18 	jmp	0x3030	; 0x3030 <__tablejump2__>
     201a:	20 32       	cpi	r18, 0x20	; 32
     201c:	91 f4       	brne	.+36     	; 0x2042 <updateDate+0x8a>
     201e:	0e 94 c5 0f 	call	0x1f8a	; 0x1f8a <atualizaMesAno>
@@ -3920,1299 +3920,2537 @@ Disassembly of section .text:
     203e:	0e 94 c5 0f 	call	0x1f8a	; 0x1f8a <atualizaMesAno>
     2042:	08 95       	ret
 
-00002044 <addPagamentoAgendado>:
-    2044:	cf 93       	push	r28
-    2046:	a0 e0       	ldi	r26, 0x00	; 0
-    2048:	b0 e0       	ldi	r27, 0x00	; 0
-    204a:	17 c0       	rjmp	.+46     	; 0x207a <addPagamentoAgendado+0x36>
-    204c:	20 91 b0 04 	lds	r18, 0x04B0	; 0x8004b0 <numPagsAgendados>
-    2050:	30 91 b1 04 	lds	r19, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
-    2054:	fc 01       	movw	r30, r24
-    2056:	ea 0f       	add	r30, r26
-    2058:	fb 1f       	adc	r31, r27
-    205a:	c0 81       	ld	r28, Z
-    205c:	f9 01       	movw	r30, r18
-    205e:	ee 0f       	add	r30, r30
-    2060:	ff 1f       	adc	r31, r31
-    2062:	e2 0f       	add	r30, r18
-    2064:	f3 1f       	adc	r31, r19
-    2066:	ee 0f       	add	r30, r30
-    2068:	ff 1f       	adc	r31, r31
-    206a:	e6 5a       	subi	r30, 0xA6	; 166
-    206c:	fa 4f       	sbci	r31, 0xFA	; 250
-    206e:	ea 0f       	add	r30, r26
-    2070:	fb 1f       	adc	r31, r27
-    2072:	20 ed       	ldi	r18, 0xD0	; 208
-    2074:	2c 0f       	add	r18, r28
-    2076:	20 83       	st	Z, r18
-    2078:	11 96       	adiw	r26, 0x01	; 1
-    207a:	a6 30       	cpi	r26, 0x06	; 6
-    207c:	b1 05       	cpc	r27, r1
-    207e:	34 f3       	brlt	.-52     	; 0x204c <addPagamentoAgendado+0x8>
-    2080:	20 e0       	ldi	r18, 0x00	; 0
-    2082:	30 e0       	ldi	r19, 0x00	; 0
-    2084:	18 c0       	rjmp	.+48     	; 0x20b6 <addPagamentoAgendado+0x72>
-    2086:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
-    208a:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
-    208e:	fb 01       	movw	r30, r22
-    2090:	e2 0f       	add	r30, r18
-    2092:	f3 1f       	adc	r31, r19
-    2094:	a0 81       	ld	r26, Z
-    2096:	fc 01       	movw	r30, r24
-    2098:	ee 0f       	add	r30, r30
-    209a:	ff 1f       	adc	r31, r31
-    209c:	ee 0f       	add	r30, r30
-    209e:	ff 1f       	adc	r31, r31
-    20a0:	e8 0f       	add	r30, r24
-    20a2:	f9 1f       	adc	r31, r25
-    20a4:	e4 5c       	subi	r30, 0xC4	; 196
-    20a6:	fa 4f       	sbci	r31, 0xFA	; 250
-    20a8:	e2 0f       	add	r30, r18
-    20aa:	f3 1f       	adc	r31, r19
-    20ac:	80 ed       	ldi	r24, 0xD0	; 208
-    20ae:	8a 0f       	add	r24, r26
-    20b0:	80 83       	st	Z, r24
-    20b2:	2f 5f       	subi	r18, 0xFF	; 255
-    20b4:	3f 4f       	sbci	r19, 0xFF	; 255
-    20b6:	25 30       	cpi	r18, 0x05	; 5
-    20b8:	31 05       	cpc	r19, r1
-    20ba:	2c f3       	brlt	.-54     	; 0x2086 <addPagamentoAgendado+0x42>
-    20bc:	20 e0       	ldi	r18, 0x00	; 0
-    20be:	30 e0       	ldi	r19, 0x00	; 0
-    20c0:	1a c0       	rjmp	.+52     	; 0x20f6 <addPagamentoAgendado+0xb2>
-    20c2:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
-    20c6:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
-    20ca:	fa 01       	movw	r30, r20
-    20cc:	e2 0f       	add	r30, r18
-    20ce:	f3 1f       	adc	r31, r19
-    20d0:	60 81       	ld	r22, Z
-    20d2:	fc 01       	movw	r30, r24
-    20d4:	ee 0f       	add	r30, r30
-    20d6:	ff 1f       	adc	r31, r31
-    20d8:	e8 0f       	add	r30, r24
-    20da:	f9 1f       	adc	r31, r25
-    20dc:	ee 0f       	add	r30, r30
-    20de:	ff 1f       	adc	r31, r31
-    20e0:	ee 0f       	add	r30, r30
-    20e2:	ff 1f       	adc	r31, r31
-    20e4:	ec 50       	subi	r30, 0x0C	; 12
-    20e6:	fb 4f       	sbci	r31, 0xFB	; 251
-    20e8:	e2 0f       	add	r30, r18
-    20ea:	f3 1f       	adc	r31, r19
-    20ec:	80 ed       	ldi	r24, 0xD0	; 208
-    20ee:	86 0f       	add	r24, r22
-    20f0:	80 83       	st	Z, r24
-    20f2:	2f 5f       	subi	r18, 0xFF	; 255
-    20f4:	3f 4f       	sbci	r19, 0xFF	; 255
-    20f6:	2c 30       	cpi	r18, 0x0C	; 12
-    20f8:	31 05       	cpc	r19, r1
-    20fa:	1c f3       	brlt	.-58     	; 0x20c2 <addPagamentoAgendado+0x7e>
-    20fc:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
-    2100:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
-    2104:	86 30       	cpi	r24, 0x06	; 6
-    2106:	91 05       	cpc	r25, r1
-    2108:	2c f4       	brge	.+10     	; 0x2114 <addPagamentoAgendado+0xd0>
-    210a:	01 96       	adiw	r24, 0x01	; 1
-    210c:	90 93 b1 04 	sts	0x04B1, r25	; 0x8004b1 <numPagsAgendados+0x1>
-    2110:	80 93 b0 04 	sts	0x04B0, r24	; 0x8004b0 <numPagsAgendados>
-    2114:	cf 91       	pop	r28
-    2116:	08 95       	ret
+00002044 <AtualizaStringData>:
+    2044:	20 91 80 05 	lds	r18, 0x0580	; 0x800580 <dia>
+    2048:	e9 ee       	ldi	r30, 0xE9	; 233
+    204a:	f5 e0       	ldi	r31, 0x05	; 5
+    204c:	8d ec       	ldi	r24, 0xCD	; 205
+    204e:	28 9f       	mul	r18, r24
+    2050:	91 2d       	mov	r25, r1
+    2052:	11 24       	eor	r1, r1
+    2054:	96 95       	lsr	r25
+    2056:	96 95       	lsr	r25
+    2058:	96 95       	lsr	r25
+    205a:	30 e3       	ldi	r19, 0x30	; 48
+    205c:	39 0f       	add	r19, r25
+    205e:	30 83       	st	Z, r19
+    2060:	99 0f       	add	r25, r25
+    2062:	39 2f       	mov	r19, r25
+    2064:	33 0f       	add	r19, r19
+    2066:	33 0f       	add	r19, r19
+    2068:	93 0f       	add	r25, r19
+    206a:	29 1b       	sub	r18, r25
+    206c:	20 5d       	subi	r18, 0xD0	; 208
+    206e:	21 83       	std	Z+1, r18	; 0x01
+    2070:	20 91 7f 05 	lds	r18, 0x057F	; 0x80057f <mes>
+    2074:	28 9f       	mul	r18, r24
+    2076:	91 2d       	mov	r25, r1
+    2078:	11 24       	eor	r1, r1
+    207a:	96 95       	lsr	r25
+    207c:	96 95       	lsr	r25
+    207e:	96 95       	lsr	r25
+    2080:	30 e3       	ldi	r19, 0x30	; 48
+    2082:	39 0f       	add	r19, r25
+    2084:	33 83       	std	Z+3, r19	; 0x03
+    2086:	99 0f       	add	r25, r25
+    2088:	39 2f       	mov	r19, r25
+    208a:	33 0f       	add	r19, r19
+    208c:	33 0f       	add	r19, r19
+    208e:	93 0f       	add	r25, r19
+    2090:	29 1b       	sub	r18, r25
+    2092:	20 5d       	subi	r18, 0xD0	; 208
+    2094:	24 83       	std	Z+4, r18	; 0x04
+    2096:	90 91 7e 05 	lds	r25, 0x057E	; 0x80057e <ano>
+    209a:	98 9f       	mul	r25, r24
+    209c:	81 2d       	mov	r24, r1
+    209e:	11 24       	eor	r1, r1
+    20a0:	86 95       	lsr	r24
+    20a2:	86 95       	lsr	r24
+    20a4:	86 95       	lsr	r24
+    20a6:	20 e3       	ldi	r18, 0x30	; 48
+    20a8:	28 0f       	add	r18, r24
+    20aa:	26 83       	std	Z+6, r18	; 0x06
+    20ac:	88 0f       	add	r24, r24
+    20ae:	28 2f       	mov	r18, r24
+    20b0:	22 0f       	add	r18, r18
+    20b2:	22 0f       	add	r18, r18
+    20b4:	82 0f       	add	r24, r18
+    20b6:	98 1b       	sub	r25, r24
+    20b8:	90 5d       	subi	r25, 0xD0	; 208
+    20ba:	97 83       	std	Z+7, r25	; 0x07
+    20bc:	08 95       	ret
 
-00002118 <venda_parcelada>:
-    2118:	af 92       	push	r10
-    211a:	bf 92       	push	r11
-    211c:	cf 92       	push	r12
-    211e:	df 92       	push	r13
-    2120:	ef 92       	push	r14
-    2122:	ff 92       	push	r15
-    2124:	0f 93       	push	r16
-    2126:	1f 93       	push	r17
-    2128:	cf 93       	push	r28
-    212a:	df 93       	push	r29
-    212c:	cd b7       	in	r28, 0x3d	; 61
-    212e:	de b7       	in	r29, 0x3e	; 62
-    2130:	6d 97       	sbiw	r28, 0x1d	; 29
-    2132:	0f b6       	in	r0, 0x3f	; 63
-    2134:	f8 94       	cli
-    2136:	de bf       	out	0x3e, r29	; 62
-    2138:	0f be       	out	0x3f, r0	; 63
-    213a:	cd bf       	out	0x3d, r28	; 61
-    213c:	86 e0       	ldi	r24, 0x06	; 6
-    213e:	e4 e1       	ldi	r30, 0x14	; 20
-    2140:	f1 e0       	ldi	r31, 0x01	; 1
-    2142:	de 01       	movw	r26, r28
-    2144:	11 96       	adiw	r26, 0x01	; 1
-    2146:	01 90       	ld	r0, Z+
-    2148:	0d 92       	st	X+, r0
-    214a:	8a 95       	dec	r24
-    214c:	e1 f7       	brne	.-8      	; 0x2146 <venda_parcelada+0x2e>
-    214e:	86 e0       	ldi	r24, 0x06	; 6
-    2150:	e4 e1       	ldi	r30, 0x14	; 20
-    2152:	f1 e0       	ldi	r31, 0x01	; 1
-    2154:	de 01       	movw	r26, r28
-    2156:	17 96       	adiw	r26, 0x07	; 7
-    2158:	01 90       	ld	r0, Z+
-    215a:	0d 92       	st	X+, r0
-    215c:	8a 95       	dec	r24
-    215e:	e1 f7       	brne	.-8      	; 0x2158 <venda_parcelada+0x40>
-    2160:	85 e0       	ldi	r24, 0x05	; 5
-    2162:	ea e1       	ldi	r30, 0x1A	; 26
-    2164:	f1 e0       	ldi	r31, 0x01	; 1
-    2166:	de 01       	movw	r26, r28
-    2168:	1d 96       	adiw	r26, 0x0d	; 13
-    216a:	01 90       	ld	r0, Z+
-    216c:	0d 92       	st	X+, r0
-    216e:	8a 95       	dec	r24
-    2170:	e1 f7       	brne	.-8      	; 0x216a <venda_parcelada+0x52>
-    2172:	0e 94 da 06 	call	0xdb4	; 0xdb4 <tela_vendaParcelada>
-    2176:	ce 01       	movw	r24, r28
-    2178:	0d 96       	adiw	r24, 0x0d	; 13
-    217a:	0e 94 59 04 	call	0x8b2	; 0x8b2 <recebe_valor>
-    217e:	ce 01       	movw	r24, r28
-    2180:	0d 96       	adiw	r24, 0x0d	; 13
-    2182:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <formata_valor>
-    2186:	0e 94 37 07 	call	0xe6e	; 0xe6e <n_parcelas>
-    218a:	b8 2e       	mov	r11, r24
-    218c:	0e 94 8c 05 	call	0xb18	; 0xb18 <metodo_pagamento>
-    2190:	a8 2e       	mov	r10, r24
-    2192:	0e 94 a6 05 	call	0xb4c	; 0xb4c <aguarda_cartao>
-    2196:	cb 2c       	mov	r12, r11
-    2198:	d1 2c       	mov	r13, r1
-    219a:	bc 01       	movw	r22, r24
-    219c:	77 27       	eor	r23, r23
-    219e:	ae 01       	movw	r20, r28
-    21a0:	49 5f       	subi	r20, 0xF9	; 249
-    21a2:	5f 4f       	sbci	r21, 0xFF	; 255
-    21a4:	7a 01       	movw	r14, r20
-    21a6:	8e 01       	movw	r16, r28
-    21a8:	0f 5f       	subi	r16, 0xFF	; 255
-    21aa:	1f 4f       	sbci	r17, 0xFF	; 255
-    21ac:	9e 01       	movw	r18, r28
-    21ae:	23 5f       	subi	r18, 0xF3	; 243
-    21b0:	3f 4f       	sbci	r19, 0xFF	; 255
-    21b2:	4a 2d       	mov	r20, r10
-    21b4:	c6 01       	movw	r24, r12
-    21b6:	0e 94 30 0a 	call	0x1460	; 0x1460 <processa_pagamento>
-    21ba:	4d 85       	ldd	r20, Y+13	; 0x0d
-    21bc:	50 e0       	ldi	r21, 0x00	; 0
-    21be:	40 53       	subi	r20, 0x30	; 48
-    21c0:	51 09       	sbc	r21, r1
-    21c2:	24 e6       	ldi	r18, 0x64	; 100
-    21c4:	24 9f       	mul	r18, r20
-    21c6:	c0 01       	movw	r24, r0
-    21c8:	25 9f       	mul	r18, r21
-    21ca:	90 0d       	add	r25, r0
-    21cc:	11 24       	eor	r1, r1
-    21ce:	4e 85       	ldd	r20, Y+14	; 0x0e
-    21d0:	50 e0       	ldi	r21, 0x00	; 0
-    21d2:	9a 01       	movw	r18, r20
-    21d4:	20 53       	subi	r18, 0x30	; 48
-    21d6:	31 09       	sbc	r19, r1
-    21d8:	b9 01       	movw	r22, r18
-    21da:	66 0f       	add	r22, r22
-    21dc:	77 1f       	adc	r23, r23
-    21de:	a9 01       	movw	r20, r18
-    21e0:	44 0f       	add	r20, r20
-    21e2:	55 1f       	adc	r21, r21
-    21e4:	44 0f       	add	r20, r20
-    21e6:	55 1f       	adc	r21, r21
-    21e8:	44 0f       	add	r20, r20
-    21ea:	55 1f       	adc	r21, r21
-    21ec:	9b 01       	movw	r18, r22
-    21ee:	24 0f       	add	r18, r20
-    21f0:	35 1f       	adc	r19, r21
-    21f2:	28 0f       	add	r18, r24
-    21f4:	39 1f       	adc	r19, r25
-    21f6:	8f 85       	ldd	r24, Y+15	; 0x0f
-    21f8:	90 e0       	ldi	r25, 0x00	; 0
-    21fa:	c0 97       	sbiw	r24, 0x30	; 48
-    21fc:	82 0f       	add	r24, r18
-    21fe:	93 1f       	adc	r25, r19
-    2200:	b6 01       	movw	r22, r12
-    2202:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    2206:	7c 01       	movw	r14, r24
-    2208:	fb 01       	movw	r30, r22
-    220a:	28 89       	ldd	r18, Y+16	; 0x10
-    220c:	30 e0       	ldi	r19, 0x00	; 0
-    220e:	20 53       	subi	r18, 0x30	; 48
-    2210:	31 09       	sbc	r19, r1
-    2212:	c9 01       	movw	r24, r18
-    2214:	88 0f       	add	r24, r24
-    2216:	99 1f       	adc	r25, r25
-    2218:	22 0f       	add	r18, r18
-    221a:	33 1f       	adc	r19, r19
-    221c:	22 0f       	add	r18, r18
-    221e:	33 1f       	adc	r19, r19
-    2220:	22 0f       	add	r18, r18
-    2222:	33 1f       	adc	r19, r19
-    2224:	28 0f       	add	r18, r24
-    2226:	39 1f       	adc	r19, r25
-    2228:	89 89       	ldd	r24, Y+17	; 0x11
-    222a:	90 e0       	ldi	r25, 0x00	; 0
-    222c:	c0 97       	sbiw	r24, 0x30	; 48
-    222e:	82 0f       	add	r24, r18
-    2230:	93 1f       	adc	r25, r19
-    2232:	b6 01       	movw	r22, r12
-    2234:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    2238:	e6 0e       	add	r14, r22
-    223a:	f7 1e       	adc	r15, r23
-    223c:	54 e6       	ldi	r21, 0x64	; 100
-    223e:	e5 16       	cp	r14, r21
-    2240:	f1 04       	cpc	r15, r1
-    2242:	3c f0       	brlt	.+14     	; 0x2252 <venda_parcelada+0x13a>
-    2244:	c7 01       	movw	r24, r14
-    2246:	64 e6       	ldi	r22, 0x64	; 100
-    2248:	70 e0       	ldi	r23, 0x00	; 0
-    224a:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    224e:	7c 01       	movw	r14, r24
-    2250:	31 96       	adiw	r30, 0x01	; 1
-    2252:	cf 01       	movw	r24, r30
-    2254:	64 e6       	ldi	r22, 0x64	; 100
-    2256:	70 e0       	ldi	r23, 0x00	; 0
-    2258:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    225c:	8c 01       	movw	r16, r24
-    225e:	60 5d       	subi	r22, 0xD0	; 208
-    2260:	6d 87       	std	Y+13, r22	; 0x0d
-    2262:	2a e0       	ldi	r18, 0x0A	; 10
-    2264:	30 e0       	ldi	r19, 0x00	; 0
-    2266:	cf 01       	movw	r24, r30
-    2268:	b9 01       	movw	r22, r18
-    226a:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    226e:	cb 01       	movw	r24, r22
-    2270:	b9 01       	movw	r22, r18
-    2272:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    2276:	80 5d       	subi	r24, 0xD0	; 208
-    2278:	8e 87       	std	Y+14, r24	; 0x0e
-    227a:	c8 01       	movw	r24, r16
-    227c:	b9 01       	movw	r22, r18
-    227e:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    2282:	80 5d       	subi	r24, 0xD0	; 208
-    2284:	8f 87       	std	Y+15, r24	; 0x0f
-    2286:	c7 01       	movw	r24, r14
-    2288:	b9 01       	movw	r22, r18
-    228a:	0e 94 e6 14 	call	0x29cc	; 0x29cc <__divmodhi4>
-    228e:	60 5d       	subi	r22, 0xD0	; 208
-    2290:	68 8b       	std	Y+16, r22	; 0x10
-    2292:	80 5d       	subi	r24, 0xD0	; 208
-    2294:	89 8b       	std	Y+17, r24	; 0x11
-    2296:	81 e0       	ldi	r24, 0x01	; 1
-    2298:	0e 94 5a 0f 	call	0x1eb4	; 0x1eb4 <sumDate>
-    229c:	80 e0       	ldi	r24, 0x00	; 0
-    229e:	90 e0       	ldi	r25, 0x00	; 0
-    22a0:	0c c0       	rjmp	.+24     	; 0x22ba <venda_parcelada+0x1a2>
-    22a2:	fc 01       	movw	r30, r24
-    22a4:	ed 51       	subi	r30, 0x1D	; 29
-    22a6:	fa 4f       	sbci	r31, 0xFA	; 250
-    22a8:	20 81       	ld	r18, Z
-    22aa:	e2 e1       	ldi	r30, 0x12	; 18
-    22ac:	f0 e0       	ldi	r31, 0x00	; 0
-    22ae:	ec 0f       	add	r30, r28
-    22b0:	fd 1f       	adc	r31, r29
-    22b2:	e8 0f       	add	r30, r24
-    22b4:	f9 1f       	adc	r31, r25
-    22b6:	20 83       	st	Z, r18
-    22b8:	01 96       	adiw	r24, 0x01	; 1
-    22ba:	86 30       	cpi	r24, 0x06	; 6
-    22bc:	91 05       	cpc	r25, r1
-    22be:	8c f3       	brlt	.-30     	; 0x22a2 <venda_parcelada+0x18a>
-    22c0:	83 e0       	ldi	r24, 0x03	; 3
-    22c2:	b8 12       	cpse	r11, r24
-    22c4:	18 c0       	rjmp	.+48     	; 0x22f6 <venda_parcelada+0x1de>
-    22c6:	82 e0       	ldi	r24, 0x02	; 2
-    22c8:	0e 94 5a 0f 	call	0x1eb4	; 0x1eb4 <sumDate>
-    22cc:	80 e0       	ldi	r24, 0x00	; 0
-    22ce:	90 e0       	ldi	r25, 0x00	; 0
-    22d0:	0e c0       	rjmp	.+28     	; 0x22ee <venda_parcelada+0x1d6>
-    22d2:	fc 01       	movw	r30, r24
-    22d4:	36 96       	adiw	r30, 0x06	; 6
-    22d6:	dc 01       	movw	r26, r24
-    22d8:	ad 51       	subi	r26, 0x1D	; 29
-    22da:	ba 4f       	sbci	r27, 0xFA	; 250
-    22dc:	2c 91       	ld	r18, X
-    22de:	42 e1       	ldi	r20, 0x12	; 18
-    22e0:	50 e0       	ldi	r21, 0x00	; 0
-    22e2:	4c 0f       	add	r20, r28
-    22e4:	5d 1f       	adc	r21, r29
-    22e6:	e4 0f       	add	r30, r20
-    22e8:	f5 1f       	adc	r31, r21
-    22ea:	20 83       	st	Z, r18
-    22ec:	01 96       	adiw	r24, 0x01	; 1
-    22ee:	86 30       	cpi	r24, 0x06	; 6
-    22f0:	91 05       	cpc	r25, r1
-    22f2:	7c f3       	brlt	.-34     	; 0x22d2 <venda_parcelada+0x1ba>
-    22f4:	02 c0       	rjmp	.+4      	; 0x22fa <venda_parcelada+0x1e2>
-    22f6:	89 e0       	ldi	r24, 0x09	; 9
-    22f8:	88 8f       	std	Y+24, r24	; 0x18
-    22fa:	ae 01       	movw	r20, r28
-    22fc:	4e 5e       	subi	r20, 0xEE	; 238
-    22fe:	5f 4f       	sbci	r21, 0xFF	; 255
-    2300:	be 01       	movw	r22, r28
-    2302:	63 5f       	subi	r22, 0xF3	; 243
-    2304:	7f 4f       	sbci	r23, 0xFF	; 255
-    2306:	ce 01       	movw	r24, r28
-    2308:	07 96       	adiw	r24, 0x07	; 7
-    230a:	0e 94 22 10 	call	0x2044	; 0x2044 <addPagamentoAgendado>
-    230e:	6d 96       	adiw	r28, 0x1d	; 29
-    2310:	0f b6       	in	r0, 0x3f	; 63
-    2312:	f8 94       	cli
-    2314:	de bf       	out	0x3e, r29	; 62
-    2316:	0f be       	out	0x3f, r0	; 63
-    2318:	cd bf       	out	0x3d, r28	; 61
-    231a:	df 91       	pop	r29
-    231c:	cf 91       	pop	r28
-    231e:	1f 91       	pop	r17
-    2320:	0f 91       	pop	r16
-    2322:	ff 90       	pop	r15
-    2324:	ef 90       	pop	r14
-    2326:	df 90       	pop	r13
-    2328:	cf 90       	pop	r12
-    232a:	bf 90       	pop	r11
-    232c:	af 90       	pop	r10
-    232e:	08 95       	ret
+000020be <AtualizaStringDataHora>:
+    20be:	0e 94 22 10 	call	0x2044	; 0x2044 <AtualizaStringData>
+    20c2:	08 95       	ret
 
-00002330 <processa_venda>:
-    2330:	81 33       	cpi	r24, 0x31	; 49
-    2332:	91 05       	cpc	r25, r1
-    2334:	19 f4       	brne	.+6      	; 0x233c <processa_venda+0xc>
-    2336:	0e 94 d7 0a 	call	0x15ae	; 0x15ae <venda_avista>
-    233a:	08 95       	ret
-    233c:	82 33       	cpi	r24, 0x32	; 50
-    233e:	91 05       	cpc	r25, r1
-    2340:	19 f4       	brne	.+6      	; 0x2348 <processa_venda+0x18>
-    2342:	0e 94 8c 10 	call	0x2118	; 0x2118 <venda_parcelada>
-    2346:	08 95       	ret
-    2348:	c3 97       	sbiw	r24, 0x33	; 51
-    234a:	11 f4       	brne	.+4      	; 0x2350 <processa_venda+0x20>
-    234c:	0e 94 ae 09 	call	0x135c	; 0x135c <estorno>
-    2350:	08 95       	ret
+000020c4 <addPagamentoAgendado>:
+    20c4:	cf 93       	push	r28
+    20c6:	a0 e0       	ldi	r26, 0x00	; 0
+    20c8:	b0 e0       	ldi	r27, 0x00	; 0
+    20ca:	17 c0       	rjmp	.+46     	; 0x20fa <addPagamentoAgendado+0x36>
+    20cc:	20 91 b0 04 	lds	r18, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    20d0:	30 91 b1 04 	lds	r19, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    20d4:	fc 01       	movw	r30, r24
+    20d6:	ea 0f       	add	r30, r26
+    20d8:	fb 1f       	adc	r31, r27
+    20da:	c0 81       	ld	r28, Z
+    20dc:	f9 01       	movw	r30, r18
+    20de:	ee 0f       	add	r30, r30
+    20e0:	ff 1f       	adc	r31, r31
+    20e2:	e2 0f       	add	r30, r18
+    20e4:	f3 1f       	adc	r31, r19
+    20e6:	ee 0f       	add	r30, r30
+    20e8:	ff 1f       	adc	r31, r31
+    20ea:	e6 5a       	subi	r30, 0xA6	; 166
+    20ec:	fa 4f       	sbci	r31, 0xFA	; 250
+    20ee:	ea 0f       	add	r30, r26
+    20f0:	fb 1f       	adc	r31, r27
+    20f2:	20 ed       	ldi	r18, 0xD0	; 208
+    20f4:	2c 0f       	add	r18, r28
+    20f6:	20 83       	st	Z, r18
+    20f8:	11 96       	adiw	r26, 0x01	; 1
+    20fa:	a6 30       	cpi	r26, 0x06	; 6
+    20fc:	b1 05       	cpc	r27, r1
+    20fe:	34 f3       	brlt	.-52     	; 0x20cc <addPagamentoAgendado+0x8>
+    2100:	20 e0       	ldi	r18, 0x00	; 0
+    2102:	30 e0       	ldi	r19, 0x00	; 0
+    2104:	18 c0       	rjmp	.+48     	; 0x2136 <addPagamentoAgendado+0x72>
+    2106:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    210a:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    210e:	fb 01       	movw	r30, r22
+    2110:	e2 0f       	add	r30, r18
+    2112:	f3 1f       	adc	r31, r19
+    2114:	a0 81       	ld	r26, Z
+    2116:	fc 01       	movw	r30, r24
+    2118:	ee 0f       	add	r30, r30
+    211a:	ff 1f       	adc	r31, r31
+    211c:	ee 0f       	add	r30, r30
+    211e:	ff 1f       	adc	r31, r31
+    2120:	e8 0f       	add	r30, r24
+    2122:	f9 1f       	adc	r31, r25
+    2124:	e4 5c       	subi	r30, 0xC4	; 196
+    2126:	fa 4f       	sbci	r31, 0xFA	; 250
+    2128:	e2 0f       	add	r30, r18
+    212a:	f3 1f       	adc	r31, r19
+    212c:	80 ed       	ldi	r24, 0xD0	; 208
+    212e:	8a 0f       	add	r24, r26
+    2130:	80 83       	st	Z, r24
+    2132:	2f 5f       	subi	r18, 0xFF	; 255
+    2134:	3f 4f       	sbci	r19, 0xFF	; 255
+    2136:	25 30       	cpi	r18, 0x05	; 5
+    2138:	31 05       	cpc	r19, r1
+    213a:	2c f3       	brlt	.-54     	; 0x2106 <addPagamentoAgendado+0x42>
+    213c:	20 e0       	ldi	r18, 0x00	; 0
+    213e:	30 e0       	ldi	r19, 0x00	; 0
+    2140:	1a c0       	rjmp	.+52     	; 0x2176 <addPagamentoAgendado+0xb2>
+    2142:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    2146:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    214a:	fa 01       	movw	r30, r20
+    214c:	e2 0f       	add	r30, r18
+    214e:	f3 1f       	adc	r31, r19
+    2150:	60 81       	ld	r22, Z
+    2152:	fc 01       	movw	r30, r24
+    2154:	ee 0f       	add	r30, r30
+    2156:	ff 1f       	adc	r31, r31
+    2158:	e8 0f       	add	r30, r24
+    215a:	f9 1f       	adc	r31, r25
+    215c:	ee 0f       	add	r30, r30
+    215e:	ff 1f       	adc	r31, r31
+    2160:	ee 0f       	add	r30, r30
+    2162:	ff 1f       	adc	r31, r31
+    2164:	ec 50       	subi	r30, 0x0C	; 12
+    2166:	fb 4f       	sbci	r31, 0xFB	; 251
+    2168:	e2 0f       	add	r30, r18
+    216a:	f3 1f       	adc	r31, r19
+    216c:	80 ed       	ldi	r24, 0xD0	; 208
+    216e:	86 0f       	add	r24, r22
+    2170:	80 83       	st	Z, r24
+    2172:	2f 5f       	subi	r18, 0xFF	; 255
+    2174:	3f 4f       	sbci	r19, 0xFF	; 255
+    2176:	2c 30       	cpi	r18, 0x0C	; 12
+    2178:	31 05       	cpc	r19, r1
+    217a:	1c f3       	brlt	.-58     	; 0x2142 <addPagamentoAgendado+0x7e>
+    217c:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    2180:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    2184:	86 30       	cpi	r24, 0x06	; 6
+    2186:	91 05       	cpc	r25, r1
+    2188:	2c f4       	brge	.+10     	; 0x2194 <addPagamentoAgendado+0xd0>
+    218a:	01 96       	adiw	r24, 0x01	; 1
+    218c:	90 93 b1 04 	sts	0x04B1, r25	; 0x8004b1 <numPagsAgendados+0x1>
+    2190:	80 93 b0 04 	sts	0x04B0, r24	; 0x8004b0 <numPagsAgendados>
+    2194:	cf 91       	pop	r28
+    2196:	08 95       	ret
 
-00002352 <existePendencia>:
-    2352:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
-    2356:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
-    235a:	18 16       	cp	r1, r24
-    235c:	19 06       	cpc	r1, r25
-    235e:	14 f4       	brge	.+4      	; 0x2364 <existePendencia+0x12>
-    2360:	81 e0       	ldi	r24, 0x01	; 1
-    2362:	08 95       	ret
-    2364:	80 e0       	ldi	r24, 0x00	; 0
-    2366:	08 95       	ret
+00002198 <venda_parcelada>:
+    2198:	af 92       	push	r10
+    219a:	bf 92       	push	r11
+    219c:	cf 92       	push	r12
+    219e:	df 92       	push	r13
+    21a0:	ef 92       	push	r14
+    21a2:	ff 92       	push	r15
+    21a4:	0f 93       	push	r16
+    21a6:	1f 93       	push	r17
+    21a8:	cf 93       	push	r28
+    21aa:	df 93       	push	r29
+    21ac:	cd b7       	in	r28, 0x3d	; 61
+    21ae:	de b7       	in	r29, 0x3e	; 62
+    21b0:	6d 97       	sbiw	r28, 0x1d	; 29
+    21b2:	0f b6       	in	r0, 0x3f	; 63
+    21b4:	f8 94       	cli
+    21b6:	de bf       	out	0x3e, r29	; 62
+    21b8:	0f be       	out	0x3f, r0	; 63
+    21ba:	cd bf       	out	0x3d, r28	; 61
+    21bc:	86 e0       	ldi	r24, 0x06	; 6
+    21be:	e4 e1       	ldi	r30, 0x14	; 20
+    21c0:	f1 e0       	ldi	r31, 0x01	; 1
+    21c2:	de 01       	movw	r26, r28
+    21c4:	11 96       	adiw	r26, 0x01	; 1
+    21c6:	01 90       	ld	r0, Z+
+    21c8:	0d 92       	st	X+, r0
+    21ca:	8a 95       	dec	r24
+    21cc:	e1 f7       	brne	.-8      	; 0x21c6 <venda_parcelada+0x2e>
+    21ce:	86 e0       	ldi	r24, 0x06	; 6
+    21d0:	e4 e1       	ldi	r30, 0x14	; 20
+    21d2:	f1 e0       	ldi	r31, 0x01	; 1
+    21d4:	de 01       	movw	r26, r28
+    21d6:	17 96       	adiw	r26, 0x07	; 7
+    21d8:	01 90       	ld	r0, Z+
+    21da:	0d 92       	st	X+, r0
+    21dc:	8a 95       	dec	r24
+    21de:	e1 f7       	brne	.-8      	; 0x21d8 <venda_parcelada+0x40>
+    21e0:	85 e0       	ldi	r24, 0x05	; 5
+    21e2:	ea e1       	ldi	r30, 0x1A	; 26
+    21e4:	f1 e0       	ldi	r31, 0x01	; 1
+    21e6:	de 01       	movw	r26, r28
+    21e8:	1d 96       	adiw	r26, 0x0d	; 13
+    21ea:	01 90       	ld	r0, Z+
+    21ec:	0d 92       	st	X+, r0
+    21ee:	8a 95       	dec	r24
+    21f0:	e1 f7       	brne	.-8      	; 0x21ea <venda_parcelada+0x52>
+    21f2:	0e 94 da 06 	call	0xdb4	; 0xdb4 <tela_vendaParcelada>
+    21f6:	ce 01       	movw	r24, r28
+    21f8:	0d 96       	adiw	r24, 0x0d	; 13
+    21fa:	0e 94 59 04 	call	0x8b2	; 0x8b2 <recebe_valor>
+    21fe:	ce 01       	movw	r24, r28
+    2200:	0d 96       	adiw	r24, 0x0d	; 13
+    2202:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <formata_valor>
+    2206:	0e 94 37 07 	call	0xe6e	; 0xe6e <n_parcelas>
+    220a:	b8 2e       	mov	r11, r24
+    220c:	0e 94 8c 05 	call	0xb18	; 0xb18 <metodo_pagamento>
+    2210:	a8 2e       	mov	r10, r24
+    2212:	0e 94 a6 05 	call	0xb4c	; 0xb4c <aguarda_cartao>
+    2216:	cb 2c       	mov	r12, r11
+    2218:	d1 2c       	mov	r13, r1
+    221a:	bc 01       	movw	r22, r24
+    221c:	77 27       	eor	r23, r23
+    221e:	ae 01       	movw	r20, r28
+    2220:	49 5f       	subi	r20, 0xF9	; 249
+    2222:	5f 4f       	sbci	r21, 0xFF	; 255
+    2224:	7a 01       	movw	r14, r20
+    2226:	8e 01       	movw	r16, r28
+    2228:	0f 5f       	subi	r16, 0xFF	; 255
+    222a:	1f 4f       	sbci	r17, 0xFF	; 255
+    222c:	9e 01       	movw	r18, r28
+    222e:	23 5f       	subi	r18, 0xF3	; 243
+    2230:	3f 4f       	sbci	r19, 0xFF	; 255
+    2232:	4a 2d       	mov	r20, r10
+    2234:	c6 01       	movw	r24, r12
+    2236:	0e 94 30 0a 	call	0x1460	; 0x1460 <processa_pagamento>
+    223a:	49 89       	ldd	r20, Y+17	; 0x11
+    223c:	50 e0       	ldi	r21, 0x00	; 0
+    223e:	40 53       	subi	r20, 0x30	; 48
+    2240:	51 09       	sbc	r21, r1
+    2242:	24 e6       	ldi	r18, 0x64	; 100
+    2244:	24 9f       	mul	r18, r20
+    2246:	c0 01       	movw	r24, r0
+    2248:	25 9f       	mul	r18, r21
+    224a:	90 0d       	add	r25, r0
+    224c:	11 24       	eor	r1, r1
+    224e:	48 89       	ldd	r20, Y+16	; 0x10
+    2250:	50 e0       	ldi	r21, 0x00	; 0
+    2252:	9a 01       	movw	r18, r20
+    2254:	20 53       	subi	r18, 0x30	; 48
+    2256:	31 09       	sbc	r19, r1
+    2258:	b9 01       	movw	r22, r18
+    225a:	66 0f       	add	r22, r22
+    225c:	77 1f       	adc	r23, r23
+    225e:	a9 01       	movw	r20, r18
+    2260:	44 0f       	add	r20, r20
+    2262:	55 1f       	adc	r21, r21
+    2264:	44 0f       	add	r20, r20
+    2266:	55 1f       	adc	r21, r21
+    2268:	44 0f       	add	r20, r20
+    226a:	55 1f       	adc	r21, r21
+    226c:	9b 01       	movw	r18, r22
+    226e:	24 0f       	add	r18, r20
+    2270:	35 1f       	adc	r19, r21
+    2272:	28 0f       	add	r18, r24
+    2274:	39 1f       	adc	r19, r25
+    2276:	8f 85       	ldd	r24, Y+15	; 0x0f
+    2278:	90 e0       	ldi	r25, 0x00	; 0
+    227a:	c0 97       	sbiw	r24, 0x30	; 48
+    227c:	82 0f       	add	r24, r18
+    227e:	93 1f       	adc	r25, r19
+    2280:	b6 01       	movw	r22, r12
+    2282:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    2286:	7c 01       	movw	r14, r24
+    2288:	fb 01       	movw	r30, r22
+    228a:	2e 85       	ldd	r18, Y+14	; 0x0e
+    228c:	30 e0       	ldi	r19, 0x00	; 0
+    228e:	20 53       	subi	r18, 0x30	; 48
+    2290:	31 09       	sbc	r19, r1
+    2292:	c9 01       	movw	r24, r18
+    2294:	88 0f       	add	r24, r24
+    2296:	99 1f       	adc	r25, r25
+    2298:	22 0f       	add	r18, r18
+    229a:	33 1f       	adc	r19, r19
+    229c:	22 0f       	add	r18, r18
+    229e:	33 1f       	adc	r19, r19
+    22a0:	22 0f       	add	r18, r18
+    22a2:	33 1f       	adc	r19, r19
+    22a4:	28 0f       	add	r18, r24
+    22a6:	39 1f       	adc	r19, r25
+    22a8:	8d 85       	ldd	r24, Y+13	; 0x0d
+    22aa:	90 e0       	ldi	r25, 0x00	; 0
+    22ac:	c0 97       	sbiw	r24, 0x30	; 48
+    22ae:	82 0f       	add	r24, r18
+    22b0:	93 1f       	adc	r25, r19
+    22b2:	b6 01       	movw	r22, r12
+    22b4:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    22b8:	e6 0e       	add	r14, r22
+    22ba:	f7 1e       	adc	r15, r23
+    22bc:	54 e6       	ldi	r21, 0x64	; 100
+    22be:	e5 16       	cp	r14, r21
+    22c0:	f1 04       	cpc	r15, r1
+    22c2:	3c f0       	brlt	.+14     	; 0x22d2 <venda_parcelada+0x13a>
+    22c4:	c7 01       	movw	r24, r14
+    22c6:	64 e6       	ldi	r22, 0x64	; 100
+    22c8:	70 e0       	ldi	r23, 0x00	; 0
+    22ca:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    22ce:	7c 01       	movw	r14, r24
+    22d0:	31 96       	adiw	r30, 0x01	; 1
+    22d2:	cf 01       	movw	r24, r30
+    22d4:	64 e6       	ldi	r22, 0x64	; 100
+    22d6:	70 e0       	ldi	r23, 0x00	; 0
+    22d8:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    22dc:	8c 01       	movw	r16, r24
+    22de:	60 5d       	subi	r22, 0xD0	; 208
+    22e0:	6d 87       	std	Y+13, r22	; 0x0d
+    22e2:	2a e0       	ldi	r18, 0x0A	; 10
+    22e4:	30 e0       	ldi	r19, 0x00	; 0
+    22e6:	cf 01       	movw	r24, r30
+    22e8:	b9 01       	movw	r22, r18
+    22ea:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    22ee:	cb 01       	movw	r24, r22
+    22f0:	b9 01       	movw	r22, r18
+    22f2:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    22f6:	80 5d       	subi	r24, 0xD0	; 208
+    22f8:	8e 87       	std	Y+14, r24	; 0x0e
+    22fa:	c8 01       	movw	r24, r16
+    22fc:	b9 01       	movw	r22, r18
+    22fe:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    2302:	80 5d       	subi	r24, 0xD0	; 208
+    2304:	8f 87       	std	Y+15, r24	; 0x0f
+    2306:	c7 01       	movw	r24, r14
+    2308:	b9 01       	movw	r22, r18
+    230a:	0e 94 04 18 	call	0x3008	; 0x3008 <__divmodhi4>
+    230e:	60 5d       	subi	r22, 0xD0	; 208
+    2310:	68 8b       	std	Y+16, r22	; 0x10
+    2312:	80 5d       	subi	r24, 0xD0	; 208
+    2314:	89 8b       	std	Y+17, r24	; 0x11
+    2316:	81 e0       	ldi	r24, 0x01	; 1
+    2318:	0e 94 5a 0f 	call	0x1eb4	; 0x1eb4 <sumDate>
+    231c:	80 e0       	ldi	r24, 0x00	; 0
+    231e:	90 e0       	ldi	r25, 0x00	; 0
+    2320:	0c c0       	rjmp	.+24     	; 0x233a <venda_parcelada+0x1a2>
+    2322:	fc 01       	movw	r30, r24
+    2324:	ed 51       	subi	r30, 0x1D	; 29
+    2326:	fa 4f       	sbci	r31, 0xFA	; 250
+    2328:	20 81       	ld	r18, Z
+    232a:	e2 e1       	ldi	r30, 0x12	; 18
+    232c:	f0 e0       	ldi	r31, 0x00	; 0
+    232e:	ec 0f       	add	r30, r28
+    2330:	fd 1f       	adc	r31, r29
+    2332:	e8 0f       	add	r30, r24
+    2334:	f9 1f       	adc	r31, r25
+    2336:	20 83       	st	Z, r18
+    2338:	01 96       	adiw	r24, 0x01	; 1
+    233a:	86 30       	cpi	r24, 0x06	; 6
+    233c:	91 05       	cpc	r25, r1
+    233e:	8c f3       	brlt	.-30     	; 0x2322 <venda_parcelada+0x18a>
+    2340:	83 e0       	ldi	r24, 0x03	; 3
+    2342:	b8 12       	cpse	r11, r24
+    2344:	18 c0       	rjmp	.+48     	; 0x2376 <venda_parcelada+0x1de>
+    2346:	82 e0       	ldi	r24, 0x02	; 2
+    2348:	0e 94 5a 0f 	call	0x1eb4	; 0x1eb4 <sumDate>
+    234c:	80 e0       	ldi	r24, 0x00	; 0
+    234e:	90 e0       	ldi	r25, 0x00	; 0
+    2350:	0e c0       	rjmp	.+28     	; 0x236e <venda_parcelada+0x1d6>
+    2352:	fc 01       	movw	r30, r24
+    2354:	36 96       	adiw	r30, 0x06	; 6
+    2356:	dc 01       	movw	r26, r24
+    2358:	ad 51       	subi	r26, 0x1D	; 29
+    235a:	ba 4f       	sbci	r27, 0xFA	; 250
+    235c:	2c 91       	ld	r18, X
+    235e:	42 e1       	ldi	r20, 0x12	; 18
+    2360:	50 e0       	ldi	r21, 0x00	; 0
+    2362:	4c 0f       	add	r20, r28
+    2364:	5d 1f       	adc	r21, r29
+    2366:	e4 0f       	add	r30, r20
+    2368:	f5 1f       	adc	r31, r21
+    236a:	20 83       	st	Z, r18
+    236c:	01 96       	adiw	r24, 0x01	; 1
+    236e:	86 30       	cpi	r24, 0x06	; 6
+    2370:	91 05       	cpc	r25, r1
+    2372:	7c f3       	brlt	.-34     	; 0x2352 <venda_parcelada+0x1ba>
+    2374:	02 c0       	rjmp	.+4      	; 0x237a <venda_parcelada+0x1e2>
+    2376:	89 e0       	ldi	r24, 0x09	; 9
+    2378:	88 8f       	std	Y+24, r24	; 0x18
+    237a:	ae 01       	movw	r20, r28
+    237c:	4e 5e       	subi	r20, 0xEE	; 238
+    237e:	5f 4f       	sbci	r21, 0xFF	; 255
+    2380:	be 01       	movw	r22, r28
+    2382:	63 5f       	subi	r22, 0xF3	; 243
+    2384:	7f 4f       	sbci	r23, 0xFF	; 255
+    2386:	ce 01       	movw	r24, r28
+    2388:	07 96       	adiw	r24, 0x07	; 7
+    238a:	0e 94 62 10 	call	0x20c4	; 0x20c4 <addPagamentoAgendado>
+    238e:	6d 96       	adiw	r28, 0x1d	; 29
+    2390:	0f b6       	in	r0, 0x3f	; 63
+    2392:	f8 94       	cli
+    2394:	de bf       	out	0x3e, r29	; 62
+    2396:	0f be       	out	0x3f, r0	; 63
+    2398:	cd bf       	out	0x3d, r28	; 61
+    239a:	df 91       	pop	r29
+    239c:	cf 91       	pop	r28
+    239e:	1f 91       	pop	r17
+    23a0:	0f 91       	pop	r16
+    23a2:	ff 90       	pop	r15
+    23a4:	ef 90       	pop	r14
+    23a6:	df 90       	pop	r13
+    23a8:	cf 90       	pop	r12
+    23aa:	bf 90       	pop	r11
+    23ac:	af 90       	pop	r10
+    23ae:	08 95       	ret
 
-00002368 <removePendencias>:
-    2368:	cf 93       	push	r28
-    236a:	df 93       	push	r29
-    236c:	90 e0       	ldi	r25, 0x00	; 0
-    236e:	a0 91 ae 04 	lds	r26, 0x04AE	; 0x8004ae <__data_end>
-    2372:	b0 91 af 04 	lds	r27, 0x04AF	; 0x8004af <__data_end+0x1>
-    2376:	a8 17       	cp	r26, r24
-    2378:	b9 07       	cpc	r27, r25
-    237a:	0c f4       	brge	.+2      	; 0x237e <removePendencias+0x16>
-    237c:	63 c0       	rjmp	.+198    	; 0x2444 <removePendencias+0xdc>
-    237e:	bc 01       	movw	r22, r24
-    2380:	2f c0       	rjmp	.+94     	; 0x23e0 <removePendencias+0x78>
-    2382:	9b 01       	movw	r18, r22
-    2384:	2f 5f       	subi	r18, 0xFF	; 255
-    2386:	3f 4f       	sbci	r19, 0xFF	; 255
-    2388:	f9 01       	movw	r30, r18
-    238a:	ee 0f       	add	r30, r30
-    238c:	ff 1f       	adc	r31, r31
-    238e:	ef 01       	movw	r28, r30
-    2390:	c2 0f       	add	r28, r18
-    2392:	d3 1f       	adc	r29, r19
-    2394:	cc 0f       	add	r28, r28
-    2396:	dd 1f       	adc	r29, r29
-    2398:	c0 53       	subi	r28, 0x30	; 48
-    239a:	db 4f       	sbci	r29, 0xFB	; 251
-    239c:	c4 0f       	add	r28, r20
-    239e:	d5 1f       	adc	r29, r21
-    23a0:	c8 81       	ld	r28, Y
-    23a2:	e2 0f       	add	r30, r18
-    23a4:	f3 1f       	adc	r31, r19
-    23a6:	ee 0f       	add	r30, r30
-    23a8:	ff 1f       	adc	r31, r31
-    23aa:	e0 53       	subi	r30, 0x30	; 48
-    23ac:	fb 4f       	sbci	r31, 0xFB	; 251
-    23ae:	e4 0f       	add	r30, r20
-    23b0:	f5 1f       	adc	r31, r21
-    23b2:	10 82       	st	Z, r1
-    23b4:	fb 01       	movw	r30, r22
-    23b6:	ee 0f       	add	r30, r30
-    23b8:	ff 1f       	adc	r31, r31
-    23ba:	e6 0f       	add	r30, r22
-    23bc:	f7 1f       	adc	r31, r23
-    23be:	ee 0f       	add	r30, r30
-    23c0:	ff 1f       	adc	r31, r31
-    23c2:	e0 53       	subi	r30, 0x30	; 48
-    23c4:	fb 4f       	sbci	r31, 0xFB	; 251
-    23c6:	e4 0f       	add	r30, r20
-    23c8:	f5 1f       	adc	r31, r21
-    23ca:	c0 83       	st	Z, r28
-    23cc:	4f 5f       	subi	r20, 0xFF	; 255
-    23ce:	5f 4f       	sbci	r21, 0xFF	; 255
-    23d0:	02 c0       	rjmp	.+4      	; 0x23d6 <removePendencias+0x6e>
-    23d2:	40 e0       	ldi	r20, 0x00	; 0
-    23d4:	50 e0       	ldi	r21, 0x00	; 0
-    23d6:	66 30       	cpi	r22, 0x06	; 6
-    23d8:	71 05       	cpc	r23, r1
-    23da:	9c f2       	brlt	.-90     	; 0x2382 <removePendencias+0x1a>
-    23dc:	6f 5f       	subi	r22, 0xFF	; 255
-    23de:	7f 4f       	sbci	r23, 0xFF	; 255
-    23e0:	6a 17       	cp	r22, r26
-    23e2:	7b 07       	cpc	r23, r27
-    23e4:	b4 f3       	brlt	.-20     	; 0x23d2 <removePendencias+0x6a>
-    23e6:	24 c0       	rjmp	.+72     	; 0x2430 <removePendencias+0xc8>
-    23e8:	fc 01       	movw	r30, r24
-    23ea:	31 96       	adiw	r30, 0x01	; 1
-    23ec:	af 01       	movw	r20, r30
-    23ee:	44 0f       	add	r20, r20
-    23f0:	55 1f       	adc	r21, r21
-    23f2:	44 0f       	add	r20, r20
-    23f4:	55 1f       	adc	r21, r21
-    23f6:	e4 0f       	add	r30, r20
-    23f8:	f5 1f       	adc	r31, r21
-    23fa:	ee 54       	subi	r30, 0x4E	; 78
-    23fc:	fb 4f       	sbci	r31, 0xFB	; 251
-    23fe:	e2 0f       	add	r30, r18
-    2400:	f3 1f       	adc	r31, r19
-    2402:	40 81       	ld	r20, Z
-    2404:	10 82       	st	Z, r1
-    2406:	fc 01       	movw	r30, r24
-    2408:	ee 0f       	add	r30, r30
-    240a:	ff 1f       	adc	r31, r31
-    240c:	ee 0f       	add	r30, r30
-    240e:	ff 1f       	adc	r31, r31
-    2410:	e8 0f       	add	r30, r24
-    2412:	f9 1f       	adc	r31, r25
-    2414:	ee 54       	subi	r30, 0x4E	; 78
-    2416:	fb 4f       	sbci	r31, 0xFB	; 251
-    2418:	e2 0f       	add	r30, r18
-    241a:	f3 1f       	adc	r31, r19
-    241c:	40 83       	st	Z, r20
-    241e:	2f 5f       	subi	r18, 0xFF	; 255
-    2420:	3f 4f       	sbci	r19, 0xFF	; 255
-    2422:	02 c0       	rjmp	.+4      	; 0x2428 <removePendencias+0xc0>
-    2424:	20 e0       	ldi	r18, 0x00	; 0
-    2426:	30 e0       	ldi	r19, 0x00	; 0
-    2428:	85 30       	cpi	r24, 0x05	; 5
-    242a:	91 05       	cpc	r25, r1
-    242c:	ec f2       	brlt	.-70     	; 0x23e8 <removePendencias+0x80>
-    242e:	01 96       	adiw	r24, 0x01	; 1
-    2430:	8a 17       	cp	r24, r26
-    2432:	9b 07       	cpc	r25, r27
-    2434:	bc f3       	brlt	.-18     	; 0x2424 <removePendencias+0xbc>
-    2436:	11 97       	sbiw	r26, 0x01	; 1
-    2438:	b0 93 af 04 	sts	0x04AF, r27	; 0x8004af <__data_end+0x1>
-    243c:	a0 93 ae 04 	sts	0x04AE, r26	; 0x8004ae <__data_end>
-    2440:	81 e0       	ldi	r24, 0x01	; 1
-    2442:	01 c0       	rjmp	.+2      	; 0x2446 <removePendencias+0xde>
-    2444:	80 e0       	ldi	r24, 0x00	; 0
-    2446:	df 91       	pop	r29
-    2448:	cf 91       	pop	r28
-    244a:	08 95       	ret
+000023b0 <processa_venda>:
+    23b0:	81 33       	cpi	r24, 0x31	; 49
+    23b2:	91 05       	cpc	r25, r1
+    23b4:	19 f4       	brne	.+6      	; 0x23bc <processa_venda+0xc>
+    23b6:	0e 94 d7 0a 	call	0x15ae	; 0x15ae <venda_avista>
+    23ba:	08 95       	ret
+    23bc:	82 33       	cpi	r24, 0x32	; 50
+    23be:	91 05       	cpc	r25, r1
+    23c0:	19 f4       	brne	.+6      	; 0x23c8 <processa_venda+0x18>
+    23c2:	0e 94 cc 10 	call	0x2198	; 0x2198 <venda_parcelada>
+    23c6:	08 95       	ret
+    23c8:	c3 97       	sbiw	r24, 0x33	; 51
+    23ca:	11 f4       	brne	.+4      	; 0x23d0 <processa_venda+0x20>
+    23cc:	0e 94 ae 09 	call	0x135c	; 0x135c <estorno>
+    23d0:	08 95       	ret
 
-0000244c <printNumPendencia>:
-    244c:	0f 93       	push	r16
-    244e:	1f 93       	push	r17
-    2450:	cf 93       	push	r28
-    2452:	df 93       	push	r29
-    2454:	8c 01       	movw	r16, r24
-    2456:	c0 e0       	ldi	r28, 0x00	; 0
-    2458:	d0 e0       	ldi	r29, 0x00	; 0
-    245a:	10 c0       	rjmp	.+32     	; 0x247c <printNumPendencia+0x30>
-    245c:	f8 01       	movw	r30, r16
-    245e:	ee 0f       	add	r30, r30
-    2460:	ff 1f       	adc	r31, r31
-    2462:	e0 0f       	add	r30, r16
-    2464:	f1 1f       	adc	r31, r17
-    2466:	ee 0f       	add	r30, r30
-    2468:	ff 1f       	adc	r31, r31
-    246a:	e0 53       	subi	r30, 0x30	; 48
-    246c:	fb 4f       	sbci	r31, 0xFB	; 251
-    246e:	ec 0f       	add	r30, r28
-    2470:	fd 1f       	adc	r31, r29
-    2472:	80 81       	ld	r24, Z
-    2474:	80 5d       	subi	r24, 0xD0	; 208
-    2476:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    247a:	21 96       	adiw	r28, 0x01	; 1
-    247c:	c6 30       	cpi	r28, 0x06	; 6
-    247e:	d1 05       	cpc	r29, r1
-    2480:	6c f3       	brlt	.-38     	; 0x245c <printNumPendencia+0x10>
-    2482:	8b e7       	ldi	r24, 0x7B	; 123
-    2484:	94 e0       	ldi	r25, 0x04	; 4
-    2486:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    248a:	c0 e0       	ldi	r28, 0x00	; 0
-    248c:	d0 e0       	ldi	r29, 0x00	; 0
-    248e:	10 c0       	rjmp	.+32     	; 0x24b0 <printNumPendencia+0x64>
-    2490:	f8 01       	movw	r30, r16
-    2492:	ee 0f       	add	r30, r30
-    2494:	ff 1f       	adc	r31, r31
-    2496:	ee 0f       	add	r30, r30
-    2498:	ff 1f       	adc	r31, r31
-    249a:	e0 0f       	add	r30, r16
-    249c:	f1 1f       	adc	r31, r17
-    249e:	ee 54       	subi	r30, 0x4E	; 78
-    24a0:	fb 4f       	sbci	r31, 0xFB	; 251
-    24a2:	ec 0f       	add	r30, r28
-    24a4:	fd 1f       	adc	r31, r29
-    24a6:	80 81       	ld	r24, Z
-    24a8:	80 5d       	subi	r24, 0xD0	; 208
-    24aa:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    24ae:	21 96       	adiw	r28, 0x01	; 1
-    24b0:	c5 30       	cpi	r28, 0x05	; 5
-    24b2:	d1 05       	cpc	r29, r1
-    24b4:	6c f3       	brlt	.-38     	; 0x2490 <printNumPendencia+0x44>
-    24b6:	86 e8       	ldi	r24, 0x86	; 134
-    24b8:	94 e0       	ldi	r25, 0x04	; 4
-    24ba:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    24be:	80 e3       	ldi	r24, 0x30	; 48
-    24c0:	80 0f       	add	r24, r16
-    24c2:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
-    24c6:	df 91       	pop	r29
-    24c8:	cf 91       	pop	r28
-    24ca:	1f 91       	pop	r17
-    24cc:	0f 91       	pop	r16
-    24ce:	08 95       	ret
+000023d2 <comparaCartoes>:
+    23d2:	dc 01       	movw	r26, r24
+    23d4:	20 e0       	ldi	r18, 0x00	; 0
+    23d6:	30 e0       	ldi	r19, 0x00	; 0
+    23d8:	0c c0       	rjmp	.+24     	; 0x23f2 <comparaCartoes+0x20>
+    23da:	fd 01       	movw	r30, r26
+    23dc:	e2 0f       	add	r30, r18
+    23de:	f3 1f       	adc	r31, r19
+    23e0:	40 81       	ld	r20, Z
+    23e2:	fb 01       	movw	r30, r22
+    23e4:	e2 0f       	add	r30, r18
+    23e6:	f3 1f       	adc	r31, r19
+    23e8:	90 81       	ld	r25, Z
+    23ea:	49 13       	cpse	r20, r25
+    23ec:	08 c0       	rjmp	.+16     	; 0x23fe <comparaCartoes+0x2c>
+    23ee:	2f 5f       	subi	r18, 0xFF	; 255
+    23f0:	3f 4f       	sbci	r19, 0xFF	; 255
+    23f2:	26 30       	cpi	r18, 0x06	; 6
+    23f4:	31 05       	cpc	r19, r1
+    23f6:	8c f3       	brlt	.-30     	; 0x23da <comparaCartoes+0x8>
+    23f8:	81 e0       	ldi	r24, 0x01	; 1
+    23fa:	90 e0       	ldi	r25, 0x00	; 0
+    23fc:	08 95       	ret
+    23fe:	80 e0       	ldi	r24, 0x00	; 0
+    2400:	90 e0       	ldi	r25, 0x00	; 0
+    2402:	08 95       	ret
 
-000024d0 <printPendencias>:
-    24d0:	20 91 ae 04 	lds	r18, 0x04AE	; 0x8004ae <__data_end>
-    24d4:	30 91 af 04 	lds	r19, 0x04AF	; 0x8004af <__data_end+0x1>
-    24d8:	12 16       	cp	r1, r18
-    24da:	13 06       	cpc	r1, r19
-    24dc:	0c f0       	brlt	.+2      	; 0x24e0 <printPendencias+0x10>
-    24de:	7a c0       	rjmp	.+244    	; 0x25d4 <printPendencias+0x104>
-    24e0:	81 30       	cpi	r24, 0x01	; 1
-    24e2:	21 f5       	brne	.+72     	; 0x252c <printPendencias+0x5c>
-    24e4:	12 16       	cp	r1, r18
-    24e6:	13 06       	cpc	r1, r19
-    24e8:	0c f5       	brge	.+66     	; 0x252c <printPendencias+0x5c>
-    24ea:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    24ee:	80 e8       	ldi	r24, 0x80	; 128
-    24f0:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    24f4:	80 e0       	ldi	r24, 0x00	; 0
-    24f6:	90 e0       	ldi	r25, 0x00	; 0
-    24f8:	0e 94 26 12 	call	0x244c	; 0x244c <printNumPendencia>
-    24fc:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
-    2500:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
-    2504:	02 97       	sbiw	r24, 0x02	; 2
-    2506:	3c f0       	brlt	.+14     	; 0x2516 <printPendencias+0x46>
-    2508:	80 ec       	ldi	r24, 0xC0	; 192
-    250a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    250e:	81 e0       	ldi	r24, 0x01	; 1
-    2510:	90 e0       	ldi	r25, 0x00	; 0
-    2512:	0e 94 26 12 	call	0x244c	; 0x244c <printNumPendencia>
-    2516:	2f ef       	ldi	r18, 0xFF	; 255
-    2518:	89 e7       	ldi	r24, 0x79	; 121
-    251a:	9f e3       	ldi	r25, 0x3F	; 63
-    251c:	21 50       	subi	r18, 0x01	; 1
-    251e:	80 40       	sbci	r24, 0x00	; 0
-    2520:	90 40       	sbci	r25, 0x00	; 0
-    2522:	e1 f7       	brne	.-8      	; 0x251c <printPendencias+0x4c>
-    2524:	00 c0       	rjmp	.+0      	; 0x2526 <printPendencias+0x56>
-    2526:	00 00       	nop
-    2528:	81 e0       	ldi	r24, 0x01	; 1
-    252a:	08 95       	ret
-    252c:	82 30       	cpi	r24, 0x02	; 2
-    252e:	41 f5       	brne	.+80     	; 0x2580 <printPendencias+0xb0>
-    2530:	23 30       	cpi	r18, 0x03	; 3
-    2532:	31 05       	cpc	r19, r1
-    2534:	2c f1       	brlt	.+74     	; 0x2580 <printPendencias+0xb0>
-    2536:	23 30       	cpi	r18, 0x03	; 3
-    2538:	31 05       	cpc	r19, r1
-    253a:	54 f0       	brlt	.+20     	; 0x2550 <printPendencias+0x80>
-    253c:	81 e0       	ldi	r24, 0x01	; 1
-    253e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    2542:	80 e8       	ldi	r24, 0x80	; 128
-    2544:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    2548:	82 e0       	ldi	r24, 0x02	; 2
-    254a:	90 e0       	ldi	r25, 0x00	; 0
-    254c:	0e 94 26 12 	call	0x244c	; 0x244c <printNumPendencia>
-    2550:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
-    2554:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
-    2558:	04 97       	sbiw	r24, 0x04	; 4
-    255a:	3c f0       	brlt	.+14     	; 0x256a <printPendencias+0x9a>
-    255c:	80 ec       	ldi	r24, 0xC0	; 192
-    255e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    2562:	83 e0       	ldi	r24, 0x03	; 3
-    2564:	90 e0       	ldi	r25, 0x00	; 0
-    2566:	0e 94 26 12 	call	0x244c	; 0x244c <printNumPendencia>
-    256a:	2f ef       	ldi	r18, 0xFF	; 255
-    256c:	89 e7       	ldi	r24, 0x79	; 121
-    256e:	9f e3       	ldi	r25, 0x3F	; 63
-    2570:	21 50       	subi	r18, 0x01	; 1
-    2572:	80 40       	sbci	r24, 0x00	; 0
-    2574:	90 40       	sbci	r25, 0x00	; 0
-    2576:	e1 f7       	brne	.-8      	; 0x2570 <printPendencias+0xa0>
-    2578:	00 c0       	rjmp	.+0      	; 0x257a <printPendencias+0xaa>
-    257a:	00 00       	nop
-    257c:	81 e0       	ldi	r24, 0x01	; 1
-    257e:	08 95       	ret
-    2580:	83 30       	cpi	r24, 0x03	; 3
-    2582:	51 f5       	brne	.+84     	; 0x25d8 <printPendencias+0x108>
-    2584:	24 30       	cpi	r18, 0x04	; 4
-    2586:	31 05       	cpc	r19, r1
-    2588:	4c f1       	brlt	.+82     	; 0x25dc <printPendencias+0x10c>
-    258a:	25 30       	cpi	r18, 0x05	; 5
-    258c:	31 05       	cpc	r19, r1
-    258e:	54 f0       	brlt	.+20     	; 0x25a4 <printPendencias+0xd4>
-    2590:	81 e0       	ldi	r24, 0x01	; 1
-    2592:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    2596:	80 e8       	ldi	r24, 0x80	; 128
-    2598:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    259c:	84 e0       	ldi	r24, 0x04	; 4
-    259e:	90 e0       	ldi	r25, 0x00	; 0
-    25a0:	0e 94 26 12 	call	0x244c	; 0x244c <printNumPendencia>
-    25a4:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
-    25a8:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
-    25ac:	06 97       	sbiw	r24, 0x06	; 6
-    25ae:	3c f0       	brlt	.+14     	; 0x25be <printPendencias+0xee>
-    25b0:	80 ec       	ldi	r24, 0xC0	; 192
-    25b2:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    25b6:	85 e0       	ldi	r24, 0x05	; 5
-    25b8:	90 e0       	ldi	r25, 0x00	; 0
-    25ba:	0e 94 26 12 	call	0x244c	; 0x244c <printNumPendencia>
-    25be:	2f ef       	ldi	r18, 0xFF	; 255
-    25c0:	89 e7       	ldi	r24, 0x79	; 121
-    25c2:	9f e3       	ldi	r25, 0x3F	; 63
-    25c4:	21 50       	subi	r18, 0x01	; 1
-    25c6:	80 40       	sbci	r24, 0x00	; 0
-    25c8:	90 40       	sbci	r25, 0x00	; 0
-    25ca:	e1 f7       	brne	.-8      	; 0x25c4 <printPendencias+0xf4>
-    25cc:	00 c0       	rjmp	.+0      	; 0x25ce <printPendencias+0xfe>
-    25ce:	00 00       	nop
-    25d0:	81 e0       	ldi	r24, 0x01	; 1
-    25d2:	08 95       	ret
-    25d4:	80 e0       	ldi	r24, 0x00	; 0
-    25d6:	08 95       	ret
-    25d8:	81 e0       	ldi	r24, 0x01	; 1
-    25da:	08 95       	ret
+00002404 <organizaPagamentos>:
+    2404:	ac 01       	movw	r20, r24
+    2406:	2f c0       	rjmp	.+94     	; 0x2466 <organizaPagamentos+0x62>
+    2408:	9a 01       	movw	r18, r20
+    240a:	2f 5f       	subi	r18, 0xFF	; 255
+    240c:	3f 4f       	sbci	r19, 0xFF	; 255
+    240e:	f9 01       	movw	r30, r18
+    2410:	ee 0f       	add	r30, r30
+    2412:	ff 1f       	adc	r31, r31
+    2414:	df 01       	movw	r26, r30
+    2416:	a2 0f       	add	r26, r18
+    2418:	b3 1f       	adc	r27, r19
+    241a:	aa 0f       	add	r26, r26
+    241c:	bb 1f       	adc	r27, r27
+    241e:	a6 5a       	subi	r26, 0xA6	; 166
+    2420:	ba 4f       	sbci	r27, 0xFA	; 250
+    2422:	a6 0f       	add	r26, r22
+    2424:	b7 1f       	adc	r27, r23
+    2426:	ac 91       	ld	r26, X
+    2428:	e2 0f       	add	r30, r18
+    242a:	f3 1f       	adc	r31, r19
+    242c:	ee 0f       	add	r30, r30
+    242e:	ff 1f       	adc	r31, r31
+    2430:	e6 5a       	subi	r30, 0xA6	; 166
+    2432:	fa 4f       	sbci	r31, 0xFA	; 250
+    2434:	e6 0f       	add	r30, r22
+    2436:	f7 1f       	adc	r31, r23
+    2438:	10 82       	st	Z, r1
+    243a:	fa 01       	movw	r30, r20
+    243c:	ee 0f       	add	r30, r30
+    243e:	ff 1f       	adc	r31, r31
+    2440:	e4 0f       	add	r30, r20
+    2442:	f5 1f       	adc	r31, r21
+    2444:	ee 0f       	add	r30, r30
+    2446:	ff 1f       	adc	r31, r31
+    2448:	e6 5a       	subi	r30, 0xA6	; 166
+    244a:	fa 4f       	sbci	r31, 0xFA	; 250
+    244c:	e6 0f       	add	r30, r22
+    244e:	f7 1f       	adc	r31, r23
+    2450:	a0 83       	st	Z, r26
+    2452:	6f 5f       	subi	r22, 0xFF	; 255
+    2454:	7f 4f       	sbci	r23, 0xFF	; 255
+    2456:	02 c0       	rjmp	.+4      	; 0x245c <organizaPagamentos+0x58>
+    2458:	60 e0       	ldi	r22, 0x00	; 0
+    245a:	70 e0       	ldi	r23, 0x00	; 0
+    245c:	46 30       	cpi	r20, 0x06	; 6
+    245e:	51 05       	cpc	r21, r1
+    2460:	9c f2       	brlt	.-90     	; 0x2408 <organizaPagamentos+0x4>
+    2462:	4f 5f       	subi	r20, 0xFF	; 255
+    2464:	5f 4f       	sbci	r21, 0xFF	; 255
+    2466:	60 91 b0 04 	lds	r22, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    246a:	70 91 b1 04 	lds	r23, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    246e:	46 17       	cp	r20, r22
+    2470:	57 07       	cpc	r21, r23
+    2472:	94 f3       	brlt	.-28     	; 0x2458 <organizaPagamentos+0x54>
+    2474:	ac 01       	movw	r20, r24
+    2476:	25 c0       	rjmp	.+74     	; 0x24c2 <organizaPagamentos+0xbe>
+    2478:	9a 01       	movw	r18, r20
+    247a:	2f 5f       	subi	r18, 0xFF	; 255
+    247c:	3f 4f       	sbci	r19, 0xFF	; 255
+    247e:	f9 01       	movw	r30, r18
+    2480:	ee 0f       	add	r30, r30
+    2482:	ff 1f       	adc	r31, r31
+    2484:	ee 0f       	add	r30, r30
+    2486:	ff 1f       	adc	r31, r31
+    2488:	e2 0f       	add	r30, r18
+    248a:	f3 1f       	adc	r31, r19
+    248c:	e4 5c       	subi	r30, 0xC4	; 196
+    248e:	fa 4f       	sbci	r31, 0xFA	; 250
+    2490:	ea 0f       	add	r30, r26
+    2492:	fb 1f       	adc	r31, r27
+    2494:	20 81       	ld	r18, Z
+    2496:	10 82       	st	Z, r1
+    2498:	fa 01       	movw	r30, r20
+    249a:	ee 0f       	add	r30, r30
+    249c:	ff 1f       	adc	r31, r31
+    249e:	ee 0f       	add	r30, r30
+    24a0:	ff 1f       	adc	r31, r31
+    24a2:	e4 0f       	add	r30, r20
+    24a4:	f5 1f       	adc	r31, r21
+    24a6:	e4 5c       	subi	r30, 0xC4	; 196
+    24a8:	fa 4f       	sbci	r31, 0xFA	; 250
+    24aa:	ea 0f       	add	r30, r26
+    24ac:	fb 1f       	adc	r31, r27
+    24ae:	20 83       	st	Z, r18
+    24b0:	11 96       	adiw	r26, 0x01	; 1
+    24b2:	02 c0       	rjmp	.+4      	; 0x24b8 <organizaPagamentos+0xb4>
+    24b4:	a0 e0       	ldi	r26, 0x00	; 0
+    24b6:	b0 e0       	ldi	r27, 0x00	; 0
+    24b8:	45 30       	cpi	r20, 0x05	; 5
+    24ba:	51 05       	cpc	r21, r1
+    24bc:	ec f2       	brlt	.-70     	; 0x2478 <organizaPagamentos+0x74>
+    24be:	4f 5f       	subi	r20, 0xFF	; 255
+    24c0:	5f 4f       	sbci	r21, 0xFF	; 255
+    24c2:	46 17       	cp	r20, r22
+    24c4:	57 07       	cpc	r21, r23
+    24c6:	b4 f3       	brlt	.-20     	; 0x24b4 <organizaPagamentos+0xb0>
+    24c8:	34 c0       	rjmp	.+104    	; 0x2532 <organizaPagamentos+0x12e>
+    24ca:	9c 01       	movw	r18, r24
+    24cc:	2f 5f       	subi	r18, 0xFF	; 255
+    24ce:	3f 4f       	sbci	r19, 0xFF	; 255
+    24d0:	f9 01       	movw	r30, r18
+    24d2:	ee 0f       	add	r30, r30
+    24d4:	ff 1f       	adc	r31, r31
+    24d6:	df 01       	movw	r26, r30
+    24d8:	a2 0f       	add	r26, r18
+    24da:	b3 1f       	adc	r27, r19
+    24dc:	aa 0f       	add	r26, r26
+    24de:	bb 1f       	adc	r27, r27
+    24e0:	aa 0f       	add	r26, r26
+    24e2:	bb 1f       	adc	r27, r27
+    24e4:	ac 50       	subi	r26, 0x0C	; 12
+    24e6:	bb 4f       	sbci	r27, 0xFB	; 251
+    24e8:	a4 0f       	add	r26, r20
+    24ea:	b5 1f       	adc	r27, r21
+    24ec:	ac 91       	ld	r26, X
+    24ee:	e2 0f       	add	r30, r18
+    24f0:	f3 1f       	adc	r31, r19
+    24f2:	ee 0f       	add	r30, r30
+    24f4:	ff 1f       	adc	r31, r31
+    24f6:	ee 0f       	add	r30, r30
+    24f8:	ff 1f       	adc	r31, r31
+    24fa:	ec 50       	subi	r30, 0x0C	; 12
+    24fc:	fb 4f       	sbci	r31, 0xFB	; 251
+    24fe:	e4 0f       	add	r30, r20
+    2500:	f5 1f       	adc	r31, r21
+    2502:	10 82       	st	Z, r1
+    2504:	fc 01       	movw	r30, r24
+    2506:	ee 0f       	add	r30, r30
+    2508:	ff 1f       	adc	r31, r31
+    250a:	e8 0f       	add	r30, r24
+    250c:	f9 1f       	adc	r31, r25
+    250e:	ee 0f       	add	r30, r30
+    2510:	ff 1f       	adc	r31, r31
+    2512:	ee 0f       	add	r30, r30
+    2514:	ff 1f       	adc	r31, r31
+    2516:	ec 50       	subi	r30, 0x0C	; 12
+    2518:	fb 4f       	sbci	r31, 0xFB	; 251
+    251a:	e4 0f       	add	r30, r20
+    251c:	f5 1f       	adc	r31, r21
+    251e:	a0 83       	st	Z, r26
+    2520:	4f 5f       	subi	r20, 0xFF	; 255
+    2522:	5f 4f       	sbci	r21, 0xFF	; 255
+    2524:	02 c0       	rjmp	.+4      	; 0x252a <organizaPagamentos+0x126>
+    2526:	40 e0       	ldi	r20, 0x00	; 0
+    2528:	50 e0       	ldi	r21, 0x00	; 0
+    252a:	8c 30       	cpi	r24, 0x0C	; 12
+    252c:	91 05       	cpc	r25, r1
+    252e:	6c f2       	brlt	.-102    	; 0x24ca <organizaPagamentos+0xc6>
+    2530:	01 96       	adiw	r24, 0x01	; 1
+    2532:	86 17       	cp	r24, r22
+    2534:	97 07       	cpc	r25, r23
+    2536:	bc f3       	brlt	.-18     	; 0x2526 <organizaPagamentos+0x122>
+    2538:	61 50       	subi	r22, 0x01	; 1
+    253a:	71 09       	sbc	r23, r1
+    253c:	70 93 b1 04 	sts	0x04B1, r23	; 0x8004b1 <numPagsAgendados+0x1>
+    2540:	60 93 b0 04 	sts	0x04B0, r22	; 0x8004b0 <numPagsAgendados>
+    2544:	08 95       	ret
+
+00002546 <removePrimeiraParcela>:
+    2546:	fc 01       	movw	r30, r24
+    2548:	ee 0f       	add	r30, r30
+    254a:	ff 1f       	adc	r31, r31
+    254c:	e8 0f       	add	r30, r24
+    254e:	f9 1f       	adc	r31, r25
+    2550:	ee 0f       	add	r30, r30
+    2552:	ff 1f       	adc	r31, r31
+    2554:	ee 0f       	add	r30, r30
+    2556:	ff 1f       	adc	r31, r31
+    2558:	ec 50       	subi	r30, 0x0C	; 12
+    255a:	fb 4f       	sbci	r31, 0xFB	; 251
+    255c:	28 e0       	ldi	r18, 0x08	; 8
+    255e:	20 83       	st	Z, r18
+    2560:	26 81       	ldd	r18, Z+6	; 0x06
+    2562:	29 30       	cpi	r18, 0x09	; 9
+    2564:	11 f4       	brne	.+4      	; 0x256a <removePrimeiraParcela+0x24>
+    2566:	0e 94 02 12 	call	0x2404	; 0x2404 <organizaPagamentos>
+    256a:	08 95       	ret
+
+0000256c <removeSegundaParcela>:
+    256c:	0e 94 02 12 	call	0x2404	; 0x2404 <organizaPagamentos>
+    2570:	08 95       	ret
+
+00002572 <removePagamentoAgendado>:
+    2572:	0f 93       	push	r16
+    2574:	1f 93       	push	r17
+    2576:	cf 93       	push	r28
+    2578:	df 93       	push	r29
+    257a:	8c 01       	movw	r16, r24
+    257c:	c0 e0       	ldi	r28, 0x00	; 0
+    257e:	d0 e0       	ldi	r29, 0x00	; 0
+    2580:	0f c0       	rjmp	.+30     	; 0x25a0 <removePagamentoAgendado+0x2e>
+    2582:	ce 01       	movw	r24, r28
+    2584:	88 0f       	add	r24, r24
+    2586:	99 1f       	adc	r25, r25
+    2588:	8c 0f       	add	r24, r28
+    258a:	9d 1f       	adc	r25, r29
+    258c:	88 0f       	add	r24, r24
+    258e:	99 1f       	adc	r25, r25
+    2590:	b8 01       	movw	r22, r16
+    2592:	86 5a       	subi	r24, 0xA6	; 166
+    2594:	9a 4f       	sbci	r25, 0xFA	; 250
+    2596:	0e 94 e9 11 	call	0x23d2	; 0x23d2 <comparaCartoes>
+    259a:	01 97       	sbiw	r24, 0x01	; 1
+    259c:	51 f0       	breq	.+20     	; 0x25b2 <removePagamentoAgendado+0x40>
+    259e:	21 96       	adiw	r28, 0x01	; 1
+    25a0:	80 91 b0 04 	lds	r24, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    25a4:	90 91 b1 04 	lds	r25, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    25a8:	c8 17       	cp	r28, r24
+    25aa:	d9 07       	cpc	r29, r25
+    25ac:	54 f3       	brlt	.-44     	; 0x2582 <removePagamentoAgendado+0x10>
+    25ae:	cf ef       	ldi	r28, 0xFF	; 255
+    25b0:	df ef       	ldi	r29, 0xFF	; 255
+    25b2:	cf 3f       	cpi	r28, 0xFF	; 255
+    25b4:	8f ef       	ldi	r24, 0xFF	; 255
+    25b6:	d8 07       	cpc	r29, r24
+    25b8:	41 f1       	breq	.+80     	; 0x260a <removePagamentoAgendado+0x98>
+    25ba:	fe 01       	movw	r30, r28
+    25bc:	ee 0f       	add	r30, r30
+    25be:	ff 1f       	adc	r31, r31
+    25c0:	ec 0f       	add	r30, r28
+    25c2:	fd 1f       	adc	r31, r29
+    25c4:	ee 0f       	add	r30, r30
+    25c6:	ff 1f       	adc	r31, r31
+    25c8:	ee 0f       	add	r30, r30
+    25ca:	ff 1f       	adc	r31, r31
+    25cc:	ec 50       	subi	r30, 0x0C	; 12
+    25ce:	fb 4f       	sbci	r31, 0xFB	; 251
+    25d0:	80 81       	ld	r24, Z
+    25d2:	88 30       	cpi	r24, 0x08	; 8
+    25d4:	31 f0       	breq	.+12     	; 0x25e2 <removePagamentoAgendado+0x70>
+    25d6:	ce 01       	movw	r24, r28
+    25d8:	0e 94 a3 12 	call	0x2546	; 0x2546 <removePrimeiraParcela>
     25dc:	81 e0       	ldi	r24, 0x01	; 1
-    25de:	08 95       	ret
+    25de:	90 e0       	ldi	r25, 0x00	; 0
+    25e0:	19 c0       	rjmp	.+50     	; 0x2614 <removePagamentoAgendado+0xa2>
+    25e2:	fe 01       	movw	r30, r28
+    25e4:	ee 0f       	add	r30, r30
+    25e6:	ff 1f       	adc	r31, r31
+    25e8:	ec 0f       	add	r30, r28
+    25ea:	fd 1f       	adc	r31, r29
+    25ec:	ee 0f       	add	r30, r30
+    25ee:	ff 1f       	adc	r31, r31
+    25f0:	ee 0f       	add	r30, r30
+    25f2:	ff 1f       	adc	r31, r31
+    25f4:	ec 50       	subi	r30, 0x0C	; 12
+    25f6:	fb 4f       	sbci	r31, 0xFB	; 251
+    25f8:	86 81       	ldd	r24, Z+6	; 0x06
+    25fa:	89 30       	cpi	r24, 0x09	; 9
+    25fc:	49 f0       	breq	.+18     	; 0x2610 <removePagamentoAgendado+0x9e>
+    25fe:	ce 01       	movw	r24, r28
+    2600:	0e 94 b6 12 	call	0x256c	; 0x256c <removeSegundaParcela>
+    2604:	81 e0       	ldi	r24, 0x01	; 1
+    2606:	90 e0       	ldi	r25, 0x00	; 0
+    2608:	05 c0       	rjmp	.+10     	; 0x2614 <removePagamentoAgendado+0xa2>
+    260a:	80 e0       	ldi	r24, 0x00	; 0
+    260c:	90 e0       	ldi	r25, 0x00	; 0
+    260e:	02 c0       	rjmp	.+4      	; 0x2614 <removePagamentoAgendado+0xa2>
+    2610:	81 e0       	ldi	r24, 0x01	; 1
+    2612:	90 e0       	ldi	r25, 0x00	; 0
+    2614:	df 91       	pop	r29
+    2616:	cf 91       	pop	r28
+    2618:	1f 91       	pop	r17
+    261a:	0f 91       	pop	r16
+    261c:	08 95       	ret
 
-000025e0 <modoADM>:
-    25e0:	8f 92       	push	r8
-    25e2:	9f 92       	push	r9
-    25e4:	af 92       	push	r10
-    25e6:	bf 92       	push	r11
-    25e8:	df 92       	push	r13
-    25ea:	ef 92       	push	r14
-    25ec:	ff 92       	push	r15
-    25ee:	0f 93       	push	r16
-    25f0:	1f 93       	push	r17
-    25f2:	cf 93       	push	r28
-    25f4:	df 93       	push	r29
-    25f6:	cd b7       	in	r28, 0x3d	; 61
-    25f8:	de b7       	in	r29, 0x3e	; 62
-    25fa:	2c 97       	sbiw	r28, 0x0c	; 12
-    25fc:	0f b6       	in	r0, 0x3f	; 63
-    25fe:	f8 94       	cli
-    2600:	de bf       	out	0x3e, r29	; 62
-    2602:	0f be       	out	0x3f, r0	; 63
-    2604:	cd bf       	out	0x3d, r28	; 61
-    2606:	4c 01       	movw	r8, r24
-    2608:	fc 01       	movw	r30, r24
-    260a:	80 81       	ld	r24, Z
-    260c:	88 23       	and	r24, r24
-    260e:	09 f4       	brne	.+2      	; 0x2612 <modoADM+0x32>
-    2610:	53 c0       	rjmp	.+166    	; 0x26b8 <modoADM+0xd8>
-    2612:	5f c0       	rjmp	.+190    	; 0x26d2 <modoADM+0xf2>
-    2614:	0e 94 a4 0b 	call	0x1748	; 0x1748 <tela_instrucoes_configDiaMesAno>
-    2618:	ae 01       	movw	r20, r28
-    261a:	49 5f       	subi	r20, 0xF9	; 249
-    261c:	5f 4f       	sbci	r21, 0xFF	; 255
-    261e:	be 01       	movw	r22, r28
-    2620:	67 5f       	subi	r22, 0xF7	; 247
-    2622:	7f 4f       	sbci	r23, 0xFF	; 255
-    2624:	ce 01       	movw	r24, r28
-    2626:	0b 96       	adiw	r24, 0x0b	; 11
-    2628:	0e 94 cf 0c 	call	0x199e	; 0x199e <getDiaMesAno>
-    262c:	d8 2e       	mov	r13, r24
-    262e:	88 23       	and	r24, r24
-    2630:	29 f1       	breq	.+74     	; 0x267c <modoADM+0x9c>
-    2632:	ff ef       	ldi	r31, 0xFF	; 255
-    2634:	af 1a       	sub	r10, r31
-    2636:	bf 0a       	sbc	r11, r31
-    2638:	0e 94 d0 0b 	call	0x17a0	; 0x17a0 <tela_instrucoes_configHoraMinSeg>
-    263c:	ae 01       	movw	r20, r28
-    263e:	4f 5f       	subi	r20, 0xFF	; 255
-    2640:	5f 4f       	sbci	r21, 0xFF	; 255
-    2642:	be 01       	movw	r22, r28
-    2644:	6d 5f       	subi	r22, 0xFD	; 253
-    2646:	7f 4f       	sbci	r23, 0xFF	; 255
-    2648:	ce 01       	movw	r24, r28
-    264a:	05 96       	adiw	r24, 0x05	; 5
-    264c:	0e 94 b7 0d 	call	0x1b6e	; 0x1b6e <getHoraMinSeg>
-    2650:	d8 2e       	mov	r13, r24
-    2652:	88 23       	and	r24, r24
-    2654:	c1 f0       	breq	.+48     	; 0x2686 <modoADM+0xa6>
-    2656:	ce 01       	movw	r24, r28
-    2658:	01 96       	adiw	r24, 0x01	; 1
-    265a:	7c 01       	movw	r14, r24
-    265c:	8e 01       	movw	r16, r28
-    265e:	0d 5f       	subi	r16, 0xFD	; 253
-    2660:	1f 4f       	sbci	r17, 0xFF	; 255
-    2662:	9e 01       	movw	r18, r28
-    2664:	2b 5f       	subi	r18, 0xFB	; 251
-    2666:	3f 4f       	sbci	r19, 0xFF	; 255
-    2668:	ae 01       	movw	r20, r28
-    266a:	49 5f       	subi	r20, 0xF9	; 249
-    266c:	5f 4f       	sbci	r21, 0xFF	; 255
-    266e:	be 01       	movw	r22, r28
-    2670:	67 5f       	subi	r22, 0xF7	; 247
-    2672:	7f 4f       	sbci	r23, 0xFF	; 255
-    2674:	0a 96       	adiw	r24, 0x0a	; 10
-    2676:	0e 94 b8 0e 	call	0x1d70	; 0x1d70 <changeDate>
-    267a:	06 c0       	rjmp	.+12     	; 0x2688 <modoADM+0xa8>
-    267c:	80 e0       	ldi	r24, 0x00	; 0
-    267e:	aa 24       	eor	r10, r10
-    2680:	aa 94       	dec	r10
-    2682:	ba 2c       	mov	r11, r10
-    2684:	01 c0       	rjmp	.+2      	; 0x2688 <modoADM+0xa8>
-    2686:	80 e0       	ldi	r24, 0x00	; 0
-    2688:	88 23       	and	r24, r24
-    268a:	29 f0       	breq	.+10     	; 0x2696 <modoADM+0xb6>
-    268c:	dd 20       	and	r13, r13
-    268e:	19 f0       	breq	.+6      	; 0x2696 <modoADM+0xb6>
-    2690:	0e 94 fc 0b 	call	0x17f8	; 0x17f8 <tela_operacaoConcluida>
-    2694:	0d c0       	rjmp	.+26     	; 0x26b0 <modoADM+0xd0>
-    2696:	dd 20       	and	r13, r13
-    2698:	19 f0       	breq	.+6      	; 0x26a0 <modoADM+0xc0>
-    269a:	0e 94 17 0c 	call	0x182e	; 0x182e <tela_dataInvalida>
-    269e:	08 c0       	rjmp	.+16     	; 0x26b0 <modoADM+0xd0>
-    26a0:	d1 10       	cpse	r13, r1
-    26a2:	06 c0       	rjmp	.+12     	; 0x26b0 <modoADM+0xd0>
-    26a4:	9f ef       	ldi	r25, 0xFF	; 255
-    26a6:	a9 16       	cp	r10, r25
-    26a8:	b9 06       	cpc	r11, r25
-    26aa:	11 f0       	breq	.+4      	; 0x26b0 <modoADM+0xd0>
-    26ac:	a1 2c       	mov	r10, r1
-    26ae:	b1 2c       	mov	r11, r1
-    26b0:	89 e1       	ldi	r24, 0x19	; 25
-    26b2:	f4 01       	movw	r30, r8
-    26b4:	80 83       	st	Z, r24
-    26b6:	02 c0       	rjmp	.+4      	; 0x26bc <modoADM+0xdc>
-    26b8:	a1 2c       	mov	r10, r1
-    26ba:	b1 2c       	mov	r11, r1
-    26bc:	f2 e0       	ldi	r31, 0x02	; 2
-    26be:	af 16       	cp	r10, r31
-    26c0:	b1 04       	cpc	r11, r1
-    26c2:	0c f0       	brlt	.+2      	; 0x26c6 <modoADM+0xe6>
-    26c4:	66 c0       	rjmp	.+204    	; 0x2792 <modoADM+0x1b2>
-    26c6:	2f ef       	ldi	r18, 0xFF	; 255
-    26c8:	a2 16       	cp	r10, r18
-    26ca:	b2 06       	cpc	r11, r18
-    26cc:	09 f0       	breq	.+2      	; 0x26d0 <modoADM+0xf0>
-    26ce:	a2 cf       	rjmp	.-188    	; 0x2614 <modoADM+0x34>
-    26d0:	60 c0       	rjmp	.+192    	; 0x2792 <modoADM+0x1b2>
-    26d2:	81 30       	cpi	r24, 0x01	; 1
-    26d4:	89 f4       	brne	.+34     	; 0x26f8 <modoADM+0x118>
-    26d6:	0e 94 a9 11 	call	0x2352	; 0x2352 <existePendencia>
-    26da:	88 23       	and	r24, r24
-    26dc:	51 f0       	breq	.+20     	; 0x26f2 <modoADM+0x112>
-    26de:	81 e0       	ldi	r24, 0x01	; 1
-    26e0:	0e 94 68 12 	call	0x24d0	; 0x24d0 <printPendencias>
-    26e4:	82 e0       	ldi	r24, 0x02	; 2
-    26e6:	0e 94 68 12 	call	0x24d0	; 0x24d0 <printPendencias>
-    26ea:	83 e0       	ldi	r24, 0x03	; 3
-    26ec:	0e 94 68 12 	call	0x24d0	; 0x24d0 <printPendencias>
-    26f0:	50 c0       	rjmp	.+160    	; 0x2792 <modoADM+0x1b2>
-    26f2:	0e 94 54 0c 	call	0x18a8	; 0x18a8 <tela_semPendencias>
-    26f6:	4d c0       	rjmp	.+154    	; 0x2792 <modoADM+0x1b2>
-    26f8:	82 30       	cpi	r24, 0x02	; 2
-    26fa:	51 f5       	brne	.+84     	; 0x2750 <modoADM+0x170>
-    26fc:	0e 94 60 0b 	call	0x16c0	; 0x16c0 <tela_instrucoes_configOper>
-    2700:	0e 94 a0 0c 	call	0x1940	; 0x1940 <tela_status_oper>
-    2704:	89 e1       	ldi	r24, 0x19	; 25
-    2706:	f4 01       	movw	r30, r8
-    2708:	80 83       	st	Z, r24
-    270a:	04 c0       	rjmp	.+8      	; 0x2714 <modoADM+0x134>
-    270c:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    2710:	f4 01       	movw	r30, r8
-    2712:	80 83       	st	Z, r24
-    2714:	f4 01       	movw	r30, r8
-    2716:	80 81       	ld	r24, Z
-    2718:	89 31       	cpi	r24, 0x19	; 25
-    271a:	c1 f3       	breq	.-16     	; 0x270c <modoADM+0x12c>
-    271c:	82 30       	cpi	r24, 0x02	; 2
-    271e:	20 f4       	brcc	.+8      	; 0x2728 <modoADM+0x148>
-    2720:	c4 01       	movw	r24, r8
-    2722:	0e 94 8a 0c 	call	0x1914	; 0x1914 <mudarStatusOper>
-    2726:	10 c0       	rjmp	.+32     	; 0x2748 <modoADM+0x168>
-    2728:	83 e0       	ldi	r24, 0x03	; 3
-    272a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
-    272e:	89 e8       	ldi	r24, 0x89	; 137
-    2730:	94 e0       	ldi	r25, 0x04	; 4
-    2732:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
-    2736:	ff ef       	ldi	r31, 0xFF	; 255
-    2738:	23 ed       	ldi	r18, 0xD3	; 211
-    273a:	80 e3       	ldi	r24, 0x30	; 48
-    273c:	f1 50       	subi	r31, 0x01	; 1
-    273e:	20 40       	sbci	r18, 0x00	; 0
-    2740:	80 40       	sbci	r24, 0x00	; 0
-    2742:	e1 f7       	brne	.-8      	; 0x273c <modoADM+0x15c>
-    2744:	00 c0       	rjmp	.+0      	; 0x2746 <modoADM+0x166>
-    2746:	00 00       	nop
-    2748:	89 e1       	ldi	r24, 0x19	; 25
-    274a:	f4 01       	movw	r30, r8
-    274c:	80 83       	st	Z, r24
-    274e:	21 c0       	rjmp	.+66     	; 0x2792 <modoADM+0x1b2>
-    2750:	83 30       	cpi	r24, 0x03	; 3
-    2752:	f9 f4       	brne	.+62     	; 0x2792 <modoADM+0x1b2>
-    2754:	0e 94 a9 11 	call	0x2352	; 0x2352 <existePendencia>
-    2758:	88 23       	and	r24, r24
-    275a:	b1 f0       	breq	.+44     	; 0x2788 <modoADM+0x1a8>
-    275c:	89 e1       	ldi	r24, 0x19	; 25
-    275e:	f4 01       	movw	r30, r8
-    2760:	80 83       	st	Z, r24
-    2762:	04 c0       	rjmp	.+8      	; 0x276c <modoADM+0x18c>
-    2764:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    2768:	f4 01       	movw	r30, r8
-    276a:	80 83       	st	Z, r24
-    276c:	f4 01       	movw	r30, r8
-    276e:	80 81       	ld	r24, Z
-    2770:	89 31       	cpi	r24, 0x19	; 25
-    2772:	c1 f3       	breq	.-16     	; 0x2764 <modoADM+0x184>
-    2774:	0e 94 b4 11 	call	0x2368	; 0x2368 <removePendencias>
-    2778:	88 23       	and	r24, r24
-    277a:	19 f0       	breq	.+6      	; 0x2782 <modoADM+0x1a2>
-    277c:	0e 94 fc 0b 	call	0x17f8	; 0x17f8 <tela_operacaoConcluida>
-    2780:	05 c0       	rjmp	.+10     	; 0x278c <modoADM+0x1ac>
-    2782:	0e 94 6f 0c 	call	0x18de	; 0x18de <tela_opcaoInvalida>
-    2786:	02 c0       	rjmp	.+4      	; 0x278c <modoADM+0x1ac>
-    2788:	0e 94 54 0c 	call	0x18a8	; 0x18a8 <tela_semPendencias>
-    278c:	89 e1       	ldi	r24, 0x19	; 25
-    278e:	f4 01       	movw	r30, r8
-    2790:	80 83       	st	Z, r24
-    2792:	2c 96       	adiw	r28, 0x0c	; 12
-    2794:	0f b6       	in	r0, 0x3f	; 63
-    2796:	f8 94       	cli
-    2798:	de bf       	out	0x3e, r29	; 62
-    279a:	0f be       	out	0x3f, r0	; 63
-    279c:	cd bf       	out	0x3d, r28	; 61
-    279e:	df 91       	pop	r29
-    27a0:	cf 91       	pop	r28
-    27a2:	1f 91       	pop	r17
-    27a4:	0f 91       	pop	r16
-    27a6:	ff 90       	pop	r15
-    27a8:	ef 90       	pop	r14
-    27aa:	df 90       	pop	r13
-    27ac:	bf 90       	pop	r11
-    27ae:	af 90       	pop	r10
-    27b0:	9f 90       	pop	r9
-    27b2:	8f 90       	pop	r8
-    27b4:	08 95       	ret
+0000261e <existePendencia>:
+    261e:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
+    2622:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
+    2626:	18 16       	cp	r1, r24
+    2628:	19 06       	cpc	r1, r25
+    262a:	14 f4       	brge	.+4      	; 0x2630 <existePendencia+0x12>
+    262c:	81 e0       	ldi	r24, 0x01	; 1
+    262e:	08 95       	ret
+    2630:	80 e0       	ldi	r24, 0x00	; 0
+    2632:	08 95       	ret
 
-000027b6 <__vector_11>:
+00002634 <removePendencias>:
+		removeSegundaParcela(achada);
+
+	numPendecias++;
+}
+
+char removePendencias(char remover){
+    2634:	cf 93       	push	r28
+    2636:	df 93       	push	r29
+	if(remover > numPendecias)
+    2638:	90 e0       	ldi	r25, 0x00	; 0
+    263a:	a0 91 ae 04 	lds	r26, 0x04AE	; 0x8004ae <__data_end>
+    263e:	b0 91 af 04 	lds	r27, 0x04AF	; 0x8004af <__data_end+0x1>
+    2642:	a8 17       	cp	r26, r24
+    2644:	b9 07       	cpc	r27, r25
+    2646:	0c f4       	brge	.+2      	; 0x264a <removePendencias+0x16>
+    2648:	63 c0       	rjmp	.+198    	; 0x2710 <removePendencias+0xdc>
+    264a:	bc 01       	movw	r22, r24
+    264c:	2f c0       	rjmp	.+94     	; 0x26ac <removePendencias+0x78>
+	char temp;
+	
+	//remove cartoesP
+	for(i=remover;i<numPendecias;i++){
+		for(j=0;i<NUMDIGITOSCARTOES;j++){
+			temp = cartoesP[i+1][j];
+    264e:	9b 01       	movw	r18, r22
+    2650:	2f 5f       	subi	r18, 0xFF	; 255
+    2652:	3f 4f       	sbci	r19, 0xFF	; 255
+    2654:	f9 01       	movw	r30, r18
+    2656:	ee 0f       	add	r30, r30
+    2658:	ff 1f       	adc	r31, r31
+    265a:	ef 01       	movw	r28, r30
+    265c:	c2 0f       	add	r28, r18
+    265e:	d3 1f       	adc	r29, r19
+    2660:	cc 0f       	add	r28, r28
+    2662:	dd 1f       	adc	r29, r29
+    2664:	c0 53       	subi	r28, 0x30	; 48
+    2666:	db 4f       	sbci	r29, 0xFB	; 251
+    2668:	c4 0f       	add	r28, r20
+    266a:	d5 1f       	adc	r29, r21
+    266c:	c8 81       	ld	r28, Y
+			cartoesP[i+1][j] = 0; //aqui que eu deleto a info da matriz
+    266e:	e2 0f       	add	r30, r18
+    2670:	f3 1f       	adc	r31, r19
+    2672:	ee 0f       	add	r30, r30
+    2674:	ff 1f       	adc	r31, r31
+    2676:	e0 53       	subi	r30, 0x30	; 48
+    2678:	fb 4f       	sbci	r31, 0xFB	; 251
+    267a:	e4 0f       	add	r30, r20
+    267c:	f5 1f       	adc	r31, r21
+    267e:	10 82       	st	Z, r1
+			cartoesP[i][j] = temp;
+    2680:	fb 01       	movw	r30, r22
+    2682:	ee 0f       	add	r30, r30
+    2684:	ff 1f       	adc	r31, r31
+    2686:	e6 0f       	add	r30, r22
+    2688:	f7 1f       	adc	r31, r23
+    268a:	ee 0f       	add	r30, r30
+    268c:	ff 1f       	adc	r31, r31
+    268e:	e0 53       	subi	r30, 0x30	; 48
+    2690:	fb 4f       	sbci	r31, 0xFB	; 251
+    2692:	e4 0f       	add	r30, r20
+    2694:	f5 1f       	adc	r31, r21
+    2696:	c0 83       	st	Z, r28
+	short i,j;
+	char temp;
+	
+	//remove cartoesP
+	for(i=remover;i<numPendecias;i++){
+		for(j=0;i<NUMDIGITOSCARTOES;j++){
+    2698:	4f 5f       	subi	r20, 0xFF	; 255
+    269a:	5f 4f       	sbci	r21, 0xFF	; 255
+    269c:	02 c0       	rjmp	.+4      	; 0x26a2 <removePendencias+0x6e>
+    269e:	40 e0       	ldi	r20, 0x00	; 0
+    26a0:	50 e0       	ldi	r21, 0x00	; 0
+    26a2:	66 30       	cpi	r22, 0x06	; 6
+    26a4:	71 05       	cpc	r23, r1
+    26a6:	9c f2       	brlt	.-90     	; 0x264e <removePendencias+0x1a>
+	//remover = remover-1; //correção pq indice começa em zero
+	short i,j;
+	char temp;
+	
+	//remove cartoesP
+	for(i=remover;i<numPendecias;i++){
+    26a8:	6f 5f       	subi	r22, 0xFF	; 255
+    26aa:	7f 4f       	sbci	r23, 0xFF	; 255
+    26ac:	6a 17       	cp	r22, r26
+    26ae:	7b 07       	cpc	r23, r27
+    26b0:	b4 f3       	brlt	.-20     	; 0x269e <removePendencias+0x6a>
+    26b2:	24 c0       	rjmp	.+72     	; 0x26fc <removePendencias+0xc8>
+	}
+	
+	//remove valParcelaP
+	for(i=remover;i<numPendecias;i++){
+		for(j=0;i<NUMDIGITOSVALORES;j++){
+			temp = valParcelaP[i+1][j];
+    26b4:	fc 01       	movw	r30, r24
+    26b6:	31 96       	adiw	r30, 0x01	; 1
+    26b8:	af 01       	movw	r20, r30
+    26ba:	44 0f       	add	r20, r20
+    26bc:	55 1f       	adc	r21, r21
+    26be:	44 0f       	add	r20, r20
+    26c0:	55 1f       	adc	r21, r21
+    26c2:	e4 0f       	add	r30, r20
+    26c4:	f5 1f       	adc	r31, r21
+    26c6:	ee 54       	subi	r30, 0x4E	; 78
+    26c8:	fb 4f       	sbci	r31, 0xFB	; 251
+    26ca:	e2 0f       	add	r30, r18
+    26cc:	f3 1f       	adc	r31, r19
+    26ce:	40 81       	ld	r20, Z
+			valParcelaP[i+1][j] = 0; //aqui que eu deleto a info da matriz
+    26d0:	10 82       	st	Z, r1
+			valParcelaP[i][j] = temp;
+    26d2:	fc 01       	movw	r30, r24
+    26d4:	ee 0f       	add	r30, r30
+    26d6:	ff 1f       	adc	r31, r31
+    26d8:	ee 0f       	add	r30, r30
+    26da:	ff 1f       	adc	r31, r31
+    26dc:	e8 0f       	add	r30, r24
+    26de:	f9 1f       	adc	r31, r25
+    26e0:	ee 54       	subi	r30, 0x4E	; 78
+    26e2:	fb 4f       	sbci	r31, 0xFB	; 251
+    26e4:	e2 0f       	add	r30, r18
+    26e6:	f3 1f       	adc	r31, r19
+    26e8:	40 83       	st	Z, r20
+		}
+	}
+	
+	//remove valParcelaP
+	for(i=remover;i<numPendecias;i++){
+		for(j=0;i<NUMDIGITOSVALORES;j++){
+    26ea:	2f 5f       	subi	r18, 0xFF	; 255
+    26ec:	3f 4f       	sbci	r19, 0xFF	; 255
+    26ee:	02 c0       	rjmp	.+4      	; 0x26f4 <removePendencias+0xc0>
+    26f0:	20 e0       	ldi	r18, 0x00	; 0
+    26f2:	30 e0       	ldi	r19, 0x00	; 0
+    26f4:	85 30       	cpi	r24, 0x05	; 5
+    26f6:	91 05       	cpc	r25, r1
+    26f8:	ec f2       	brlt	.-70     	; 0x26b4 <removePendencias+0x80>
+			cartoesP[i][j] = temp;
+		}
+	}
+	
+	//remove valParcelaP
+	for(i=remover;i<numPendecias;i++){
+    26fa:	01 96       	adiw	r24, 0x01	; 1
+    26fc:	8a 17       	cp	r24, r26
+    26fe:	9b 07       	cpc	r25, r27
+    2700:	bc f3       	brlt	.-18     	; 0x26f0 <removePendencias+0xbc>
+			temp = valParcelaP[i+1][j];
+			valParcelaP[i+1][j] = 0; //aqui que eu deleto a info da matriz
+			valParcelaP[i][j] = temp;
+		}
+	}
+	numPendecias--;
+    2702:	11 97       	sbiw	r26, 0x01	; 1
+    2704:	b0 93 af 04 	sts	0x04AF, r27	; 0x8004af <__data_end+0x1>
+    2708:	a0 93 ae 04 	sts	0x04AE, r26	; 0x8004ae <__data_end>
+	return 1; //removi a pendencia 
+    270c:	81 e0       	ldi	r24, 0x01	; 1
+    270e:	01 c0       	rjmp	.+2      	; 0x2712 <removePendencias+0xde>
+	numPendecias++;
+}
+
+char removePendencias(char remover){
+	if(remover > numPendecias)
+		return 0; //pediu pra remover uma pendencia q não existe
+    2710:	80 e0       	ldi	r24, 0x00	; 0
+		}
+	}
+	numPendecias--;
+	return 1; //removi a pendencia 
+	
+}
+    2712:	df 91       	pop	r29
+    2714:	cf 91       	pop	r28
+    2716:	08 95       	ret
+
+00002718 <printNumPendencia>:
+		_delay_ms(1300);
+	}
+	return 1;
+}
+
+void printNumPendencia(short num){
+    2718:	0f 93       	push	r16
+    271a:	1f 93       	push	r17
+    271c:	cf 93       	push	r28
+    271e:	df 93       	push	r29
+    2720:	8c 01       	movw	r16, r24
+	short i;
+	//print num cartao
+	for(i=0;i<NUMDIGITOSCARTOES;i++)
+    2722:	c0 e0       	ldi	r28, 0x00	; 0
+    2724:	d0 e0       	ldi	r29, 0x00	; 0
+    2726:	10 c0       	rjmp	.+32     	; 0x2748 <printNumPendencia+0x30>
+		writeCharacter(cartoesP[num][i]+48);
+    2728:	f8 01       	movw	r30, r16
+    272a:	ee 0f       	add	r30, r30
+    272c:	ff 1f       	adc	r31, r31
+    272e:	e0 0f       	add	r30, r16
+    2730:	f1 1f       	adc	r31, r17
+    2732:	ee 0f       	add	r30, r30
+    2734:	ff 1f       	adc	r31, r31
+    2736:	e0 53       	subi	r30, 0x30	; 48
+    2738:	fb 4f       	sbci	r31, 0xFB	; 251
+    273a:	ec 0f       	add	r30, r28
+    273c:	fd 1f       	adc	r31, r29
+    273e:	80 81       	ld	r24, Z
+    2740:	80 5d       	subi	r24, 0xD0	; 208
+    2742:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+}
+
+void printNumPendencia(short num){
+	short i;
+	//print num cartao
+	for(i=0;i<NUMDIGITOSCARTOES;i++)
+    2746:	21 96       	adiw	r28, 0x01	; 1
+    2748:	c6 30       	cpi	r28, 0x06	; 6
+    274a:	d1 05       	cpc	r29, r1
+    274c:	6c f3       	brlt	.-38     	; 0x2728 <printNumPendencia+0x10>
+		writeCharacter(cartoesP[num][i]+48);
+	writeString(" ");
+    274e:	8b e7       	ldi	r24, 0x7B	; 123
+    2750:	94 e0       	ldi	r25, 0x04	; 4
+    2752:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+	//print val parcela
+	for(i=0;i<NUMDIGITOSVALORES;i++)
+    2756:	c0 e0       	ldi	r28, 0x00	; 0
+    2758:	d0 e0       	ldi	r29, 0x00	; 0
+    275a:	10 c0       	rjmp	.+32     	; 0x277c <printNumPendencia+0x64>
+		writeCharacter(valParcelaP[num][i]+48);
+    275c:	f8 01       	movw	r30, r16
+    275e:	ee 0f       	add	r30, r30
+    2760:	ff 1f       	adc	r31, r31
+    2762:	ee 0f       	add	r30, r30
+    2764:	ff 1f       	adc	r31, r31
+    2766:	e0 0f       	add	r30, r16
+    2768:	f1 1f       	adc	r31, r17
+    276a:	ee 54       	subi	r30, 0x4E	; 78
+    276c:	fb 4f       	sbci	r31, 0xFB	; 251
+    276e:	ec 0f       	add	r30, r28
+    2770:	fd 1f       	adc	r31, r29
+    2772:	80 81       	ld	r24, Z
+    2774:	80 5d       	subi	r24, 0xD0	; 208
+    2776:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+	//print num cartao
+	for(i=0;i<NUMDIGITOSCARTOES;i++)
+		writeCharacter(cartoesP[num][i]+48);
+	writeString(" ");
+	//print val parcela
+	for(i=0;i<NUMDIGITOSVALORES;i++)
+    277a:	21 96       	adiw	r28, 0x01	; 1
+    277c:	c5 30       	cpi	r28, 0x05	; 5
+    277e:	d1 05       	cpc	r29, r1
+    2780:	6c f3       	brlt	.-38     	; 0x275c <printNumPendencia+0x44>
+		writeCharacter(valParcelaP[num][i]+48);
+	writeString(" -");
+    2782:	86 e8       	ldi	r24, 0x86	; 134
+    2784:	94 e0       	ldi	r25, 0x04	; 4
+    2786:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+	writeCharacter(num+48);
+    278a:	80 e3       	ldi	r24, 0x30	; 48
+    278c:	80 0f       	add	r24, r16
+    278e:	0e 94 08 04 	call	0x810	; 0x810 <writeCharacter>
+}
+    2792:	df 91       	pop	r29
+    2794:	cf 91       	pop	r28
+    2796:	1f 91       	pop	r17
+    2798:	0f 91       	pop	r16
+    279a:	08 95       	ret
+
+0000279c <printPendencias>:
+	return 1; //removi a pendencia 
+	
+}
+
+char printPendencias(char sobeDesce){
+	if(numPendecias < 1)
+    279c:	20 91 ae 04 	lds	r18, 0x04AE	; 0x8004ae <__data_end>
+    27a0:	30 91 af 04 	lds	r19, 0x04AF	; 0x8004af <__data_end+0x1>
+    27a4:	12 16       	cp	r1, r18
+    27a6:	13 06       	cpc	r1, r19
+    27a8:	0c f0       	brlt	.+2      	; 0x27ac <printPendencias+0x10>
+    27aa:	7a c0       	rjmp	.+244    	; 0x28a0 <printPendencias+0x104>
+		return 0; //sem pendencias pra printar
+		
+	if(sobeDesce == 1 && numPendecias >= 1){
+    27ac:	81 30       	cpi	r24, 0x01	; 1
+    27ae:	21 f5       	brne	.+72     	; 0x27f8 <printPendencias+0x5c>
+    27b0:	12 16       	cp	r1, r18
+    27b2:	13 06       	cpc	r1, r19
+    27b4:	0c f5       	brge	.+66     	; 0x27f8 <printPendencias+0x5c>
+		writeInstruction(lcd_Clear);
+    27b6:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+		writeInstruction(lcd_LineOne | lcd_SetCursor);
+    27ba:	80 e8       	ldi	r24, 0x80	; 128
+    27bc:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+		printNumPendencia(0); //pend 1
+    27c0:	80 e0       	ldi	r24, 0x00	; 0
+    27c2:	90 e0       	ldi	r25, 0x00	; 0
+    27c4:	0e 94 8c 13 	call	0x2718	; 0x2718 <printNumPendencia>
+		if(numPendecias > 1){
+    27c8:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
+    27cc:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
+    27d0:	02 97       	sbiw	r24, 0x02	; 2
+    27d2:	3c f0       	brlt	.+14     	; 0x27e2 <printPendencias+0x46>
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+    27d4:	80 ec       	ldi	r24, 0xC0	; 192
+    27d6:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			printNumPendencia(1); //pend 2
+    27da:	81 e0       	ldi	r24, 0x01	; 1
+    27dc:	90 e0       	ldi	r25, 0x00	; 0
+    27de:	0e 94 8c 13 	call	0x2718	; 0x2718 <printNumPendencia>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+    27e2:	2f ef       	ldi	r18, 0xFF	; 255
+    27e4:	89 e7       	ldi	r24, 0x79	; 121
+    27e6:	9f e3       	ldi	r25, 0x3F	; 63
+    27e8:	21 50       	subi	r18, 0x01	; 1
+    27ea:	80 40       	sbci	r24, 0x00	; 0
+    27ec:	90 40       	sbci	r25, 0x00	; 0
+    27ee:	e1 f7       	brne	.-8      	; 0x27e8 <printPendencias+0x4c>
+    27f0:	00 c0       	rjmp	.+0      	; 0x27f2 <printPendencias+0x56>
+    27f2:	00 00       	nop
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(5); //pend 6
+		}
+		_delay_ms(1300);
+	}
+	return 1;
+    27f4:	81 e0       	ldi	r24, 0x01	; 1
+    27f6:	08 95       	ret
+		if(numPendecias > 1){
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(1); //pend 2
+		}
+		_delay_ms(1300);
+	}else if(sobeDesce == 2 && numPendecias > 2){
+    27f8:	82 30       	cpi	r24, 0x02	; 2
+    27fa:	41 f5       	brne	.+80     	; 0x284c <printPendencias+0xb0>
+    27fc:	23 30       	cpi	r18, 0x03	; 3
+    27fe:	31 05       	cpc	r19, r1
+    2800:	2c f1       	brlt	.+74     	; 0x284c <printPendencias+0xb0>
+		if(numPendecias > 2){
+    2802:	23 30       	cpi	r18, 0x03	; 3
+    2804:	31 05       	cpc	r19, r1
+    2806:	54 f0       	brlt	.+20     	; 0x281c <printPendencias+0x80>
+			writeInstruction(lcd_Clear);
+    2808:	81 e0       	ldi	r24, 0x01	; 1
+    280a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			writeInstruction(lcd_LineOne | lcd_SetCursor);
+    280e:	80 e8       	ldi	r24, 0x80	; 128
+    2810:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			printNumPendencia(2);	//pend 3
+    2814:	82 e0       	ldi	r24, 0x02	; 2
+    2816:	90 e0       	ldi	r25, 0x00	; 0
+    2818:	0e 94 8c 13 	call	0x2718	; 0x2718 <printNumPendencia>
+		}
+		if(numPendecias > 3){
+    281c:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
+    2820:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
+    2824:	04 97       	sbiw	r24, 0x04	; 4
+    2826:	3c f0       	brlt	.+14     	; 0x2836 <printPendencias+0x9a>
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+    2828:	80 ec       	ldi	r24, 0xC0	; 192
+    282a:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			printNumPendencia(3); //pend 4
+    282e:	83 e0       	ldi	r24, 0x03	; 3
+    2830:	90 e0       	ldi	r25, 0x00	; 0
+    2832:	0e 94 8c 13 	call	0x2718	; 0x2718 <printNumPendencia>
+    2836:	2f ef       	ldi	r18, 0xFF	; 255
+    2838:	89 e7       	ldi	r24, 0x79	; 121
+    283a:	9f e3       	ldi	r25, 0x3F	; 63
+    283c:	21 50       	subi	r18, 0x01	; 1
+    283e:	80 40       	sbci	r24, 0x00	; 0
+    2840:	90 40       	sbci	r25, 0x00	; 0
+    2842:	e1 f7       	brne	.-8      	; 0x283c <printPendencias+0xa0>
+    2844:	00 c0       	rjmp	.+0      	; 0x2846 <printPendencias+0xaa>
+    2846:	00 00       	nop
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(5); //pend 6
+		}
+		_delay_ms(1300);
+	}
+	return 1;
+    2848:	81 e0       	ldi	r24, 0x01	; 1
+    284a:	08 95       	ret
+		if(numPendecias > 3){
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(3); //pend 4
+		}
+		_delay_ms(1300);
+	}else if(sobeDesce == 3 && numPendecias >= 4){
+    284c:	83 30       	cpi	r24, 0x03	; 3
+    284e:	51 f5       	brne	.+84     	; 0x28a4 <printPendencias+0x108>
+    2850:	24 30       	cpi	r18, 0x04	; 4
+    2852:	31 05       	cpc	r19, r1
+    2854:	4c f1       	brlt	.+82     	; 0x28a8 <printPendencias+0x10c>
+		if(numPendecias > 4){
+    2856:	25 30       	cpi	r18, 0x05	; 5
+    2858:	31 05       	cpc	r19, r1
+    285a:	54 f0       	brlt	.+20     	; 0x2870 <printPendencias+0xd4>
+			writeInstruction(lcd_Clear);
+    285c:	81 e0       	ldi	r24, 0x01	; 1
+    285e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			writeInstruction(lcd_LineOne | lcd_SetCursor);
+    2862:	80 e8       	ldi	r24, 0x80	; 128
+    2864:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			printNumPendencia(4); //pend 5
+    2868:	84 e0       	ldi	r24, 0x04	; 4
+    286a:	90 e0       	ldi	r25, 0x00	; 0
+    286c:	0e 94 8c 13 	call	0x2718	; 0x2718 <printNumPendencia>
+		}
+		if(numPendecias > 5){
+    2870:	80 91 ae 04 	lds	r24, 0x04AE	; 0x8004ae <__data_end>
+    2874:	90 91 af 04 	lds	r25, 0x04AF	; 0x8004af <__data_end+0x1>
+    2878:	06 97       	sbiw	r24, 0x06	; 6
+    287a:	3c f0       	brlt	.+14     	; 0x288a <printPendencias+0xee>
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+    287c:	80 ec       	ldi	r24, 0xC0	; 192
+    287e:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			printNumPendencia(5); //pend 6
+    2882:	85 e0       	ldi	r24, 0x05	; 5
+    2884:	90 e0       	ldi	r25, 0x00	; 0
+    2886:	0e 94 8c 13 	call	0x2718	; 0x2718 <printNumPendencia>
+    288a:	2f ef       	ldi	r18, 0xFF	; 255
+    288c:	89 e7       	ldi	r24, 0x79	; 121
+    288e:	9f e3       	ldi	r25, 0x3F	; 63
+    2890:	21 50       	subi	r18, 0x01	; 1
+    2892:	80 40       	sbci	r24, 0x00	; 0
+    2894:	90 40       	sbci	r25, 0x00	; 0
+    2896:	e1 f7       	brne	.-8      	; 0x2890 <printPendencias+0xf4>
+    2898:	00 c0       	rjmp	.+0      	; 0x289a <printPendencias+0xfe>
+    289a:	00 00       	nop
+		}
+		_delay_ms(1300);
+	}
+	return 1;
+    289c:	81 e0       	ldi	r24, 0x01	; 1
+    289e:	08 95       	ret
+	
+}
+
+char printPendencias(char sobeDesce){
+	if(numPendecias < 1)
+		return 0; //sem pendencias pra printar
+    28a0:	80 e0       	ldi	r24, 0x00	; 0
+    28a2:	08 95       	ret
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(5); //pend 6
+		}
+		_delay_ms(1300);
+	}
+	return 1;
+    28a4:	81 e0       	ldi	r24, 0x01	; 1
+    28a6:	08 95       	ret
+    28a8:	81 e0       	ldi	r24, 0x01	; 1
+}
+    28aa:	08 95       	ret
+
+000028ac <modoADM>:
+#include "../Headers/relogio.h"
+#include "../Headers/pendencias.h"
+
+static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
+
+void modoADM(char *tecla){
+    28ac:	8f 92       	push	r8
+    28ae:	9f 92       	push	r9
+    28b0:	af 92       	push	r10
+    28b2:	bf 92       	push	r11
+    28b4:	df 92       	push	r13
+    28b6:	ef 92       	push	r14
+    28b8:	ff 92       	push	r15
+    28ba:	0f 93       	push	r16
+    28bc:	1f 93       	push	r17
+    28be:	cf 93       	push	r28
+    28c0:	df 93       	push	r29
+    28c2:	cd b7       	in	r28, 0x3d	; 61
+    28c4:	de b7       	in	r29, 0x3e	; 62
+    28c6:	2c 97       	sbiw	r28, 0x0c	; 12
+    28c8:	0f b6       	in	r0, 0x3f	; 63
+    28ca:	f8 94       	cli
+    28cc:	de bf       	out	0x3e, r29	; 62
+    28ce:	0f be       	out	0x3f, r0	; 63
+    28d0:	cd bf       	out	0x3d, r28	; 61
+    28d2:	4c 01       	movw	r8, r24
+	char status;
+	short cont=0;
+	char pendenciaInvalida;
+	if((*tecla) == KEY_1){
+    28d4:	fc 01       	movw	r30, r24
+    28d6:	80 81       	ld	r24, Z
+    28d8:	88 23       	and	r24, r24
+    28da:	09 f4       	brne	.+2      	; 0x28de <modoADM+0x32>
+    28dc:	53 c0       	rjmp	.+166    	; 0x2984 <modoADM+0xd8>
+    28de:	61 c0       	rjmp	.+194    	; 0x29a2 <modoADM+0xf6>
+		//mudar hora
+		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
+		
+		while(cont <2 && cont != -1){
+				tela_instrucoes_configDiaMesAno();
+    28e0:	0e 94 a4 0b 	call	0x1748	; 0x1748 <tela_instrucoes_configDiaMesAno>
+				status = getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
+    28e4:	ae 01       	movw	r20, r28
+    28e6:	49 5f       	subi	r20, 0xF9	; 249
+    28e8:	5f 4f       	sbci	r21, 0xFF	; 255
+    28ea:	be 01       	movw	r22, r28
+    28ec:	67 5f       	subi	r22, 0xF7	; 247
+    28ee:	7f 4f       	sbci	r23, 0xFF	; 255
+    28f0:	ce 01       	movw	r24, r28
+    28f2:	0b 96       	adiw	r24, 0x0b	; 11
+    28f4:	0e 94 cf 0c 	call	0x199e	; 0x199e <getDiaMesAno>
+    28f8:	d8 2e       	mov	r13, r24
+				result=0;
+			if (status){
+    28fa:	88 23       	and	r24, r24
+    28fc:	29 f1       	breq	.+74     	; 0x2948 <modoADM+0x9c>
+				cont ++;
+    28fe:	ff ef       	ldi	r31, 0xFF	; 255
+    2900:	af 1a       	sub	r10, r31
+    2902:	bf 0a       	sbc	r11, r31
+				tela_instrucoes_configHoraMinSeg();
+    2904:	0e 94 d0 0b 	call	0x17a0	; 0x17a0 <tela_instrucoes_configHoraMinSeg>
+				status = getHoraMinSeg(hora,min,seg);//preenche hora min e seg
+    2908:	ae 01       	movw	r20, r28
+    290a:	4f 5f       	subi	r20, 0xFF	; 255
+    290c:	5f 4f       	sbci	r21, 0xFF	; 255
+    290e:	be 01       	movw	r22, r28
+    2910:	6d 5f       	subi	r22, 0xFD	; 253
+    2912:	7f 4f       	sbci	r23, 0xFF	; 255
+    2914:	ce 01       	movw	r24, r28
+    2916:	05 96       	adiw	r24, 0x05	; 5
+    2918:	0e 94 b7 0d 	call	0x1b6e	; 0x1b6e <getHoraMinSeg>
+    291c:	d8 2e       	mov	r13, r24
+				if (status)result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
+    291e:	88 23       	and	r24, r24
+    2920:	c1 f0       	breq	.+48     	; 0x2952 <modoADM+0xa6>
+    2922:	ce 01       	movw	r24, r28
+    2924:	01 96       	adiw	r24, 0x01	; 1
+    2926:	7c 01       	movw	r14, r24
+    2928:	8e 01       	movw	r16, r28
+    292a:	0d 5f       	subi	r16, 0xFD	; 253
+    292c:	1f 4f       	sbci	r17, 0xFF	; 255
+    292e:	9e 01       	movw	r18, r28
+    2930:	2b 5f       	subi	r18, 0xFB	; 251
+    2932:	3f 4f       	sbci	r19, 0xFF	; 255
+    2934:	ae 01       	movw	r20, r28
+    2936:	49 5f       	subi	r20, 0xF9	; 249
+    2938:	5f 4f       	sbci	r21, 0xFF	; 255
+    293a:	be 01       	movw	r22, r28
+    293c:	67 5f       	subi	r22, 0xF7	; 247
+    293e:	7f 4f       	sbci	r23, 0xFF	; 255
+    2940:	0a 96       	adiw	r24, 0x0a	; 10
+    2942:	0e 94 b8 0e 	call	0x1d70	; 0x1d70 <changeDate>
+    2946:	06 c0       	rjmp	.+12     	; 0x2954 <modoADM+0xa8>
+		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
+		
+		while(cont <2 && cont != -1){
+				tela_instrucoes_configDiaMesAno();
+				status = getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
+				result=0;
+    2948:	80 e0       	ldi	r24, 0x00	; 0
+				cont ++;
+				tela_instrucoes_configHoraMinSeg();
+				status = getHoraMinSeg(hora,min,seg);//preenche hora min e seg
+				if (status)result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
+			}
+			else cont = -1;
+    294a:	aa 24       	eor	r10, r10
+    294c:	aa 94       	dec	r10
+    294e:	ba 2c       	mov	r11, r10
+    2950:	01 c0       	rjmp	.+2      	; 0x2954 <modoADM+0xa8>
+		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
+		
+		while(cont <2 && cont != -1){
+				tela_instrucoes_configDiaMesAno();
+				status = getDiaMesAno(dia,mes,ano); //preenche dia mes e ano
+				result=0;
+    2952:	80 e0       	ldi	r24, 0x00	; 0
+				tela_instrucoes_configHoraMinSeg();
+				status = getHoraMinSeg(hora,min,seg);//preenche hora min e seg
+				if (status)result = changeDate(dia,mes,ano,hora,min,seg); //faz o update
+			}
+			else cont = -1;
+			if(result && status) //informa se update foi valido
+    2954:	88 23       	and	r24, r24
+    2956:	29 f0       	breq	.+10     	; 0x2962 <modoADM+0xb6>
+    2958:	dd 20       	and	r13, r13
+    295a:	19 f0       	breq	.+6      	; 0x2962 <modoADM+0xb6>
+				tela_operacaoConcluida();
+    295c:	0e 94 fc 0b 	call	0x17f8	; 0x17f8 <tela_operacaoConcluida>
+    2960:	0d c0       	rjmp	.+26     	; 0x297c <modoADM+0xd0>
+			else if(status)
+    2962:	dd 20       	and	r13, r13
+    2964:	19 f0       	breq	.+6      	; 0x296c <modoADM+0xc0>
+				tela_dataInvalida();
+    2966:	0e 94 17 0c 	call	0x182e	; 0x182e <tela_dataInvalida>
+    296a:	08 c0       	rjmp	.+16     	; 0x297c <modoADM+0xd0>
+			else if (!status && cont !=-1)cont=0;
+    296c:	d1 10       	cpse	r13, r1
+    296e:	06 c0       	rjmp	.+12     	; 0x297c <modoADM+0xd0>
+    2970:	9f ef       	ldi	r25, 0xFF	; 255
+    2972:	a9 16       	cp	r10, r25
+    2974:	b9 06       	cpc	r11, r25
+    2976:	11 f0       	breq	.+4      	; 0x297c <modoADM+0xd0>
+    2978:	a1 2c       	mov	r10, r1
+    297a:	b1 2c       	mov	r11, r1
+			*tecla = TECLA_INVALIDA;
+    297c:	89 e1       	ldi	r24, 0x19	; 25
+    297e:	f4 01       	movw	r30, r8
+    2980:	80 83       	st	Z, r24
+    2982:	02 c0       	rjmp	.+4      	; 0x2988 <modoADM+0xdc>
+    2984:	a1 2c       	mov	r10, r1
+    2986:	b1 2c       	mov	r11, r1
+	char pendenciaInvalida;
+	if((*tecla) == KEY_1){
+		//mudar hora
+		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
+		
+		while(cont <2 && cont != -1){
+    2988:	f2 e0       	ldi	r31, 0x02	; 2
+    298a:	af 16       	cp	r10, r31
+    298c:	b1 04       	cpc	r11, r1
+    298e:	2c f4       	brge	.+10     	; 0x299a <modoADM+0xee>
+    2990:	2f ef       	ldi	r18, 0xFF	; 255
+    2992:	a2 16       	cp	r10, r18
+    2994:	b2 06       	cpc	r11, r18
+    2996:	09 f0       	breq	.+2      	; 0x299a <modoADM+0xee>
+    2998:	a3 cf       	rjmp	.-186    	; 0x28e0 <modoADM+0x34>
+			else if(status)
+				tela_dataInvalida();
+			else if (!status && cont !=-1)cont=0;
+			*tecla = TECLA_INVALIDA;
+		}
+		*tecla = TECLA_INVALIDA;
+    299a:	89 e1       	ldi	r24, 0x19	; 25
+    299c:	f4 01       	movw	r30, r8
+    299e:	80 83       	st	Z, r24
+    29a0:	60 c0       	rjmp	.+192    	; 0x2a62 <modoADM+0x1b6>
+	}else if((*tecla) == KEY_2){
+    29a2:	81 30       	cpi	r24, 0x01	; 1
+    29a4:	89 f4       	brne	.+34     	; 0x29c8 <modoADM+0x11c>
+		//ver pendencia
+		if(existePendencia()){
+    29a6:	0e 94 0f 13 	call	0x261e	; 0x261e <existePendencia>
+    29aa:	88 23       	and	r24, r24
+    29ac:	51 f0       	breq	.+20     	; 0x29c2 <modoADM+0x116>
+			printPendencias(1);
+    29ae:	81 e0       	ldi	r24, 0x01	; 1
+    29b0:	0e 94 ce 13 	call	0x279c	; 0x279c <printPendencias>
+			printPendencias(2); //se não tiver mais pendencias ele não faz nada
+    29b4:	82 e0       	ldi	r24, 0x02	; 2
+    29b6:	0e 94 ce 13 	call	0x279c	; 0x279c <printPendencias>
+			printPendencias(3);
+    29ba:	83 e0       	ldi	r24, 0x03	; 3
+    29bc:	0e 94 ce 13 	call	0x279c	; 0x279c <printPendencias>
+    29c0:	50 c0       	rjmp	.+160    	; 0x2a62 <modoADM+0x1b6>
+		}else
+			tela_semPendencias();
+    29c2:	0e 94 54 0c 	call	0x18a8	; 0x18a8 <tela_semPendencias>
+    29c6:	4d c0       	rjmp	.+154    	; 0x2a62 <modoADM+0x1b6>
+		
+	}else if((*tecla) == KEY_3){
+    29c8:	82 30       	cpi	r24, 0x02	; 2
+    29ca:	51 f5       	brne	.+84     	; 0x2a20 <modoADM+0x174>
+		//hab/deshabilitar operadore
+		tela_instrucoes_configOper();
+    29cc:	0e 94 60 0b 	call	0x16c0	; 0x16c0 <tela_instrucoes_configOper>
+		tela_status_oper();
+    29d0:	0e 94 a0 0c 	call	0x1940	; 0x1940 <tela_status_oper>
+		(*tecla) = TECLA_INVALIDA;
+    29d4:	89 e1       	ldi	r24, 0x19	; 25
+    29d6:	f4 01       	movw	r30, r8
+    29d8:	80 83       	st	Z, r24
+		while ((*tecla) == TECLA_INVALIDA){
+    29da:	04 c0       	rjmp	.+8      	; 0x29e4 <modoADM+0x138>
+			(*tecla) = teclaDebouce();
+    29dc:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    29e0:	f4 01       	movw	r30, r8
+    29e2:	80 83       	st	Z, r24
+	}else if((*tecla) == KEY_3){
+		//hab/deshabilitar operadore
+		tela_instrucoes_configOper();
+		tela_status_oper();
+		(*tecla) = TECLA_INVALIDA;
+		while ((*tecla) == TECLA_INVALIDA){
+    29e4:	f4 01       	movw	r30, r8
+    29e6:	80 81       	ld	r24, Z
+    29e8:	89 31       	cpi	r24, 0x19	; 25
+    29ea:	c1 f3       	breq	.-16     	; 0x29dc <modoADM+0x130>
+			(*tecla) = teclaDebouce();
+		}
+		
+		if((*tecla) == KEY_1 || (*tecla) == KEY_2 ) 
+    29ec:	82 30       	cpi	r24, 0x02	; 2
+    29ee:	20 f4       	brcc	.+8      	; 0x29f8 <modoADM+0x14c>
+			mudarStatusOper(tecla); //passando o endereço de tecla(teclaG da main), não o valor
+    29f0:	c4 01       	movw	r24, r8
+    29f2:	0e 94 8a 0c 	call	0x1914	; 0x1914 <mudarStatusOper>
+    29f6:	10 c0       	rjmp	.+32     	; 0x2a18 <modoADM+0x16c>
+		else{
+			writeInstruction(lcd_Clear | lcd_Home);
+    29f8:	83 e0       	ldi	r24, 0x03	; 3
+    29fa:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+			writeString("Opcao Invalida");	
+    29fe:	89 e8       	ldi	r24, 0x89	; 137
+    2a00:	94 e0       	ldi	r25, 0x04	; 4
+    2a02:	0e 94 1a 04 	call	0x834	; 0x834 <writeString>
+    2a06:	ff ef       	ldi	r31, 0xFF	; 255
+    2a08:	23 ed       	ldi	r18, 0xD3	; 211
+    2a0a:	80 e3       	ldi	r24, 0x30	; 48
+    2a0c:	f1 50       	subi	r31, 0x01	; 1
+    2a0e:	20 40       	sbci	r18, 0x00	; 0
+    2a10:	80 40       	sbci	r24, 0x00	; 0
+    2a12:	e1 f7       	brne	.-8      	; 0x2a0c <modoADM+0x160>
+    2a14:	00 c0       	rjmp	.+0      	; 0x2a16 <modoADM+0x16a>
+    2a16:	00 00       	nop
+			_delay_ms(1000);	
+		}
+		*tecla = TECLA_INVALIDA;
+    2a18:	89 e1       	ldi	r24, 0x19	; 25
+    2a1a:	f4 01       	movw	r30, r8
+    2a1c:	80 83       	st	Z, r24
+    2a1e:	21 c0       	rjmp	.+66     	; 0x2a62 <modoADM+0x1b6>
+	}else if((*tecla) == KEY_4){
+    2a20:	83 30       	cpi	r24, 0x03	; 3
+    2a22:	f9 f4       	brne	.+62     	; 0x2a62 <modoADM+0x1b6>
+		//remover pendencia
+		if(existePendencia()){
+    2a24:	0e 94 0f 13 	call	0x261e	; 0x261e <existePendencia>
+    2a28:	88 23       	and	r24, r24
+    2a2a:	b1 f0       	breq	.+44     	; 0x2a58 <modoADM+0x1ac>
+			*tecla = TECLA_INVALIDA;
+    2a2c:	89 e1       	ldi	r24, 0x19	; 25
+    2a2e:	f4 01       	movw	r30, r8
+    2a30:	80 83       	st	Z, r24
+			while(*tecla == TECLA_INVALIDA){
+    2a32:	04 c0       	rjmp	.+8      	; 0x2a3c <modoADM+0x190>
+				*tecla = teclaDebouce();
+    2a34:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    2a38:	f4 01       	movw	r30, r8
+    2a3a:	80 83       	st	Z, r24
+		*tecla = TECLA_INVALIDA;
+	}else if((*tecla) == KEY_4){
+		//remover pendencia
+		if(existePendencia()){
+			*tecla = TECLA_INVALIDA;
+			while(*tecla == TECLA_INVALIDA){
+    2a3c:	f4 01       	movw	r30, r8
+    2a3e:	80 81       	ld	r24, Z
+    2a40:	89 31       	cpi	r24, 0x19	; 25
+    2a42:	c1 f3       	breq	.-16     	; 0x2a34 <modoADM+0x188>
+				*tecla = teclaDebouce();
+				}
+			pendenciaInvalida = removePendencias(*tecla);
+    2a44:	0e 94 1a 13 	call	0x2634	; 0x2634 <removePendencias>
+			if(pendenciaInvalida)
+    2a48:	88 23       	and	r24, r24
+    2a4a:	19 f0       	breq	.+6      	; 0x2a52 <modoADM+0x1a6>
+				tela_operacaoConcluida();
+    2a4c:	0e 94 fc 0b 	call	0x17f8	; 0x17f8 <tela_operacaoConcluida>
+    2a50:	05 c0       	rjmp	.+10     	; 0x2a5c <modoADM+0x1b0>
+			else
+				tela_opcaoInvalida();
+    2a52:	0e 94 6f 0c 	call	0x18de	; 0x18de <tela_opcaoInvalida>
+    2a56:	02 c0       	rjmp	.+4      	; 0x2a5c <modoADM+0x1b0>
+		}else
+			tela_semPendencias();
+    2a58:	0e 94 54 0c 	call	0x18a8	; 0x18a8 <tela_semPendencias>
+		*tecla = TECLA_INVALIDA;
+    2a5c:	89 e1       	ldi	r24, 0x19	; 25
+    2a5e:	f4 01       	movw	r30, r8
+    2a60:	80 83       	st	Z, r24
+	}
+}
+    2a62:	2c 96       	adiw	r28, 0x0c	; 12
+    2a64:	0f b6       	in	r0, 0x3f	; 63
+    2a66:	f8 94       	cli
+    2a68:	de bf       	out	0x3e, r29	; 62
+    2a6a:	0f be       	out	0x3f, r0	; 63
+    2a6c:	cd bf       	out	0x3d, r28	; 61
+    2a6e:	df 91       	pop	r29
+    2a70:	cf 91       	pop	r28
+    2a72:	1f 91       	pop	r17
+    2a74:	0f 91       	pop	r16
+    2a76:	ff 90       	pop	r15
+    2a78:	ef 90       	pop	r14
+    2a7a:	df 90       	pop	r13
+    2a7c:	bf 90       	pop	r11
+    2a7e:	af 90       	pop	r10
+    2a80:	9f 90       	pop	r9
+    2a82:	8f 90       	pop	r8
+    2a84:	08 95       	ret
+
+00002a86 <enviarPedidoSerial>:
+	
+	if(resultado)
+		removePagamentoAgendado(cartao);
+}
+
+char enviarPedidoSerial(char pedido[]){
+    2a86:	0f 93       	push	r16
+    2a88:	1f 93       	push	r17
+    2a8a:	cf 93       	push	r28
+    2a8c:	df 93       	push	r29
+    2a8e:	8c 01       	movw	r16, r24
+	short i;
+	for(i=0;i<13;i++)
+    2a90:	c0 e0       	ldi	r28, 0x00	; 0
+    2a92:	d0 e0       	ldi	r29, 0x00	; 0
+    2a94:	07 c0       	rjmp	.+14     	; 0x2aa4 <enviarPedidoSerial+0x1e>
+		USART_envia(pedido[i]);
+    2a96:	f8 01       	movw	r30, r16
+    2a98:	ec 0f       	add	r30, r28
+    2a9a:	fd 1f       	adc	r31, r29
+    2a9c:	80 81       	ld	r24, Z
+    2a9e:	0e 94 bb 03 	call	0x776	; 0x776 <USART_envia>
+		removePagamentoAgendado(cartao);
+}
+
+char enviarPedidoSerial(char pedido[]){
+	short i;
+	for(i=0;i<13;i++)
+    2aa2:	21 96       	adiw	r28, 0x01	; 1
+    2aa4:	cd 30       	cpi	r28, 0x0D	; 13
+    2aa6:	d1 05       	cpc	r29, r1
+    2aa8:	b4 f3       	brlt	.-20     	; 0x2a96 <enviarPedidoSerial+0x10>
+		USART_envia(pedido[i]);
+	
+	if(USART_recebe() == 0x4f ){
+    2aaa:	0e 94 c2 03 	call	0x784	; 0x784 <USART_recebe>
+    2aae:	8f 34       	cpi	r24, 0x4F	; 79
+    2ab0:	21 f4       	brne	.+8      	; 0x2aba <enviarPedidoSerial+0x34>
+		tela_OK();
+    2ab2:	0e 94 c9 05 	call	0xb92	; 0xb92 <tela_OK>
+		return 1;
+    2ab6:	81 e0       	ldi	r24, 0x01	; 1
+    2ab8:	01 c0       	rjmp	.+2      	; 0x2abc <enviarPedidoSerial+0x36>
+	}else
+		return 0;
+    2aba:	80 e0       	ldi	r24, 0x00	; 0
+}
+    2abc:	df 91       	pop	r29
+    2abe:	cf 91       	pop	r28
+    2ac0:	1f 91       	pop	r17
+    2ac2:	0f 91       	pop	r16
+    2ac4:	08 95       	ret
+
+00002ac6 <enviarPedidoDePagamento>:
+			}
+		
+		}
+}
+	
+void enviarPedidoDePagamento(short cobrar){
+    2ac6:	cf 93       	push	r28
+    2ac8:	df 93       	push	r29
+    2aca:	cd b7       	in	r28, 0x3d	; 61
+    2acc:	de b7       	in	r29, 0x3e	; 62
+    2ace:	63 97       	sbiw	r28, 0x13	; 19
+    2ad0:	0f b6       	in	r0, 0x3f	; 63
+    2ad2:	f8 94       	cli
+    2ad4:	de bf       	out	0x3e, r29	; 62
+    2ad6:	0f be       	out	0x3f, r0	; 63
+    2ad8:	cd bf       	out	0x3d, r28	; 61
+	char cartao[NUMDIGITOSCARTOES];
+	char pedido[13], resultado;
+	short i;
+	
+	for(i=0;i<NUMDIGITOSCARTOES;i++){ //pega num do cartao e prepara o pedido
+    2ada:	20 e0       	ldi	r18, 0x00	; 0
+    2adc:	30 e0       	ldi	r19, 0x00	; 0
+    2ade:	1e c0       	rjmp	.+60     	; 0x2b1c <enviarPedidoDePagamento+0x56>
+		cartao[i] = cartoesA[cobrar][i];
+    2ae0:	fc 01       	movw	r30, r24
+    2ae2:	ee 0f       	add	r30, r30
+    2ae4:	ff 1f       	adc	r31, r31
+    2ae6:	e8 0f       	add	r30, r24
+    2ae8:	f9 1f       	adc	r31, r25
+    2aea:	ee 0f       	add	r30, r30
+    2aec:	ff 1f       	adc	r31, r31
+    2aee:	e6 5a       	subi	r30, 0xA6	; 166
+    2af0:	fa 4f       	sbci	r31, 0xFA	; 250
+    2af2:	e2 0f       	add	r30, r18
+    2af4:	f3 1f       	adc	r31, r19
+    2af6:	40 81       	ld	r20, Z
+    2af8:	e1 e0       	ldi	r30, 0x01	; 1
+    2afa:	f0 e0       	ldi	r31, 0x00	; 0
+    2afc:	ec 0f       	add	r30, r28
+    2afe:	fd 1f       	adc	r31, r29
+    2b00:	e2 0f       	add	r30, r18
+    2b02:	f3 1f       	adc	r31, r19
+    2b04:	40 83       	st	Z, r20
+		pedido[i+2] = cartao[i];
+    2b06:	f9 01       	movw	r30, r18
+    2b08:	32 96       	adiw	r30, 0x02	; 2
+    2b0a:	67 e0       	ldi	r22, 0x07	; 7
+    2b0c:	70 e0       	ldi	r23, 0x00	; 0
+    2b0e:	6c 0f       	add	r22, r28
+    2b10:	7d 1f       	adc	r23, r29
+    2b12:	e6 0f       	add	r30, r22
+    2b14:	f7 1f       	adc	r31, r23
+    2b16:	40 83       	st	Z, r20
+void enviarPedidoDePagamento(short cobrar){
+	char cartao[NUMDIGITOSCARTOES];
+	char pedido[13], resultado;
+	short i;
+	
+	for(i=0;i<NUMDIGITOSCARTOES;i++){ //pega num do cartao e prepara o pedido
+    2b18:	2f 5f       	subi	r18, 0xFF	; 255
+    2b1a:	3f 4f       	sbci	r19, 0xFF	; 255
+    2b1c:	26 30       	cpi	r18, 0x06	; 6
+    2b1e:	31 05       	cpc	r19, r1
+    2b20:	fc f2       	brlt	.-66     	; 0x2ae0 <enviarPedidoDePagamento+0x1a>
+    2b22:	20 e0       	ldi	r18, 0x00	; 0
+    2b24:	30 e0       	ldi	r19, 0x00	; 0
+    2b26:	18 c0       	rjmp	.+48     	; 0x2b58 <enviarPedidoDePagamento+0x92>
+		cartao[i] = cartoesA[cobrar][i];
+		pedido[i+2] = cartao[i];
+	}
+	
+	for(i=0;i<NUMDIGITOSVALORES;i++){ //prepara o pedido
+		pedido[i+8] = valParcelaA[cobrar][i];
+    2b28:	a9 01       	movw	r20, r18
+    2b2a:	48 5f       	subi	r20, 0xF8	; 248
+    2b2c:	5f 4f       	sbci	r21, 0xFF	; 255
+    2b2e:	fc 01       	movw	r30, r24
+    2b30:	ee 0f       	add	r30, r30
+    2b32:	ff 1f       	adc	r31, r31
+    2b34:	ee 0f       	add	r30, r30
+    2b36:	ff 1f       	adc	r31, r31
+    2b38:	e8 0f       	add	r30, r24
+    2b3a:	f9 1f       	adc	r31, r25
+    2b3c:	e4 5c       	subi	r30, 0xC4	; 196
+    2b3e:	fa 4f       	sbci	r31, 0xFA	; 250
+    2b40:	e2 0f       	add	r30, r18
+    2b42:	f3 1f       	adc	r31, r19
+    2b44:	60 81       	ld	r22, Z
+    2b46:	e7 e0       	ldi	r30, 0x07	; 7
+    2b48:	f0 e0       	ldi	r31, 0x00	; 0
+    2b4a:	ec 0f       	add	r30, r28
+    2b4c:	fd 1f       	adc	r31, r29
+    2b4e:	e4 0f       	add	r30, r20
+    2b50:	f5 1f       	adc	r31, r21
+    2b52:	60 83       	st	Z, r22
+	for(i=0;i<NUMDIGITOSCARTOES;i++){ //pega num do cartao e prepara o pedido
+		cartao[i] = cartoesA[cobrar][i];
+		pedido[i+2] = cartao[i];
+	}
+	
+	for(i=0;i<NUMDIGITOSVALORES;i++){ //prepara o pedido
+    2b54:	2f 5f       	subi	r18, 0xFF	; 255
+    2b56:	3f 4f       	sbci	r19, 0xFF	; 255
+    2b58:	25 30       	cpi	r18, 0x05	; 5
+    2b5a:	31 05       	cpc	r19, r1
+    2b5c:	2c f3       	brlt	.-54     	; 0x2b28 <enviarPedidoDePagamento+0x62>
+		pedido[i+8] = valParcelaA[cobrar][i];
+	}
+		
+	pedido[0] = 'A'; // finaliza o pedido
+    2b5e:	81 e4       	ldi	r24, 0x41	; 65
+    2b60:	8f 83       	std	Y+7, r24	; 0x07
+	pedido[1] = 'P';
+    2b62:	80 e5       	ldi	r24, 0x50	; 80
+    2b64:	88 87       	std	Y+8, r24	; 0x08
+	pedido[12] = '\r';
+    2b66:	8d e0       	ldi	r24, 0x0D	; 13
+    2b68:	8b 8b       	std	Y+19, r24	; 0x13
+	
+	//falar com vini sobre serial, perguntar tb sobre numeros em vendas estarem invertidos
+	resultado = enviarPedidoSerial(pedido);
+    2b6a:	ce 01       	movw	r24, r28
+    2b6c:	07 96       	adiw	r24, 0x07	; 7
+    2b6e:	0e 94 43 15 	call	0x2a86	; 0x2a86 <enviarPedidoSerial>
+	
+	if(resultado)
+    2b72:	88 23       	and	r24, r24
+    2b74:	21 f0       	breq	.+8      	; 0x2b7e <enviarPedidoDePagamento+0xb8>
+		removePagamentoAgendado(cartao);
+    2b76:	ce 01       	movw	r24, r28
+    2b78:	01 96       	adiw	r24, 0x01	; 1
+    2b7a:	0e 94 b9 12 	call	0x2572	; 0x2572 <removePagamentoAgendado>
+}
+    2b7e:	63 96       	adiw	r28, 0x13	; 19
+    2b80:	0f b6       	in	r0, 0x3f	; 63
+    2b82:	f8 94       	cli
+    2b84:	de bf       	out	0x3e, r29	; 62
+    2b86:	0f be       	out	0x3f, r0	; 63
+    2b88:	cd bf       	out	0x3d, r28	; 61
+    2b8a:	df 91       	pop	r29
+    2b8c:	cf 91       	pop	r28
+    2b8e:	08 95       	ret
+
+00002b90 <cobrarPagementosAgendados>:
+		writeCharacter(valParcelaP[num][i]+48);
+	writeString(" -");
+	writeCharacter(num+48);
+}
+
+void cobrarPagementosAgendados(){
+    2b90:	0f 93       	push	r16
+    2b92:	1f 93       	push	r17
+    2b94:	cf 93       	push	r28
+    2b96:	df 93       	push	r29
+    2b98:	00 d0       	rcall	.+0      	; 0x2b9a <cobrarPagementosAgendados+0xa>
+    2b9a:	00 d0       	rcall	.+0      	; 0x2b9c <cobrarPagementosAgendados+0xc>
+    2b9c:	00 d0       	rcall	.+0      	; 0x2b9e <cobrarPagementosAgendados+0xe>
+    2b9e:	cd b7       	in	r28, 0x3d	; 61
+    2ba0:	de b7       	in	r29, 0x3e	; 62
+	char diaAtual[2],mesAtual[2],anoAtual[2];
+	short i, cobrar=-1;
+	
+	//pego as infos da data atual
+	AtualizaStringDataHora();
+    2ba2:	0e 94 5f 10 	call	0x20be	; 0x20be <AtualizaStringDataHora>
+	for(i=0;i<2;i++){
+    2ba6:	80 e0       	ldi	r24, 0x00	; 0
+    2ba8:	90 e0       	ldi	r25, 0x00	; 0
+    2baa:	25 c0       	rjmp	.+74     	; 0x2bf6 <cobrarPagementosAgendados+0x66>
+		diaAtual[i]=stringDATA[i]-48;
+    2bac:	fc 01       	movw	r30, r24
+    2bae:	e7 51       	subi	r30, 0x17	; 23
+    2bb0:	fa 4f       	sbci	r31, 0xFA	; 250
+    2bb2:	20 81       	ld	r18, Z
+    2bb4:	e1 e0       	ldi	r30, 0x01	; 1
+    2bb6:	f0 e0       	ldi	r31, 0x00	; 0
+    2bb8:	ec 0f       	add	r30, r28
+    2bba:	fd 1f       	adc	r31, r29
+    2bbc:	e8 0f       	add	r30, r24
+    2bbe:	f9 1f       	adc	r31, r25
+    2bc0:	20 53       	subi	r18, 0x30	; 48
+    2bc2:	20 83       	st	Z, r18
+		mesAtual[i]=stringDATA[i+3]-48;
+    2bc4:	fc 01       	movw	r30, r24
+    2bc6:	e4 51       	subi	r30, 0x14	; 20
+    2bc8:	fa 4f       	sbci	r31, 0xFA	; 250
+    2bca:	20 81       	ld	r18, Z
+    2bcc:	e3 e0       	ldi	r30, 0x03	; 3
+    2bce:	f0 e0       	ldi	r31, 0x00	; 0
+    2bd0:	ec 0f       	add	r30, r28
+    2bd2:	fd 1f       	adc	r31, r29
+    2bd4:	e8 0f       	add	r30, r24
+    2bd6:	f9 1f       	adc	r31, r25
+    2bd8:	20 53       	subi	r18, 0x30	; 48
+    2bda:	20 83       	st	Z, r18
+		anoAtual[i]=stringDATA[i+6]-48;
+    2bdc:	fc 01       	movw	r30, r24
+    2bde:	e1 51       	subi	r30, 0x11	; 17
+    2be0:	fa 4f       	sbci	r31, 0xFA	; 250
+    2be2:	20 81       	ld	r18, Z
+    2be4:	e5 e0       	ldi	r30, 0x05	; 5
+    2be6:	f0 e0       	ldi	r31, 0x00	; 0
+    2be8:	ec 0f       	add	r30, r28
+    2bea:	fd 1f       	adc	r31, r29
+    2bec:	e8 0f       	add	r30, r24
+    2bee:	f9 1f       	adc	r31, r25
+    2bf0:	20 53       	subi	r18, 0x30	; 48
+    2bf2:	20 83       	st	Z, r18
+	char diaAtual[2],mesAtual[2],anoAtual[2];
+	short i, cobrar=-1;
+	
+	//pego as infos da data atual
+	AtualizaStringDataHora();
+	for(i=0;i<2;i++){
+    2bf4:	01 96       	adiw	r24, 0x01	; 1
+    2bf6:	82 30       	cpi	r24, 0x02	; 2
+    2bf8:	91 05       	cpc	r25, r1
+    2bfa:	c4 f2       	brlt	.-80     	; 0x2bac <cobrarPagementosAgendados+0x1c>
+    2bfc:	8f ef       	ldi	r24, 0xFF	; 255
+    2bfe:	9f ef       	ldi	r25, 0xFF	; 255
+    2c00:	00 e0       	ldi	r16, 0x00	; 0
+    2c02:	10 e0       	ldi	r17, 0x00	; 0
+    2c04:	c6 c0       	rjmp	.+396    	; 0x2d92 <cobrarPagementosAgendados+0x202>
+	}
+	//012345 67891011 
+	//ddmmaa|ddmma a
+	//comparar com primeira coluna de datasVenc 
+	for(i=0;i<numPagsAgendados;i++){
+		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE) //verifica a primeira data
+    2c06:	f8 01       	movw	r30, r16
+    2c08:	ee 0f       	add	r30, r30
+    2c0a:	ff 1f       	adc	r31, r31
+    2c0c:	e0 0f       	add	r30, r16
+    2c0e:	f1 1f       	adc	r31, r17
+    2c10:	ee 0f       	add	r30, r30
+    2c12:	ff 1f       	adc	r31, r31
+    2c14:	ee 0f       	add	r30, r30
+    2c16:	ff 1f       	adc	r31, r31
+    2c18:	ec 50       	subi	r30, 0x0C	; 12
+    2c1a:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c1c:	20 81       	ld	r18, Z
+    2c1e:	28 30       	cpi	r18, 0x08	; 8
+    2c20:	09 f4       	brne	.+2      	; 0x2c24 <cobrarPagementosAgendados+0x94>
+    2c22:	50 c0       	rjmp	.+160    	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+			if(datasVenc[i][0]==diaAtual[0] && datasVenc[i][1]==diaAtual[1] && 
+    2c24:	39 81       	ldd	r19, Y+1	; 0x01
+    2c26:	23 13       	cpse	r18, r19
+    2c28:	4d c0       	rjmp	.+154    	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+    2c2a:	f8 01       	movw	r30, r16
+    2c2c:	ee 0f       	add	r30, r30
+    2c2e:	ff 1f       	adc	r31, r31
+    2c30:	e0 0f       	add	r30, r16
+    2c32:	f1 1f       	adc	r31, r17
+    2c34:	ee 0f       	add	r30, r30
+    2c36:	ff 1f       	adc	r31, r31
+    2c38:	ee 0f       	add	r30, r30
+    2c3a:	ff 1f       	adc	r31, r31
+    2c3c:	ec 50       	subi	r30, 0x0C	; 12
+    2c3e:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c40:	31 81       	ldd	r19, Z+1	; 0x01
+    2c42:	2a 81       	ldd	r18, Y+2	; 0x02
+    2c44:	32 13       	cpse	r19, r18
+    2c46:	3e c0       	rjmp	.+124    	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
+    2c48:	f8 01       	movw	r30, r16
+    2c4a:	ee 0f       	add	r30, r30
+    2c4c:	ff 1f       	adc	r31, r31
+    2c4e:	e0 0f       	add	r30, r16
+    2c50:	f1 1f       	adc	r31, r17
+    2c52:	ee 0f       	add	r30, r30
+    2c54:	ff 1f       	adc	r31, r31
+    2c56:	ee 0f       	add	r30, r30
+    2c58:	ff 1f       	adc	r31, r31
+    2c5a:	ec 50       	subi	r30, 0x0C	; 12
+    2c5c:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c5e:	32 81       	ldd	r19, Z+2	; 0x02
+    2c60:	2b 81       	ldd	r18, Y+3	; 0x03
+	//012345 67891011 
+	//ddmmaa|ddmma a
+	//comparar com primeira coluna de datasVenc 
+	for(i=0;i<numPagsAgendados;i++){
+		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE) //verifica a primeira data
+			if(datasVenc[i][0]==diaAtual[0] && datasVenc[i][1]==diaAtual[1] && 
+    2c62:	32 13       	cpse	r19, r18
+    2c64:	2f c0       	rjmp	.+94     	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
+    2c66:	f8 01       	movw	r30, r16
+    2c68:	ee 0f       	add	r30, r30
+    2c6a:	ff 1f       	adc	r31, r31
+    2c6c:	e0 0f       	add	r30, r16
+    2c6e:	f1 1f       	adc	r31, r17
+    2c70:	ee 0f       	add	r30, r30
+    2c72:	ff 1f       	adc	r31, r31
+    2c74:	ee 0f       	add	r30, r30
+    2c76:	ff 1f       	adc	r31, r31
+    2c78:	ec 50       	subi	r30, 0x0C	; 12
+    2c7a:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c7c:	33 81       	ldd	r19, Z+3	; 0x03
+    2c7e:	2c 81       	ldd	r18, Y+4	; 0x04
+    2c80:	32 13       	cpse	r19, r18
+    2c82:	20 c0       	rjmp	.+64     	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
+    2c84:	f8 01       	movw	r30, r16
+    2c86:	ee 0f       	add	r30, r30
+    2c88:	ff 1f       	adc	r31, r31
+    2c8a:	e0 0f       	add	r30, r16
+    2c8c:	f1 1f       	adc	r31, r17
+    2c8e:	ee 0f       	add	r30, r30
+    2c90:	ff 1f       	adc	r31, r31
+    2c92:	ee 0f       	add	r30, r30
+    2c94:	ff 1f       	adc	r31, r31
+    2c96:	ec 50       	subi	r30, 0x0C	; 12
+    2c98:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c9a:	34 81       	ldd	r19, Z+4	; 0x04
+    2c9c:	2d 81       	ldd	r18, Y+5	; 0x05
+	//ddmmaa|ddmma a
+	//comparar com primeira coluna de datasVenc 
+	for(i=0;i<numPagsAgendados;i++){
+		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE) //verifica a primeira data
+			if(datasVenc[i][0]==diaAtual[0] && datasVenc[i][1]==diaAtual[1] && 
+			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
+    2c9e:	32 13       	cpse	r19, r18
+    2ca0:	11 c0       	rjmp	.+34     	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
+    2ca2:	f8 01       	movw	r30, r16
+    2ca4:	ee 0f       	add	r30, r30
+    2ca6:	ff 1f       	adc	r31, r31
+    2ca8:	e0 0f       	add	r30, r16
+    2caa:	f1 1f       	adc	r31, r17
+    2cac:	ee 0f       	add	r30, r30
+    2cae:	ff 1f       	adc	r31, r31
+    2cb0:	ee 0f       	add	r30, r30
+    2cb2:	ff 1f       	adc	r31, r31
+    2cb4:	ec 50       	subi	r30, 0x0C	; 12
+    2cb6:	fb 4f       	sbci	r31, 0xFB	; 251
+    2cb8:	35 81       	ldd	r19, Z+5	; 0x05
+    2cba:	2e 81       	ldd	r18, Y+6	; 0x06
+    2cbc:	32 13       	cpse	r19, r18
+    2cbe:	02 c0       	rjmp	.+4      	; 0x2cc4 <cobrarPagementosAgendados+0x134>
+				cobrar = 1;
+    2cc0:	81 e0       	ldi	r24, 0x01	; 1
+    2cc2:	90 e0       	ldi	r25, 0x00	; 0
+			
+			}
+		if(datasVenc[i][6] != SEMPARCELA) //verifica a segunda
+    2cc4:	f8 01       	movw	r30, r16
+    2cc6:	ee 0f       	add	r30, r30
+    2cc8:	ff 1f       	adc	r31, r31
+    2cca:	e0 0f       	add	r30, r16
+    2ccc:	f1 1f       	adc	r31, r17
+    2cce:	ee 0f       	add	r30, r30
+    2cd0:	ff 1f       	adc	r31, r31
+    2cd2:	ee 0f       	add	r30, r30
+    2cd4:	ff 1f       	adc	r31, r31
+    2cd6:	ec 50       	subi	r30, 0x0C	; 12
+    2cd8:	fb 4f       	sbci	r31, 0xFB	; 251
+    2cda:	26 81       	ldd	r18, Z+6	; 0x06
+    2cdc:	29 30       	cpi	r18, 0x09	; 9
+    2cde:	09 f4       	brne	.+2      	; 0x2ce2 <cobrarPagementosAgendados+0x152>
+    2ce0:	50 c0       	rjmp	.+160    	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
+    2ce2:	39 81       	ldd	r19, Y+1	; 0x01
+    2ce4:	23 13       	cpse	r18, r19
+    2ce6:	4d c0       	rjmp	.+154    	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+    2ce8:	f8 01       	movw	r30, r16
+    2cea:	ee 0f       	add	r30, r30
+    2cec:	ff 1f       	adc	r31, r31
+    2cee:	e0 0f       	add	r30, r16
+    2cf0:	f1 1f       	adc	r31, r17
+    2cf2:	ee 0f       	add	r30, r30
+    2cf4:	ff 1f       	adc	r31, r31
+    2cf6:	ee 0f       	add	r30, r30
+    2cf8:	ff 1f       	adc	r31, r31
+    2cfa:	ec 50       	subi	r30, 0x0C	; 12
+    2cfc:	fb 4f       	sbci	r31, 0xFB	; 251
+    2cfe:	37 81       	ldd	r19, Z+7	; 0x07
+    2d00:	2a 81       	ldd	r18, Y+2	; 0x02
+    2d02:	32 13       	cpse	r19, r18
+    2d04:	3e c0       	rjmp	.+124    	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
+    2d06:	f8 01       	movw	r30, r16
+    2d08:	ee 0f       	add	r30, r30
+    2d0a:	ff 1f       	adc	r31, r31
+    2d0c:	e0 0f       	add	r30, r16
+    2d0e:	f1 1f       	adc	r31, r17
+    2d10:	ee 0f       	add	r30, r30
+    2d12:	ff 1f       	adc	r31, r31
+    2d14:	ee 0f       	add	r30, r30
+    2d16:	ff 1f       	adc	r31, r31
+    2d18:	ec 50       	subi	r30, 0x0C	; 12
+    2d1a:	fb 4f       	sbci	r31, 0xFB	; 251
+    2d1c:	30 85       	ldd	r19, Z+8	; 0x08
+    2d1e:	2b 81       	ldd	r18, Y+3	; 0x03
+			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
+				cobrar = 1;
+			
+			}
+		if(datasVenc[i][6] != SEMPARCELA) //verifica a segunda
+			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
+    2d20:	32 13       	cpse	r19, r18
+    2d22:	2f c0       	rjmp	.+94     	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
+    2d24:	f8 01       	movw	r30, r16
+    2d26:	ee 0f       	add	r30, r30
+    2d28:	ff 1f       	adc	r31, r31
+    2d2a:	e0 0f       	add	r30, r16
+    2d2c:	f1 1f       	adc	r31, r17
+    2d2e:	ee 0f       	add	r30, r30
+    2d30:	ff 1f       	adc	r31, r31
+    2d32:	ee 0f       	add	r30, r30
+    2d34:	ff 1f       	adc	r31, r31
+    2d36:	ec 50       	subi	r30, 0x0C	; 12
+    2d38:	fb 4f       	sbci	r31, 0xFB	; 251
+    2d3a:	31 85       	ldd	r19, Z+9	; 0x09
+    2d3c:	2c 81       	ldd	r18, Y+4	; 0x04
+    2d3e:	32 13       	cpse	r19, r18
+    2d40:	20 c0       	rjmp	.+64     	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+			datasVenc[i][10]==anoAtual[0] && datasVenc[i][11]==anoAtual[1]){
+    2d42:	f8 01       	movw	r30, r16
+    2d44:	ee 0f       	add	r30, r30
+    2d46:	ff 1f       	adc	r31, r31
+    2d48:	e0 0f       	add	r30, r16
+    2d4a:	f1 1f       	adc	r31, r17
+    2d4c:	ee 0f       	add	r30, r30
+    2d4e:	ff 1f       	adc	r31, r31
+    2d50:	ee 0f       	add	r30, r30
+    2d52:	ff 1f       	adc	r31, r31
+    2d54:	ec 50       	subi	r30, 0x0C	; 12
+    2d56:	fb 4f       	sbci	r31, 0xFB	; 251
+    2d58:	32 85       	ldd	r19, Z+10	; 0x0a
+    2d5a:	2d 81       	ldd	r18, Y+5	; 0x05
+				cobrar = 1;
+			
+			}
+		if(datasVenc[i][6] != SEMPARCELA) //verifica a segunda
+			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
+			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
+    2d5c:	32 13       	cpse	r19, r18
+    2d5e:	11 c0       	rjmp	.+34     	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+			datasVenc[i][10]==anoAtual[0] && datasVenc[i][11]==anoAtual[1]){
+    2d60:	f8 01       	movw	r30, r16
+    2d62:	ee 0f       	add	r30, r30
+    2d64:	ff 1f       	adc	r31, r31
+    2d66:	e0 0f       	add	r30, r16
+    2d68:	f1 1f       	adc	r31, r17
+    2d6a:	ee 0f       	add	r30, r30
+    2d6c:	ff 1f       	adc	r31, r31
+    2d6e:	ee 0f       	add	r30, r30
+    2d70:	ff 1f       	adc	r31, r31
+    2d72:	ec 50       	subi	r30, 0x0C	; 12
+    2d74:	fb 4f       	sbci	r31, 0xFB	; 251
+    2d76:	33 85       	ldd	r19, Z+11	; 0x0b
+    2d78:	2e 81       	ldd	r18, Y+6	; 0x06
+    2d7a:	32 13       	cpse	r19, r18
+    2d7c:	02 c0       	rjmp	.+4      	; 0x2d82 <cobrarPagementosAgendados+0x1f2>
+				cobrar = 1;	
+    2d7e:	81 e0       	ldi	r24, 0x01	; 1
+    2d80:	90 e0       	ldi	r25, 0x00	; 0
+			}
+			
+			if(cobrar){
+    2d82:	00 97       	sbiw	r24, 0x00	; 0
+    2d84:	21 f0       	breq	.+8      	; 0x2d8e <cobrarPagementosAgendados+0x1fe>
+				enviarPedidoDePagamento(cobrar);
+    2d86:	0e 94 63 15 	call	0x2ac6	; 0x2ac6 <enviarPedidoDePagamento>
+				cobrar = -1;
+    2d8a:	8f ef       	ldi	r24, 0xFF	; 255
+    2d8c:	9f ef       	ldi	r25, 0xFF	; 255
+		anoAtual[i]=stringDATA[i+6]-48;
+	}
+	//012345 67891011 
+	//ddmmaa|ddmma a
+	//comparar com primeira coluna de datasVenc 
+	for(i=0;i<numPagsAgendados;i++){
+    2d8e:	0f 5f       	subi	r16, 0xFF	; 255
+    2d90:	1f 4f       	sbci	r17, 0xFF	; 255
+    2d92:	20 91 b0 04 	lds	r18, 0x04B0	; 0x8004b0 <numPagsAgendados>
+    2d96:	30 91 b1 04 	lds	r19, 0x04B1	; 0x8004b1 <numPagsAgendados+0x1>
+    2d9a:	02 17       	cp	r16, r18
+    2d9c:	13 07       	cpc	r17, r19
+    2d9e:	0c f4       	brge	.+2      	; 0x2da2 <cobrarPagementosAgendados+0x212>
+    2da0:	32 cf       	rjmp	.-412    	; 0x2c06 <cobrarPagementosAgendados+0x76>
+				enviarPedidoDePagamento(cobrar);
+				cobrar = -1;
+			}
+		
+		}
+}
+    2da2:	26 96       	adiw	r28, 0x06	; 6
+    2da4:	0f b6       	in	r0, 0x3f	; 63
+    2da6:	f8 94       	cli
+    2da8:	de bf       	out	0x3e, r29	; 62
+    2daa:	0f be       	out	0x3f, r0	; 63
+    2dac:	cd bf       	out	0x3d, r28	; 61
+    2dae:	df 91       	pop	r29
+    2db0:	cf 91       	pop	r28
+    2db2:	1f 91       	pop	r17
+    2db4:	0f 91       	pop	r16
+    2db6:	08 95       	ret
+
+00002db8 <__vector_11>:
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
 //////////////////////////////////////////////////////////////////////////
 
 
 ISR(TIMER1_COMPA_vect){
-    27b6:	1f 92       	push	r1
-    27b8:	0f 92       	push	r0
-    27ba:	0f b6       	in	r0, 0x3f	; 63
-    27bc:	0f 92       	push	r0
-    27be:	11 24       	eor	r1, r1
-    27c0:	2f 93       	push	r18
-    27c2:	3f 93       	push	r19
-    27c4:	4f 93       	push	r20
-    27c6:	5f 93       	push	r21
-    27c8:	6f 93       	push	r22
-    27ca:	7f 93       	push	r23
-    27cc:	8f 93       	push	r24
-    27ce:	9f 93       	push	r25
-    27d0:	af 93       	push	r26
-    27d2:	bf 93       	push	r27
-    27d4:	ef 93       	push	r30
-    27d6:	ff 93       	push	r31
+    2db8:	1f 92       	push	r1
+    2dba:	0f 92       	push	r0
+    2dbc:	0f b6       	in	r0, 0x3f	; 63
+    2dbe:	0f 92       	push	r0
+    2dc0:	11 24       	eor	r1, r1
+    2dc2:	2f 93       	push	r18
+    2dc4:	3f 93       	push	r19
+    2dc6:	4f 93       	push	r20
+    2dc8:	5f 93       	push	r21
+    2dca:	6f 93       	push	r22
+    2dcc:	7f 93       	push	r23
+    2dce:	8f 93       	push	r24
+    2dd0:	9f 93       	push	r25
+    2dd2:	af 93       	push	r26
+    2dd4:	bf 93       	push	r27
+    2dd6:	ef 93       	push	r30
+    2dd8:	ff 93       	push	r31
 	//writeString("."); //fica escrevendo uns pontos na tela pra gente ver +- se ta 1 seg
 	contSerial = verificaSerial(contSerial);
-    27d8:	80 91 dc 05 	lds	r24, 0x05DC	; 0x8005dc <contSerial>
-    27dc:	90 e0       	ldi	r25, 0x00	; 0
-    27de:	0e 94 c9 03 	call	0x792	; 0x792 <verificaSerial>
-    27e2:	80 93 dc 05 	sts	0x05DC, r24	; 0x8005dc <contSerial>
+    2dda:	80 91 dc 05 	lds	r24, 0x05DC	; 0x8005dc <contSerial>
+    2dde:	90 e0       	ldi	r25, 0x00	; 0
+    2de0:	0e 94 c9 03 	call	0x792	; 0x792 <verificaSerial>
+    2de4:	80 93 dc 05 	sts	0x05DC, r24	; 0x8005dc <contSerial>
 
 	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
-    27e6:	88 37       	cpi	r24, 0x78	; 120
-    27e8:	31 f4       	brne	.+12     	; 0x27f6 <__vector_11+0x40>
+    2de8:	88 37       	cpi	r24, 0x78	; 120
+    2dea:	31 f4       	brne	.+12     	; 0x2df8 <__vector_11+0x40>
 		contSerial = 0;
-    27ea:	10 92 dc 05 	sts	0x05DC, r1	; 0x8005dc <contSerial>
+    2dec:	10 92 dc 05 	sts	0x05DC, r1	; 0x8005dc <contSerial>
 		PORTC ^= (1 << PORTC4);
-    27ee:	98 b1       	in	r25, 0x08	; 8
-    27f0:	80 e1       	ldi	r24, 0x10	; 16
-    27f2:	89 27       	eor	r24, r25
-    27f4:	88 b9       	out	0x08, r24	; 8
+    2df0:	98 b1       	in	r25, 0x08	; 8
+    2df2:	80 e1       	ldi	r24, 0x10	; 16
+    2df4:	89 27       	eor	r24, r25
+    2df6:	88 b9       	out	0x08, r24	; 8
 	}
 	
 	if (teclaG == KEY_CONFIRMA)
-    27f6:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
-    27fa:	8b 30       	cpi	r24, 0x0B	; 11
-    27fc:	31 f4       	brne	.+12     	; 0x280a <__vector_11+0x54>
+    2df8:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
+    2dfc:	8b 30       	cpi	r24, 0x0B	; 11
+    2dfe:	31 f4       	brne	.+12     	; 0x2e0c <__vector_11+0x54>
 		contTelaOn++;
-    27fe:	90 91 df 05 	lds	r25, 0x05DF	; 0x8005df <contTelaOn>
-    2802:	9f 5f       	subi	r25, 0xFF	; 255
-    2804:	90 93 df 05 	sts	0x05DF, r25	; 0x8005df <contTelaOn>
-    2808:	02 c0       	rjmp	.+4      	; 0x280e <__vector_11+0x58>
+    2e00:	90 91 df 05 	lds	r25, 0x05DF	; 0x8005df <contTelaOn>
+    2e04:	9f 5f       	subi	r25, 0xFF	; 255
+    2e06:	90 93 df 05 	sts	0x05DF, r25	; 0x8005df <contTelaOn>
+    2e0a:	02 c0       	rjmp	.+4      	; 0x2e10 <__vector_11+0x58>
 	else
 		contTelaOn = 0;
-    280a:	10 92 df 05 	sts	0x05DF, r1	; 0x8005df <contTelaOn>
+    2e0c:	10 92 df 05 	sts	0x05DF, r1	; 0x8005df <contTelaOn>
 	
 	if (teclaG == KEY_APAGAR)
-    280e:	89 30       	cpi	r24, 0x09	; 9
-    2810:	31 f4       	brne	.+12     	; 0x281e <__vector_11+0x68>
+    2e10:	89 30       	cpi	r24, 0x09	; 9
+    2e12:	31 f4       	brne	.+12     	; 0x2e20 <__vector_11+0x68>
 		contTelaOff++;
-    2812:	80 91 de 05 	lds	r24, 0x05DE	; 0x8005de <contTelaOff>
-    2816:	8f 5f       	subi	r24, 0xFF	; 255
-    2818:	80 93 de 05 	sts	0x05DE, r24	; 0x8005de <contTelaOff>
-    281c:	02 c0       	rjmp	.+4      	; 0x2822 <__vector_11+0x6c>
+    2e14:	80 91 de 05 	lds	r24, 0x05DE	; 0x8005de <contTelaOff>
+    2e18:	8f 5f       	subi	r24, 0xFF	; 255
+    2e1a:	80 93 de 05 	sts	0x05DE, r24	; 0x8005de <contTelaOff>
+    2e1e:	02 c0       	rjmp	.+4      	; 0x2e24 <__vector_11+0x6c>
 	else
 		contTelaOff = 0;
-    281e:	10 92 de 05 	sts	0x05DE, r1	; 0x8005de <contTelaOff>
+    2e20:	10 92 de 05 	sts	0x05DE, r1	; 0x8005de <contTelaOff>
 	
 	if(contTelaOn == 3 && telaOnOff==0){ // se for # por 3 segundos e tiver desligada -> liga tela
-    2822:	80 91 df 05 	lds	r24, 0x05DF	; 0x8005df <contTelaOn>
-    2826:	83 30       	cpi	r24, 0x03	; 3
-    2828:	61 f4       	brne	.+24     	; 0x2842 <__vector_11+0x8c>
-    282a:	80 91 dd 05 	lds	r24, 0x05DD	; 0x8005dd <telaOnOff>
-    282e:	81 11       	cpse	r24, r1
-    2830:	08 c0       	rjmp	.+16     	; 0x2842 <__vector_11+0x8c>
+    2e24:	80 91 df 05 	lds	r24, 0x05DF	; 0x8005df <contTelaOn>
+    2e28:	83 30       	cpi	r24, 0x03	; 3
+    2e2a:	61 f4       	brne	.+24     	; 0x2e44 <__vector_11+0x8c>
+    2e2c:	80 91 dd 05 	lds	r24, 0x05DD	; 0x8005dd <telaOnOff>
+    2e30:	81 11       	cpse	r24, r1
+    2e32:	08 c0       	rjmp	.+16     	; 0x2e44 <__vector_11+0x8c>
 		writeInstruction(lcd_DisplayOn);
-    2832:	8c e0       	ldi	r24, 0x0C	; 12
-    2834:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2e34:	8c e0       	ldi	r24, 0x0C	; 12
+    2e36:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 		contTelaOn = 0;
-    2838:	10 92 df 05 	sts	0x05DF, r1	; 0x8005df <contTelaOn>
+    2e3a:	10 92 df 05 	sts	0x05DF, r1	; 0x8005df <contTelaOn>
 		telaOnOff = 1;
-    283c:	81 e0       	ldi	r24, 0x01	; 1
-    283e:	80 93 dd 05 	sts	0x05DD, r24	; 0x8005dd <telaOnOff>
+    2e3e:	81 e0       	ldi	r24, 0x01	; 1
+    2e40:	80 93 dd 05 	sts	0x05DD, r24	; 0x8005dd <telaOnOff>
 		
 	}
 	if (contTelaOff == 4 && telaOnOff==1){ //se * por 4 segs e tiver ligada -> desliga
-    2842:	80 91 de 05 	lds	r24, 0x05DE	; 0x8005de <contTelaOff>
-    2846:	84 30       	cpi	r24, 0x04	; 4
-    2848:	59 f4       	brne	.+22     	; 0x2860 <__vector_11+0xaa>
-    284a:	80 91 dd 05 	lds	r24, 0x05DD	; 0x8005dd <telaOnOff>
-    284e:	81 30       	cpi	r24, 0x01	; 1
-    2850:	39 f4       	brne	.+14     	; 0x2860 <__vector_11+0xaa>
+    2e44:	80 91 de 05 	lds	r24, 0x05DE	; 0x8005de <contTelaOff>
+    2e48:	84 30       	cpi	r24, 0x04	; 4
+    2e4a:	59 f4       	brne	.+22     	; 0x2e62 <__vector_11+0xaa>
+    2e4c:	80 91 dd 05 	lds	r24, 0x05DD	; 0x8005dd <telaOnOff>
+    2e50:	81 30       	cpi	r24, 0x01	; 1
+    2e52:	39 f4       	brne	.+14     	; 0x2e62 <__vector_11+0xaa>
 		writeInstruction(lcd_DisplayOff);
-    2852:	88 e0       	ldi	r24, 0x08	; 8
-    2854:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2e54:	88 e0       	ldi	r24, 0x08	; 8
+    2e56:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 		contTelaOff = 0;
-    2858:	10 92 de 05 	sts	0x05DE, r1	; 0x8005de <contTelaOff>
+    2e5a:	10 92 de 05 	sts	0x05DE, r1	; 0x8005de <contTelaOff>
 		telaOnOff = 0;
-    285c:	10 92 dd 05 	sts	0x05DD, r1	; 0x8005dd <telaOnOff>
+    2e5e:	10 92 dd 05 	sts	0x05DD, r1	; 0x8005dd <telaOnOff>
 	}
 	
 	updateDate();				
-    2860:	0e 94 dc 0f 	call	0x1fb8	; 0x1fb8 <updateDate>
-		cobrar...
-		
-		"APCCCCCCVVVVV\r"
-	*/
+    2e62:	0e 94 dc 0f 	call	0x1fb8	; 0x1fb8 <updateDate>
 	
+	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) {
+    2e66:	80 91 e2 05 	lds	r24, 0x05E2	; 0x8005e2 <horas>
+    2e6a:	8c 30       	cpi	r24, 0x0C	; 12
+    2e6c:	21 f0       	breq	.+8      	; 0x2e76 <__vector_11+0xbe>
+    2e6e:	82 31       	cpi	r24, 0x12	; 18
+    2e70:	11 f0       	breq	.+4      	; 0x2e76 <__vector_11+0xbe>
+    2e72:	86 31       	cpi	r24, 0x16	; 22
+    2e74:	a9 f4       	brne	.+42     	; 0x2ea0 <__vector_11+0xe8>
+    2e76:	80 91 e1 05 	lds	r24, 0x05E1	; 0x8005e1 <minutos>
+    2e7a:	81 11       	cpse	r24, r1
+    2e7c:	11 c0       	rjmp	.+34     	; 0x2ea0 <__vector_11+0xe8>
+    2e7e:	80 91 e0 05 	lds	r24, 0x05E0	; 0x8005e0 <segundos>
+    2e82:	83 30       	cpi	r24, 0x03	; 3
+    2e84:	68 f4       	brcc	.+26     	; 0x2ea0 <__vector_11+0xe8>
+		cobrarPagementosAgendados();
+    2e86:	0e 94 c8 15 	call	0x2b90	; 0x2b90 <cobrarPagementosAgendados>
+		
+		if(existePendencia()) 
+    2e8a:	0e 94 0f 13 	call	0x261e	; 0x261e <existePendencia>
+    2e8e:	88 23       	and	r24, r24
+    2e90:	21 f0       	breq	.+8      	; 0x2e9a <__vector_11+0xe2>
+			PORTC |= (1<<5);
+    2e92:	88 b1       	in	r24, 0x08	; 8
+    2e94:	80 62       	ori	r24, 0x20	; 32
+    2e96:	88 b9       	out	0x08, r24	; 8
+    2e98:	03 c0       	rjmp	.+6      	; 0x2ea0 <__vector_11+0xe8>
+		else
+			PORTC &= ~(1<<5);
+    2e9a:	88 b1       	in	r24, 0x08	; 8
+    2e9c:	8f 7d       	andi	r24, 0xDF	; 223
+    2e9e:	88 b9       	out	0x08, r24	; 8
+		}
 	}
-    2864:	ff 91       	pop	r31
-    2866:	ef 91       	pop	r30
-    2868:	bf 91       	pop	r27
-    286a:	af 91       	pop	r26
-    286c:	9f 91       	pop	r25
-    286e:	8f 91       	pop	r24
-    2870:	7f 91       	pop	r23
-    2872:	6f 91       	pop	r22
-    2874:	5f 91       	pop	r21
-    2876:	4f 91       	pop	r20
-    2878:	3f 91       	pop	r19
-    287a:	2f 91       	pop	r18
-    287c:	0f 90       	pop	r0
-    287e:	0f be       	out	0x3f, r0	; 63
-    2880:	0f 90       	pop	r0
-    2882:	1f 90       	pop	r1
-    2884:	18 95       	reti
+    2ea0:	ff 91       	pop	r31
+    2ea2:	ef 91       	pop	r30
+    2ea4:	bf 91       	pop	r27
+    2ea6:	af 91       	pop	r26
+    2ea8:	9f 91       	pop	r25
+    2eaa:	8f 91       	pop	r24
+    2eac:	7f 91       	pop	r23
+    2eae:	6f 91       	pop	r22
+    2eb0:	5f 91       	pop	r21
+    2eb2:	4f 91       	pop	r20
+    2eb4:	3f 91       	pop	r19
+    2eb6:	2f 91       	pop	r18
+    2eb8:	0f 90       	pop	r0
+    2eba:	0f be       	out	0x3f, r0	; 63
+    2ebc:	0f 90       	pop	r0
+    2ebe:	1f 90       	pop	r1
+    2ec0:	18 95       	reti
 
-00002886 <setTimer1_UmSeg>:
+00002ec2 <setTimer1_UmSeg>:
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
 	// Pre scaler de 256 -> 62500Hz logo 62500 contagens para 1 seg
 	
 	TCCR1A = 4; //modo comparação
-    2886:	84 e0       	ldi	r24, 0x04	; 4
-    2888:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+    2ec2:	84 e0       	ldi	r24, 0x04	; 4
+    2ec4:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
 	TCCR1B = 0x4; //pre scaler de 256
-    288c:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+    2ec8:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
 	TCNT1 = 0;  //contagem começa do zero
-    2890:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
-    2894:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
+    2ecc:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7f8085>
+    2ed0:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7f8084>
 	OCR1A = 62500; //até onde tem q contar
-    2898:	84 e2       	ldi	r24, 0x24	; 36
-    289a:	94 ef       	ldi	r25, 0xF4	; 244
-    289c:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
-    28a0:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+    2ed4:	84 e2       	ldi	r24, 0x24	; 36
+    2ed6:	94 ef       	ldi	r25, 0xF4	; 244
+    2ed8:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+    2edc:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
 	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em 
-    28a4:	ef e6       	ldi	r30, 0x6F	; 111
-    28a6:	f0 e0       	ldi	r31, 0x00	; 0
-    28a8:	80 81       	ld	r24, Z
-    28aa:	82 60       	ori	r24, 0x02	; 2
-    28ac:	80 83       	st	Z, r24
+    2ee0:	ef e6       	ldi	r30, 0x6F	; 111
+    2ee2:	f0 e0       	ldi	r31, 0x00	; 0
+    2ee4:	80 81       	ld	r24, Z
+    2ee6:	82 60       	ori	r24, 0x02	; 2
+    2ee8:	80 83       	st	Z, r24
 	sei(); // talvez colocar no mais ??
-    28ae:	78 94       	sei
-    28b0:	08 95       	ret
+    2eea:	78 94       	sei
+    2eec:	08 95       	ret
 
-000028b2 <main>:
+00002eee <main>:
 }
 
 int main(){
-    28b2:	cf 93       	push	r28
-    28b4:	df 93       	push	r29
-    28b6:	cd b7       	in	r28, 0x3d	; 61
-    28b8:	de b7       	in	r29, 0x3e	; 62
-    28ba:	2c 97       	sbiw	r28, 0x0c	; 12
-    28bc:	0f b6       	in	r0, 0x3f	; 63
-    28be:	f8 94       	cli
-    28c0:	de bf       	out	0x3e, r29	; 62
-    28c2:	0f be       	out	0x3f, r0	; 63
-    28c4:	cd bf       	out	0x3d, r28	; 61
+    2eee:	cf 93       	push	r28
+    2ef0:	df 93       	push	r29
+    2ef2:	cd b7       	in	r28, 0x3d	; 61
+    2ef4:	de b7       	in	r29, 0x3e	; 62
+    2ef6:	2c 97       	sbiw	r28, 0x0c	; 12
+    2ef8:	0f b6       	in	r0, 0x3f	; 63
+    2efa:	f8 94       	cli
+    2efc:	de bf       	out	0x3e, r29	; 62
+    2efe:	0f be       	out	0x3f, r0	; 63
+    2f00:	cd bf       	out	0x3d, r28	; 61
 	
 	anoZero();							// inicia o relogio
-    28c6:	0e 94 a3 0e 	call	0x1d46	; 0x1d46 <anoZero>
+    2f02:	0e 94 a3 0e 	call	0x1d46	; 0x1d46 <anoZero>
 	USART_INIT(UBRR);					// inicia serial
-    28ca:	83 e3       	ldi	r24, 0x33	; 51
-    28cc:	90 e0       	ldi	r25, 0x00	; 0
-    28ce:	0e 94 b0 03 	call	0x760	; 0x760 <USART_INIT>
+    2f06:	83 e3       	ldi	r24, 0x33	; 51
+    2f08:	90 e0       	ldi	r25, 0x00	; 0
+    2f0a:	0e 94 b0 03 	call	0x760	; 0x760 <USART_INIT>
 	setup_lcd();						// inicia lcd
-    28d2:	0e 94 af 04 	call	0x95e	; 0x95e <setup_lcd>
+    2f0e:	0e 94 af 04 	call	0x95e	; 0x95e <setup_lcd>
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
-    28d6:	0e 94 43 14 	call	0x2886	; 0x2886 <setTimer1_UmSeg>
+    2f12:	0e 94 61 17 	call	0x2ec2	; 0x2ec2 <setTimer1_UmSeg>
 
 // 	writeInstruction(lcd_DisplayOff);
 // 	while(telaOnOff==0)
 // 		teclaG = teclaDebouce();
 
 	writeInstruction(lcd_DisplayOn);
-    28da:	8c e0       	ldi	r24, 0x0C	; 12
-    28dc:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2f16:	8c e0       	ldi	r24, 0x0C	; 12
+    2f18:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
-    28e0:	0e 94 62 05 	call	0xac4	; 0xac4 <tela_bloqueio_inicial>
+    2f1c:	0e 94 62 05 	call	0xac4	; 0xac4 <tela_bloqueio_inicial>
 	
 	
 	// inserindo cartões pra teste
 	char cartao_teste[] = {8+48,0+48,0+48,0+48,0+48,0+48};
-    28e4:	86 e0       	ldi	r24, 0x06	; 6
-    28e6:	eb e2       	ldi	r30, 0x2B	; 43
-    28e8:	f1 e0       	ldi	r31, 0x01	; 1
-    28ea:	de 01       	movw	r26, r28
-    28ec:	11 96       	adiw	r26, 0x01	; 1
-    28ee:	01 90       	ld	r0, Z+
-    28f0:	0d 92       	st	X+, r0
-    28f2:	8a 95       	dec	r24
-    28f4:	e1 f7       	brne	.-8      	; 0x28ee <main+0x3c>
+    2f20:	86 e0       	ldi	r24, 0x06	; 6
+    2f22:	eb e2       	ldi	r30, 0x2B	; 43
+    2f24:	f1 e0       	ldi	r31, 0x01	; 1
+    2f26:	de 01       	movw	r26, r28
+    2f28:	11 96       	adiw	r26, 0x01	; 1
+    2f2a:	01 90       	ld	r0, Z+
+    2f2c:	0d 92       	st	X+, r0
+    2f2e:	8a 95       	dec	r24
+    2f30:	e1 f7       	brne	.-8      	; 0x2f2a <main+0x3c>
 	char cartao_teste_2[] = {0+48,0+48,2+48,0+48,0+48,0+48};
-    28f6:	86 e0       	ldi	r24, 0x06	; 6
-    28f8:	e1 e3       	ldi	r30, 0x31	; 49
-    28fa:	f1 e0       	ldi	r31, 0x01	; 1
-    28fc:	de 01       	movw	r26, r28
-    28fe:	17 96       	adiw	r26, 0x07	; 7
-    2900:	01 90       	ld	r0, Z+
-    2902:	0d 92       	st	X+, r0
-    2904:	8a 95       	dec	r24
-    2906:	e1 f7       	brne	.-8      	; 0x2900 <main+0x4e>
+    2f32:	86 e0       	ldi	r24, 0x06	; 6
+    2f34:	e1 e3       	ldi	r30, 0x31	; 49
+    2f36:	f1 e0       	ldi	r31, 0x01	; 1
+    2f38:	de 01       	movw	r26, r28
+    2f3a:	17 96       	adiw	r26, 0x07	; 7
+    2f3c:	01 90       	ld	r0, Z+
+    2f3e:	0d 92       	st	X+, r0
+    2f40:	8a 95       	dec	r24
+    2f42:	e1 f7       	brne	.-8      	; 0x2f3c <main+0x4e>
 	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
-    2908:	ae 01       	movw	r20, r28
-    290a:	4f 5f       	subi	r20, 0xFF	; 255
-    290c:	5f 4f       	sbci	r21, 0xFF	; 255
-    290e:	68 e9       	ldi	r22, 0x98	; 152
-    2910:	74 e0       	ldi	r23, 0x04	; 4
-    2912:	cb 01       	movw	r24, r22
-    2914:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
+    2f44:	ae 01       	movw	r20, r28
+    2f46:	4f 5f       	subi	r20, 0xFF	; 255
+    2f48:	5f 4f       	sbci	r21, 0xFF	; 255
+    2f4a:	68 e9       	ldi	r22, 0x98	; 152
+    2f4c:	74 e0       	ldi	r23, 0x04	; 4
+    2f4e:	cb 01       	movw	r24, r22
+    2f50:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
-    2918:	ae 01       	movw	r20, r28
-    291a:	49 5f       	subi	r20, 0xF9	; 249
-    291c:	5f 4f       	sbci	r21, 0xFF	; 255
-    291e:	6f e9       	ldi	r22, 0x9F	; 159
-    2920:	74 e0       	ldi	r23, 0x04	; 4
-    2922:	86 ea       	ldi	r24, 0xA6	; 166
-    2924:	94 e0       	ldi	r25, 0x04	; 4
-    2926:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
+    2f54:	ae 01       	movw	r20, r28
+    2f56:	49 5f       	subi	r20, 0xF9	; 249
+    2f58:	5f 4f       	sbci	r21, 0xFF	; 255
+    2f5a:	6f e9       	ldi	r22, 0x9F	; 159
+    2f5c:	74 e0       	ldi	r23, 0x04	; 4
+    2f5e:	86 ea       	ldi	r24, 0xA6	; 166
+    2f60:	94 e0       	ldi	r25, 0x04	; 4
+    2f62:	0e 94 f6 00 	call	0x1ec	; 0x1ec <addCartao>
 	anoZero();							// inicia o relogio
 	USART_INIT(UBRR);					// inicia serial
 	setup_lcd();						// inicia lcd
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
 	char loop1 = 1; //para ele agir diferente no 1 loop
-    292a:	01 e0       	ldi	r16, 0x01	; 1
+    2f66:	01 e0       	ldi	r16, 0x01	; 1
 	/////
 	
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
 		
 		if(loop1){
-    292c:	00 23       	and	r16, r16
-    292e:	41 f0       	breq	.+16     	; 0x2940 <main+0x8e>
+    2f68:	00 23       	and	r16, r16
+    2f6a:	41 f0       	breq	.+16     	; 0x2f7c <main+0x8e>
 			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
-    2930:	83 e1       	ldi	r24, 0x13	; 19
-    2932:	91 e0       	ldi	r25, 0x01	; 1
-    2934:	0e 94 35 06 	call	0xc6a	; 0xc6a <login>
-    2938:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
+    2f6c:	83 e1       	ldi	r24, 0x13	; 19
+    2f6e:	91 e0       	ldi	r25, 0x01	; 1
+    2f70:	0e 94 35 06 	call	0xc6a	; 0xc6a <login>
+    2f74:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
 			loop1 = 0;
-    293c:	00 e0       	ldi	r16, 0x00	; 0
-    293e:	0c c0       	rjmp	.+24     	; 0x2958 <main+0xa6>
+    2f78:	00 e0       	ldi	r16, 0x00	; 0
+    2f7a:	0c c0       	rjmp	.+24     	; 0x2f94 <main+0xa6>
 		}else{
 			continuar = continuar_modo_atual(&teclaG);
-    2940:	83 e1       	ldi	r24, 0x13	; 19
-    2942:	91 e0       	ldi	r25, 0x01	; 1
-    2944:	0e 94 8d 0b 	call	0x171a	; 0x171a <continuar_modo_atual>
+    2f7c:	83 e1       	ldi	r24, 0x13	; 19
+    2f7e:	91 e0       	ldi	r25, 0x01	; 1
+    2f80:	0e 94 8d 0b 	call	0x171a	; 0x171a <continuar_modo_atual>
 			if(!continuar)
-    2948:	81 11       	cpse	r24, r1
-    294a:	06 c0       	rjmp	.+12     	; 0x2958 <main+0xa6>
+    2f84:	81 11       	cpse	r24, r1
+    2f86:	06 c0       	rjmp	.+12     	; 0x2f94 <main+0xa6>
 				userIndex = login(&teclaG); //pode mudar o modo adm <-> oper
-    294c:	83 e1       	ldi	r24, 0x13	; 19
-    294e:	91 e0       	ldi	r25, 0x01	; 1
-    2950:	0e 94 35 06 	call	0xc6a	; 0xc6a <login>
-    2954:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
+    2f88:	83 e1       	ldi	r24, 0x13	; 19
+    2f8a:	91 e0       	ldi	r25, 0x01	; 1
+    2f8c:	0e 94 35 06 	call	0xc6a	; 0xc6a <login>
+    2f90:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
 		}
 		
 		teclaG = TECLA_INVALIDA;
-    2958:	89 e1       	ldi	r24, 0x19	; 25
-    295a:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2f94:	89 e1       	ldi	r24, 0x19	; 25
+    2f96:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		if(userIndex != 0){
-    295e:	10 91 12 01 	lds	r17, 0x0112	; 0x800112 <userIndex>
-    2962:	11 23       	and	r17, r17
-    2964:	e1 f0       	breq	.+56     	; 0x299e <main+0xec>
+    2f9a:	10 91 12 01 	lds	r17, 0x0112	; 0x800112 <userIndex>
+    2f9e:	11 23       	and	r17, r17
+    2fa0:	e1 f0       	breq	.+56     	; 0x2fda <main+0xec>
 			if(getOperStatus(userIndex))
-    2966:	81 2f       	mov	r24, r17
-    2968:	0e 94 c9 0c 	call	0x1992	; 0x1992 <getOperStatus>
-    296c:	88 23       	and	r24, r24
-    296e:	a1 f0       	breq	.+40     	; 0x2998 <main+0xe6>
+    2fa2:	81 2f       	mov	r24, r17
+    2fa4:	0e 94 c9 0c 	call	0x1992	; 0x1992 <getOperStatus>
+    2fa8:	88 23       	and	r24, r24
+    2faa:	a1 f0       	breq	.+40     	; 0x2fd4 <main+0xe6>
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
-    2970:	83 e0       	ldi	r24, 0x03	; 3
-    2972:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
+    2fac:	83 e0       	ldi	r24, 0x03	; 3
+    2fae:	0e 94 43 04 	call	0x886	; 0x886 <writeInstruction>
 					menu_vendas();
-    2976:	0e 94 50 05 	call	0xaa0	; 0xaa0 <menu_vendas>
+    2fb2:	0e 94 50 05 	call	0xaa0	; 0xaa0 <menu_vendas>
 					while(teclaG+49 > 51){
-    297a:	04 c0       	rjmp	.+8      	; 0x2984 <main+0xd2>
+    2fb6:	04 c0       	rjmp	.+8      	; 0x2fc0 <main+0xd2>
 						teclaG = teclaDebouce();
-    297c:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    2980:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2fb8:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    2fbc:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		if(userIndex != 0){
 			if(getOperStatus(userIndex))
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
 					menu_vendas();
 					while(teclaG+49 > 51){
-    2984:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
-    2988:	90 e0       	ldi	r25, 0x00	; 0
-    298a:	c1 96       	adiw	r24, 0x31	; 49
-    298c:	84 33       	cpi	r24, 0x34	; 52
-    298e:	91 05       	cpc	r25, r1
-    2990:	ac f7       	brge	.-22     	; 0x297c <main+0xca>
+    2fc0:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
+    2fc4:	90 e0       	ldi	r25, 0x00	; 0
+    2fc6:	c1 96       	adiw	r24, 0x31	; 49
+    2fc8:	84 33       	cpi	r24, 0x34	; 52
+    2fca:	91 05       	cpc	r25, r1
+    2fcc:	ac f7       	brge	.-22     	; 0x2fb8 <main+0xca>
 						teclaG = teclaDebouce();
 					}
 					processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
-    2992:	0e 94 98 11 	call	0x2330	; 0x2330 <processa_venda>
-    2996:	03 c0       	rjmp	.+6      	; 0x299e <main+0xec>
+    2fce:	0e 94 d8 11 	call	0x23b0	; 0x23b0 <processa_venda>
+    2fd2:	03 c0       	rjmp	.+6      	; 0x2fda <main+0xec>
 					break;
 				}
 			else{
 				tela_operadorDesabilitado(userIndex);
-    2998:	81 2f       	mov	r24, r17
-    299a:	0e 94 32 0c 	call	0x1864	; 0x1864 <tela_operadorDesabilitado>
+    2fd4:	81 2f       	mov	r24, r17
+    2fd6:	0e 94 32 0c 	call	0x1864	; 0x1864 <tela_operadorDesabilitado>
 				}
 		}
 		
 		if(userIndex == 0){
-    299e:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <userIndex>
-    29a2:	81 11       	cpse	r24, r1
-    29a4:	c3 cf       	rjmp	.-122    	; 0x292c <main+0x7a>
+    2fda:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <userIndex>
+    2fde:	81 11       	cpse	r24, r1
+    2fe0:	c3 cf       	rjmp	.-122    	; 0x2f68 <main+0x7a>
 			menuADM();
-    29a6:	0e 94 2e 0b 	call	0x165c	; 0x165c <menuADM>
+    2fe2:	0e 94 2e 0b 	call	0x165c	; 0x165c <menuADM>
 			teclaG = TECLA_INVALIDA;
-    29aa:	89 e1       	ldi	r24, 0x19	; 25
-    29ac:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2fe6:	89 e1       	ldi	r24, 0x19	; 25
+    2fe8:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 			while(teclaG == TECLA_INVALIDA){
-    29b0:	04 c0       	rjmp	.+8      	; 0x29ba <main+0x108>
+    2fec:	04 c0       	rjmp	.+8      	; 0x2ff6 <main+0x108>
 				teclaG = teclaDebouce();
-    29b2:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
-    29b6:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
+    2fee:	0e 94 6f 03 	call	0x6de	; 0x6de <teclaDebouce>
+    2ff2:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		}
 		
 		if(userIndex == 0){
 			menuADM();
 			teclaG = TECLA_INVALIDA;
 			while(teclaG == TECLA_INVALIDA){
-    29ba:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
-    29be:	89 31       	cpi	r24, 0x19	; 25
-    29c0:	c1 f3       	breq	.-16     	; 0x29b2 <main+0x100>
+    2ff6:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
+    2ffa:	89 31       	cpi	r24, 0x19	; 25
+    2ffc:	c1 f3       	breq	.-16     	; 0x2fee <main+0x100>
 				teclaG = teclaDebouce();
 			}
 			modoADM(&teclaG);
-    29c2:	83 e1       	ldi	r24, 0x13	; 19
-    29c4:	91 e0       	ldi	r25, 0x01	; 1
-    29c6:	0e 94 f0 12 	call	0x25e0	; 0x25e0 <modoADM>
-    29ca:	b0 cf       	rjmp	.-160    	; 0x292c <main+0x7a>
+    2ffe:	83 e1       	ldi	r24, 0x13	; 19
+    3000:	91 e0       	ldi	r25, 0x01	; 1
+    3002:	0e 94 56 14 	call	0x28ac	; 0x28ac <modoADM>
+    3006:	b0 cf       	rjmp	.-160    	; 0x2f68 <main+0x7a>
 
-000029cc <__divmodhi4>:
-    29cc:	97 fb       	bst	r25, 7
-    29ce:	07 2e       	mov	r0, r23
-    29d0:	16 f4       	brtc	.+4      	; 0x29d6 <__divmodhi4+0xa>
-    29d2:	00 94       	com	r0
-    29d4:	07 d0       	rcall	.+14     	; 0x29e4 <__divmodhi4_neg1>
-    29d6:	77 fd       	sbrc	r23, 7
-    29d8:	09 d0       	rcall	.+18     	; 0x29ec <__divmodhi4_neg2>
-    29da:	0e 94 00 15 	call	0x2a00	; 0x2a00 <__udivmodhi4>
-    29de:	07 fc       	sbrc	r0, 7
-    29e0:	05 d0       	rcall	.+10     	; 0x29ec <__divmodhi4_neg2>
-    29e2:	3e f4       	brtc	.+14     	; 0x29f2 <__divmodhi4_exit>
+00003008 <__divmodhi4>:
+    3008:	97 fb       	bst	r25, 7
+    300a:	07 2e       	mov	r0, r23
+    300c:	16 f4       	brtc	.+4      	; 0x3012 <__divmodhi4+0xa>
+    300e:	00 94       	com	r0
+    3010:	07 d0       	rcall	.+14     	; 0x3020 <__divmodhi4_neg1>
+    3012:	77 fd       	sbrc	r23, 7
+    3014:	09 d0       	rcall	.+18     	; 0x3028 <__divmodhi4_neg2>
+    3016:	0e 94 1e 18 	call	0x303c	; 0x303c <__udivmodhi4>
+    301a:	07 fc       	sbrc	r0, 7
+    301c:	05 d0       	rcall	.+10     	; 0x3028 <__divmodhi4_neg2>
+    301e:	3e f4       	brtc	.+14     	; 0x302e <__divmodhi4_exit>
 
-000029e4 <__divmodhi4_neg1>:
-    29e4:	90 95       	com	r25
-    29e6:	81 95       	neg	r24
-    29e8:	9f 4f       	sbci	r25, 0xFF	; 255
-    29ea:	08 95       	ret
+00003020 <__divmodhi4_neg1>:
+    3020:	90 95       	com	r25
+    3022:	81 95       	neg	r24
+    3024:	9f 4f       	sbci	r25, 0xFF	; 255
+    3026:	08 95       	ret
 
-000029ec <__divmodhi4_neg2>:
-    29ec:	70 95       	com	r23
-    29ee:	61 95       	neg	r22
-    29f0:	7f 4f       	sbci	r23, 0xFF	; 255
+00003028 <__divmodhi4_neg2>:
+    3028:	70 95       	com	r23
+    302a:	61 95       	neg	r22
+    302c:	7f 4f       	sbci	r23, 0xFF	; 255
 
-000029f2 <__divmodhi4_exit>:
-    29f2:	08 95       	ret
+0000302e <__divmodhi4_exit>:
+    302e:	08 95       	ret
 
-000029f4 <__tablejump2__>:
-    29f4:	ee 0f       	add	r30, r30
-    29f6:	ff 1f       	adc	r31, r31
-    29f8:	05 90       	lpm	r0, Z+
-    29fa:	f4 91       	lpm	r31, Z
-    29fc:	e0 2d       	mov	r30, r0
-    29fe:	09 94       	ijmp
+00003030 <__tablejump2__>:
+    3030:	ee 0f       	add	r30, r30
+    3032:	ff 1f       	adc	r31, r31
+    3034:	05 90       	lpm	r0, Z+
+    3036:	f4 91       	lpm	r31, Z
+    3038:	e0 2d       	mov	r30, r0
+    303a:	09 94       	ijmp
 
-00002a00 <__udivmodhi4>:
-    2a00:	aa 1b       	sub	r26, r26
-    2a02:	bb 1b       	sub	r27, r27
-    2a04:	51 e1       	ldi	r21, 0x11	; 17
-    2a06:	07 c0       	rjmp	.+14     	; 0x2a16 <__udivmodhi4_ep>
+0000303c <__udivmodhi4>:
+    303c:	aa 1b       	sub	r26, r26
+    303e:	bb 1b       	sub	r27, r27
+    3040:	51 e1       	ldi	r21, 0x11	; 17
+    3042:	07 c0       	rjmp	.+14     	; 0x3052 <__udivmodhi4_ep>
 
-00002a08 <__udivmodhi4_loop>:
-    2a08:	aa 1f       	adc	r26, r26
-    2a0a:	bb 1f       	adc	r27, r27
-    2a0c:	a6 17       	cp	r26, r22
-    2a0e:	b7 07       	cpc	r27, r23
-    2a10:	10 f0       	brcs	.+4      	; 0x2a16 <__udivmodhi4_ep>
-    2a12:	a6 1b       	sub	r26, r22
-    2a14:	b7 0b       	sbc	r27, r23
+00003044 <__udivmodhi4_loop>:
+    3044:	aa 1f       	adc	r26, r26
+    3046:	bb 1f       	adc	r27, r27
+    3048:	a6 17       	cp	r26, r22
+    304a:	b7 07       	cpc	r27, r23
+    304c:	10 f0       	brcs	.+4      	; 0x3052 <__udivmodhi4_ep>
+    304e:	a6 1b       	sub	r26, r22
+    3050:	b7 0b       	sbc	r27, r23
 
-00002a16 <__udivmodhi4_ep>:
-    2a16:	88 1f       	adc	r24, r24
-    2a18:	99 1f       	adc	r25, r25
-    2a1a:	5a 95       	dec	r21
-    2a1c:	a9 f7       	brne	.-22     	; 0x2a08 <__udivmodhi4_loop>
-    2a1e:	80 95       	com	r24
-    2a20:	90 95       	com	r25
-    2a22:	bc 01       	movw	r22, r24
-    2a24:	cd 01       	movw	r24, r26
-    2a26:	08 95       	ret
+00003052 <__udivmodhi4_ep>:
+    3052:	88 1f       	adc	r24, r24
+    3054:	99 1f       	adc	r25, r25
+    3056:	5a 95       	dec	r21
+    3058:	a9 f7       	brne	.-22     	; 0x3044 <__udivmodhi4_loop>
+    305a:	80 95       	com	r24
+    305c:	90 95       	com	r25
+    305e:	bc 01       	movw	r22, r24
+    3060:	cd 01       	movw	r24, r26
+    3062:	08 95       	ret
 
-00002a28 <_exit>:
-    2a28:	f8 94       	cli
+00003064 <_exit>:
+    3064:	f8 94       	cli
 
-00002a2a <__stop_program>:
-    2a2a:	ff cf       	rjmp	.-2      	; 0x2a2a <__stop_program>
+00003066 <__stop_program>:
+    3066:	ff cf       	rjmp	.-2      	; 0x3066 <__stop_program>

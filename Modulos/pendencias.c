@@ -3,6 +3,7 @@
 #include "../Headers/botoes.h"
 #include "../Headers/relogio.h"
 #include "../Headers/pendencias.h"
+#include "../Headers/senha.h"
 #include <util/delay.h>
 
 
@@ -386,9 +387,13 @@ void enviarPedidoDePagamento(short cobrar){
 }
 
 char enviarPedidoSerial(char pedido[]){
-	//return 1 se ok 
-	//0 se qualquer outra coisa
-	//lembrar de add um delay e esperar uns 5 seg pra resposta do serial
-	//ou espera o serial responder algo
-	return 0;
+	short i;
+	for(i=0;i<13;i++)
+		USART_envia(pedido[i]);
+	
+	if(USART_recebe() == 0x4f ){
+		tela_OK();
+		return 1;
+	}else
+		return 0;
 }

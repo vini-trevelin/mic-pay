@@ -92,15 +92,15 @@ ISR(TIMER1_COMPA_vect){
 	}
 	
 	updateDate();				
-	//chamada de cobrarPagamentosAgendados(12 || 18 || 22)
-	//
-	/*
-	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) 
-		cobrar...
-		
-		"APCCCCCCVVVVV\r"
-	*/
 	
+	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) {
+		cobrarPagementosAgendados();
+		
+		if(existePendencia()) 
+			PORTC |= (1<<5);
+		else
+			PORTC &= ~(1<<5);
+		}
 	}
 		
 	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string

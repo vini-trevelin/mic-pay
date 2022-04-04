@@ -173,11 +173,11 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	processa_pagamento(parcelas,tipo_cartao,metodo_pgmt,valor,senha,cartao);
 	
 	//calculo pra mandar o valor das parcelas pra addPagamentoAgendado
-	temp1 = (valor[0]-48)*100 + (valor[1]-48)*10 + (valor[2]-48); //val antes da virgula em numerico
+	temp1 = (valor[4]-48)*100 + (valor[3]-48)*10 + (valor[2]-48); //val antes da virgula em numerico
 	temp2 = temp1/parcelas;
 	temp3 = temp1%parcelas;
 	
-	temp1 = (valor[3]-48)*10 + (valor[4]-48); //centavos
+	temp1 = (valor[1]-48)*10 + (valor[0]-48); //centavos
 	temp1 = temp1/parcelas + temp3;
 	
 	if(temp1 >= 100){

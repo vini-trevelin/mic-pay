@@ -35,6 +35,7 @@ void modoADM(char *tecla){
 			else if (!status && cont !=-1)cont=0;
 			*tecla = TECLA_INVALIDA;
 		}
+		*tecla = TECLA_INVALIDA;
 	}else if((*tecla) == KEY_2){
 		//ver pendencia
 		if(existePendencia()){
