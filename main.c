@@ -95,14 +95,15 @@ ISR(TIMER1_COMPA_vect){
 	
 	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) {
 		cobrarPagementosAgendados();
-		
-		if(existePendencia()) 
-			PORTC |= (1<<5);
-		else
-			PORTC &= ~(1<<5);
-		}
 	}
-		
+	
+	if(existePendencia()){
+		PORTC ^= (1<<5);
+	}else{
+		PORTC &= ~(1<<5);
+		}
+}
+	
 	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
 									//acho q vamos usar ela no modo adm pra guardar o momento das pendencias 
 

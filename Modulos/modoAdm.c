@@ -12,7 +12,7 @@ static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
 void modoADM(char *tecla){
 	//char status;
 	//short cont=0;
-	char pendenciaInvalida;
+	char pendenciaValida;
 	if((*tecla) == KEY_1){
 		//mudar hora
 		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
@@ -62,8 +62,8 @@ void modoADM(char *tecla){
 			while((*tecla) == TECLA_INVALIDA){
 				(*tecla) = teclaDebouce();
 				}
-			pendenciaInvalida = removePendencias(*tecla);
-			if(pendenciaInvalida)
+			pendenciaValida = removePendencias(*tecla);
+			if(pendenciaValida)
 				tela_operacaoConcluida();
 			else
 				tela_opcaoInvalida();

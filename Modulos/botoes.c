@@ -21,8 +21,9 @@ uint8_t tecla_lida(){
 	DDRC &=~(0x0F);
 	DDRD &=~(0x70);
 	
-	DDRC |= (1 << PORTC4)  ;	//PINO PC4 como saida
-
+	DDRC |= (1 << PORTC4) ;	//PINO PC4 como saida
+	DDRC |= (1 << PORTC5) ;
+	
 	PORTC |= 0x0F;					// coloca todas linhas em 1
 
 	for(coluna=0;coluna<3;coluna++){

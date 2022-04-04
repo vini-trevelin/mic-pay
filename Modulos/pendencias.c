@@ -244,7 +244,7 @@ void addPendencias(short achada, char PouS){
 }
 
 char removePendencias(char remover){
-	if(remover > numPendecias)
+	if(remover+1 > numPendecias)
 		return 0; //pediu pra remover uma pendencia q não existe
 	//remover = remover-1; //correção pq indice começa em zero
 	short i,j;

@@ -29,3 +29,4 @@ void tela_semPendencias();
 void tela_opcaoInvalida();
 void tela_cobrarPagAgendado();
 void tela_AguardandoPagAgendado();
+void tela_instrucoes_remPendencia();
