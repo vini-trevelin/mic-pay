@@ -22,16 +22,9 @@
  *
  */
  #include "../Headers/relogio.h"
-unsigned static char horas;
-unsigned static char minutos;
-unsigned static char segundos;
 unsigned static char dia;
 unsigned static char mes;
 unsigned static char ano; // de 2000 (00) até (2099) (99)
-static char stringHORA[9];
-static char stringDATA[9];
-static char dataFUTURA[6];
-static char stringDATAFUTURA[9]; // para teste 
 // Relógio estilo 0 -  23 horas
 // software não preve anos bissextos
 void anoZero(){

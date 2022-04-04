@@ -25,3 +25,5 @@ void tela_instrucoes_configHoraMinSeg();
 void tela_operacaoConcluida();
 void tela_dataInvalida();
 void tela_operadorDesabilitado(char oper);
+void tela_semPendencias();
+void tela_opcaoInvalida();

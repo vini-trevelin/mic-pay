@@ -12,6 +12,7 @@
 #include "Headers/lcd.h"
 #include "Headers/serial.h"
 #include "Headers/relogio.h"
+#include "Headers/pendencias.h"
 
 #include <util/delay.h>
 
@@ -53,9 +54,7 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 #include "Modulos/telas.c"
 #include "Modulos/modoAdm.c"
 #include "Modulos/relogio.c"
-
-
-
+#include "Modulos/pendencias.c"
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
 //////////////////////////////////////////////////////////////////////////
@@ -92,11 +91,20 @@ ISR(TIMER1_COMPA_vect){
 		telaOnOff = 0;
 	}
 	
-	updateDate();
+	updateDate();				
+	//chamada de cobrarPagamentosAgendados(12 || 18 || 22)
+	//
+	/*
+	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) 
+		cobrar...
+		
+		"APCCCCCCVVVVV\r"
+	*/
+	
+	}
+		
 	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
 									//acho q vamos usar ela no modo adm pra guardar o momento das pendencias 
-								 
-}
 
 //////////////////////////////////////////////////////////////////////////
 //FUNÇÔES//

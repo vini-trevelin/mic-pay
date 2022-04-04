@@ -233,3 +233,19 @@ void tela_operadorDesabilitado(char oper){
 	writeString("Desabilitado");
 	_delay_ms(1000);
 }
+void tela_semPendencias(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Nao ha ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Pendencias");
+	_delay_ms(1000);
+}
+void tela_opcaoInvalida(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("OPCAO ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("INVALIDA");
+	_delay_ms(1000);
+}

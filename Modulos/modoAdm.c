@@ -5,12 +5,14 @@
 #include "../Headers/botoes.h"
 #include "../Headers/modoAdm.h"
 #include "../Headers/relogio.h"
+#include "../Headers/pendencias.h"
 
 static char statusOperadores[] = {1,1}; //dois operadores começam habilitados
 
 void modoADM(char *tecla){
 	char status;
 	short cont=0;
+	char pendenciaInvalida;
 	if((*tecla) == KEY_1){
 		//mudar hora
 		char dia[2],mes[2],ano[2],hora[2],min[2],seg[2],result;
@@ -34,7 +36,14 @@ void modoADM(char *tecla){
 			*tecla = TECLA_INVALIDA;
 		}
 	}else if((*tecla) == KEY_2){
-		//ver pagamentos pendentes
+		//ver pendencia
+		if(existePendencia()){
+			printPendencias(1);
+			printPendencias(2); //se não tiver mais pendencias ele não faz nada
+			printPendencias(3);
+		}else
+			tela_semPendencias();
+		
 	}else if((*tecla) == KEY_3){
 		//hab/deshabilitar operadore
 		tela_instrucoes_configOper();
@@ -53,7 +62,19 @@ void modoADM(char *tecla){
 		}
 		*tecla = TECLA_INVALIDA;
 	}else if((*tecla) == KEY_4){
-		//des pendencia
+		//remover pendencia
+		if(existePendencia()){
+			*tecla = TECLA_INVALIDA;
+			while(*tecla == TECLA_INVALIDA){
+				*tecla = teclaDebouce();
+				}
+			pendenciaInvalida = removePendencias(*tecla);
+			if(pendenciaInvalida)
+				tela_operacaoConcluida();
+			else
+				tela_opcaoInvalida();
+		}else
+			tela_semPendencias();
 		*tecla = TECLA_INVALIDA;
 	}
 }

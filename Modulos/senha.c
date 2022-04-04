@@ -49,7 +49,8 @@ void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se
 			if(contador>0){
 				uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
 				writeInstruction(lcd_LineTwo | aux);
-				writeString(" "); //TROCAR POR CARACTERE DE ESPACO
+				writeCharacter(' ');
+				//writeString(" "); //TROCAR POR CARACTERE DE ESPACO
 				writeInstruction(lcd_LineTwo | aux);
 				contador --;
 			}

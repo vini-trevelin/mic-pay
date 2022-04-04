@@ -19,7 +19,13 @@
 // serão strings  de argumento de um writeString() da biblioteca lcd
 // static char dataFUTURA[6]; sempre depois de uma chamada de sumDate
 //	static char stringDATAFUTURA[9]; // sempre depois de uma chamada de sumDate para teste 
-
+static char stringHORA[9];
+static char stringDATA[9];
+static char dataFUTURA[6];
+unsigned static char horas;
+unsigned static char minutos;
+unsigned static char segundos;
+static char stringDATAFUTURA[9]; // para teste
 void anoZero(); //so pra inicializar o relogio em uma dataPradroa
 char changeDate(char ArrNovoDia[],char ArrNovoMes[],char ArrNovoAno[], char ArrNovaHora[],char ArrNovoMinuto[],char ArrNovoSegundo[]);// retorna 1 se foi possivel efetuar a troca se não ERRO_DATA (0)
 //se achar que precisa saber qual elemento foi digitado errado podemos mudar 

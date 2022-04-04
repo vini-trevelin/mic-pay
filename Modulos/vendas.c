@@ -4,7 +4,9 @@
 #include "../Headers/telas.h"
 #include "../Headers/senha.h"
 #include "../Headers/cartoes.h"
-
+#include "../Headers/relogio.h"
+#include "../Headers/modoAdm.h"
+#include "../Headers/pendencias.h"
 
 
 void processa_venda(int opcao){
@@ -150,7 +152,8 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
 	char valor[] = {' ', ' ', ' ' ,' ',' '};
 	char metodo_pgmt,tipo_cartao,parcelas;
-
+	char dataPags[12];
+	short temp1, temp2, temp3;
 	tela_vendaParcelada();
 	recebe_valor(valor);
 	formata_valor(valor);	
@@ -167,7 +170,40 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	metodo_pgmt = metodo_pagamento();
 	tipo_cartao = aguarda_cartao();
 	
-	processa_pagamento(parcelas,tipo_cartao,metodo_pgmt,valor,senha,cartao); 
+	processa_pagamento(parcelas,tipo_cartao,metodo_pgmt,valor,senha,cartao);
+	
+	//calculo pra mandar o valor das parcelas pra addPagamentoAgendado
+	temp1 = (valor[0]-48)*100 + (valor[1]-48)*10 + (valor[2]-48); //val antes da virgula em numerico
+	temp2 = temp1/parcelas;
+	temp3 = temp1%parcelas;
+	
+	temp1 = (valor[3]-48)*10 + (valor[4]-48); //centavos
+	temp1 = temp1/parcelas + temp3;
+	
+	if(temp1 >= 100){
+		temp1=temp1%100;
+		temp2++;
+	}
+	
+	valor[0]=temp2/100 + 48;
+	valor[1]=(temp2/10)%10 + 48;
+	valor[2]=(temp2%100)%10 + 48;
+	valor[3]=temp1/10 + 48;
+	valor[4]=temp1%10 + 48;
+	
+	sumDate(1);
+	for(temp1 = 0;temp1<6;temp1++)
+		dataPags[temp1] = dataFUTURA[temp1];
+		
+	if(parcelas==3){
+		sumDate(2);
+		for(temp1 = 0;temp1<6;temp1++)
+			dataPags[temp1+6] = dataFUTURA[temp1];
+	}else{
+		dataPags[6] = 9; //flag de não ter parcela 
+	}
+	
+	addPagamentoAgendado(cartao,valor,dataPags);
 	
 }
 

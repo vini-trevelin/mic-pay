@@ -1,16 +1,10 @@
 #include <avr/io.h>
-#include "../Headers/pendencias.h"
 #include "../Headers/lcd.h"
-#include "../Headers/botores.h"
+#include "../Headers/botoes.h"
+#include "../Headers/relogio.h"
+#include "../Headers/pendencias.h"
+#include <util/delay.h>
 
-#define NUMPAGSAGENDADOS 6 //NUM de pag que podem estar agendados
-#define NUMDIGITOSCARTOES 6 //num de digitos em um cartão
-#define NUMDIGITOSVALORES 5 //num de digitos em val de parcelas
-#define NUMDATAS 12 //2*6 (max duas datas, cada uma com 6 digitos cada)
-
-#define CARTAONAOENCONTRADO 0 
-#define PARCELAPAGA_OUPENDENTE 8
-#define SEMPARCELA 9
 
 
 /*
@@ -20,8 +14,8 @@ valParcelaA	-> Guarda o val da parcela
 datasVenc	-> datas dos vencimentos (pegar de 6 em 6)(ex 131224130125 = 13/12/24 e 10/01/25 , 9????? se a data começar com 9 a parcela nõa existe)
 
 Matrizes de pagamentos PENDENTES
-cartoesP		-> Guarda o numero dos cartões
-valsPendentes	-> Guarda o val da parcela
+cartoesP		-> Guarda o numero dos cartões com pendencia
+valsPendentes	-> Guarda o val da parcela pendente
 
 Trabalho de manter as linhas sincronizadas entre as matrizes
 */
@@ -34,22 +28,8 @@ static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {0};
 static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0}; //talvez mais linhas, já que cada cartão poderia ter 2 pendencias teoricamente
 static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0};
 
-static char numPagsAgendados = 0; // pra saber quantos pagsAgendados tem
-static char numPendecias = 0; //saber quantas pendencias temos
-
-//as funcs espera receber os valores em ascii, mas vão armazenar em numerico
-void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]); //para add no caso de compra com cartao
-short removePagamentoAgendado(char cartao[]); //para remover quando o pagamento for recebido (12,18 ou 22)(sempre remove uma parcela, verifica qual deve ser)
-void removePrimeiraParcela(short remover);
-void removeSegundaParcela(short remover);
-void organizaPagamentos(); //para organizar dps q um foi removido
-
-char existePendecia(); //olha se tem alguma pendecia, retorna se tem (as 12, 18 e 22) (func pra deixar led ligada na pratica) 
-void verificarPendencia(char dia[],char mes[], char ano[]); //add um pag agendado que expirou em pendencias, rodar as 22h sempre
-void removePendencias(char pendencia); //pro adm remover pendencias manualmente (vai receber o indice dela)(talvez retorne algo dizendo se o selecionado é valido)
-void organizaPendencias(); //pra organizar dps q uma for removida
-
-void comparaCartoes(char cartao1[],char cartao2[]);
+static short numPagsAgendados = 0; // pra saber quantos pagsAgendados tem
+static short numPendecias = 0; //saber quantas pendencias temos
 
 void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
 	// se só tiver uma parcela, datasVenci tem q ter o 1° digito da data da segunda parcela com um 9(SEMPARCELA) (ex:2008259 = 20/08/25 e 9?????)
@@ -65,7 +45,7 @@ void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
 		
 	//add datas vencimento
 	for(i=0;i<NUMDATAS;i++)
-		datasVenc[numPagsAgendados][i] = datasVenci[i];
+		datasVenc[numPagsAgendados][i] = datasVenci[i]-48;
 		
 	if(numPagsAgendados < NUMPAGSAGENDADOS) //tem q ser < pq uso como indice nas matrizes
 		numPagsAgendados++;
@@ -81,11 +61,10 @@ short removePagamentoAgendado(char cartao[]){
 	//																		PARCELAPAGA = 8 
 	//se só tiver uma parcela a ser removida, então ele vai zerar todas as infos desse cartão em cartoesA, valParcelas e dataVenc, dps ainda arruma a matriz
 	
-	
 	short i, remover=-1;
 	//acho o cartão que vai pagar uma parcela 
 	for(i=0;i<numPagsAgendados;i++){
-		if( comparaCartoes(cartoesA[i],cartao) ){ //se o cartão é igual
+		if( comparaCartoes(cartoesA[i],cartao) == 1 ){ //se o cartão é igual
 			remover = i; //sei qual indice pra remover a parcela
 			break;
 		}
@@ -124,24 +103,9 @@ short comparaCartoes(char cartao1[],char cartao2[]){
 }
 
 void removePrimeiraParcela(short remover){
-	short i;
 	datasVenc[remover][0] = PARCELAPAGA_OUPENDENTE; //só precisa colocar o sinal q foi paga na primeira posição, ela que verifico em removePagamentoAgendado
 	
 	if(datasVenc[remover][6] == SEMPARCELA){ //mas se não vai ter outra parcela, pode tirar esse cartão das matrizes
-		//tira infos das matrizes
-// 		
-// 		//tira cartão
-// 		for(i=0;i<NUMDIGITOSCARTOES;i++)
-// 			cartoesA[remover][i] = 0;
-// 		
-// 		//tira val da parcela
-// 		for(i=0;i<NUMDIGITOSVALORES;i++)
-// 			valParcelaA[remover][i] = 0;
-// 		
-// 		//tira datas vencimento
-// 		for(i=0;i<NUMPAGSAGENDADOS;i++)
-// 			datasVenc[remover][i] = 0;
-		
 		//no final percebi que era melhor colocar os zerar os valores em organizaPagamentos
 		organizaPagamentos(remover);
 	}
@@ -150,22 +114,6 @@ void removePrimeiraParcela(short remover){
 void removeSegundaParcela(short remover){
 	//na verdade vai limpar as matrizes na linha da parcela removida e arrumar as matrizes
 	//pq se vai remover a ultima possivel parcela, então não vai ter parcelas, obviamente vis a vis trivial
-// 	
-// 	//tira infos das matrizes
-// 	//tira cartão
-// 	short i;
-// 	for(i=0;i<NUMDIGITOSCARTOES;i++)
-// 		cartoesA[remover][i] = 0;
-// 	
-// 	//tira val da parcela
-// 	for(i=0;i<NUMDIGITOSVALORES;i++)
-// 		valParcelaA[remover][i] = 0;
-// 	
-// 	//tira datas vencimento
-// 	for(i=0;i<NUMPAGSAGENDADOS;i++)
-// 		datasVenc[remover][i] = 0;
-
-	//no final percebi que era melhor colocar os zerar os valores em organizaPagamentos
 	organizaPagamentos(remover);
 }
 
@@ -203,7 +151,7 @@ void organizaPagamentos(short remover){
 	numPagsAgendados--; //organiza pagamentos só é chamado quando se zera um pagamentoAgendado, então posso diminuir o numero de pags agendados
 }
 
-char existePendecia(){
+char existePendencia(){
 	//vou olhar se tem algum valor em valParcelaP != 0 e retorna 1 se tiver
 	if(numPendecias>0)
 		return 1;
@@ -212,38 +160,235 @@ char existePendecia(){
 	
 }
 
-void verificarPendencia(char dia[],char mes[], char ano[]){
-	//olhar as datas de vencimento de datasVenc e add a pendencia 
+void verificarPendencia(){
+	//012345678
+	//dd/mm/aa
+	char diaAtual[2],mesAtual[2],anoAtual[2];
+	short i,pendAchada = -1;
 	
-	/*
-	(tem q comparar para todos os pagamentosAgendados
-	ou seja for(i=0;i<numPagsAgendados;i++)
-				compara 
-				add se precisar )
-				
-	comparação:(tem q comparar a segunda parcela tb)(se o 1° digito do dia é 8 quer dizer q já foi pago ou dado como pendente, não deve acusar)
-				(o 8 no 1° digito do dia garante que podemos esperar q o cara pague a segunda parcela, mesmo tendo a 1° pendente
-				edge case fudido mas ta ai suhsuhsushushushushushs)
-				
-	(agendado é o que esta em datasVenc, Agora é o do sistema)
-	se (anoAgora >= anoAgendado || mesAgora > mesAgendado) -> pendencia
-	ou se mesAgora == mesAgendado && diaAgora > diaAgendado -> pendencia
+	//pego as infos da data atual
+	AtualizaStringDataHora();
+	for(i=0;i<2;i++){
+		diaAtual[i]=stringDATA[i]-48;
+		mesAtual[i]=stringDATA[i+3]-48;
+		anoAtual[i]=stringDATA[i+6]-48;
+	}			
+	            //012345 67891011
+	//datasVenc = ddmmaa|ddmma a
 	
-	Adição:
-	pega o indice da linha que foi achado a pendencia e faz:
-	(digamos que o indice seja "pendencia")
-	
-	
-	//copia o num do cartão
-	for(i=0;i<NUMDIGITOSCARTOES;i++)
-		cartoesP[numPendecias][i] = cartoesA[pendencia][i];
-	
-	//copia o val da pendencia
-	for(i=0;i<NUMDIGITOSVALORES;i++)
-		valParcelaP[numPendecias][i] = valParcelaA[pendencia][i];
+	//for pra verificar se as primeiras parcelas tem pendencia
+	for(i=0;i<numPagsAgendados;i++){
+		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE){
+			if(anoAtual[0]>datasVenc[i][4] ||  ( anoAtual[0]==datasVenc[i][4] && anoAtual[1]>datasVenc[i][5] ) ){ //se o ano venceu
+			
+				pendAchada = i; //é uma pendecia
+			
+			}else if((anoAtual[0]==datasVenc[i][4] && anoAtual[1]==datasVenc[i][5]) && 
+					(mesAtual[0]>datasVenc[i][2] || (mesAtual[0]==datasVenc[i][2] && mesAtual[1]>datasVenc[i][3])) ){ //se ano = mas mes venceu
+						pendAchada = i;
+					}
+			
+			else if(mesAtual[0]==datasVenc[i][2] && mesAtual[1]==datasVenc[i][3])
+				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = o dia venceu
+					pendAchada = i; 
+			}
 		
-	//tb deve add o famoso 8 na data que a pendencia foi criada
-	datasVenc[pendencia][0 OU 6, tem que ver] = PARCELAPAGA_OUPENDENTE;
+			if(pendAchada != -1)//add pendencia a matriz de pendencias
+				addPendencias(pendAchada,1); //1 diz q foi na primeira data q achou 
+		
+			pendAchada = -1;
+		}
+	}
+	pendAchada = -1;
 	
-	numPendecias++; //mais uma pendecia (numPendencias tem um limite) */
+	//para segunda parcela
+	for(i=0;i<numPagsAgendados;i++){
+		if(datasVenc[i][6] != PARCELAPAGA_OUPENDENTE && datasVenc[i][6] != SEMPARCELA){
+			if(anoAtual[0]>datasVenc[i][10] ||  ( anoAtual[0]==datasVenc[i][10] && anoAtual[1]>datasVenc[i][11] ) ){ //se o ano venceu
+				
+				pendAchada = i; //é uma pendecia
+				
+			}else if((anoAtual[0]==datasVenc[i][10] && anoAtual[1]==datasVenc[i][11]) &&
+			(mesAtual[0]>datasVenc[i][8] || (mesAtual[0]==datasVenc[i][8] && mesAtual[1]>datasVenc[i][9])) ){ //se ano = mas mes venceu
+				pendAchada = i;
+			}
+			
+			else if(mesAtual[0]==datasVenc[i][8] && mesAtual[1]==datasVenc[i][9])
+					if( diaAtual[0]>datasVenc[i][6] || ( diaAtual[0]==datasVenc[i][6] && diaAtual[1]>datasVenc[i][7]) ){ //se mes = mas dia venceu
+						pendAchada = i;
+			}
+			
+			if(pendAchada != -1)//add pendencia a matriz de pendencias
+				addPendencias(pendAchada,2); //2 diz q foi na segunda data q achou
+			
+			pendAchada = -1;
+		}
+	}
+}
+
+void addPendencias(short achada, char PouS){
+	short i;
+	for(i=0;i<NUMDIGITOSCARTOES;i++)
+		cartoesP[numPendecias][i]=cartoesA[achada][i];
+	
+	for(i=0;i<NUMDIGITOSVALORES;i++)
+		valParcelaP[numPendecias][i] = valParcelaA[achada][i];
+		
+	if(PouS == 1)
+		removePrimeiraParcela(achada); 
+	else
+		removeSegundaParcela(achada);
+
+	numPendecias++;
+}
+
+char removePendencias(char remover){
+	if(remover > numPendecias)
+		return 0; //pediu pra remover uma pendencia q não existe
+	//remover = remover-1; //correção pq indice começa em zero
+	short i,j;
+	char temp;
+	
+	//remove cartoesP
+	for(i=remover;i<numPendecias;i++){
+		for(j=0;i<NUMDIGITOSCARTOES;j++){
+			temp = cartoesP[i+1][j];
+			cartoesP[i+1][j] = 0; //aqui que eu deleto a info da matriz
+			cartoesP[i][j] = temp;
+		}
+	}
+	
+	//remove valParcelaP
+	for(i=remover;i<numPendecias;i++){
+		for(j=0;i<NUMDIGITOSVALORES;j++){
+			temp = valParcelaP[i+1][j];
+			valParcelaP[i+1][j] = 0; //aqui que eu deleto a info da matriz
+			valParcelaP[i][j] = temp;
+		}
+	}
+	numPendecias--;
+	return 1; //removi a pendencia 
+	
+}
+
+char printPendencias(char sobeDesce){
+	if(numPendecias < 1)
+		return 0; //sem pendencias pra printar
+		
+	if(sobeDesce == 1 && numPendecias >= 1){
+		writeInstruction(lcd_Clear);
+		writeInstruction(lcd_LineOne | lcd_SetCursor);
+		printNumPendencia(0); //pend 1
+		if(numPendecias > 1){
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(1); //pend 2
+		}
+		_delay_ms(1300);
+	}else if(sobeDesce == 2 && numPendecias > 2){
+		if(numPendecias > 2){
+			writeInstruction(lcd_Clear);
+			writeInstruction(lcd_LineOne | lcd_SetCursor);
+			printNumPendencia(2);	//pend 3
+		}
+		if(numPendecias > 3){
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(3); //pend 4
+		}
+		_delay_ms(1300);
+	}else if(sobeDesce == 3 && numPendecias >= 4){
+		if(numPendecias > 4){
+			writeInstruction(lcd_Clear);
+			writeInstruction(lcd_LineOne | lcd_SetCursor);
+			printNumPendencia(4); //pend 5
+		}
+		if(numPendecias > 5){
+			writeInstruction(lcd_LineTwo | lcd_SetCursor);
+			printNumPendencia(5); //pend 6
+		}
+		_delay_ms(1300);
+	}
+	return 1;
+}
+
+void printNumPendencia(short num){
+	short i;
+	//print num cartao
+	for(i=0;i<NUMDIGITOSCARTOES;i++)
+		writeCharacter(cartoesP[num][i]+48);
+	writeString(" ");
+	//print val parcela
+	for(i=0;i<NUMDIGITOSVALORES;i++)
+		writeCharacter(valParcelaP[num][i]+48);
+	writeString(" -");
+	writeCharacter(num+48);
+}
+
+void cobrarPagementosAgendados(){
+	char diaAtual[2],mesAtual[2],anoAtual[2];
+	short i, cobrar=-1;
+	
+	//pego as infos da data atual
+	AtualizaStringDataHora();
+	for(i=0;i<2;i++){
+		diaAtual[i]=stringDATA[i]-48;
+		mesAtual[i]=stringDATA[i+3]-48;
+		anoAtual[i]=stringDATA[i+6]-48;
+	}
+	//012345 67891011 
+	//ddmmaa|ddmma a
+	//comparar com primeira coluna de datasVenc 
+	for(i=0;i<numPagsAgendados;i++){
+		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE) //verifica a primeira data
+			if(datasVenc[i][0]==diaAtual[0] && datasVenc[i][1]==diaAtual[1] && 
+			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
+			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
+				cobrar = 1;
+			
+			}
+		if(datasVenc[i][6] != SEMPARCELA) //verifica a segunda
+			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
+			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
+			datasVenc[i][10]==anoAtual[0] && datasVenc[i][11]==anoAtual[1]){
+				cobrar = 1;	
+			}
+			
+			if(cobrar){
+				enviarPedidoDePagamento(cobrar);
+				cobrar = -1;
+			}
+		
+		}
+}
+	
+void enviarPedidoDePagamento(short cobrar){
+	char cartao[NUMDIGITOSCARTOES];
+	char pedido[13], resultado;
+	short i;
+	
+	for(i=0;i<NUMDIGITOSCARTOES;i++){ //pega num do cartao e prepara o pedido
+		cartao[i] = cartoesA[cobrar][i];
+		pedido[i+2] = cartao[i];
+	}
+	
+	for(i=0;i<NUMDIGITOSVALORES;i++){ //prepara o pedido
+		pedido[i+8] = valParcelaA[cobrar][i];
+	}
+		
+	pedido[0] = 'A'; // finaliza o pedido
+	pedido[1] = 'P';
+	pedido[12] = '\r';
+	
+	//falar com vini sobre serial, perguntar tb sobre numeros em vendas estarem invertidos
+	resultado = enviarPedidoSerial(pedido);
+	
+	if(resultado)
+		removePagamentoAgendado(cartao);
+}
+
+char enviarPedidoSerial(char pedido[]){
+	//return 1 se ok 
+	//0 se qualquer outra coisa
+	//lembrar de add um delay e esperar uns 5 seg pra resposta do serial
+	//ou espera o serial responder algo
+	return 0;
 }
