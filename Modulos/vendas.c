@@ -174,37 +174,37 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	
 	//calculo pra mandar o valor das parcelas pra addPagamentoAgendado
 	temp1 = (valor[4]-48)*100 + (valor[3]-48)*10 + (valor[2]-48); //parte antes da virgula para int
-	parcelas = parcelas - 48;
-	temp2 = temp1/parcelas; //
-	temp3 = temp1%parcelas; //0
+	parcelas = parcelas - 48; //parcelas de ascii paranumerico
+	temp2 = temp1/parcelas; //pega as centenas dezenas e unidades da parcela 
+	temp3 = temp1%parcelas; // pega as dezenas e unidades de centavo da parcela
 	
-	temp1 = (valor[1]-48)*10 + (valor[0]-48); //centavos
-	temp1 = temp1/parcelas + temp3;
+	temp1 = (valor[1]-48)*10 + (valor[0]-48); // pega os centavos 
+	temp1 = temp1/parcelas + temp3; //soma 
 	
-	if(temp1 >= 100){
-		temp1=temp1%100;
+	if(temp1 >= 100){ //verifica se centavos passou de 1 real
+		temp1=temp1%100; 
 		temp2++;
 	}
-	
-	valor[0]=temp2/100 + 48; //5/100
-	valor[1]=(temp2/10)%10 + 48; //5/10
-	valor[2]=(temp2%100)%10 + 48; // 5
-	valor[3]=temp1/10 + 48; //
+	//monta o vetor de valor
+	valor[0]=temp2/100 + 48; 
+	valor[1]=(temp2/10)%10 + 48; 
+	valor[2]=(temp2%100)%10 + 48;
+	valor[3]=temp1/10 + 48;
 	valor[4]=temp1%10 + 48;
 	
-	sumDate(1);
+	sumDate(1); //data da primeira parcela
 	for(temp1 = 0;temp1<6;temp1++)
 		dataPags[temp1] = dataFUTURA[temp1];
 		
-	if(parcelas==3){
-		sumDate(2);
+	if(parcelas==3){ //se tiver mais parcelas
+		sumDate(2); //data da segunda parcela
 		for(temp1 = 0;temp1<6;temp1++)
 			dataPags[temp1+6] = dataFUTURA[temp1];
 	}else{
 		dataPags[6] = 9; //flag de não ter parcela 
 	}
-	
-	addPagamentoAgendado(cartao,valor,dataPags);
+	//add pagamento agendado 
+	addPagamentoAgendado(cartao,valor,dataPags); 
 }
 
 void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
