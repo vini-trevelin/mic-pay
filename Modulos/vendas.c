@@ -121,8 +121,6 @@ void estorno(){
 	{'1','2','3','4'}, //op 1
 	{'2','3','4','5'}, //op 2
 	};
-
-	/// ----------------------------------------------------------
 	
 	tela_estorno();
 	recebe_senha(senha_operador);
@@ -144,7 +142,7 @@ void estorno(){
 		tela_SF();
 	}
 	
-	_delay_ms(5000);
+	_delay_ms(3000);
 }
 
 void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 números
@@ -154,7 +152,7 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	char valor[] = {' ', ' ', ' ' ,' ',' '};
 	char metodo_pgmt,tipo_cartao,parcelas;
 	char dataPags[12];
-	short temp1, temp2, temp3;
+	short temp1, temp2, temp3,pagamento;
 	tela_vendaParcelada();
 	recebe_valor(valor);
 	formata_valor(valor);	
@@ -171,41 +169,44 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	metodo_pgmt = metodo_pagamento();
 	tipo_cartao = aguarda_cartao();
 	
-	processa_pagamento(parcelas,tipo_cartao,metodo_pgmt,valor,senha,cartao);
+	pagamento = processa_pagamento(parcelas,tipo_cartao,metodo_pgmt,valor,senha,cartao);
 	
-	//calculo pra mandar o valor das parcelas pra addPagamentoAgendado
-	temp1 = (valor[4]-48)*100 + (valor[3]-48)*10 + (valor[2]-48); //parte antes da virgula para int
-	parcelas = parcelas - 48; //parcelas de ascii paranumerico
-	temp2 = temp1/parcelas; //pega as centenas dezenas e unidades da parcela 
-	temp3 = temp1%parcelas; // pega as dezenas e unidades de centavo da parcela
+	if(pagamento==1){
+		//calculo pra mandar o valor das parcelas pra addPagamentoAgendado
+		temp1 = (valor[4]-48)*100 + (valor[3]-48)*10 + (valor[2]-48); //parte antes da virgula para int
+		parcelas = parcelas - 48; //parcelas de ascii paranumerico
+		temp2 = temp1/parcelas; //pega as centenas dezenas e unidades da parcela
+		temp3 = temp1%parcelas; // pega as dezenas e unidades de centavo da parcela
 	
-	temp1 = (valor[1]-48)*10 + (valor[0]-48); // pega os centavos 
-	temp1 = temp1/parcelas + temp3; //soma 
+		temp1 = (valor[1]-48)*10 + (valor[0]-48); // pega os centavos
+		temp1 = temp1/parcelas + temp3; //soma
 	
-	if(temp1 >= 100){ //verifica se centavos passou de 1 real
-		temp1=temp1%100; 
-		temp2++;
-	}
-	//monta o vetor de valor
-	valor[0]=temp2/100 + 48; 
-	valor[1]=(temp2/10)%10 + 48; 
-	valor[2]=(temp2%100)%10 + 48;
-	valor[3]=temp1/10 + 48;
-	valor[4]=temp1%10 + 48;
+		if(temp1 >= 100){ //verifica se centavos passou de 1 real
+			temp1=temp1%100;
+			temp2++;
+		}
+		//monta o vetor de valor
+		valor[0]=temp2/100 + 48;
+		valor[1]=(temp2/10)%10 + 48;
+		valor[2]=(temp2%100)%10 + 48;
+		valor[3]=temp1/10 + 48;
+		valor[4]=temp1%10 + 48;
 	
-	sumDate(1); //data da primeira parcela
-	for(temp1 = 0;temp1<6;temp1++)
-		dataPags[temp1] = dataFUTURA[temp1];
-		
-	if(parcelas==3){ //se tiver mais parcelas
-		sumDate(2); //data da segunda parcela
+		sumDate(1); //data da primeira parcela
 		for(temp1 = 0;temp1<6;temp1++)
+		dataPags[temp1] = dataFUTURA[temp1];
+	
+		if(parcelas==3){ //se tiver mais parcelas
+			sumDate(2); //data da segunda parcela
+			for(temp1 = 0;temp1<6;temp1++)
 			dataPags[temp1+6] = dataFUTURA[temp1];
-	}else{
-		dataPags[6] = 9; //flag de não ter parcela 
+			}else{
+			dataPags[6] = 9; //flag de não ter parcela
+		}
+		//add pagamento agendado
+		addPagamentoAgendado(cartao,valor,dataPags);
 	}
-	//add pagamento agendado 
-	addPagamentoAgendado(cartao,valor,dataPags); 
+
 }
 
 void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
@@ -228,7 +229,7 @@ void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
 void processa_estorno(int tipo_cartao, char valor[],char cartao[]){
 	short i, req=0;
 	
-	while(req != 1){
+	while(req != 1 && req != 3 && req != 5){
 
 		if(tipo_cartao == 1){ // cartão magnetico - vai cartão (CM 123456 /r)
 			if(req != 2){
@@ -248,10 +249,11 @@ void processa_estorno(int tipo_cartao, char valor[],char cartao[]){
 				recebe_cartao(cartao);
 		}
 		req = requisicao_externa(cartao,cartao,valor,0);
+		com_ext = 0;
 	}
 }
 
-void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]){
+int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]){
 	short i, req=0, aux;
 	char cartao_local=0;
 	
@@ -265,22 +267,17 @@ void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valo
 			}
 			recebe_senha(senha);
 		}
-	
 		if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r)
 			for(i=0;i<12;i++){
 				if(i<6){cartao [i] = USART_recebe();} // preenche cartao
 				else{senha [i-6] = USART_recebe();}	// preenche senha
 			}
-
 		}
 		if(tipo_cartao == 3){ // digitar nº e senha
-			
 			if(req != 2){
 				recebe_cartao(cartao);
-				
 			}
 			recebe_senha(senha);
-			
 		}
 		
 		if(metodo_pgmt == 2){										// se o pagamento for no cartão de crédito, verifica pra ver se for cartão da FIRMA
@@ -291,7 +288,7 @@ void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valo
 		if(!cartao_local){											// se o cartão não for do tipo local, faz requisição externa
 			req = requisicao_externa(cartao,senha,valor,parcelas);
 		}else{
-			aux = executarVendaInterna(cartao_local,valor,senha);	
+			aux = executarVendaInterna(cartao_local,valor,senha);	// se for local, executa venda interna
 			if(aux==1){
 				req=1;
 			}else if(aux==2){
@@ -301,15 +298,21 @@ void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valo
 			}
 			tela_vendaInterna(aux);
 			//mostraSaldoNaSerial(cartao_local);
-			
 		}
-			
+		
+		com_ext = 0;
+		
+		if(req==3 || req==4 || req==5){								// se retornou CF, SI ou falha de comunicação ext, sai do loop
+			return 0;
+		}
 	}
+	return 1;
 }
 
 int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){
 	char req[21];
 	short i,tamanho = 0;
+	
 	
 	if(parcelas == 1){										// para venda a vista	------------------------------------------------------
 		req[0] = 0x56;	// V em ascii
@@ -344,30 +347,32 @@ int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){
 		USART_envia(req[i]);
 	}
 	USART_envia(0x0d);								// \r final
-
-	tela_processandoVenda();
+	
+	com_ext = 1;
 	
 	while(1){
 		if(parcelas==0){
 			switch(USART_recebe() ){
 				case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
-				case 0x43: tela_CF();return 1;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
+				case 0x43: tela_CF();return 3;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
+				case 0: return 5; break;
 			}
 		}else{
 			switch(USART_recebe() ){
 				case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
-				case 0x43: tela_CF();return 1;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
+				case 0x43: tela_CF();return 3;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
 				case 0x53:											// S em ascii
-				switch (USART_recebe()){
-					case 0x46:										// F em ascii	- SENHA COM FALHA -> pergunta senha novamente
-					tela_SF();
-					return 2;
-					break;
-					case 0x49:										// I em ascii	- SALDO INSUFICIENTE -> volta pra tela inicial
-					tela_SI();
-					return 1;
-					break;
-				}
+					switch (USART_recebe()){
+						case 0x46:										// F em ascii	- SENHA COM FALHA -> pergunta senha novamente
+							tela_SF();
+							return 2;
+							break;
+						case 0x49:										// I em ascii	- SALDO INSUFICIENTE -> volta pra tela inicial
+							tela_SI();
+							return 4;
+							break;
+					}
+				case 0: return 5; break;				
 			}
 		}
 

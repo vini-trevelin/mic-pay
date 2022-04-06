@@ -20,7 +20,14 @@ void USART_envia(unsigned char dados){
 
 // Função para receber 
 unsigned char USART_recebe(void){
-	while(!(UCSR0A & (1<<RXC0)));							// espera algum dado ser recebido (registrador)
+	while(!(UCSR0A & (1<<RXC0))){							// espera algum dado ser recebido (registrador)
+		switch(com_ext){									// fica meio bugado pq fica sobrescrevendo tela mas efeito dahora deixei
+			case 2: tela_processandoVenda();break;
+			case 6: tela_processandoVenda2();break;
+			case 10: tela_processandoVenda3();break;
+			case TEMPO_REQUISICAO: tela_erroCom();com_ext = 0;return 0;// indica que não recebi algo no registrador
+		}
+	}						
 	return UDR0;											// retorna dado recebido
 }
 char verificaSerial(short contSerial){

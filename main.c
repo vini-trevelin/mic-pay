@@ -16,8 +16,9 @@
 
 #include <util/delay.h>
 
-#define N_CARACSENHA 4 // todas as senhas com 4 caracteres? REVER ISSO
-#define TEMPO_COMUNICACAO 120 // todas as senhas com 4 caracteres? REVER ISSO
+#define N_CARACSENHA 4				// todas as senhas com 4 caracteres? s, menos de cartão
+#define TEMPO_COMUNICACAO 120		// 2min   (tempo para verificação da comunicação externa)
+#define TEMPO_REQUISICAO 13			// 13s (tempo para verificação de resposta a requisição ext)
 
 //////////////////////////////////////////////////////////////////////////
 //GLOBAIS//
@@ -25,14 +26,16 @@
 
 
 char teclaG = TECLA_INVALIDA;
-char contTelaOn = 0; //para segurar o botão por 3 segundos
+char contTelaOn = 0;							//para segurar o botão por 3 segundos
 char contTelaOff = 0;
-char telaOnOff = 0; //para saber o estado da tela (inicia Desligada)
-static char contSerial = 0; //para saber quanto tempo a serial esta sem comunicação
+char telaOnOff = 0;								//para saber o estado da tela (inicia Desligada)
+static char contSerial = 0;						//para saber quanto tempo a serial esta sem comunicação
+static char com_ext = 0;						//para saber se comunicação ext foi requisitada (vendas.c)
 
 char userIndex= 10;
 short controle = 1;
 char flagRELOGIO = 0;
+
 
 //static para manterem os valores durante as incializações
 static char numCartoesLocais [LOCALCARDNUM][CARDSIZE]; // indices correspondentes entre os 3  elementos
@@ -45,6 +48,7 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 //INCLUDES MÓDULOS//
 //////////////////////////////////////////////////////////////////////////
 
+#include "Modulos/relogio.c"
 #include "Modulos/cartoes.c"
 #include "Modulos/vendas.c"
 #include "Modulos/botoes.c"
@@ -54,15 +58,16 @@ unsigned static char cartoesCadastrados; // inicia sem nenhum cadastro;
 #include "Modulos/senha.c"
 #include "Modulos/telas.c"
 #include "Modulos/modoAdm.c"
-#include "Modulos/relogio.c"
 #include "Modulos/pendencias.c"
+
 //////////////////////////////////////////////////////////////////////////
 						//INTERUPÇÕES//
 //////////////////////////////////////////////////////////////////////////
 
 
-ISR(TIMER1_COMPA_vect){
+ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	updateDate();
+	
 	if(flagRELOGIO)
 		tela_dataAtual();
 	
@@ -73,6 +78,10 @@ ISR(TIMER1_COMPA_vect){
 		PORTC ^= (1 << PORTC4);
 	}
 	
+	if(com_ext != 0){
+		com_ext++;
+	}
+
 	if (teclaG == KEY_CONFIRMA)
 		contTelaOn++;
 	else
@@ -175,6 +184,7 @@ int main(){
 //	testa_pendencia();
 	while(1){
 		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
+		
 		
 		if(loop1){
 			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)

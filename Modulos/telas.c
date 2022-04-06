@@ -151,6 +151,20 @@ void tela_processandoVenda(){
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("servidor... ");
 }
+void tela_processandoVenda2(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Aguardando ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("servidor... (2)");
+}
+void tela_processandoVenda3(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Aguardando ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("servidor... (3)");
+}
 void menuADM(){
 	_delay_ms(750);
 	writeInstruction(lcd_Clear | lcd_Home);
@@ -294,4 +308,12 @@ void tela_dataAtual(){
 	writeInstruction(lcd_LineTwo | (lcd_SetCursor+(uint8_t)5));
 	writeString(stringHORA);
 	writeString(" V*");
+}
+void tela_erroCom(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Erro na");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Comonicacao Ext.");
+	_delay_ms(2000);
 }

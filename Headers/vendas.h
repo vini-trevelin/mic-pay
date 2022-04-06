@@ -5,7 +5,7 @@ void venda_parcelada();
 void estorno();
 
 // funções utilizadas pelas operações
-void processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]);
+int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]);
 int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas);
 uint8_t transforma_int(char valor[]);
 void processa_venda(int opcao);
