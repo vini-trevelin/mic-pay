@@ -109,7 +109,7 @@ char n_parcelas(){
 }
 
 void estorno(){
-	char senha_operador[] = {'0', '0', '0' ,'0', '0', '0'};	// to declarando aq pq n sei onde vou usar
+	char senha_operador[] = {'0', '0', '0' ,'0'};	// to declarando aq pq n sei onde vou usar
 	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
 	char valor[] = {' ', ' ', ' ' ,' ',' '};
 	short i,senhaValida=0;	
@@ -117,9 +117,9 @@ void estorno(){
 	
 	// declarei denovo pq n sei se vai ficar global ou oq ---- MUDAR
 
-	char senhas[3][N_CARACSENHA] =  {	{0,1,2,3}, //adm
-	{1,2,3,4}, //op 1
-	{2,3,4,5}, //op 2
+	char senhas[3][N_CARACSENHA] =  {	{'0','1','2','3'}, //adm
+	{'1','2','3','4'}, //op 1
+	{'2','3','4','5'}, //op 2
 	};
 
 	/// ----------------------------------------------------------
@@ -132,6 +132,7 @@ void estorno(){
 			senhaValida = validarSenha(senha_operador,senhas[i]);
 		}
 	}
+	
 	if (senhaValida){
 		tela_valorEstorno();
 		recebe_valor(valor);
@@ -229,7 +230,7 @@ void processa_estorno(int tipo_cartao, char valor[],char cartao[]){
 	
 	while(req != 1){
 
-		if(tipo_cartao == 1){ // cartão magnetico - vai cartão e pede senha (CM 123456 /r)
+		if(tipo_cartao == 1){ // cartão magnetico - vai cartão (CM 123456 /r)
 			if(req != 2){
 				for(i=0;i<6;i++){
 					cartao [i] = USART_recebe()	;		 // preenche cartao
@@ -237,13 +238,13 @@ void processa_estorno(int tipo_cartao, char valor[],char cartao[]){
 			}
 		}
 		
-		if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r)
+		if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r) (n faz mt sentido no estorno mas deixei)
 			for(i=0;i<6;i++){
 				cartao [i] = USART_recebe(); // preenche cartao
 			}
 
 		}
-		if(tipo_cartao == 3){ // digitar nº e senha
+		if(tipo_cartao == 3){ // digitar nº cartão
 				recebe_cartao(cartao);
 		}
 		req = requisicao_externa(cartao,cartao,valor,0);
@@ -320,8 +321,8 @@ int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){
 		}
 		tamanho = 19;
 	}else if(parcelas == 0){							// para estorno	-------------------------------------------------------------
-		req[0] = 0x45;	// V em ascii
-		req[1] = 0x56;	// P em ascii
+		req[0] = 0x45;	// E em ascii
+		req[1] = 0x56;	// V em ascii
 		for(i=2;i<13;i++){								
 			if(i<8){req[i] = cartao [i-2];}				
 			else{ req[i] = valor[12-i];}			
@@ -347,22 +348,29 @@ int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){
 	tela_processandoVenda();
 	
 	while(1){
-		
-		switch(USART_recebe() ){
-			case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
-			case 0x43: tela_CF();return 1;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
-			case 0x53:											// S em ascii
-			switch (USART_recebe()){
-				case 0x46:										// F em ascii	- SENHA COM FALHA -> pergunta senha novamente
-				tela_SF();
-				return 2;
-				break;
-				case 0x49:										// I em ascii	- SALDO INSUFICIENTE -> volta pra tela inicial
-				tela_SI();
-				return 1;
-				break;
+		if(parcelas==0){
+			switch(USART_recebe() ){
+				case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
+				case 0x43: tela_CF();return 1;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
+			}
+		}else{
+			switch(USART_recebe() ){
+				case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
+				case 0x43: tela_CF();return 1;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
+				case 0x53:											// S em ascii
+				switch (USART_recebe()){
+					case 0x46:										// F em ascii	- SENHA COM FALHA -> pergunta senha novamente
+					tela_SF();
+					return 2;
+					break;
+					case 0x49:										// I em ascii	- SALDO INSUFICIENTE -> volta pra tela inicial
+					tela_SI();
+					return 1;
+					break;
+				}
 			}
 		}
+
 	}
 }
 
@@ -467,7 +475,7 @@ void recebe_valor(char valor[]){	// f recebe valor de 5 digitos (ou menos)
 						valor[pos-contador+1] = ' ';
 						contador --;
 					}
-					}else if(tecla == KEY_CONFIRMA_ASCII && valor[5]!='0'){
+					}else if(tecla == KEY_CONFIRMA_ASCII && valor[5]!=' '){
 						break;
 					}else if(contador<5){
 						if(tecla == KEY_0_ASCII){
