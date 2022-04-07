@@ -3,6 +3,7 @@
 #include "../Headers/botoes.h"
 #include "../Headers/relogio.h"
 #include "../Headers/pendencias.h"
+#include "../Headers/serial.h"
 #include "../Headers/senha.h"
 #include <util/delay.h>
 
@@ -366,6 +367,7 @@ void cobrarPagementosAgendados(){
 }
 	
 void enviarPedidoDePagamento(short cobrar){
+	cobrar = 0;
 	char cartao[NUMDIGITOSCARTOES];
 	char pedido[13], resultado;
 	short i;
@@ -378,12 +380,11 @@ void enviarPedidoDePagamento(short cobrar){
 	for(i=0;i<NUMDIGITOSVALORES;i++){ //prepara o pedido
 		pedido[i+8] = valParcelaA[cobrar][i]+48;
 	}
-		
+	//AP cccccc vvvvv
 	pedido[0] = 'A'; // finaliza o pedido
 	pedido[1] = 'P';
-	pedido[12] = '\r';
 	
-	//falar com vini sobre serial, perguntar tb sobre numeros em vendas estarem invertidos
+	//char tester[] = {65,80,7+48,5+48,3+48,1+48,5+48,9+48,1+48,4+48,2+48,5+48,1+48};
 	resultado = enviarPedidoSerial(pedido);
 	
 	if(resultado){
@@ -397,12 +398,13 @@ char enviarPedidoSerial(char pedido[]){
 	tela_cobrarPagAgendado();
 	tela_AguardandoPagAgendado();
 	
-	for(i=0;i<13;i++)
+	for(i=0;i<12;i++){
 		USART_envia(pedido[i]);
-	
-	if(USART_recebe() == 0x4f ){
+	}
+	USART_envia(0x0d);
+	if(USART_recebe() == 0x4f){
 		tela_OK();
 		return 1;
-	}else
+	}else //tenho q fazer uma tela aqui caso não ok (tela_parcelaNaoPaga ou sei la)
 		return 0;
 }

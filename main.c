@@ -107,6 +107,8 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	
 	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) {
 		cobrarPagementosAgendados();
+		if (horas == 22)
+			verificarPendencia();
 	}
 	
 	if(existePendencia()){
@@ -181,10 +183,11 @@ int main(){
 	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
 	/////
-//	testa_pendencia();
+	_delay_ms(2000);
+	enviarPedidoDePagamento(2);
+	_delay_ms(10000);
+	
 	while(1){
-		//writeInstruction(lcd_DisplayOn); // comentar quando colocar a rotina de ligar a tela
-		
 		
 		if(loop1){
 			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
