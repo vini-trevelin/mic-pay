@@ -367,7 +367,6 @@ void cobrarPagementosAgendados(){
 }
 	
 void enviarPedidoDePagamento(short cobrar){
-	cobrar = 0;
 	char cartao[NUMDIGITOSCARTOES];
 	char pedido[13], resultado;
 	short i;

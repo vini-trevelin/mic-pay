@@ -183,9 +183,6 @@ int main(){
 	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
 	/////
-	_delay_ms(2000);
-	enviarPedidoDePagamento(2);
-	_delay_ms(10000);
 	
 	while(1){
 		
