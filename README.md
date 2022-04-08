@@ -5,6 +5,7 @@ Software desenvolvido para emulação no PICSimLab
 Playlist com vídeos demonstrativos:
 
 Esquemático:
+
 ![image](https://user-images.githubusercontent.com/40406284/162344544-415d51f4-5aea-4b5d-bbc1-b81da276046c.png)
 
 Pinagem da placa Arduino UNO utilizada para simulação: (.pcf)
