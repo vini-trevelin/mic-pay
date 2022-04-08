@@ -14,6 +14,7 @@ Matrizes de pagamentos AGENDADOS
 cartoesA	-> Guarda o numero dos cartões
 valParcelaA	-> Guarda o val da parcela
 datasVenc	-> datas dos vencimentos (pegar de 6 em 6)(ex 131224130125 = 13/12/24 e 10/01/25 , 9????? se a data começar com 9 a parcela nõa existe)
+																							   se começar com 8 já foi paga ou dada como pendente
 
 Matrizes de pagamentos PENDENTES
 cartoesP		-> Guarda o numero dos cartões com pendencia
@@ -23,15 +24,15 @@ Trabalho de manter as linhas sincronizadas entre as matrizes
 */
 
 //tenho q inicializar eles pra zero
-static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};
-static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0};
-static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {0};
+static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] ={0};// {{1,4,7,8,5,2},{1,2,7,8,4,5}};//cartão1 = 147852, cartão2 = 127845
+static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] ={0}; // {{0,4,5,0,9},{0,5,6,5,1}}; //val parcela do cartaõ1 = R$45,09 ; val parcela do cartaõ2 = R$56,61
+static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {0};//{{0,1,0,2,2,2,9,0,0,0,0,0},{1,5,0,2,2,2,1,5,0,3,2,2}}; // datasVen cartaõ1 = 01/02/22 ; datasVen cartaõ2 = 15/02/22 e 15/03/22
 
-static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}}; //talvez mais linhas, já que cada cartão poderia ter 2 pendencias teoricamente
-static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
+static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};//{{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}}; //para testar
+static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0}; //{{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
 
 static short numPagsAgendados = 0; // pra saber quantos pagsAgendados tem
-static short numPendecias = 3; //saber quantas pendencias temos
+static short numPendecias = 0; //saber quantas pendencias temos
 
 void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
 	// se só tiver uma parcela, datasVenci tem q ter o 1° digito da data da segunda parcela com um 9(SEMPARCELA) (ex:2008259 = 20/08/25 e 9?????)
@@ -108,7 +109,7 @@ void removePrimeiraParcela(short remover){
 	datasVenc[remover][0] = PARCELAPAGA_OUPENDENTE; //só precisa colocar o sinal q foi paga na primeira posição, ela que verifico em removePagamentoAgendado
 	
 	if(datasVenc[remover][6] == SEMPARCELA){ //mas se não vai ter outra parcela, pode tirar esse cartão das matrizes
-		//no final percebi que era melhor colocar os zerar os valores em organizaPagamentos
+		//no final percebi que era melhor colocar para zerar os valores em organizaPagamentos
 		organizaPagamentos(remover);
 	}
 }
@@ -263,7 +264,6 @@ char removePendencias(char remover){
 			cartoesP[i][j] = temp;			
 		}
 	}
-	writeCharacter('D');
 	//remove valParcelaP
 	for(i=remover;i<numPendecias-1;i++){
 		for(j=0;j<NUMDIGITOSVALORES-1;j++){
@@ -289,7 +289,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(1); //pend 2
 		}
-		_delay_ms(2300);
+		_delay_ms(3000);
 	}else if(sobeDesce == 2 && numPendecias > 2){
 		if(numPendecias > 2){
 			writeInstruction(lcd_Clear);
@@ -300,7 +300,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(3); //pend 4
 		}
-		_delay_ms(2300);
+		_delay_ms(3000);
 	}else if(sobeDesce == 3 && numPendecias >= 4){
 		if(numPendecias > 4){
 			writeInstruction(lcd_Clear);
@@ -311,7 +311,7 @@ char printPendencias(char sobeDesce){
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
 			printNumPendencia(5); //pend 6
 		}
-		_delay_ms(2300);
+		_delay_ms(3000);
 	}
 	return 1;
 }
@@ -331,7 +331,8 @@ void printNumPendencia(short num){
 
 void cobrarPagementosAgendados(){
 	char diaAtual[2],mesAtual[2],anoAtual[2];
-	short i, cobrar=-1;
+	short i, cobrar;
+	char flagPagCobrado=0;
 	
 	//pego as infos da data atual
 	AtualizaStringDataHora();
@@ -340,33 +341,38 @@ void cobrarPagementosAgendados(){
 		mesAtual[i]=stringDATA[i+3]-48;
 		anoAtual[i]=stringDATA[i+6]-48;
 	}
+	
 	//012345 67891011 
 	//ddmmaa|ddmma a
 	//comparar com primeira coluna de datasVenc 
-	for(i=0;i<numPagsAgendados;i++){
-		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE) //verifica a primeira data
+	for(i=0,cobrar=-1;i<numPagsAgendados;i++){
+		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE){ //verifica a primeira data
 			if(datasVenc[i][0]==diaAtual[0] && datasVenc[i][1]==diaAtual[1] && 
 			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
 			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
 				cobrar = i;
 			
 			}
-		if(datasVenc[i][6] != SEMPARCELA) //verifica a segunda
+		}
+		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda
 			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
 			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
 			datasVenc[i][10]==anoAtual[0] && datasVenc[i][11]==anoAtual[1]){
 				cobrar = i;	
 			}
-			
-			if(cobrar){
-				enviarPedidoDePagamento(cobrar);
-				cobrar = -1;
-			}
+		}
+		
+		if(cobrar != -1)
+			flagPagCobrado = enviarPedidoDePagamento(cobrar);
 		cobrar = -1;
+		}
+		if(flagPagCobrado){ //se não tiver sido cobrado pag não tem pq mudar a tela e interromper a maquina
+			tela_fimDacobranca();
+			tela_precioneOK();
 		}
 }
 	
-void enviarPedidoDePagamento(short cobrar){
+char enviarPedidoDePagamento(short cobrar){
 	char cartao[NUMDIGITOSCARTOES];
 	char pedido[13], resultado;
 	short i;
@@ -379,17 +385,19 @@ void enviarPedidoDePagamento(short cobrar){
 	for(i=0;i<NUMDIGITOSVALORES;i++){ //prepara o pedido
 		pedido[i+8] = valParcelaA[cobrar][i]+48;
 	}
-	//AP cccccc vvvvv
+	//AP cccccc vvvvv \r
 	pedido[0] = 'A'; // finaliza o pedido
 	pedido[1] = 'P';
 	
-	//char tester[] = {65,80,7+48,5+48,3+48,1+48,5+48,9+48,1+48,4+48,2+48,5+48,1+48};
 	resultado = enviarPedidoSerial(pedido);
 	
 	if(resultado){
 		removePagamentoAgendado(cartao);
 		tela_operacaoConcluida();
+	}else{
+		tela_pagNencontrado();
 	}
+	return resultado;
 }
 
 char enviarPedidoSerial(char pedido[]){
@@ -397,13 +405,13 @@ char enviarPedidoSerial(char pedido[]){
 	tela_cobrarPagAgendado();
 	tela_AguardandoPagAgendado();
 	
-	for(i=0;i<12;i++){
+	for(i=0;i<13;i++){
 		USART_envia(pedido[i]);
 	}
 	USART_envia(0x0d);
 	if(USART_recebe() == 0x4f){
 		tela_OK();
 		return 1;
-	}else //tenho q fazer uma tela aqui caso não ok (tela_parcelaNaoPaga ou sei la)
+	}else
 		return 0;
 }

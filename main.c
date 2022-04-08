@@ -105,7 +105,7 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	}
 					
 	
-	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos < 3) {
+	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos == 0) {
 		cobrarPagementosAgendados();
 		if (horas == 22)
 			verificarPendencia();

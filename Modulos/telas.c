@@ -25,8 +25,14 @@ void tela_bloqueio_inicial(){
 	writeString("     MicPay"); //ficar mais fiel ao pdf
 	writeInstruction(lcd_SetCursor | lcd_LineTwo);
 	writeString("       :)");
-	_delay_ms(1000); 
-	writeInstruction(lcd_Home | lcd_Clear);
+	_delay_ms(750); 
+	writeInstruction(lcd_SetCursor | lcd_LineTwo);
+	writeString("       ;D");
+	_delay_ms(750);
+	writeInstruction(lcd_SetCursor | lcd_LineTwo);
+	writeString("       :)");
+	_delay_ms(750);
+	writeInstruction(lcd_Clear);
 }
 void menu_pagamento(){
 	writeInstruction(lcd_Clear);
@@ -315,5 +321,29 @@ void tela_erroCom(){
 	writeString("Erro na");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("Comonicacao Ext.");
+	_delay_ms(2000);
+}
+void tela_precioneOK(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("CONFIRMA ");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Para continuar");
+	_delay_ms(2000);
+}
+void tela_fimDacobranca(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("cobrancas");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("finalizadas");
+	_delay_ms(2000);
+}
+void tela_pagNencontrado(){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Parcela nao");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("localizado");
 	_delay_ms(2000);
 }

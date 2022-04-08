@@ -194,7 +194,7 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	
 		sumDate(1); //data da primeira parcela
 		for(temp1 = 0;temp1<6;temp1++)
-		dataPags[temp1] = dataFUTURA[temp1];
+			dataPags[temp1] = dataFUTURA[temp1];
 	
 		if(parcelas==3){ //se tiver mais parcelas
 			sumDate(2); //data da segunda parcela

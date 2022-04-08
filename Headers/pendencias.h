@@ -21,7 +21,7 @@ char removePendencias(char remover); //pro adm remover pendencias manualmente (v
 void organizaPendencias(); //pra organizar dps q uma for removida
 
 void cobrarPagementosAgendados(); //chama no interrupt do timer nos horarios certos, uso externo
-void enviarPedidoDePagamento(short cobrar); //prepara o pedido de pag com quem deve pagar no dia, uso interno
+char enviarPedidoDePagamento(short cobrar); //prepara o pedido de pag com quem deve pagar no dia, uso interno
 char enviarPedidoSerial(char pedido[]); //envia o pedido pra serial, uso interno
 
 char printPendencias(char sobeDesce); //printa a tela de pendencias pro adm escolher, uso externo
