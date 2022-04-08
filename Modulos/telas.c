@@ -334,7 +334,7 @@ void tela_precioneOK(){
 void tela_fimDacobranca(){
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
-	writeString("cobrancas");
+	writeString("Cobrancas");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("finalizadas");
 	_delay_ms(2000);
@@ -342,7 +342,7 @@ void tela_fimDacobranca(){
 void tela_pagNencontrado(){
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
-	writeString("Parcela nao");
+	writeString("pagamento nao");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
 	writeString("localizado");
 	_delay_ms(2000);

@@ -24,14 +24,14 @@ Trabalho de manter as linhas sincronizadas entre as matrizes
 */
 
 //tenho q inicializar eles pra zero
-static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] ={0};// {{1,4,7,8,5,2},{1,2,7,8,4,5}};//cartão1 = 147852, cartão2 = 127845
-static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] ={0}; // {{0,4,5,0,9},{0,5,6,5,1}}; //val parcela do cartaõ1 = R$45,09 ; val parcela do cartaõ2 = R$56,61
-static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {0};//{{0,1,0,2,2,2,9,0,0,0,0,0},{1,5,0,2,2,2,1,5,0,3,2,2}}; // datasVen cartaõ1 = 01/02/22 ; datasVen cartaõ2 = 15/02/22 e 15/03/22
+static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {{1,1,0,0,0,0},{2,2,0,0,0,0},{3,3,0,0,0,0}};//cartão1 = 147852, cartão2 = 127845
+static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] ={{0,1,1,0,0},{0,2,2,0,0},{0,3,3,0,0}}; //val parcela cartaõ1 = R$11 ; do cartaõ2 = R$22 cartão3 = R$33
+static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {{0,1,0,2,2,2,9,0,0,0,0,0},{0,1,0,2,2,2,0,1,0,3,2,2},{0,1,0,2,2,2,0,1,0,3,2,2}}; // datasVen cartaõ1 = 01/02/22 ; datasVen cartaõ2 = 01/02/22 e 01/03/22
 
 static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};//{{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}}; //para testar
 static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0}; //{{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
 
-static short numPagsAgendados = 0; // pra saber quantos pagsAgendados tem
+static short numPagsAgendados = 3; // pra saber quantos pagsAgendados tem
 static short numPendecias = 0; //saber quantas pendencias temos
 
 void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
@@ -332,7 +332,7 @@ void printNumPendencia(short num){
 void cobrarPagementosAgendados(){
 	char diaAtual[2],mesAtual[2],anoAtual[2];
 	short i, cobrar;
-	char flagPagCobrado=0;
+	char flagPagCobrado=0, pagCobrado=0;
 	
 	//pego as infos da data atual
 	AtualizaStringDataHora();
@@ -351,7 +351,6 @@ void cobrarPagementosAgendados(){
 			datasVenc[i][2]==mesAtual[0] && datasVenc[i][3]==mesAtual[1] &&
 			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
 				cobrar = i;
-			
 			}
 		}
 		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda
@@ -362,14 +361,19 @@ void cobrarPagementosAgendados(){
 			}
 		}
 		
-		if(cobrar != -1)
-			flagPagCobrado = enviarPedidoDePagamento(cobrar);
-		cobrar = -1;
+		if(cobrar != -1){
+			pagCobrado = enviarPedidoDePagamento(cobrar);
+			cobrar = -1;
+			flagPagCobrado = 1;
+			if(pagCobrado) //caso o pag tenha sido cobrado é preciso voltar na matriz pq organizaPagamentos()
+				i--;			//vai fazer todos subirem uma posição
 		}
-		if(flagPagCobrado){ //se não tiver sido cobrado pag não tem pq mudar a tela e interromper a maquina
-			tela_fimDacobranca();
-			tela_precioneOK();
-		}
+	}
+	
+	if(flagPagCobrado == 1){ //se não tiver sido cobrado pag não tem pq mudar a tela e interromper a maquina
+		tela_fimDacobranca();
+		tela_precioneOK();
+	}
 }
 	
 char enviarPedidoDePagamento(short cobrar){
@@ -391,17 +395,19 @@ char enviarPedidoDePagamento(short cobrar){
 	
 	resultado = enviarPedidoSerial(pedido);
 	
-	if(resultado){
+	if(resultado == 1){
 		removePagamentoAgendado(cartao);
 		tela_operacaoConcluida();
-	}else{
+		return 1;
+	}else if(resultado == 2){
 		tela_pagNencontrado();
 	}
-	return resultado;
+	return 0;
 }
 
 char enviarPedidoSerial(char pedido[]){
 	short i;
+	char recebe_serial[3];
 	tela_cobrarPagAgendado();
 	tela_AguardandoPagAgendado();
 	
@@ -409,9 +415,16 @@ char enviarPedidoSerial(char pedido[]){
 		USART_envia(pedido[i]);
 	}
 	USART_envia(0x0d);
-	if(USART_recebe() == 0x4f){
-		tela_OK();
+	
+	recebe_serial[0] = USART_recebe();
+	recebe_serial[1] = USART_recebe();
+	recebe_serial[2] = USART_recebe();
+	writeInstruction(lcd_Clear);
+	
+	if(recebe_serial[0] == 0x4f){
 		return 1;
-	}else
-		return 0;
+	}else if(recebe_serial[0] == 0x50){
+		return 2;
+	}
+	return 0;
 }
