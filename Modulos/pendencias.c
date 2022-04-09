@@ -24,14 +24,14 @@ Trabalho de manter as linhas sincronizadas entre as matrizes
 */
 
 //tenho q inicializar eles pra zero
-static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {{1,1,0,0,0,0},{2,2,0,0,0,0},{3,3,0,0,0,0}};//cartão1 = 147852, cartão2 = 127845
-static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] ={{0,1,1,0,0},{0,2,2,0,0},{0,3,3,0,0}}; //val parcela cartaõ1 = R$11 ; do cartaõ2 = R$22 cartão3 = R$33
-static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {{0,1,0,2,2,2,9,0,0,0,0,0},{0,1,0,2,2,2,0,1,0,3,2,2},{0,1,0,2,2,2,0,1,0,3,2,2}}; // datasVen cartaõ1 = 01/02/22 ; datasVen cartaõ2 = 01/02/22 e 01/03/22
+static char cartoesA[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};
+static char valParcelaA[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] ={0};
+static char datasVenc[NUMPAGSAGENDADOS][NUMDATAS] = {0};
 
-static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};//{{7,8,9,4,5,5},{7,5,3,1,5,9},{1,5,9,7,5,3}}; //para testar
-static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0}; //{{1,2,5,8,9},{1,4,7,5,8},{5,6,2,3}};
+static char cartoesP[NUMPAGSAGENDADOS][NUMDIGITOSCARTOES] = {0};
+static char valParcelaP[NUMPAGSAGENDADOS][NUMDIGITOSVALORES] = {0};
 
-static short numPagsAgendados = 3; // pra saber quantos pagsAgendados tem
+static short numPagsAgendados = 0; // pra saber quantos pagsAgendados tem
 static short numPendecias = 0; //saber quantas pendencias temos
 
 void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
@@ -53,8 +53,6 @@ void addPagamentoAgendado(char cartao[], char valParcela[], char datasVenci[]){
 	if(numPagsAgendados < NUMPAGSAGENDADOS) //tem q ser < pq uso como indice nas matrizes
 		numPagsAgendados++;
 		
-// 	else  //Pode adicionar isso, mas teria q pensar em um jeito de resolver o problema, negar a compra dai?
-// 		return NUMMAXDEPAGSAGENDADOS;
 }
 
 short removePagamentoAgendado(char cartao[]){
@@ -93,7 +91,7 @@ short removePagamentoAgendado(char cartao[]){
 	return 1; //cartão encontrado e parcela paga 
 }
 
-short comparaCartoes(char cartao1[],char cartao2[]){
+short comparaCartoes(char cartao1[],char cartao2[]){ //só compara dois cartões
 	short i;
 	short igual=1;
 	for (i=0;i<NUMDIGITOSCARTOES;i++){
@@ -154,8 +152,7 @@ void organizaPagamentos(short remover){
 	numPagsAgendados--; //organiza pagamentos só é chamado quando se zera um pagamentoAgendado, então posso diminuir o numero de pags agendados
 }
 
-char existePendencia(){
-	//vou olhar se tem algum valor em valParcelaP != 0 e retorna 1 se tiver
+char existePendencia(){ //ve se tem alguma pendencia no sistema
 	if(numPendecias>0)
 		return 1;
 	else
@@ -194,7 +191,7 @@ void verificarPendencia(){
 					}
 			
 			else if(mesAtual[0]==datasVenc[i][2] && mesAtual[1]==datasVenc[i][3])
-				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = o dia venceu
+				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = mas dia venceu
 					pendAchada = i; 
 			}
 		
@@ -353,7 +350,7 @@ void cobrarPagementosAgendados(){
 				cobrar = i;
 			}
 		}
-		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda
+		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda data
 			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
 			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
 			datasVenc[i][10]==anoAtual[0] && datasVenc[i][11]==anoAtual[1]){
@@ -376,7 +373,7 @@ void cobrarPagementosAgendados(){
 	}
 }
 	
-char enviarPedidoDePagamento(short cobrar){
+char enviarPedidoDePagamento(short cobrar){ //prepara o pedido e manda pra serial
 	char cartao[NUMDIGITOSCARTOES];
 	char pedido[13], resultado;
 	short i;

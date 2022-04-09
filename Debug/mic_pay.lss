@@ -3,31 +3,31 @@ mic_pay.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000542  00800100  0000398e  00003a22  2**0
+  0 .data         000004b6  00800100  0000398e  00003a22  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         0000398e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          000000c3  00800642  00800642  00003f64  2**0
+  2 .bss          0000014f  008005b6  008005b6  00003ed8  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00003f64  2**0
+  3 .comment      00000030  00000000  00000000  00003ed8  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00003f94  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00003f08  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000003d0  00000000  00000000  00003fd4  2**0
+  5 .debug_aranges 000003d0  00000000  00000000  00003f48  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000058c6  00000000  00000000  000043a4  2**0
+  6 .debug_info   000058c6  00000000  00000000  00004318  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009bf  00000000  00000000  00009c6a  2**0
+  7 .debug_abbrev 000009bf  00000000  00000000  00009bde  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00003800  00000000  00000000  0000a629  2**0
+  8 .debug_line   00003800  00000000  00000000  0000a59d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000c08  00000000  00000000  0000de2c  2**2
+  9 .debug_frame  00000c08  00000000  00000000  0000dda0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000f7a  00000000  00000000  0000ea34  2**0
+ 10 .debug_str    00000f7a  00000000  00000000  0000e9a8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000043a5  00000000  00000000  0000f9ae  2**0
+ 11 .debug_loc    000043a5  00000000  00000000  0000f922  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000003f0  00000000  00000000  00013d53  2**0
+ 12 .debug_ranges 000003f0  00000000  00000000  00013cc7  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -93,7 +93,7 @@ Disassembly of section .text:
       a2:	cd bf       	out	0x3d, r28	; 61
 
 000000a4 <__do_copy_data>:
-      a4:	16 e0       	ldi	r17, 0x06	; 6
+      a4:	15 e0       	ldi	r17, 0x05	; 5
       a6:	a0 e0       	ldi	r26, 0x00	; 0
       a8:	b1 e0       	ldi	r27, 0x01	; 1
       aa:	ee e8       	ldi	r30, 0x8E	; 142
@@ -101,14 +101,14 @@ Disassembly of section .text:
       ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
       b0:	05 90       	lpm	r0, Z+
       b2:	0d 92       	st	X+, r0
-      b4:	a2 34       	cpi	r26, 0x42	; 66
+      b4:	a6 3b       	cpi	r26, 0xB6	; 182
       b6:	b1 07       	cpc	r27, r17
       b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
 
 000000ba <__do_clear_bss>:
       ba:	27 e0       	ldi	r18, 0x07	; 7
-      bc:	a2 e4       	ldi	r26, 0x42	; 66
-      be:	b6 e0       	ldi	r27, 0x06	; 6
+      bc:	a6 eb       	ldi	r26, 0xB6	; 182
+      be:	b5 e0       	ldi	r27, 0x05	; 5
       c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
 
 000000c2 <.do_clear_bss_loop>:
@@ -1650,8 +1650,8 @@ char getNumPendecias(){
      cde:	c0 6c       	ori	r28, 0xC0	; 192
      ce0:	8c 2f       	mov	r24, r28
      ce2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     ce6:	80 e1       	ldi	r24, 0x10	; 16
-     ce8:	96 e0       	ldi	r25, 0x06	; 6
+     ce6:	84 e8       	ldi	r24, 0x84	; 132
+     ce8:	95 e0       	ldi	r25, 0x05	; 5
      cea:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      cee:	8c 2f       	mov	r24, r28
      cf0:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -1807,11 +1807,11 @@ char getNumPendecias(){
      e2c:	f8 01       	movw	r30, r16
      e2e:	80 81       	ld	r24, Z
      e30:	fe 01       	movw	r30, r28
-     e32:	e2 57       	subi	r30, 0x72	; 114
+     e32:	ee 5f       	subi	r30, 0xFE	; 254
      e34:	fe 4f       	sbci	r31, 0xFE	; 254
      e36:	80 83       	st	Z, r24
-     e38:	8c e6       	ldi	r24, 0x6C	; 108
-     e3a:	95 e0       	ldi	r25, 0x05	; 5
+     e38:	80 ee       	ldi	r24, 0xE0	; 224
+     e3a:	94 e0       	ldi	r25, 0x04	; 4
      e3c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      e40:	21 96       	adiw	r28, 0x01	; 1
      e42:	80 e0       	ldi	r24, 0x00	; 0
@@ -1833,7 +1833,7 @@ char getNumPendecias(){
      e68:	21 97       	sbiw	r28, 0x01	; 1
      e6a:	86 e4       	ldi	r24, 0x46	; 70
      e6c:	fe 01       	movw	r30, r28
-     e6e:	e2 57       	subi	r30, 0x72	; 114
+     e6e:	ee 5f       	subi	r30, 0xFE	; 254
      e70:	fe 4f       	sbci	r31, 0xFE	; 254
      e72:	80 83       	st	Z, r24
      e74:	80 e0       	ldi	r24, 0x00	; 0
@@ -1864,23 +1864,23 @@ char getNumPendecias(){
      ea2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
      ea6:	80 e8       	ldi	r24, 0x80	; 128
      ea8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     eac:	83 ec       	ldi	r24, 0xC3	; 195
+     eac:	87 e3       	ldi	r24, 0x37	; 55
      eae:	91 e0       	ldi	r25, 0x01	; 1
      eb0:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      eb4:	80 ec       	ldi	r24, 0xC0	; 192
      eb6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     eba:	81 ed       	ldi	r24, 0xD1	; 209
+     eba:	85 e4       	ldi	r24, 0x45	; 69
      ebc:	91 e0       	ldi	r25, 0x01	; 1
      ebe:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      ec2:	08 95       	ret
 
 00000ec4 <tela_bloqueio_inicial>:
-     ec4:	8d ed       	ldi	r24, 0xDD	; 221
+     ec4:	81 e5       	ldi	r24, 0x51	; 81
      ec6:	91 e0       	ldi	r25, 0x01	; 1
      ec8:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      ecc:	80 ec       	ldi	r24, 0xC0	; 192
      ece:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     ed2:	89 ee       	ldi	r24, 0xE9	; 233
+     ed2:	8d e5       	ldi	r24, 0x5D	; 93
      ed4:	91 e0       	ldi	r25, 0x01	; 1
      ed6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      eda:	2f ef       	ldi	r18, 0xFF	; 255
@@ -1894,7 +1894,7 @@ char getNumPendecias(){
      eea:	00 00       	nop
      eec:	80 ec       	ldi	r24, 0xC0	; 192
      eee:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     ef2:	83 ef       	ldi	r24, 0xF3	; 243
+     ef2:	87 e6       	ldi	r24, 0x67	; 103
      ef4:	91 e0       	ldi	r25, 0x01	; 1
      ef6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      efa:	2f ef       	ldi	r18, 0xFF	; 255
@@ -1908,7 +1908,7 @@ char getNumPendecias(){
      f0a:	00 00       	nop
      f0c:	80 ec       	ldi	r24, 0xC0	; 192
      f0e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     f12:	89 ee       	ldi	r24, 0xE9	; 233
+     f12:	8d e5       	ldi	r24, 0x5D	; 93
      f14:	91 e0       	ldi	r25, 0x01	; 1
      f16:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      f1a:	2f ef       	ldi	r18, 0xFF	; 255
@@ -1929,13 +1929,13 @@ char getNumPendecias(){
      f36:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
      f3a:	80 e8       	ldi	r24, 0x80	; 128
      f3c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     f40:	8d ef       	ldi	r24, 0xFD	; 253
+     f40:	81 e7       	ldi	r24, 0x71	; 113
      f42:	91 e0       	ldi	r25, 0x01	; 1
      f44:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      f48:	80 ec       	ldi	r24, 0xC0	; 192
      f4a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     f4e:	8d e0       	ldi	r24, 0x0D	; 13
-     f50:	92 e0       	ldi	r25, 0x02	; 2
+     f4e:	81 e8       	ldi	r24, 0x81	; 129
+     f50:	91 e0       	ldi	r25, 0x01	; 1
      f52:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      f56:	08 95       	ret
 
@@ -1952,13 +1952,13 @@ char getNumPendecias(){
      f6a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
      f6e:	80 e8       	ldi	r24, 0x80	; 128
      f70:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     f74:	8e e1       	ldi	r24, 0x1E	; 30
-     f76:	92 e0       	ldi	r25, 0x02	; 2
+     f74:	82 e9       	ldi	r24, 0x92	; 146
+     f76:	91 e0       	ldi	r25, 0x01	; 1
      f78:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      f7c:	80 ec       	ldi	r24, 0xC0	; 192
      f7e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     f82:	8c e2       	ldi	r24, 0x2C	; 44
-     f84:	92 e0       	ldi	r25, 0x02	; 2
+     f82:	80 ea       	ldi	r24, 0xA0	; 160
+     f84:	91 e0       	ldi	r25, 0x01	; 1
      f86:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      f8a:	08 95       	ret
 
@@ -1967,13 +1967,13 @@ char getNumPendecias(){
      f8e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
      f92:	80 e8       	ldi	r24, 0x80	; 128
      f94:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     f98:	8a e3       	ldi	r24, 0x3A	; 58
-     f9a:	92 e0       	ldi	r25, 0x02	; 2
+     f98:	8e ea       	ldi	r24, 0xAE	; 174
+     f9a:	91 e0       	ldi	r25, 0x01	; 1
      f9c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      fa0:	80 ec       	ldi	r24, 0xC0	; 192
      fa2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     fa6:	88 e4       	ldi	r24, 0x48	; 72
-     fa8:	92 e0       	ldi	r25, 0x02	; 2
+     fa6:	8c eb       	ldi	r24, 0xBC	; 188
+     fa8:	91 e0       	ldi	r25, 0x01	; 1
      faa:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      fae:	2f ef       	ldi	r18, 0xFF	; 255
      fb0:	8f e4       	ldi	r24, 0x4F	; 79
@@ -1991,13 +1991,13 @@ char getNumPendecias(){
      fc4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
      fc8:	80 e8       	ldi	r24, 0x80	; 128
      fca:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     fce:	84 e5       	ldi	r24, 0x54	; 84
-     fd0:	92 e0       	ldi	r25, 0x02	; 2
+     fce:	88 ec       	ldi	r24, 0xC8	; 200
+     fd0:	91 e0       	ldi	r25, 0x01	; 1
      fd2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      fd6:	80 ec       	ldi	r24, 0xC0	; 192
      fd8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-     fdc:	8f e5       	ldi	r24, 0x5F	; 95
-     fde:	92 e0       	ldi	r25, 0x02	; 2
+     fdc:	83 ed       	ldi	r24, 0xD3	; 211
+     fde:	91 e0       	ldi	r25, 0x01	; 1
      fe0:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
      fe4:	2f ef       	ldi	r18, 0xFF	; 255
      fe6:	8b e7       	ldi	r24, 0x7B	; 123
@@ -2015,13 +2015,13 @@ char getNumPendecias(){
      ffa:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
      ffe:	80 e8       	ldi	r24, 0x80	; 128
     1000:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1004:	84 e5       	ldi	r24, 0x54	; 84
-    1006:	92 e0       	ldi	r25, 0x02	; 2
+    1004:	88 ec       	ldi	r24, 0xC8	; 200
+    1006:	91 e0       	ldi	r25, 0x01	; 1
     1008:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     100c:	80 ec       	ldi	r24, 0xC0	; 192
     100e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1012:	8f e6       	ldi	r24, 0x6F	; 111
-    1014:	92 e0       	ldi	r25, 0x02	; 2
+    1012:	83 ee       	ldi	r24, 0xE3	; 227
+    1014:	91 e0       	ldi	r25, 0x01	; 1
     1016:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     101a:	2f ef       	ldi	r18, 0xFF	; 255
     101c:	8b e7       	ldi	r24, 0x7B	; 123
@@ -2039,13 +2039,13 @@ char getNumPendecias(){
     1030:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1034:	80 e8       	ldi	r24, 0x80	; 128
     1036:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    103a:	84 e5       	ldi	r24, 0x54	; 84
-    103c:	92 e0       	ldi	r25, 0x02	; 2
+    103a:	88 ec       	ldi	r24, 0xC8	; 200
+    103c:	91 e0       	ldi	r25, 0x01	; 1
     103e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1042:	80 ec       	ldi	r24, 0xC0	; 192
     1044:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1048:	8c e7       	ldi	r24, 0x7C	; 124
-    104a:	92 e0       	ldi	r25, 0x02	; 2
+    1048:	80 ef       	ldi	r24, 0xF0	; 240
+    104a:	91 e0       	ldi	r25, 0x01	; 1
     104c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1050:	2f ef       	ldi	r18, 0xFF	; 255
     1052:	8b e7       	ldi	r24, 0x7B	; 123
@@ -2071,7 +2071,7 @@ char getNumPendecias(){
     1076:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     107a:	82 e0       	ldi	r24, 0x02	; 2
     107c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1080:	8c e8       	ldi	r24, 0x8C	; 140
+    1080:	80 e0       	ldi	r24, 0x00	; 0
     1082:	92 e0       	ldi	r25, 0x02	; 2
     1084:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1088:	c7 01       	movw	r24, r14
@@ -2086,9 +2086,9 @@ char getNumPendecias(){
     109c:	77 1f       	adc	r23, r23
     109e:	66 0f       	add	r22, r22
     10a0:	77 1f       	adc	r23, r23
-    10a2:	6e 56       	subi	r22, 0x6E	; 110
+    10a2:	6a 5f       	subi	r22, 0xFA	; 250
     10a4:	7e 4f       	sbci	r23, 0xFE	; 254
-    10a6:	8e e8       	ldi	r24, 0x8E	; 142
+    10a6:	82 e0       	ldi	r24, 0x02	; 2
     10a8:	91 e0       	ldi	r25, 0x01	; 1
     10aa:	0e 94 d4 06 	call	0xda8	; 0xda8 <validarSenha>
     10ae:	18 2f       	mov	r17, r24
@@ -2098,26 +2098,26 @@ char getNumPendecias(){
     10b6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     10ba:	80 e8       	ldi	r24, 0x80	; 128
     10bc:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    10c0:	8b e9       	ldi	r24, 0x9B	; 155
+    10c0:	8f e0       	ldi	r24, 0x0F	; 15
     10c2:	92 e0       	ldi	r25, 0x02	; 2
     10c4:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     10c8:	80 ec       	ldi	r24, 0xC0	; 192
     10ca:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     10ce:	c1 11       	cpse	r28, r1
     10d0:	05 c0       	rjmp	.+10     	; 0x10dc <login+0x78>
-    10d2:	85 ea       	ldi	r24, 0xA5	; 165
+    10d2:	89 e1       	ldi	r24, 0x19	; 25
     10d4:	92 e0       	ldi	r25, 0x02	; 2
     10d6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     10da:	0d c0       	rjmp	.+26     	; 0x10f6 <login+0x92>
     10dc:	c1 30       	cpi	r28, 0x01	; 1
     10de:	29 f4       	brne	.+10     	; 0x10ea <login+0x86>
-    10e0:	83 eb       	ldi	r24, 0xB3	; 179
+    10e0:	87 e2       	ldi	r24, 0x27	; 39
     10e2:	92 e0       	ldi	r25, 0x02	; 2
     10e4:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     10e8:	06 c0       	rjmp	.+12     	; 0x10f6 <login+0x92>
     10ea:	c2 30       	cpi	r28, 0x02	; 2
     10ec:	21 f4       	brne	.+8      	; 0x10f6 <login+0x92>
-    10ee:	8e eb       	ldi	r24, 0xBE	; 190
+    10ee:	82 e3       	ldi	r24, 0x32	; 50
     10f0:	92 e0       	ldi	r25, 0x02	; 2
     10f2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     10f6:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2153,7 +2153,7 @@ char getNumPendecias(){
     1130:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1134:	80 e8       	ldi	r24, 0x80	; 128
     1136:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    113a:	89 ec       	ldi	r24, 0xC9	; 201
+    113a:	8d e3       	ldi	r24, 0x3D	; 61
     113c:	92 e0       	ldi	r25, 0x02	; 2
     113e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1142:	80 ec       	ldi	r24, 0xC0	; 192
@@ -2165,12 +2165,12 @@ char getNumPendecias(){
     114c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1150:	80 e8       	ldi	r24, 0x80	; 128
     1152:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1156:	89 ed       	ldi	r24, 0xD9	; 217
+    1156:	8d e4       	ldi	r24, 0x4D	; 77
     1158:	92 e0       	ldi	r25, 0x02	; 2
     115a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     115e:	80 ec       	ldi	r24, 0xC0	; 192
     1160:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1164:	88 ee       	ldi	r24, 0xE8	; 232
+    1164:	8c e5       	ldi	r24, 0x5C	; 92
     1166:	92 e0       	ldi	r25, 0x02	; 2
     1168:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     116c:	08 95       	ret
@@ -2180,7 +2180,7 @@ char getNumPendecias(){
     1170:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1174:	80 e8       	ldi	r24, 0x80	; 128
     1176:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    117a:	8c ee       	ldi	r24, 0xEC	; 236
+    117a:	80 e6       	ldi	r24, 0x60	; 96
     117c:	92 e0       	ldi	r25, 0x02	; 2
     117e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1182:	80 ec       	ldi	r24, 0xC0	; 192
@@ -2192,12 +2192,12 @@ char getNumPendecias(){
     118c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1190:	80 e8       	ldi	r24, 0x80	; 128
     1192:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1196:	88 ef       	ldi	r24, 0xF8	; 248
+    1196:	8c e6       	ldi	r24, 0x6C	; 108
     1198:	92 e0       	ldi	r25, 0x02	; 2
     119a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     119e:	80 ec       	ldi	r24, 0xC0	; 192
     11a0:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    11a4:	88 ee       	ldi	r24, 0xE8	; 232
+    11a4:	8c e5       	ldi	r24, 0x5C	; 92
     11a6:	92 e0       	ldi	r25, 0x02	; 2
     11a8:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     11ac:	08 95       	ret
@@ -2207,12 +2207,12 @@ char getNumPendecias(){
     11b0:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     11b4:	80 e8       	ldi	r24, 0x80	; 128
     11b6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    11ba:	89 e0       	ldi	r24, 0x09	; 9
-    11bc:	93 e0       	ldi	r25, 0x03	; 3
+    11ba:	8d e7       	ldi	r24, 0x7D	; 125
+    11bc:	92 e0       	ldi	r25, 0x02	; 2
     11be:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     11c2:	80 ec       	ldi	r24, 0xC0	; 192
     11c4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    11c8:	88 ee       	ldi	r24, 0xE8	; 232
+    11c8:	8c e5       	ldi	r24, 0x5C	; 92
     11ca:	92 e0       	ldi	r25, 0x02	; 2
     11cc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     11d0:	08 95       	ret
@@ -2228,13 +2228,13 @@ char getNumPendecias(){
     11e4:	c1 30       	cpi	r28, 0x01	; 1
     11e6:	d1 05       	cpc	r29, r1
     11e8:	a9 f4       	brne	.+42     	; 0x1214 <tela_vendaInterna+0x42>
-    11ea:	88 e1       	ldi	r24, 0x18	; 24
-    11ec:	93 e0       	ldi	r25, 0x03	; 3
+    11ea:	8c e8       	ldi	r24, 0x8C	; 140
+    11ec:	92 e0       	ldi	r25, 0x02	; 2
     11ee:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     11f2:	80 ec       	ldi	r24, 0xC0	; 192
     11f4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    11f8:	86 e2       	ldi	r24, 0x26	; 38
-    11fa:	93 e0       	ldi	r25, 0x03	; 3
+    11f8:	8a e9       	ldi	r24, 0x9A	; 154
+    11fa:	92 e0       	ldi	r25, 0x02	; 2
     11fc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1200:	2f ef       	ldi	r18, 0xFF	; 255
     1202:	87 ea       	ldi	r24, 0xA7	; 167
@@ -2248,13 +2248,13 @@ char getNumPendecias(){
     1212:	19 c0       	rjmp	.+50     	; 0x1246 <tela_vendaInterna+0x74>
     1214:	cd 2b       	or	r28, r29
     1216:	a9 f4       	brne	.+42     	; 0x1242 <tela_vendaInterna+0x70>
-    1218:	81 e3       	ldi	r24, 0x31	; 49
-    121a:	93 e0       	ldi	r25, 0x03	; 3
+    1218:	85 ea       	ldi	r24, 0xA5	; 165
+    121a:	92 e0       	ldi	r25, 0x02	; 2
     121c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1220:	80 ec       	ldi	r24, 0xC0	; 192
     1222:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1226:	81 e4       	ldi	r24, 0x41	; 65
-    1228:	93 e0       	ldi	r25, 0x03	; 3
+    1226:	85 eb       	ldi	r24, 0xB5	; 181
+    1228:	92 e0       	ldi	r25, 0x02	; 2
     122a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     122e:	2f ef       	ldi	r18, 0xFF	; 255
     1230:	87 ea       	ldi	r24, 0xA7	; 167
@@ -2276,8 +2276,8 @@ char getNumPendecias(){
     124e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1252:	80 e8       	ldi	r24, 0x80	; 128
     1254:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1258:	82 e5       	ldi	r24, 0x52	; 82
-    125a:	93 e0       	ldi	r25, 0x03	; 3
+    1258:	86 ec       	ldi	r24, 0xC6	; 198
+    125a:	92 e0       	ldi	r25, 0x02	; 2
     125c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1260:	80 ec       	ldi	r24, 0xC0	; 192
     1262:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2306,8 +2306,8 @@ char getNumPendecias(){
     1292:	10 6c       	ori	r17, 0xC0	; 192
     1294:	81 2f       	mov	r24, r17
     1296:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    129a:	80 e1       	ldi	r24, 0x10	; 16
-    129c:	96 e0       	ldi	r25, 0x06	; 6
+    129a:	84 e8       	ldi	r24, 0x84	; 132
+    129c:	95 e0       	ldi	r25, 0x05	; 5
     129e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     12a2:	81 2f       	mov	r24, r17
     12a4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2352,8 +2352,8 @@ char getNumPendecias(){
     12f6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     12fa:	80 e8       	ldi	r24, 0x80	; 128
     12fc:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1300:	83 e6       	ldi	r24, 0x63	; 99
-    1302:	93 e0       	ldi	r25, 0x03	; 3
+    1300:	87 ed       	ldi	r24, 0xD7	; 215
+    1302:	92 e0       	ldi	r25, 0x02	; 2
     1304:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1308:	80 ec       	ldi	r24, 0xC0	; 192
     130a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2383,8 +2383,8 @@ char getNumPendecias(){
     133c:	10 6c       	ori	r17, 0xC0	; 192
     133e:	81 2f       	mov	r24, r17
     1340:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1344:	80 e1       	ldi	r24, 0x10	; 16
-    1346:	96 e0       	ldi	r25, 0x06	; 6
+    1344:	84 e8       	ldi	r24, 0x84	; 132
+    1346:	95 e0       	ldi	r25, 0x05	; 5
     1348:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     134c:	81 2f       	mov	r24, r17
     134e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2411,8 +2411,8 @@ char getNumPendecias(){
     137a:	10 6c       	ori	r17, 0xC0	; 192
     137c:	81 2f       	mov	r24, r17
     137e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1382:	8c e6       	ldi	r24, 0x6C	; 108
-    1384:	95 e0       	ldi	r25, 0x05	; 5
+    1382:	80 ee       	ldi	r24, 0xE0	; 224
+    1384:	94 e0       	ldi	r25, 0x04	; 4
     1386:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     138a:	81 2f       	mov	r24, r17
     138c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2430,8 +2430,8 @@ char getNumPendecias(){
     13a2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     13a6:	80 e8       	ldi	r24, 0x80	; 128
     13a8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    13ac:	84 e7       	ldi	r24, 0x74	; 116
-    13ae:	93 e0       	ldi	r25, 0x03	; 3
+    13ac:	88 ee       	ldi	r24, 0xE8	; 232
+    13ae:	92 e0       	ldi	r25, 0x02	; 2
     13b0:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     13b4:	80 ec       	ldi	r24, 0xC0	; 192
     13b6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2463,8 +2463,8 @@ char getNumPendecias(){
     13ec:	c0 6c       	ori	r28, 0xC0	; 192
     13ee:	8c 2f       	mov	r24, r28
     13f0:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    13f4:	80 e1       	ldi	r24, 0x10	; 16
-    13f6:	96 e0       	ldi	r25, 0x06	; 6
+    13f4:	84 e8       	ldi	r24, 0x84	; 132
+    13f6:	95 e0       	ldi	r25, 0x05	; 5
     13f8:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     13fc:	8c 2f       	mov	r24, r28
     13fe:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2512,12 +2512,12 @@ char getNumPendecias(){
     1456:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     145a:	80 e8       	ldi	r24, 0x80	; 128
     145c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1460:	86 e8       	ldi	r24, 0x86	; 134
-    1462:	93 e0       	ldi	r25, 0x03	; 3
+    1460:	8a ef       	ldi	r24, 0xFA	; 250
+    1462:	92 e0       	ldi	r25, 0x02	; 2
     1464:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1468:	80 ec       	ldi	r24, 0xC0	; 192
     146a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    146e:	82 e9       	ldi	r24, 0x92	; 146
+    146e:	86 e0       	ldi	r24, 0x06	; 6
     1470:	93 e0       	ldi	r25, 0x03	; 3
     1472:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1476:	08 95       	ret
@@ -2527,12 +2527,12 @@ char getNumPendecias(){
     147a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     147e:	80 e8       	ldi	r24, 0x80	; 128
     1480:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1484:	86 e8       	ldi	r24, 0x86	; 134
-    1486:	93 e0       	ldi	r25, 0x03	; 3
+    1484:	8a ef       	ldi	r24, 0xFA	; 250
+    1486:	92 e0       	ldi	r25, 0x02	; 2
     1488:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     148c:	80 ec       	ldi	r24, 0xC0	; 192
     148e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1492:	8f e9       	ldi	r24, 0x9F	; 159
+    1492:	83 e1       	ldi	r24, 0x13	; 19
     1494:	93 e0       	ldi	r25, 0x03	; 3
     1496:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     149a:	08 95       	ret
@@ -2542,12 +2542,12 @@ char getNumPendecias(){
     149e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     14a2:	80 e8       	ldi	r24, 0x80	; 128
     14a4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    14a8:	86 e8       	ldi	r24, 0x86	; 134
-    14aa:	93 e0       	ldi	r25, 0x03	; 3
+    14a8:	8a ef       	ldi	r24, 0xFA	; 250
+    14aa:	92 e0       	ldi	r25, 0x02	; 2
     14ac:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     14b0:	80 ec       	ldi	r24, 0xC0	; 192
     14b2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    14b6:	8f ea       	ldi	r24, 0xAF	; 175
+    14b6:	83 e2       	ldi	r24, 0x23	; 35
     14b8:	93 e0       	ldi	r25, 0x03	; 3
     14ba:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     14be:	08 95       	ret
@@ -2564,12 +2564,12 @@ char getNumPendecias(){
     14d0:	00 00       	nop
     14d2:	83 e0       	ldi	r24, 0x03	; 3
     14d4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    14d8:	8f eb       	ldi	r24, 0xBF	; 191
+    14d8:	83 e3       	ldi	r24, 0x33	; 51
     14da:	93 e0       	ldi	r25, 0x03	; 3
     14dc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     14e0:	80 ec       	ldi	r24, 0xC0	; 192
     14e2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    14e6:	8f ec       	ldi	r24, 0xCF	; 207
+    14e6:	83 e4       	ldi	r24, 0x43	; 67
     14e8:	93 e0       	ldi	r25, 0x03	; 3
     14ea:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     14ee:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2585,12 +2585,12 @@ char getNumPendecias(){
     1502:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1506:	80 e8       	ldi	r24, 0x80	; 128
     1508:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    150c:	80 ee       	ldi	r24, 0xE0	; 224
+    150c:	84 e5       	ldi	r24, 0x54	; 84
     150e:	93 e0       	ldi	r25, 0x03	; 3
     1510:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1514:	80 ec       	ldi	r24, 0xC0	; 192
     1516:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    151a:	81 ef       	ldi	r24, 0xF1	; 241
+    151a:	85 e6       	ldi	r24, 0x65	; 101
     151c:	93 e0       	ldi	r25, 0x03	; 3
     151e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1522:	08 95       	ret
@@ -2600,13 +2600,13 @@ char getNumPendecias(){
     1526:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     152a:	80 e8       	ldi	r24, 0x80	; 128
     152c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1530:	82 e0       	ldi	r24, 0x02	; 2
-    1532:	94 e0       	ldi	r25, 0x04	; 4
+    1530:	86 e7       	ldi	r24, 0x76	; 118
+    1532:	93 e0       	ldi	r25, 0x03	; 3
     1534:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1538:	80 ec       	ldi	r24, 0xC0	; 192
     153a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    153e:	83 e1       	ldi	r24, 0x13	; 19
-    1540:	94 e0       	ldi	r25, 0x04	; 4
+    153e:	87 e8       	ldi	r24, 0x87	; 135
+    1540:	93 e0       	ldi	r25, 0x03	; 3
     1542:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1546:	2f ef       	ldi	r18, 0xFF	; 255
     1548:	8d e3       	ldi	r24, 0x3D	; 61
@@ -2624,13 +2624,13 @@ char getNumPendecias(){
     155c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1560:	80 e8       	ldi	r24, 0x80	; 128
     1562:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1566:	82 e2       	ldi	r24, 0x22	; 34
-    1568:	94 e0       	ldi	r25, 0x04	; 4
+    1566:	86 e9       	ldi	r24, 0x96	; 150
+    1568:	93 e0       	ldi	r25, 0x03	; 3
     156a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     156e:	80 ec       	ldi	r24, 0xC0	; 192
     1570:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1574:	82 e3       	ldi	r24, 0x32	; 50
-    1576:	94 e0       	ldi	r25, 0x04	; 4
+    1574:	86 ea       	ldi	r24, 0xA6	; 166
+    1576:	93 e0       	ldi	r25, 0x03	; 3
     1578:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     157c:	08 95       	ret
 
@@ -2662,13 +2662,13 @@ char getNumPendecias(){
     15ae:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     15b2:	80 e8       	ldi	r24, 0x80	; 128
     15b4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    15b8:	81 e4       	ldi	r24, 0x41	; 65
-    15ba:	94 e0       	ldi	r25, 0x04	; 4
+    15b8:	85 eb       	ldi	r24, 0xB5	; 181
+    15ba:	93 e0       	ldi	r25, 0x03	; 3
     15bc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     15c0:	80 ec       	ldi	r24, 0xC0	; 192
     15c2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    15c6:	8b e4       	ldi	r24, 0x4B	; 75
-    15c8:	94 e0       	ldi	r25, 0x04	; 4
+    15c6:	8f eb       	ldi	r24, 0xBF	; 191
+    15c8:	93 e0       	ldi	r25, 0x03	; 3
     15ca:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     15ce:	2f ef       	ldi	r18, 0xFF	; 255
     15d0:	8d e3       	ldi	r24, 0x3D	; 61
@@ -2683,13 +2683,13 @@ char getNumPendecias(){
     15e2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     15e6:	80 e8       	ldi	r24, 0x80	; 128
     15e8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    15ec:	88 e5       	ldi	r24, 0x58	; 88
-    15ee:	94 e0       	ldi	r25, 0x04	; 4
+    15ec:	8c ec       	ldi	r24, 0xCC	; 204
+    15ee:	93 e0       	ldi	r25, 0x03	; 3
     15f0:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     15f4:	80 ec       	ldi	r24, 0xC0	; 192
     15f6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    15fa:	86 e6       	ldi	r24, 0x66	; 102
-    15fc:	94 e0       	ldi	r25, 0x04	; 4
+    15fa:	8a ed       	ldi	r24, 0xDA	; 218
+    15fc:	93 e0       	ldi	r25, 0x03	; 3
     15fe:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1602:	08 95       	ret
 
@@ -2698,13 +2698,13 @@ char getNumPendecias(){
     1606:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     160a:	80 e8       	ldi	r24, 0x80	; 128
     160c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1610:	81 e4       	ldi	r24, 0x41	; 65
-    1612:	94 e0       	ldi	r25, 0x04	; 4
+    1610:	85 eb       	ldi	r24, 0xB5	; 181
+    1612:	93 e0       	ldi	r25, 0x03	; 3
     1614:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1618:	80 ec       	ldi	r24, 0xC0	; 192
     161a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    161e:	8d e6       	ldi	r24, 0x6D	; 109
-    1620:	94 e0       	ldi	r25, 0x04	; 4
+    161e:	81 ee       	ldi	r24, 0xE1	; 225
+    1620:	93 e0       	ldi	r25, 0x03	; 3
     1622:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1626:	2f ef       	ldi	r18, 0xFF	; 255
     1628:	8d e3       	ldi	r24, 0x3D	; 61
@@ -2719,13 +2719,13 @@ char getNumPendecias(){
     163a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     163e:	80 e8       	ldi	r24, 0x80	; 128
     1640:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1644:	88 e5       	ldi	r24, 0x58	; 88
-    1646:	94 e0       	ldi	r25, 0x04	; 4
+    1644:	8c ec       	ldi	r24, 0xCC	; 204
+    1646:	93 e0       	ldi	r25, 0x03	; 3
     1648:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     164c:	80 ec       	ldi	r24, 0xC0	; 192
     164e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1652:	8a e7       	ldi	r24, 0x7A	; 122
-    1654:	94 e0       	ldi	r25, 0x04	; 4
+    1652:	8e ee       	ldi	r24, 0xEE	; 238
+    1654:	93 e0       	ldi	r25, 0x03	; 3
     1656:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     165a:	08 95       	ret
 
@@ -2734,13 +2734,13 @@ char getNumPendecias(){
     165e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1662:	80 e8       	ldi	r24, 0x80	; 128
     1664:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1668:	81 e8       	ldi	r24, 0x81	; 129
-    166a:	94 e0       	ldi	r25, 0x04	; 4
+    1668:	85 ef       	ldi	r24, 0xF5	; 245
+    166a:	93 e0       	ldi	r25, 0x03	; 3
     166c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1670:	80 ec       	ldi	r24, 0xC0	; 192
     1672:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1676:	8a e8       	ldi	r24, 0x8A	; 138
-    1678:	94 e0       	ldi	r25, 0x04	; 4
+    1676:	8e ef       	ldi	r24, 0xFE	; 254
+    1678:	93 e0       	ldi	r25, 0x03	; 3
     167a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     167e:	2f ef       	ldi	r18, 0xFF	; 255
     1680:	83 ed       	ldi	r24, 0xD3	; 211
@@ -2758,12 +2758,12 @@ char getNumPendecias(){
     1694:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1698:	80 e8       	ldi	r24, 0x80	; 128
     169a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    169e:	85 e9       	ldi	r24, 0x95	; 149
+    169e:	89 e0       	ldi	r24, 0x09	; 9
     16a0:	94 e0       	ldi	r25, 0x04	; 4
     16a2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     16a6:	80 ec       	ldi	r24, 0xC0	; 192
     16a8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    16ac:	84 ea       	ldi	r24, 0xA4	; 164
+    16ac:	88 e1       	ldi	r24, 0x18	; 24
     16ae:	94 e0       	ldi	r25, 0x04	; 4
     16b0:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     16b4:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2784,7 +2784,7 @@ char getNumPendecias(){
     16ce:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     16d2:	80 e8       	ldi	r24, 0x80	; 128
     16d4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    16d8:	84 eb       	ldi	r24, 0xB4	; 180
+    16d8:	88 e2       	ldi	r24, 0x28	; 40
     16da:	94 e0       	ldi	r25, 0x04	; 4
     16dc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     16e0:	80 e3       	ldi	r24, 0x30	; 48
@@ -2792,7 +2792,7 @@ char getNumPendecias(){
     16e4:	0e 94 08 06 	call	0xc10	; 0xc10 <writeCharacter>
     16e8:	80 ec       	ldi	r24, 0xC0	; 192
     16ea:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    16ee:	8e eb       	ldi	r24, 0xBE	; 190
+    16ee:	82 e3       	ldi	r24, 0x32	; 50
     16f0:	94 e0       	ldi	r25, 0x04	; 4
     16f2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     16f6:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2812,12 +2812,12 @@ char getNumPendecias(){
     170e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1712:	80 e8       	ldi	r24, 0x80	; 128
     1714:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1718:	8b ec       	ldi	r24, 0xCB	; 203
+    1718:	8f e3       	ldi	r24, 0x3F	; 63
     171a:	94 e0       	ldi	r25, 0x04	; 4
     171c:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1720:	80 ec       	ldi	r24, 0xC0	; 192
     1722:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1726:	83 ed       	ldi	r24, 0xD3	; 211
+    1726:	87 e4       	ldi	r24, 0x47	; 71
     1728:	94 e0       	ldi	r25, 0x04	; 4
     172a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     172e:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2836,12 +2836,12 @@ char getNumPendecias(){
     1744:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1748:	80 e8       	ldi	r24, 0x80	; 128
     174a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    174e:	8e ed       	ldi	r24, 0xDE	; 222
+    174e:	82 e5       	ldi	r24, 0x52	; 82
     1750:	94 e0       	ldi	r25, 0x04	; 4
     1752:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1756:	80 ec       	ldi	r24, 0xC0	; 192
     1758:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    175c:	85 ee       	ldi	r24, 0xE5	; 229
+    175c:	89 e5       	ldi	r24, 0x59	; 89
     175e:	94 e0       	ldi	r25, 0x04	; 4
     1760:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1764:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2860,12 +2860,12 @@ char getNumPendecias(){
     177a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     177e:	80 e8       	ldi	r24, 0x80	; 128
     1780:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1784:	8e ee       	ldi	r24, 0xEE	; 238
+    1784:	82 e6       	ldi	r24, 0x62	; 98
     1786:	94 e0       	ldi	r25, 0x04	; 4
     1788:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     178c:	80 ec       	ldi	r24, 0xC0	; 192
     178e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1792:	87 ef       	ldi	r24, 0xF7	; 247
+    1792:	8b e6       	ldi	r24, 0x6B	; 107
     1794:	94 e0       	ldi	r25, 0x04	; 4
     1796:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     179a:	2f ef       	ldi	r18, 0xFF	; 255
@@ -2884,13 +2884,13 @@ char getNumPendecias(){
     17b0:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     17b4:	80 e8       	ldi	r24, 0x80	; 128
     17b6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    17ba:	86 e0       	ldi	r24, 0x06	; 6
-    17bc:	95 e0       	ldi	r25, 0x05	; 5
+    17ba:	8a e7       	ldi	r24, 0x7A	; 122
+    17bc:	94 e0       	ldi	r25, 0x04	; 4
     17be:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     17c2:	80 ec       	ldi	r24, 0xC0	; 192
     17c4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    17c8:	81 e1       	ldi	r24, 0x11	; 17
-    17ca:	95 e0       	ldi	r25, 0x05	; 5
+    17c8:	85 e8       	ldi	r24, 0x85	; 133
+    17ca:	94 e0       	ldi	r25, 0x04	; 4
     17cc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     17d0:	2f ef       	ldi	r18, 0xFF	; 255
     17d2:	83 ed       	ldi	r24, 0xD3	; 211
@@ -2908,13 +2908,13 @@ char getNumPendecias(){
     17e6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     17ea:	80 e8       	ldi	r24, 0x80	; 128
     17ec:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    17f0:	89 e1       	ldi	r24, 0x19	; 25
-    17f2:	95 e0       	ldi	r25, 0x05	; 5
+    17f0:	8d e8       	ldi	r24, 0x8D	; 141
+    17f2:	94 e0       	ldi	r25, 0x04	; 4
     17f4:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     17f8:	80 ec       	ldi	r24, 0xC0	; 192
     17fa:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    17fe:	8a e2       	ldi	r24, 0x2A	; 42
-    1800:	95 e0       	ldi	r25, 0x05	; 5
+    17fe:	8e e9       	ldi	r24, 0x9E	; 158
+    1800:	94 e0       	ldi	r25, 0x04	; 4
     1802:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1806:	2f ef       	ldi	r18, 0xFF	; 255
     1808:	83 ed       	ldi	r24, 0xD3	; 211
@@ -2932,13 +2932,13 @@ char getNumPendecias(){
     181c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1820:	80 e8       	ldi	r24, 0x80	; 128
     1822:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1826:	88 e3       	ldi	r24, 0x38	; 56
-    1828:	95 e0       	ldi	r25, 0x05	; 5
+    1826:	8c ea       	ldi	r24, 0xAC	; 172
+    1828:	94 e0       	ldi	r25, 0x04	; 4
     182a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     182e:	80 ec       	ldi	r24, 0xC0	; 192
     1830:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1834:	89 e4       	ldi	r24, 0x49	; 73
-    1836:	95 e0       	ldi	r25, 0x05	; 5
+    1834:	8d eb       	ldi	r24, 0xBD	; 189
+    1836:	94 e0       	ldi	r25, 0x04	; 4
     1838:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     183c:	2f ef       	ldi	r18, 0xFF	; 255
     183e:	87 ea       	ldi	r24, 0xA7	; 167
@@ -2956,8 +2956,8 @@ char getNumPendecias(){
     1852:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1856:	80 e8       	ldi	r24, 0x80	; 128
     1858:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    185c:	88 e5       	ldi	r24, 0x58	; 88
-    185e:	95 e0       	ldi	r25, 0x05	; 5
+    185c:	8c ec       	ldi	r24, 0xCC	; 204
+    185e:	94 e0       	ldi	r25, 0x04	; 4
     1860:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1864:	85 e8       	ldi	r24, 0x85	; 133
     1866:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -2965,21 +2965,21 @@ char getNumPendecias(){
     186e:	83 ef       	ldi	r24, 0xF3	; 243
     1870:	96 e0       	ldi	r25, 0x06	; 6
     1872:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
-    1876:	8f e5       	ldi	r24, 0x5F	; 95
-    1878:	95 e0       	ldi	r25, 0x05	; 5
+    1876:	83 ed       	ldi	r24, 0xD3	; 211
+    1878:	94 e0       	ldi	r25, 0x04	; 4
     187a:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     187e:	80 ec       	ldi	r24, 0xC0	; 192
     1880:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1884:	83 e6       	ldi	r24, 0x63	; 99
-    1886:	95 e0       	ldi	r25, 0x05	; 5
+    1884:	87 ed       	ldi	r24, 0xD7	; 215
+    1886:	94 e0       	ldi	r25, 0x04	; 4
     1888:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     188c:	85 ec       	ldi	r24, 0xC5	; 197
     188e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1892:	8c ef       	ldi	r24, 0xFC	; 252
     1894:	96 e0       	ldi	r25, 0x06	; 6
     1896:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
-    189a:	8a e6       	ldi	r24, 0x6A	; 106
-    189c:	95 e0       	ldi	r25, 0x05	; 5
+    189a:	8e ed       	ldi	r24, 0xDE	; 222
+    189c:	94 e0       	ldi	r25, 0x04	; 4
     189e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     18a2:	08 95       	ret
 
@@ -2988,13 +2988,13 @@ char getNumPendecias(){
     18a6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     18aa:	80 e8       	ldi	r24, 0x80	; 128
     18ac:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    18b0:	8e e6       	ldi	r24, 0x6E	; 110
-    18b2:	95 e0       	ldi	r25, 0x05	; 5
+    18b0:	82 ee       	ldi	r24, 0xE2	; 226
+    18b2:	94 e0       	ldi	r25, 0x04	; 4
     18b4:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     18b8:	80 ec       	ldi	r24, 0xC0	; 192
     18ba:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    18be:	86 e7       	ldi	r24, 0x76	; 118
-    18c0:	95 e0       	ldi	r25, 0x05	; 5
+    18be:	8a ee       	ldi	r24, 0xEA	; 234
+    18c0:	94 e0       	ldi	r25, 0x04	; 4
     18c2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     18c6:	2f ef       	ldi	r18, 0xFF	; 255
     18c8:	87 ea       	ldi	r24, 0xA7	; 167
@@ -3492,7 +3492,7 @@ char getNumPendecias(){
     1cc8:	8b 83       	std	Y+3, r24	; 0x03
     1cca:	8c 83       	std	Y+4, r24	; 0x04
     1ccc:	86 e0       	ldi	r24, 0x06	; 6
-    1cce:	e0 ea       	ldi	r30, 0xA0	; 160
+    1cce:	e4 e1       	ldi	r30, 0x14	; 20
     1cd0:	f1 e0       	ldi	r31, 0x01	; 1
     1cd2:	de 01       	movw	r26, r28
     1cd4:	15 96       	adiw	r26, 0x05	; 5
@@ -3501,7 +3501,7 @@ char getNumPendecias(){
     1cda:	8a 95       	dec	r24
     1cdc:	e1 f7       	brne	.-8      	; 0x1cd6 <estorno+0x2c>
     1cde:	85 e0       	ldi	r24, 0x05	; 5
-    1ce0:	e6 ea       	ldi	r30, 0xA6	; 166
+    1ce0:	ea e1       	ldi	r30, 0x1A	; 26
     1ce2:	f1 e0       	ldi	r31, 0x01	; 1
     1ce4:	de 01       	movw	r26, r28
     1ce6:	1b 96       	adiw	r26, 0x0b	; 11
@@ -3510,7 +3510,7 @@ char getNumPendecias(){
     1cec:	8a 95       	dec	r24
     1cee:	e1 f7       	brne	.-8      	; 0x1ce8 <estorno+0x3e>
     1cf0:	8c e0       	ldi	r24, 0x0C	; 12
-    1cf2:	eb ea       	ldi	r30, 0xAB	; 171
+    1cf2:	ef e1       	ldi	r30, 0x1F	; 31
     1cf4:	f1 e0       	ldi	r31, 0x01	; 1
     1cf6:	de 01       	movw	r26, r28
     1cf8:	50 96       	adiw	r26, 0x10	; 16
@@ -3771,7 +3771,7 @@ char getNumPendecias(){
     1f18:	0f be       	out	0x3f, r0	; 63
     1f1a:	cd bf       	out	0x3d, r28	; 61
     1f1c:	86 e0       	ldi	r24, 0x06	; 6
-    1f1e:	e0 ea       	ldi	r30, 0xA0	; 160
+    1f1e:	e4 e1       	ldi	r30, 0x14	; 20
     1f20:	f1 e0       	ldi	r31, 0x01	; 1
     1f22:	de 01       	movw	r26, r28
     1f24:	11 96       	adiw	r26, 0x01	; 1
@@ -3780,7 +3780,7 @@ char getNumPendecias(){
     1f2a:	8a 95       	dec	r24
     1f2c:	e1 f7       	brne	.-8      	; 0x1f26 <venda_avista+0x28>
     1f2e:	86 e0       	ldi	r24, 0x06	; 6
-    1f30:	e0 ea       	ldi	r30, 0xA0	; 160
+    1f30:	e4 e1       	ldi	r30, 0x14	; 20
     1f32:	f1 e0       	ldi	r31, 0x01	; 1
     1f34:	de 01       	movw	r26, r28
     1f36:	17 96       	adiw	r26, 0x07	; 7
@@ -3789,7 +3789,7 @@ char getNumPendecias(){
     1f3c:	8a 95       	dec	r24
     1f3e:	e1 f7       	brne	.-8      	; 0x1f38 <venda_avista+0x3a>
     1f40:	85 e0       	ldi	r24, 0x05	; 5
-    1f42:	e6 ea       	ldi	r30, 0xA6	; 166
+    1f42:	ea e1       	ldi	r30, 0x1A	; 26
     1f44:	f1 e0       	ldi	r31, 0x01	; 1
     1f46:	de 01       	movw	r26, r28
     1f48:	1d 96       	adiw	r26, 0x0d	; 13
@@ -3842,12 +3842,12 @@ char getNumPendecias(){
     1fae:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1fb2:	80 e8       	ldi	r24, 0x80	; 128
     1fb4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1fb8:	87 e8       	ldi	r24, 0x87	; 135
-    1fba:	95 e0       	ldi	r25, 0x05	; 5
+    1fb8:	8b ef       	ldi	r24, 0xFB	; 251
+    1fba:	94 e0       	ldi	r25, 0x04	; 4
     1fbc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1fc0:	80 ec       	ldi	r24, 0xC0	; 192
     1fc2:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1fc6:	81 e9       	ldi	r24, 0x91	; 145
+    1fc6:	85 e0       	ldi	r24, 0x05	; 5
     1fc8:	95 e0       	ldi	r25, 0x05	; 5
     1fca:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1fce:	2f ef       	ldi	r18, 0xFF	; 255
@@ -3866,12 +3866,12 @@ char getNumPendecias(){
     1fe4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     1fe8:	80 e8       	ldi	r24, 0x80	; 128
     1fea:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1fee:	80 ea       	ldi	r24, 0xA0	; 160
+    1fee:	84 e1       	ldi	r24, 0x14	; 20
     1ff0:	95 e0       	ldi	r25, 0x05	; 5
     1ff2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     1ff6:	80 ec       	ldi	r24, 0xC0	; 192
     1ff8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    1ffc:	8a ea       	ldi	r24, 0xAA	; 170
+    1ffc:	8e e1       	ldi	r24, 0x1E	; 30
     1ffe:	95 e0       	ldi	r25, 0x05	; 5
     2000:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     2004:	2f ef       	ldi	r18, 0xFF	; 255
@@ -3890,12 +3890,12 @@ char getNumPendecias(){
     201a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
     201e:	80 e8       	ldi	r24, 0x80	; 128
     2020:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    2024:	86 eb       	ldi	r24, 0xB6	; 182
+    2024:	8a e2       	ldi	r24, 0x2A	; 42
     2026:	95 e0       	ldi	r25, 0x05	; 5
     2028:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     202c:	80 ec       	ldi	r24, 0xC0	; 192
     202e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    2032:	84 ec       	ldi	r24, 0xC4	; 196
+    2032:	88 e3       	ldi	r24, 0x38	; 56
     2034:	95 e0       	ldi	r25, 0x05	; 5
     2036:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     203a:	2f ef       	ldi	r18, 0xFF	; 255
@@ -3914,19 +3914,19 @@ char getNumPendecias(){
     2050:	80 81       	ld	r24, Z
     2052:	90 e0       	ldi	r25, 0x00	; 0
     2054:	fc 01       	movw	r30, r24
-    2056:	e4 57       	subi	r30, 0x74	; 116
-    2058:	fe 4f       	sbci	r31, 0xFE	; 254
+    2056:	e0 50       	subi	r30, 0x00	; 0
+    2058:	ff 4f       	sbci	r31, 0xFF	; 255
     205a:	20 81       	ld	r18, Z
     205c:	21 30       	cpi	r18, 0x01	; 1
     205e:	29 f4       	brne	.+10     	; 0x206a <mudarStatusOper+0x1c>
     2060:	fc 01       	movw	r30, r24
-    2062:	e4 57       	subi	r30, 0x74	; 116
-    2064:	fe 4f       	sbci	r31, 0xFE	; 254
+    2062:	e0 50       	subi	r30, 0x00	; 0
+    2064:	ff 4f       	sbci	r31, 0xFF	; 255
     2066:	10 82       	st	Z, r1
     2068:	05 c0       	rjmp	.+10     	; 0x2074 <mudarStatusOper+0x26>
     206a:	fc 01       	movw	r30, r24
-    206c:	e4 57       	subi	r30, 0x74	; 116
-    206e:	fe 4f       	sbci	r31, 0xFE	; 254
+    206c:	e0 50       	subi	r30, 0x00	; 0
+    206e:	ff 4f       	sbci	r31, 0xFF	; 255
     2070:	21 e0       	ldi	r18, 0x01	; 1
     2072:	20 83       	st	Z, r18
     2074:	0e 94 2e 0b 	call	0x165c	; 0x165c <tela_operacaoConcluida>
@@ -3935,32 +3935,32 @@ char getNumPendecias(){
 0000207a <tela_status_oper>:
     207a:	83 e0       	ldi	r24, 0x03	; 3
     207c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    2080:	8f ec       	ldi	r24, 0xCF	; 207
+    2080:	83 e4       	ldi	r24, 0x43	; 67
     2082:	95 e0       	ldi	r25, 0x05	; 5
     2084:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
-    2088:	80 91 8c 01 	lds	r24, 0x018C	; 0x80018c <statusOperadores>
+    2088:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
     208c:	81 30       	cpi	r24, 0x01	; 1
     208e:	29 f4       	brne	.+10     	; 0x209a <tela_status_oper+0x20>
-    2090:	86 ed       	ldi	r24, 0xD6	; 214
+    2090:	8a e4       	ldi	r24, 0x4A	; 74
     2092:	95 e0       	ldi	r25, 0x05	; 5
     2094:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     2098:	04 c0       	rjmp	.+8      	; 0x20a2 <tela_status_oper+0x28>
-    209a:	81 ee       	ldi	r24, 0xE1	; 225
+    209a:	85 e5       	ldi	r24, 0x55	; 85
     209c:	95 e0       	ldi	r25, 0x05	; 5
     209e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     20a2:	80 ec       	ldi	r24, 0xC0	; 192
     20a4:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    20a8:	8c ee       	ldi	r24, 0xEC	; 236
+    20a8:	80 e6       	ldi	r24, 0x60	; 96
     20aa:	95 e0       	ldi	r25, 0x05	; 5
     20ac:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
-    20b0:	80 91 8d 01 	lds	r24, 0x018D	; 0x80018d <statusOperadores+0x1>
+    20b0:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
     20b4:	81 30       	cpi	r24, 0x01	; 1
     20b6:	29 f4       	brne	.+10     	; 0x20c2 <tela_status_oper+0x48>
-    20b8:	83 ef       	ldi	r24, 0xF3	; 243
+    20b8:	87 e6       	ldi	r24, 0x67	; 103
     20ba:	95 e0       	ldi	r25, 0x05	; 5
     20bc:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     20c0:	08 95       	ret
-    20c2:	8e ef       	ldi	r24, 0xFE	; 254
+    20c2:	82 e7       	ldi	r24, 0x72	; 114
     20c4:	95 e0       	ldi	r25, 0x05	; 5
     20c6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     20ca:	08 95       	ret
@@ -3968,8 +3968,8 @@ char getNumPendecias(){
 000020cc <getOperStatus>:
     20cc:	e8 2f       	mov	r30, r24
     20ce:	f0 e0       	ldi	r31, 0x00	; 0
-    20d0:	e5 57       	subi	r30, 0x75	; 117
-    20d2:	fe 4f       	sbci	r31, 0xFE	; 254
+    20d0:	e1 50       	subi	r30, 0x01	; 1
+    20d2:	ff 4f       	sbci	r31, 0xFF	; 255
     20d4:	80 81       	ld	r24, Z
     20d6:	08 95       	ret
 
@@ -3987,8 +3987,8 @@ char getNumPendecias(){
     20ec:	5c 01       	movw	r10, r24
     20ee:	6b 01       	movw	r12, r22
     20f0:	7a 01       	movw	r14, r20
-    20f2:	89 e0       	ldi	r24, 0x09	; 9
-    20f4:	96 e0       	ldi	r25, 0x06	; 6
+    20f2:	8d e7       	ldi	r24, 0x7D	; 125
+    20f4:	95 e0       	ldi	r25, 0x05	; 5
     20f6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     20fa:	86 ec       	ldi	r24, 0xC6	; 198
     20fc:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4036,8 +4036,8 @@ char getNumPendecias(){
     2156:	c0 64       	ori	r28, 0x40	; 64
     2158:	8c 2f       	mov	r24, r28
     215a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    215e:	80 e1       	ldi	r24, 0x10	; 16
-    2160:	96 e0       	ldi	r25, 0x06	; 6
+    215e:	84 e8       	ldi	r24, 0x84	; 132
+    2160:	95 e0       	ldi	r25, 0x05	; 5
     2162:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     2166:	8c 2f       	mov	r24, r28
     2168:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4093,8 +4093,8 @@ char getNumPendecias(){
     21d4:	c0 64       	ori	r28, 0x40	; 64
     21d6:	8c 2f       	mov	r24, r28
     21d8:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    21dc:	80 e1       	ldi	r24, 0x10	; 16
-    21de:	96 e0       	ldi	r25, 0x06	; 6
+    21dc:	84 e8       	ldi	r24, 0x84	; 132
+    21de:	95 e0       	ldi	r25, 0x05	; 5
     21e0:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     21e4:	8c 2f       	mov	r24, r28
     21e6:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4146,8 +4146,8 @@ char getNumPendecias(){
     224a:	c0 64       	ori	r28, 0x40	; 64
     224c:	8c 2f       	mov	r24, r28
     224e:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    2252:	80 e1       	ldi	r24, 0x10	; 16
-    2254:	96 e0       	ldi	r25, 0x06	; 6
+    2252:	84 e8       	ldi	r24, 0x84	; 132
+    2254:	95 e0       	ldi	r25, 0x05	; 5
     2256:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     225a:	8c 2f       	mov	r24, r28
     225c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4215,8 +4215,8 @@ char getNumPendecias(){
     22de:	5c 01       	movw	r10, r24
     22e0:	6b 01       	movw	r12, r22
     22e2:	7a 01       	movw	r14, r20
-    22e4:	82 e1       	ldi	r24, 0x12	; 18
-    22e6:	96 e0       	ldi	r25, 0x06	; 6
+    22e4:	86 e8       	ldi	r24, 0x86	; 134
+    22e6:	95 e0       	ldi	r25, 0x05	; 5
     22e8:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     22ec:	86 ec       	ldi	r24, 0xC6	; 198
     22ee:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4264,8 +4264,8 @@ char getNumPendecias(){
     2348:	c0 64       	ori	r28, 0x40	; 64
     234a:	8c 2f       	mov	r24, r28
     234c:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    2350:	80 e1       	ldi	r24, 0x10	; 16
-    2352:	96 e0       	ldi	r25, 0x06	; 6
+    2350:	84 e8       	ldi	r24, 0x84	; 132
+    2352:	95 e0       	ldi	r25, 0x05	; 5
     2354:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     2358:	8c 2f       	mov	r24, r28
     235a:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4323,8 +4323,8 @@ char getNumPendecias(){
     23ca:	c0 64       	ori	r28, 0x40	; 64
     23cc:	8c 2f       	mov	r24, r28
     23ce:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    23d2:	80 e1       	ldi	r24, 0x10	; 16
-    23d4:	96 e0       	ldi	r25, 0x06	; 6
+    23d2:	84 e8       	ldi	r24, 0x84	; 132
+    23d4:	95 e0       	ldi	r25, 0x05	; 5
     23d6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     23da:	8c 2f       	mov	r24, r28
     23dc:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4377,8 +4377,8 @@ char getNumPendecias(){
     2442:	c0 64       	ori	r28, 0x40	; 64
     2444:	8c 2f       	mov	r24, r28
     2446:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
-    244a:	80 e1       	ldi	r24, 0x10	; 16
-    244c:	96 e0       	ldi	r25, 0x06	; 6
+    244a:	84 e8       	ldi	r24, 0x84	; 132
+    244c:	95 e0       	ldi	r25, 0x05	; 5
     244e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     2452:	8c 2f       	mov	r24, r28
     2454:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
@@ -4437,8 +4437,8 @@ char getNumPendecias(){
     24c4:	a0 e0       	ldi	r26, 0x00	; 0
     24c6:	b0 e0       	ldi	r27, 0x00	; 0
     24c8:	17 c0       	rjmp	.+46     	; 0x24f8 <addPagamentoAgendado+0x36>
-    24ca:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__data_start>
-    24ce:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__data_start+0x1>
+    24ca:	20 91 b8 05 	lds	r18, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    24ce:	30 91 b9 05 	lds	r19, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     24d2:	fc 01       	movw	r30, r24
     24d4:	ea 0f       	add	r30, r26
     24d6:	fb 1f       	adc	r31, r27
@@ -4450,8 +4450,8 @@ char getNumPendecias(){
     24e2:	f3 1f       	adc	r31, r19
     24e4:	ee 0f       	add	r30, r30
     24e6:	ff 1f       	adc	r31, r31
-    24e8:	e8 59       	subi	r30, 0x98	; 152
-    24ea:	fe 4f       	sbci	r31, 0xFE	; 254
+    24e8:	ee 59       	subi	r30, 0x9E	; 158
+    24ea:	f9 4f       	sbci	r31, 0xF9	; 249
     24ec:	ea 0f       	add	r30, r26
     24ee:	fb 1f       	adc	r31, r27
     24f0:	20 ed       	ldi	r18, 0xD0	; 208
@@ -4464,8 +4464,8 @@ char getNumPendecias(){
     24fe:	20 e0       	ldi	r18, 0x00	; 0
     2500:	30 e0       	ldi	r19, 0x00	; 0
     2502:	18 c0       	rjmp	.+48     	; 0x2534 <addPagamentoAgendado+0x72>
-    2504:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-    2508:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+    2504:	80 91 b8 05 	lds	r24, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    2508:	90 91 b9 05 	lds	r25, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     250c:	fb 01       	movw	r30, r22
     250e:	e2 0f       	add	r30, r18
     2510:	f3 1f       	adc	r31, r19
@@ -4477,8 +4477,8 @@ char getNumPendecias(){
     251c:	ff 1f       	adc	r31, r31
     251e:	e8 0f       	add	r30, r24
     2520:	f9 1f       	adc	r31, r25
-    2522:	e6 5b       	subi	r30, 0xB6	; 182
-    2524:	fe 4f       	sbci	r31, 0xFE	; 254
+    2522:	ec 5b       	subi	r30, 0xBC	; 188
+    2524:	f9 4f       	sbci	r31, 0xF9	; 249
     2526:	e2 0f       	add	r30, r18
     2528:	f3 1f       	adc	r31, r19
     252a:	80 ed       	ldi	r24, 0xD0	; 208
@@ -4492,8 +4492,8 @@ char getNumPendecias(){
     253a:	20 e0       	ldi	r18, 0x00	; 0
     253c:	30 e0       	ldi	r19, 0x00	; 0
     253e:	1a c0       	rjmp	.+52     	; 0x2574 <addPagamentoAgendado+0xb2>
-    2540:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-    2544:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+    2540:	80 91 b8 05 	lds	r24, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    2544:	90 91 b9 05 	lds	r25, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     2548:	fa 01       	movw	r30, r20
     254a:	e2 0f       	add	r30, r18
     254c:	f3 1f       	adc	r31, r19
@@ -4507,8 +4507,8 @@ char getNumPendecias(){
     255c:	ff 1f       	adc	r31, r31
     255e:	ee 0f       	add	r30, r30
     2560:	ff 1f       	adc	r31, r31
-    2562:	ee 5f       	subi	r30, 0xFE	; 254
-    2564:	fe 4f       	sbci	r31, 0xFE	; 254
+    2562:	e4 50       	subi	r30, 0x04	; 4
+    2564:	fa 4f       	sbci	r31, 0xFA	; 250
     2566:	e2 0f       	add	r30, r18
     2568:	f3 1f       	adc	r31, r19
     256a:	80 ed       	ldi	r24, 0xD0	; 208
@@ -4519,14 +4519,14 @@ char getNumPendecias(){
     2574:	2c 30       	cpi	r18, 0x0C	; 12
     2576:	31 05       	cpc	r19, r1
     2578:	1c f3       	brlt	.-58     	; 0x2540 <addPagamentoAgendado+0x7e>
-    257a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-    257e:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+    257a:	80 91 b8 05 	lds	r24, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    257e:	90 91 b9 05 	lds	r25, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     2582:	86 30       	cpi	r24, 0x06	; 6
     2584:	91 05       	cpc	r25, r1
     2586:	2c f4       	brge	.+10     	; 0x2592 <addPagamentoAgendado+0xd0>
     2588:	01 96       	adiw	r24, 0x01	; 1
-    258a:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
-    258e:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+    258a:	90 93 b9 05 	sts	0x05B9, r25	; 0x8005b9 <numPagsAgendados+0x1>
+    258e:	80 93 b8 05 	sts	0x05B8, r24	; 0x8005b8 <numPagsAgendados>
     2592:	cf 91       	pop	r28
     2594:	08 95       	ret
 
@@ -4550,7 +4550,7 @@ char getNumPendecias(){
     25b6:	0f be       	out	0x3f, r0	; 63
     25b8:	cd bf       	out	0x3d, r28	; 61
     25ba:	86 e0       	ldi	r24, 0x06	; 6
-    25bc:	e0 ea       	ldi	r30, 0xA0	; 160
+    25bc:	e4 e1       	ldi	r30, 0x14	; 20
     25be:	f1 e0       	ldi	r31, 0x01	; 1
     25c0:	de 01       	movw	r26, r28
     25c2:	11 96       	adiw	r26, 0x01	; 1
@@ -4559,7 +4559,7 @@ char getNumPendecias(){
     25c8:	8a 95       	dec	r24
     25ca:	e1 f7       	brne	.-8      	; 0x25c4 <venda_parcelada+0x2e>
     25cc:	86 e0       	ldi	r24, 0x06	; 6
-    25ce:	e0 ea       	ldi	r30, 0xA0	; 160
+    25ce:	e4 e1       	ldi	r30, 0x14	; 20
     25d0:	f1 e0       	ldi	r31, 0x01	; 1
     25d2:	de 01       	movw	r26, r28
     25d4:	17 96       	adiw	r26, 0x07	; 7
@@ -4568,7 +4568,7 @@ char getNumPendecias(){
     25da:	8a 95       	dec	r24
     25dc:	e1 f7       	brne	.-8      	; 0x25d6 <venda_parcelada+0x40>
     25de:	85 e0       	ldi	r24, 0x05	; 5
-    25e0:	e6 ea       	ldi	r30, 0xA6	; 166
+    25e0:	ea e1       	ldi	r30, 0x1A	; 26
     25e2:	f1 e0       	ldi	r31, 0x01	; 1
     25e4:	de 01       	movw	r26, r28
     25e6:	1d 96       	adiw	r26, 0x0d	; 13
@@ -4847,8 +4847,8 @@ char getNumPendecias(){
     2826:	b3 1f       	adc	r27, r19
     2828:	aa 0f       	add	r26, r26
     282a:	bb 1f       	adc	r27, r27
-    282c:	a8 59       	subi	r26, 0x98	; 152
-    282e:	be 4f       	sbci	r27, 0xFE	; 254
+    282c:	ae 59       	subi	r26, 0x9E	; 158
+    282e:	b9 4f       	sbci	r27, 0xF9	; 249
     2830:	a6 0f       	add	r26, r22
     2832:	b7 1f       	adc	r27, r23
     2834:	ac 91       	ld	r26, X
@@ -4856,8 +4856,8 @@ char getNumPendecias(){
     2838:	f3 1f       	adc	r31, r19
     283a:	ee 0f       	add	r30, r30
     283c:	ff 1f       	adc	r31, r31
-    283e:	e8 59       	subi	r30, 0x98	; 152
-    2840:	fe 4f       	sbci	r31, 0xFE	; 254
+    283e:	ee 59       	subi	r30, 0x9E	; 158
+    2840:	f9 4f       	sbci	r31, 0xF9	; 249
     2842:	e6 0f       	add	r30, r22
     2844:	f7 1f       	adc	r31, r23
     2846:	10 82       	st	Z, r1
@@ -4868,8 +4868,8 @@ char getNumPendecias(){
     2850:	f5 1f       	adc	r31, r21
     2852:	ee 0f       	add	r30, r30
     2854:	ff 1f       	adc	r31, r31
-    2856:	e8 59       	subi	r30, 0x98	; 152
-    2858:	fe 4f       	sbci	r31, 0xFE	; 254
+    2856:	ee 59       	subi	r30, 0x9E	; 158
+    2858:	f9 4f       	sbci	r31, 0xF9	; 249
     285a:	e6 0f       	add	r30, r22
     285c:	f7 1f       	adc	r31, r23
     285e:	a0 83       	st	Z, r26
@@ -4883,8 +4883,8 @@ char getNumPendecias(){
     286e:	9c f2       	brlt	.-90     	; 0x2816 <organizaPagamentos+0x8>
     2870:	4f 5f       	subi	r20, 0xFF	; 255
     2872:	5f 4f       	sbci	r21, 0xFF	; 255
-    2874:	a0 91 00 01 	lds	r26, 0x0100	; 0x800100 <__data_start>
-    2878:	b0 91 01 01 	lds	r27, 0x0101	; 0x800101 <__data_start+0x1>
+    2874:	a0 91 b8 05 	lds	r26, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    2878:	b0 91 b9 05 	lds	r27, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     287c:	bd 01       	movw	r22, r26
     287e:	61 50       	subi	r22, 0x01	; 1
     2880:	71 09       	sbc	r23, r1
@@ -4903,8 +4903,8 @@ char getNumPendecias(){
     289a:	ff 1f       	adc	r31, r31
     289c:	e2 0f       	add	r30, r18
     289e:	f3 1f       	adc	r31, r19
-    28a0:	e6 5b       	subi	r30, 0xB6	; 182
-    28a2:	fe 4f       	sbci	r31, 0xFE	; 254
+    28a0:	ec 5b       	subi	r30, 0xBC	; 188
+    28a2:	f9 4f       	sbci	r31, 0xF9	; 249
     28a4:	e4 0f       	add	r30, r20
     28a6:	f5 1f       	adc	r31, r21
     28a8:	20 81       	ld	r18, Z
@@ -4916,8 +4916,8 @@ char getNumPendecias(){
     28b4:	ff 1f       	adc	r31, r31
     28b6:	ec 0f       	add	r30, r28
     28b8:	fd 1f       	adc	r31, r29
-    28ba:	e6 5b       	subi	r30, 0xB6	; 182
-    28bc:	fe 4f       	sbci	r31, 0xFE	; 254
+    28ba:	ec 5b       	subi	r30, 0xBC	; 188
+    28bc:	f9 4f       	sbci	r31, 0xF9	; 249
     28be:	e4 0f       	add	r30, r20
     28c0:	f5 1f       	adc	r31, r21
     28c2:	20 83       	st	Z, r18
@@ -4947,8 +4947,8 @@ char getNumPendecias(){
     28f2:	dd 1f       	adc	r29, r29
     28f4:	cc 0f       	add	r28, r28
     28f6:	dd 1f       	adc	r29, r29
-    28f8:	ce 5f       	subi	r28, 0xFE	; 254
-    28fa:	de 4f       	sbci	r29, 0xFE	; 254
+    28f8:	c4 50       	subi	r28, 0x04	; 4
+    28fa:	da 4f       	sbci	r29, 0xFA	; 250
     28fc:	c4 0f       	add	r28, r20
     28fe:	d5 1f       	adc	r29, r21
     2900:	c8 81       	ld	r28, Y
@@ -4958,8 +4958,8 @@ char getNumPendecias(){
     2908:	ff 1f       	adc	r31, r31
     290a:	ee 0f       	add	r30, r30
     290c:	ff 1f       	adc	r31, r31
-    290e:	ee 5f       	subi	r30, 0xFE	; 254
-    2910:	fe 4f       	sbci	r31, 0xFE	; 254
+    290e:	e4 50       	subi	r30, 0x04	; 4
+    2910:	fa 4f       	sbci	r31, 0xFA	; 250
     2912:	e4 0f       	add	r30, r20
     2914:	f5 1f       	adc	r31, r21
     2916:	10 82       	st	Z, r1
@@ -4972,8 +4972,8 @@ char getNumPendecias(){
     2924:	ff 1f       	adc	r31, r31
     2926:	ee 0f       	add	r30, r30
     2928:	ff 1f       	adc	r31, r31
-    292a:	ee 5f       	subi	r30, 0xFE	; 254
-    292c:	fe 4f       	sbci	r31, 0xFE	; 254
+    292a:	e4 50       	subi	r30, 0x04	; 4
+    292c:	fa 4f       	sbci	r31, 0xFA	; 250
     292e:	e4 0f       	add	r30, r20
     2930:	f5 1f       	adc	r31, r21
     2932:	c0 83       	st	Z, r28
@@ -4990,8 +4990,8 @@ char getNumPendecias(){
     2948:	97 07       	cpc	r25, r23
     294a:	bc f3       	brlt	.-18     	; 0x293a <organizaPagamentos+0x12c>
     294c:	11 97       	sbiw	r26, 0x01	; 1
-    294e:	b0 93 01 01 	sts	0x0101, r27	; 0x800101 <__data_start+0x1>
-    2952:	a0 93 00 01 	sts	0x0100, r26	; 0x800100 <__data_start>
+    294e:	b0 93 b9 05 	sts	0x05B9, r27	; 0x8005b9 <numPagsAgendados+0x1>
+    2952:	a0 93 b8 05 	sts	0x05B8, r26	; 0x8005b8 <numPagsAgendados>
     2956:	df 91       	pop	r29
     2958:	cf 91       	pop	r28
     295a:	08 95       	ret
@@ -5006,8 +5006,8 @@ char getNumPendecias(){
     2968:	ff 1f       	adc	r31, r31
     296a:	ee 0f       	add	r30, r30
     296c:	ff 1f       	adc	r31, r31
-    296e:	ee 5f       	subi	r30, 0xFE	; 254
-    2970:	fe 4f       	sbci	r31, 0xFE	; 254
+    296e:	e4 50       	subi	r30, 0x04	; 4
+    2970:	fa 4f       	sbci	r31, 0xFA	; 250
     2972:	28 e0       	ldi	r18, 0x08	; 8
     2974:	20 83       	st	Z, r18
     2976:	26 81       	ldd	r18, Z+6	; 0x06
@@ -5037,14 +5037,14 @@ char getNumPendecias(){
     29a2:	88 0f       	add	r24, r24
     29a4:	99 1f       	adc	r25, r25
     29a6:	b8 01       	movw	r22, r16
-    29a8:	88 59       	subi	r24, 0x98	; 152
-    29aa:	9e 4f       	sbci	r25, 0xFE	; 254
+    29a8:	8e 59       	subi	r24, 0x9E	; 158
+    29aa:	99 4f       	sbci	r25, 0xF9	; 249
     29ac:	0e 94 ee 13 	call	0x27dc	; 0x27dc <comparaCartoes>
     29b0:	01 97       	sbiw	r24, 0x01	; 1
     29b2:	51 f0       	breq	.+20     	; 0x29c8 <removePagamentoAgendado+0x40>
     29b4:	21 96       	adiw	r28, 0x01	; 1
-    29b6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-    29ba:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+    29b6:	80 91 b8 05 	lds	r24, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    29ba:	90 91 b9 05 	lds	r25, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     29be:	c8 17       	cp	r28, r24
     29c0:	d9 07       	cpc	r29, r25
     29c2:	54 f3       	brlt	.-44     	; 0x2998 <removePagamentoAgendado+0x10>
@@ -5063,8 +5063,8 @@ char getNumPendecias(){
     29dc:	ff 1f       	adc	r31, r31
     29de:	ee 0f       	add	r30, r30
     29e0:	ff 1f       	adc	r31, r31
-    29e2:	ee 5f       	subi	r30, 0xFE	; 254
-    29e4:	fe 4f       	sbci	r31, 0xFE	; 254
+    29e2:	e4 50       	subi	r30, 0x04	; 4
+    29e4:	fa 4f       	sbci	r31, 0xFA	; 250
     29e6:	80 81       	ld	r24, Z
     29e8:	88 30       	cpi	r24, 0x08	; 8
     29ea:	31 f0       	breq	.+12     	; 0x29f8 <removePagamentoAgendado+0x70>
@@ -5082,8 +5082,8 @@ char getNumPendecias(){
     2a04:	ff 1f       	adc	r31, r31
     2a06:	ee 0f       	add	r30, r30
     2a08:	ff 1f       	adc	r31, r31
-    2a0a:	ee 5f       	subi	r30, 0xFE	; 254
-    2a0c:	fe 4f       	sbci	r31, 0xFE	; 254
+    2a0a:	e4 50       	subi	r30, 0x04	; 4
+    2a0c:	fa 4f       	sbci	r31, 0xFA	; 250
     2a0e:	86 81       	ldd	r24, Z+6	; 0x06
     2a10:	89 30       	cpi	r24, 0x09	; 9
     2a12:	49 f0       	breq	.+18     	; 0x2a26 <removePagamentoAgendado+0x9e>
@@ -5104,8 +5104,8 @@ char getNumPendecias(){
     2a32:	08 95       	ret
 
 00002a34 <existePendencia>:
-    2a34:	80 91 42 06 	lds	r24, 0x0642	; 0x800642 <__data_end>
-    2a38:	90 91 43 06 	lds	r25, 0x0643	; 0x800643 <__data_end+0x1>
+    2a34:	80 91 b6 05 	lds	r24, 0x05B6	; 0x8005b6 <__data_end>
+    2a38:	90 91 b7 05 	lds	r25, 0x05B7	; 0x8005b7 <__data_end+0x1>
     2a3c:	18 16       	cp	r1, r24
     2a3e:	19 06       	cpc	r1, r25
     2a40:	14 f4       	brge	.+4      	; 0x2a46 <existePendencia+0x12>
@@ -5125,8 +5125,8 @@ void addPendencias(short achada, char PouS){
     2a4c:	50 e0       	ldi	r21, 0x00	; 0
     2a4e:	1e c0       	rjmp	.+60     	; 0x2a8c <addPendencias+0x42>
 		cartoesP[numPendecias][i]=cartoesA[achada][i];
-    2a50:	20 91 42 06 	lds	r18, 0x0642	; 0x800642 <__data_end>
-    2a54:	30 91 43 06 	lds	r19, 0x0643	; 0x800643 <__data_end+0x1>
+    2a50:	20 91 b6 05 	lds	r18, 0x05B6	; 0x8005b6 <__data_end>
+    2a54:	30 91 b7 05 	lds	r19, 0x05B7	; 0x8005b7 <__data_end+0x1>
     2a58:	fc 01       	movw	r30, r24
     2a5a:	ee 0f       	add	r30, r30
     2a5c:	ff 1f       	adc	r31, r31
@@ -5134,8 +5134,8 @@ void addPendencias(short achada, char PouS){
     2a60:	f9 1f       	adc	r31, r25
     2a62:	ee 0f       	add	r30, r30
     2a64:	ff 1f       	adc	r31, r31
-    2a66:	e8 59       	subi	r30, 0x98	; 152
-    2a68:	fe 4f       	sbci	r31, 0xFE	; 254
+    2a66:	ee 59       	subi	r30, 0x9E	; 158
+    2a68:	f9 4f       	sbci	r31, 0xF9	; 249
     2a6a:	e4 0f       	add	r30, r20
     2a6c:	f5 1f       	adc	r31, r21
     2a6e:	70 81       	ld	r23, Z
@@ -5146,8 +5146,8 @@ void addPendencias(short achada, char PouS){
     2a78:	f3 1f       	adc	r31, r19
     2a7a:	ee 0f       	add	r30, r30
     2a7c:	ff 1f       	adc	r31, r31
-    2a7e:	ee 59       	subi	r30, 0x9E	; 158
-    2a80:	f9 4f       	sbci	r31, 0xF9	; 249
+    2a7e:	e8 52       	subi	r30, 0x28	; 40
+    2a80:	fa 4f       	sbci	r31, 0xFA	; 250
     2a82:	e4 0f       	add	r30, r20
     2a84:	f5 1f       	adc	r31, r21
     2a86:	70 83       	st	Z, r23
@@ -5169,8 +5169,8 @@ void addPendencias(short achada, char PouS){
 	
 	for(i=0;i<NUMDIGITOSVALORES;i++)
 		valParcelaP[numPendecias][i] = valParcelaA[achada][i];
-    2a98:	20 91 42 06 	lds	r18, 0x0642	; 0x800642 <__data_end>
-    2a9c:	30 91 43 06 	lds	r19, 0x0643	; 0x800643 <__data_end+0x1>
+    2a98:	20 91 b6 05 	lds	r18, 0x05B6	; 0x8005b6 <__data_end>
+    2a9c:	30 91 b7 05 	lds	r19, 0x05B7	; 0x8005b7 <__data_end+0x1>
     2aa0:	fc 01       	movw	r30, r24
     2aa2:	ee 0f       	add	r30, r30
     2aa4:	ff 1f       	adc	r31, r31
@@ -5178,8 +5178,8 @@ void addPendencias(short achada, char PouS){
     2aa8:	ff 1f       	adc	r31, r31
     2aaa:	e8 0f       	add	r30, r24
     2aac:	f9 1f       	adc	r31, r25
-    2aae:	e6 5b       	subi	r30, 0xB6	; 182
-    2ab0:	fe 4f       	sbci	r31, 0xFE	; 254
+    2aae:	ec 5b       	subi	r30, 0xBC	; 188
+    2ab0:	f9 4f       	sbci	r31, 0xF9	; 249
     2ab2:	e4 0f       	add	r30, r20
     2ab4:	f5 1f       	adc	r31, r21
     2ab6:	70 81       	ld	r23, Z
@@ -5190,8 +5190,8 @@ void addPendencias(short achada, char PouS){
     2ac0:	ff 1f       	adc	r31, r31
     2ac2:	e2 0f       	add	r30, r18
     2ac4:	f3 1f       	adc	r31, r19
-    2ac6:	ec 5b       	subi	r30, 0xBC	; 188
-    2ac8:	f9 4f       	sbci	r31, 0xF9	; 249
+    2ac6:	e6 54       	subi	r30, 0x46	; 70
+    2ac8:	fa 4f       	sbci	r31, 0xFA	; 250
     2aca:	e4 0f       	add	r30, r20
     2acc:	f5 1f       	adc	r31, r21
     2ace:	70 83       	st	Z, r23
@@ -5219,11 +5219,11 @@ void addPendencias(short achada, char PouS){
     2ae4:	0e 94 c1 14 	call	0x2982	; 0x2982 <removeSegundaParcela>
 
 	numPendecias++;
-    2ae8:	80 91 42 06 	lds	r24, 0x0642	; 0x800642 <__data_end>
-    2aec:	90 91 43 06 	lds	r25, 0x0643	; 0x800643 <__data_end+0x1>
+    2ae8:	80 91 b6 05 	lds	r24, 0x05B6	; 0x8005b6 <__data_end>
+    2aec:	90 91 b7 05 	lds	r25, 0x05B7	; 0x8005b7 <__data_end+0x1>
     2af0:	01 96       	adiw	r24, 0x01	; 1
-    2af2:	90 93 43 06 	sts	0x0643, r25	; 0x800643 <__data_end+0x1>
-    2af6:	80 93 42 06 	sts	0x0642, r24	; 0x800642 <__data_end>
+    2af2:	90 93 b7 05 	sts	0x05B7, r25	; 0x8005b7 <__data_end+0x1>
+    2af6:	80 93 b6 05 	sts	0x05B6, r24	; 0x8005b6 <__data_end>
     2afa:	08 95       	ret
 
 00002afc <verificarPendencia>:
@@ -5320,8 +5320,8 @@ void verificarPendencia(){
     2b7a:	ff 1f       	adc	r31, r31
     2b7c:	ee 0f       	add	r30, r30
     2b7e:	ff 1f       	adc	r31, r31
-    2b80:	ee 5f       	subi	r30, 0xFE	; 254
-    2b82:	fe 4f       	sbci	r31, 0xFE	; 254
+    2b80:	e4 50       	subi	r30, 0x04	; 4
+    2b82:	fa 4f       	sbci	r31, 0xFA	; 250
     2b84:	20 81       	ld	r18, Z
     2b86:	28 30       	cpi	r18, 0x08	; 8
     2b88:	09 f4       	brne	.+2      	; 0x2b8c <verificarPendencia+0x90>
@@ -5337,8 +5337,8 @@ void verificarPendencia(){
     2b9a:	ff 1f       	adc	r31, r31
     2b9c:	ee 0f       	add	r30, r30
     2b9e:	ff 1f       	adc	r31, r31
-    2ba0:	ee 5f       	subi	r30, 0xFE	; 254
-    2ba2:	fe 4f       	sbci	r31, 0xFE	; 254
+    2ba0:	e4 50       	subi	r30, 0x04	; 4
+    2ba2:	fa 4f       	sbci	r31, 0xFA	; 250
     2ba4:	84 81       	ldd	r24, Z+4	; 0x04
     2ba6:	89 17       	cp	r24, r25
     2ba8:	08 f4       	brcc	.+2      	; 0x2bac <verificarPendencia+0xb0>
@@ -5355,8 +5355,8 @@ void verificarPendencia(){
     2bbe:	ff 1f       	adc	r31, r31
     2bc0:	ee 0f       	add	r30, r30
     2bc2:	ff 1f       	adc	r31, r31
-    2bc4:	ee 5f       	subi	r30, 0xFE	; 254
-    2bc6:	fe 4f       	sbci	r31, 0xFE	; 254
+    2bc4:	e4 50       	subi	r30, 0x04	; 4
+    2bc6:	fa 4f       	sbci	r31, 0xFA	; 250
     2bc8:	35 81       	ldd	r19, Z+5	; 0x05
     2bca:	34 17       	cp	r19, r20
     2bcc:	08 f4       	brcc	.+2      	; 0x2bd0 <verificarPendencia+0xd4>
@@ -5377,8 +5377,8 @@ void verificarPendencia(){
     2be2:	ff 1f       	adc	r31, r31
     2be4:	ee 0f       	add	r30, r30
     2be6:	ff 1f       	adc	r31, r31
-    2be8:	ee 5f       	subi	r30, 0xFE	; 254
-    2bea:	fe 4f       	sbci	r31, 0xFE	; 254
+    2be8:	e4 50       	subi	r30, 0x04	; 4
+    2bea:	fa 4f       	sbci	r31, 0xFA	; 250
     2bec:	85 81       	ldd	r24, Z+5	; 0x05
     2bee:	98 13       	cpse	r25, r24
     2bf0:	21 c0       	rjmp	.+66     	; 0x2c34 <verificarPendencia+0x138>
@@ -5393,8 +5393,8 @@ void verificarPendencia(){
     2c00:	ff 1f       	adc	r31, r31
     2c02:	ee 0f       	add	r30, r30
     2c04:	ff 1f       	adc	r31, r31
-    2c06:	ee 5f       	subi	r30, 0xFE	; 254
-    2c08:	fe 4f       	sbci	r31, 0xFE	; 254
+    2c06:	e4 50       	subi	r30, 0x04	; 4
+    2c08:	fa 4f       	sbci	r31, 0xFA	; 250
     2c0a:	82 81       	ldd	r24, Z+2	; 0x02
 		if(datasVenc[i][0] != PARCELAPAGA_OUPENDENTE){
 			if(anoAtual[0]>datasVenc[i][4] ||  ( anoAtual[0]==datasVenc[i][4] && anoAtual[1]>datasVenc[i][5] ) ){ //se o ano venceu
@@ -5418,8 +5418,8 @@ void verificarPendencia(){
     2c24:	ff 1f       	adc	r31, r31
     2c26:	ee 0f       	add	r30, r30
     2c28:	ff 1f       	adc	r31, r31
-    2c2a:	ee 5f       	subi	r30, 0xFE	; 254
-    2c2c:	fe 4f       	sbci	r31, 0xFE	; 254
+    2c2a:	e4 50       	subi	r30, 0x04	; 4
+    2c2c:	fa 4f       	sbci	r31, 0xFA	; 250
     2c2e:	83 81       	ldd	r24, Z+3	; 0x03
     2c30:	89 17       	cp	r24, r25
     2c32:	d8 f1       	brcs	.+118    	; 0x2caa <verificarPendencia+0x1ae>
@@ -5437,8 +5437,8 @@ void verificarPendencia(){
     2c42:	ff 1f       	adc	r31, r31
     2c44:	ee 0f       	add	r30, r30
     2c46:	ff 1f       	adc	r31, r31
-    2c48:	ee 5f       	subi	r30, 0xFE	; 254
-    2c4a:	fe 4f       	sbci	r31, 0xFE	; 254
+    2c48:	e4 50       	subi	r30, 0x04	; 4
+    2c4a:	fa 4f       	sbci	r31, 0xFA	; 250
     2c4c:	82 81       	ldd	r24, Z+2	; 0x02
     2c4e:	98 13       	cpse	r25, r24
     2c50:	2e c0       	rjmp	.+92     	; 0x2cae <verificarPendencia+0x1b2>
@@ -5452,12 +5452,12 @@ void verificarPendencia(){
     2c60:	ff 1f       	adc	r31, r31
     2c62:	ee 0f       	add	r30, r30
     2c64:	ff 1f       	adc	r31, r31
-    2c66:	ee 5f       	subi	r30, 0xFE	; 254
-    2c68:	fe 4f       	sbci	r31, 0xFE	; 254
+    2c66:	e4 50       	subi	r30, 0x04	; 4
+    2c68:	fa 4f       	sbci	r31, 0xFA	; 250
     2c6a:	83 81       	ldd	r24, Z+3	; 0x03
     2c6c:	98 13       	cpse	r25, r24
     2c6e:	22 c0       	rjmp	.+68     	; 0x2cb4 <verificarPendencia+0x1b8>
-				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = o dia venceu
+				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = mas dia venceu
     2c70:	89 81       	ldd	r24, Y+1	; 0x01
     2c72:	28 17       	cp	r18, r24
     2c74:	10 f1       	brcs	.+68     	; 0x2cba <verificarPendencia+0x1be>
@@ -5473,8 +5473,8 @@ void verificarPendencia(){
     2c88:	ff 1f       	adc	r31, r31
     2c8a:	ee 0f       	add	r30, r30
     2c8c:	ff 1f       	adc	r31, r31
-    2c8e:	ee 5f       	subi	r30, 0xFE	; 254
-    2c90:	fe 4f       	sbci	r31, 0xFE	; 254
+    2c8e:	e4 50       	subi	r30, 0x04	; 4
+    2c90:	fa 4f       	sbci	r31, 0xFA	; 250
     2c92:	81 81       	ldd	r24, Z+1	; 0x01
     2c94:	89 17       	cp	r24, r25
     2c96:	b0 f0       	brcs	.+44     	; 0x2cc4 <verificarPendencia+0x1c8>
@@ -5508,7 +5508,7 @@ void verificarPendencia(){
 					}
 			
 			else if(mesAtual[0]==datasVenc[i][2] && mesAtual[1]==datasVenc[i][3])
-				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = o dia venceu
+				if( diaAtual[0]>datasVenc[i][0] || ( diaAtual[0]==datasVenc[i][0] && diaAtual[1]>datasVenc[i][1]) ){ //se mes = mas dia venceu
 					pendAchada = i; 
     2cba:	c8 01       	movw	r24, r16
     2cbc:	04 c0       	rjmp	.+8      	; 0x2cc6 <verificarPendencia+0x1ca>
@@ -5534,8 +5534,8 @@ void verificarPendencia(){
 	for(i=0;i<numPagsAgendados;i++){
     2cd4:	0f 5f       	subi	r16, 0xFF	; 255
     2cd6:	1f 4f       	sbci	r17, 0xFF	; 255
-    2cd8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-    2cdc:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+    2cd8:	80 91 b8 05 	lds	r24, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    2cdc:	90 91 b9 05 	lds	r25, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     2ce0:	08 17       	cp	r16, r24
     2ce2:	19 07       	cpc	r17, r25
     2ce4:	0c f4       	brge	.+2      	; 0x2ce8 <verificarPendencia+0x1ec>
@@ -5558,8 +5558,8 @@ void verificarPendencia(){
     2cfa:	ff 1f       	adc	r31, r31
     2cfc:	ee 0f       	add	r30, r30
     2cfe:	ff 1f       	adc	r31, r31
-    2d00:	ee 5f       	subi	r30, 0xFE	; 254
-    2d02:	fe 4f       	sbci	r31, 0xFE	; 254
+    2d00:	e4 50       	subi	r30, 0x04	; 4
+    2d02:	fa 4f       	sbci	r31, 0xFA	; 250
     2d04:	26 81       	ldd	r18, Z+6	; 0x06
     2d06:	88 ef       	ldi	r24, 0xF8	; 248
     2d08:	82 0f       	add	r24, r18
@@ -5577,8 +5577,8 @@ void verificarPendencia(){
     2d1e:	ff 1f       	adc	r31, r31
     2d20:	ee 0f       	add	r30, r30
     2d22:	ff 1f       	adc	r31, r31
-    2d24:	ee 5f       	subi	r30, 0xFE	; 254
-    2d26:	fe 4f       	sbci	r31, 0xFE	; 254
+    2d24:	e4 50       	subi	r30, 0x04	; 4
+    2d26:	fa 4f       	sbci	r31, 0xFA	; 250
     2d28:	82 85       	ldd	r24, Z+10	; 0x0a
     2d2a:	89 17       	cp	r24, r25
     2d2c:	08 f4       	brcc	.+2      	; 0x2d30 <verificarPendencia+0x234>
@@ -5595,8 +5595,8 @@ void verificarPendencia(){
     2d42:	ff 1f       	adc	r31, r31
     2d44:	ee 0f       	add	r30, r30
     2d46:	ff 1f       	adc	r31, r31
-    2d48:	ee 5f       	subi	r30, 0xFE	; 254
-    2d4a:	fe 4f       	sbci	r31, 0xFE	; 254
+    2d48:	e4 50       	subi	r30, 0x04	; 4
+    2d4a:	fa 4f       	sbci	r31, 0xFA	; 250
     2d4c:	33 85       	ldd	r19, Z+11	; 0x0b
     2d4e:	34 17       	cp	r19, r20
     2d50:	08 f4       	brcc	.+2      	; 0x2d54 <verificarPendencia+0x258>
@@ -5617,8 +5617,8 @@ void verificarPendencia(){
     2d66:	ff 1f       	adc	r31, r31
     2d68:	ee 0f       	add	r30, r30
     2d6a:	ff 1f       	adc	r31, r31
-    2d6c:	ee 5f       	subi	r30, 0xFE	; 254
-    2d6e:	fe 4f       	sbci	r31, 0xFE	; 254
+    2d6c:	e4 50       	subi	r30, 0x04	; 4
+    2d6e:	fa 4f       	sbci	r31, 0xFA	; 250
     2d70:	83 85       	ldd	r24, Z+11	; 0x0b
     2d72:	98 13       	cpse	r25, r24
     2d74:	21 c0       	rjmp	.+66     	; 0x2db8 <verificarPendencia+0x2bc>
@@ -5633,8 +5633,8 @@ void verificarPendencia(){
     2d84:	ff 1f       	adc	r31, r31
     2d86:	ee 0f       	add	r30, r30
     2d88:	ff 1f       	adc	r31, r31
-    2d8a:	ee 5f       	subi	r30, 0xFE	; 254
-    2d8c:	fe 4f       	sbci	r31, 0xFE	; 254
+    2d8a:	e4 50       	subi	r30, 0x04	; 4
+    2d8c:	fa 4f       	sbci	r31, 0xFA	; 250
     2d8e:	80 85       	ldd	r24, Z+8	; 0x08
 		if(datasVenc[i][6] != PARCELAPAGA_OUPENDENTE && datasVenc[i][6] != SEMPARCELA){
 			if(anoAtual[0]>datasVenc[i][10] ||  ( anoAtual[0]==datasVenc[i][10] && anoAtual[1]>datasVenc[i][11] ) ){ //se o ano venceu
@@ -5658,8 +5658,8 @@ void verificarPendencia(){
     2da8:	ff 1f       	adc	r31, r31
     2daa:	ee 0f       	add	r30, r30
     2dac:	ff 1f       	adc	r31, r31
-    2dae:	ee 5f       	subi	r30, 0xFE	; 254
-    2db0:	fe 4f       	sbci	r31, 0xFE	; 254
+    2dae:	e4 50       	subi	r30, 0x04	; 4
+    2db0:	fa 4f       	sbci	r31, 0xFA	; 250
     2db2:	81 85       	ldd	r24, Z+9	; 0x09
     2db4:	89 17       	cp	r24, r25
     2db6:	d8 f1       	brcs	.+118    	; 0x2e2e <verificarPendencia+0x332>
@@ -5677,8 +5677,8 @@ void verificarPendencia(){
     2dc6:	ff 1f       	adc	r31, r31
     2dc8:	ee 0f       	add	r30, r30
     2dca:	ff 1f       	adc	r31, r31
-    2dcc:	ee 5f       	subi	r30, 0xFE	; 254
-    2dce:	fe 4f       	sbci	r31, 0xFE	; 254
+    2dcc:	e4 50       	subi	r30, 0x04	; 4
+    2dce:	fa 4f       	sbci	r31, 0xFA	; 250
     2dd0:	80 85       	ldd	r24, Z+8	; 0x08
     2dd2:	98 13       	cpse	r25, r24
     2dd4:	2e c0       	rjmp	.+92     	; 0x2e32 <verificarPendencia+0x336>
@@ -5692,8 +5692,8 @@ void verificarPendencia(){
     2de4:	ff 1f       	adc	r31, r31
     2de6:	ee 0f       	add	r30, r30
     2de8:	ff 1f       	adc	r31, r31
-    2dea:	ee 5f       	subi	r30, 0xFE	; 254
-    2dec:	fe 4f       	sbci	r31, 0xFE	; 254
+    2dea:	e4 50       	subi	r30, 0x04	; 4
+    2dec:	fa 4f       	sbci	r31, 0xFA	; 250
     2dee:	81 85       	ldd	r24, Z+9	; 0x09
     2df0:	98 13       	cpse	r25, r24
     2df2:	22 c0       	rjmp	.+68     	; 0x2e38 <verificarPendencia+0x33c>
@@ -5713,8 +5713,8 @@ void verificarPendencia(){
     2e0c:	ff 1f       	adc	r31, r31
     2e0e:	ee 0f       	add	r30, r30
     2e10:	ff 1f       	adc	r31, r31
-    2e12:	ee 5f       	subi	r30, 0xFE	; 254
-    2e14:	fe 4f       	sbci	r31, 0xFE	; 254
+    2e12:	e4 50       	subi	r30, 0x04	; 4
+    2e14:	fa 4f       	sbci	r31, 0xFA	; 250
     2e16:	87 81       	ldd	r24, Z+7	; 0x07
     2e18:	89 17       	cp	r24, r25
     2e1a:	b0 f0       	brcs	.+44     	; 0x2e48 <verificarPendencia+0x34c>
@@ -5774,8 +5774,8 @@ void verificarPendencia(){
 	for(i=0;i<numPagsAgendados;i++){
     2e58:	0f 5f       	subi	r16, 0xFF	; 255
     2e5a:	1f 4f       	sbci	r17, 0xFF	; 255
-    2e5c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-    2e60:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+    2e5c:	80 91 b8 05 	lds	r24, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    2e60:	90 91 b9 05 	lds	r25, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     2e64:	08 17       	cp	r16, r24
     2e66:	19 07       	cpc	r17, r25
     2e68:	0c f4       	brge	.+2      	; 0x2e6c <verificarPendencia+0x370>
@@ -5813,8 +5813,8 @@ char removePendencias(char remover){
     2e8a:	9e 01       	movw	r18, r28
     2e8c:	2f 5f       	subi	r18, 0xFF	; 255
     2e8e:	3f 4f       	sbci	r19, 0xFF	; 255
-    2e90:	80 91 42 06 	lds	r24, 0x0642	; 0x800642 <__data_end>
-    2e94:	90 91 43 06 	lds	r25, 0x0643	; 0x800643 <__data_end+0x1>
+    2e90:	80 91 b6 05 	lds	r24, 0x05B6	; 0x8005b6 <__data_end>
+    2e94:	90 91 b7 05 	lds	r25, 0x05B7	; 0x8005b7 <__data_end+0x1>
     2e98:	82 17       	cp	r24, r18
     2e9a:	93 07       	cpc	r25, r19
     2e9c:	0c f4       	brge	.+2      	; 0x2ea0 <removePendencias+0x1e>
@@ -5846,8 +5846,8 @@ char removePendencias(char remover){
     2ec0:	b3 1f       	adc	r27, r19
     2ec2:	aa 0f       	add	r26, r26
     2ec4:	bb 1f       	adc	r27, r27
-    2ec6:	ae 59       	subi	r26, 0x9E	; 158
-    2ec8:	b9 4f       	sbci	r27, 0xF9	; 249
+    2ec6:	a8 52       	subi	r26, 0x28	; 40
+    2ec8:	ba 4f       	sbci	r27, 0xFA	; 250
     2eca:	a8 0f       	add	r26, r24
     2ecc:	b9 1f       	adc	r27, r25
     2ece:	6c 91       	ld	r22, X
@@ -5862,8 +5862,8 @@ char removePendencias(char remover){
     2edc:	f5 1f       	adc	r31, r21
     2ede:	ee 0f       	add	r30, r30
     2ee0:	ff 1f       	adc	r31, r31
-    2ee2:	ee 59       	subi	r30, 0x9E	; 158
-    2ee4:	f9 4f       	sbci	r31, 0xF9	; 249
+    2ee2:	e8 52       	subi	r30, 0x28	; 40
+    2ee4:	fa 4f       	sbci	r31, 0xFA	; 250
     2ee6:	e8 0f       	add	r30, r24
     2ee8:	f9 1f       	adc	r31, r25
     2eea:	60 83       	st	Z, r22
@@ -5888,8 +5888,8 @@ char removePendencias(char remover){
 	for(i=remover;i<numPendecias-1;i++){
     2efa:	4f 5f       	subi	r20, 0xFF	; 255
     2efc:	5f 4f       	sbci	r21, 0xFF	; 255
-    2efe:	20 91 42 06 	lds	r18, 0x0642	; 0x800642 <__data_end>
-    2f02:	30 91 43 06 	lds	r19, 0x0643	; 0x800643 <__data_end+0x1>
+    2efe:	20 91 b6 05 	lds	r18, 0x05B6	; 0x8005b6 <__data_end>
+    2f02:	30 91 b7 05 	lds	r19, 0x05B7	; 0x8005b7 <__data_end+0x1>
     2f06:	c9 01       	movw	r24, r18
     2f08:	01 97       	sbiw	r24, 0x01	; 1
     2f0a:	48 17       	cp	r20, r24
@@ -5911,8 +5911,8 @@ char removePendencias(char remover){
     2f1e:	77 1f       	adc	r23, r23
     2f20:	e6 0f       	add	r30, r22
     2f22:	f7 1f       	adc	r31, r23
-    2f24:	ec 5b       	subi	r30, 0xBC	; 188
-    2f26:	f9 4f       	sbci	r31, 0xF9	; 249
+    2f24:	e6 54       	subi	r30, 0x46	; 70
+    2f26:	fa 4f       	sbci	r31, 0xFA	; 250
     2f28:	e4 0f       	add	r30, r20
     2f2a:	f5 1f       	adc	r31, r21
     2f2c:	60 81       	ld	r22, Z
@@ -5926,8 +5926,8 @@ char removePendencias(char remover){
     2f38:	ff 1f       	adc	r31, r31
     2f3a:	ec 0f       	add	r30, r28
     2f3c:	fd 1f       	adc	r31, r29
-    2f3e:	ec 5b       	subi	r30, 0xBC	; 188
-    2f40:	f9 4f       	sbci	r31, 0xF9	; 249
+    2f3e:	e6 54       	subi	r30, 0x46	; 70
+    2f40:	fa 4f       	sbci	r31, 0xFA	; 250
     2f42:	e4 0f       	add	r30, r20
     2f44:	f5 1f       	adc	r31, r21
     2f46:	60 83       	st	Z, r22
@@ -5963,8 +5963,8 @@ char removePendencias(char remover){
 	numPendecias--;
     2f60:	21 50       	subi	r18, 0x01	; 1
     2f62:	31 09       	sbc	r19, r1
-    2f64:	30 93 43 06 	sts	0x0643, r19	; 0x800643 <__data_end+0x1>
-    2f68:	20 93 42 06 	sts	0x0642, r18	; 0x800642 <__data_end>
+    2f64:	30 93 b7 05 	sts	0x05B7, r19	; 0x8005b7 <__data_end+0x1>
+    2f68:	20 93 b6 05 	sts	0x05B6, r18	; 0x8005b6 <__data_end>
 	return 1; //removi a pendencia 
     2f6c:	81 e0       	ldi	r24, 0x01	; 1
     2f6e:	01 c0       	rjmp	.+2      	; 0x2f72 <removePendencias+0xf0>
@@ -6011,8 +6011,8 @@ void printNumPendencia(short num){
     2f90:	f1 1f       	adc	r31, r17
     2f92:	ee 0f       	add	r30, r30
     2f94:	ff 1f       	adc	r31, r31
-    2f96:	ee 59       	subi	r30, 0x9E	; 158
-    2f98:	f9 4f       	sbci	r31, 0xF9	; 249
+    2f96:	e8 52       	subi	r30, 0x28	; 40
+    2f98:	fa 4f       	sbci	r31, 0xFA	; 250
     2f9a:	ec 0f       	add	r30, r28
     2f9c:	fd 1f       	adc	r31, r29
     2f9e:	80 81       	ld	r24, Z
@@ -6030,8 +6030,8 @@ void printNumPendencia(short num){
     2fac:	6c f3       	brlt	.-38     	; 0x2f88 <printNumPendencia+0x10>
 		writeCharacter(cartoesP[num][i]+48);
 	writeString(" ");
-    2fae:	80 e1       	ldi	r24, 0x10	; 16
-    2fb0:	96 e0       	ldi	r25, 0x06	; 6
+    2fae:	84 e8       	ldi	r24, 0x84	; 132
+    2fb0:	95 e0       	ldi	r25, 0x05	; 5
     2fb2:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
 	//print val parcela
 	for(i=0;i<NUMDIGITOSVALORES;i++)
@@ -6046,8 +6046,8 @@ void printNumPendencia(short num){
     2fc4:	ff 1f       	adc	r31, r31
     2fc6:	e0 0f       	add	r30, r16
     2fc8:	f1 1f       	adc	r31, r17
-    2fca:	ec 5b       	subi	r30, 0xBC	; 188
-    2fcc:	f9 4f       	sbci	r31, 0xF9	; 249
+    2fca:	e6 54       	subi	r30, 0x46	; 70
+    2fcc:	fa 4f       	sbci	r31, 0xFA	; 250
     2fce:	ec 0f       	add	r30, r28
     2fd0:	fd 1f       	adc	r31, r29
     2fd2:	80 81       	ld	r24, Z
@@ -6065,8 +6065,8 @@ void printNumPendencia(short num){
     2fe0:	6c f3       	brlt	.-38     	; 0x2fbc <printNumPendencia+0x44>
 		writeCharacter(valParcelaP[num][i]+48);
 	writeString(" -");
-    2fe2:	8b e1       	ldi	r24, 0x1B	; 27
-    2fe4:	96 e0       	ldi	r25, 0x06	; 6
+    2fe2:	8f e8       	ldi	r24, 0x8F	; 143
+    2fe4:	95 e0       	ldi	r25, 0x05	; 5
     2fe6:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
 	writeCharacter(num+49);
     2fea:	81 e3       	ldi	r24, 0x31	; 49
@@ -6086,8 +6086,8 @@ void printNumPendencia(short num){
 
 char printPendencias(char sobeDesce){
 	if(numPendecias < 1)
-    2ffc:	20 91 42 06 	lds	r18, 0x0642	; 0x800642 <__data_end>
-    3000:	30 91 43 06 	lds	r19, 0x0643	; 0x800643 <__data_end+0x1>
+    2ffc:	20 91 b6 05 	lds	r18, 0x05B6	; 0x8005b6 <__data_end>
+    3000:	30 91 b7 05 	lds	r19, 0x05B7	; 0x8005b7 <__data_end+0x1>
     3004:	12 16       	cp	r1, r18
     3006:	13 06       	cpc	r1, r19
     3008:	0c f0       	brlt	.+2      	; 0x300c <printPendencias+0x10>
@@ -6110,8 +6110,8 @@ char printPendencias(char sobeDesce){
     3022:	90 e0       	ldi	r25, 0x00	; 0
     3024:	0e 94 bc 17 	call	0x2f78	; 0x2f78 <printNumPendencia>
 		if(numPendecias > 1){
-    3028:	80 91 42 06 	lds	r24, 0x0642	; 0x800642 <__data_end>
-    302c:	90 91 43 06 	lds	r25, 0x0643	; 0x800643 <__data_end+0x1>
+    3028:	80 91 b6 05 	lds	r24, 0x05B6	; 0x8005b6 <__data_end>
+    302c:	90 91 b7 05 	lds	r25, 0x05B7	; 0x8005b7 <__data_end+0x1>
     3030:	02 97       	sbiw	r24, 0x02	; 2
     3032:	3c f0       	brlt	.+14     	; 0x3042 <printPendencias+0x46>
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
@@ -6171,8 +6171,8 @@ char printPendencias(char sobeDesce){
     3078:	0e 94 bc 17 	call	0x2f78	; 0x2f78 <printNumPendencia>
 		}
 		if(numPendecias > 3){
-    307c:	80 91 42 06 	lds	r24, 0x0642	; 0x800642 <__data_end>
-    3080:	90 91 43 06 	lds	r25, 0x0643	; 0x800643 <__data_end+0x1>
+    307c:	80 91 b6 05 	lds	r24, 0x05B6	; 0x8005b6 <__data_end>
+    3080:	90 91 b7 05 	lds	r25, 0x05B7	; 0x8005b7 <__data_end+0x1>
     3084:	04 97       	sbiw	r24, 0x04	; 4
     3086:	3c f0       	brlt	.+14     	; 0x3096 <printPendencias+0x9a>
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
@@ -6226,8 +6226,8 @@ char printPendencias(char sobeDesce){
     30cc:	0e 94 bc 17 	call	0x2f78	; 0x2f78 <printNumPendencia>
 		}
 		if(numPendecias > 5){
-    30d0:	80 91 42 06 	lds	r24, 0x0642	; 0x800642 <__data_end>
-    30d4:	90 91 43 06 	lds	r25, 0x0643	; 0x800643 <__data_end+0x1>
+    30d0:	80 91 b6 05 	lds	r24, 0x05B6	; 0x8005b6 <__data_end>
+    30d4:	90 91 b7 05 	lds	r25, 0x05B7	; 0x8005b7 <__data_end+0x1>
     30d8:	06 97       	sbiw	r24, 0x06	; 6
     30da:	3c f0       	brlt	.+14     	; 0x30ea <printPendencias+0xee>
 			writeInstruction(lcd_LineTwo | lcd_SetCursor);
@@ -6583,8 +6583,8 @@ void modoADM(char *tecla){
     3294:	83 e0       	ldi	r24, 0x03	; 3
     3296:	0e 94 43 06 	call	0xc86	; 0xc86 <writeInstruction>
 			writeString("Opcao Invalida");	
-    329a:	8e e1       	ldi	r24, 0x1E	; 30
-    329c:	96 e0       	ldi	r25, 0x06	; 6
+    329a:	82 e9       	ldi	r24, 0x92	; 146
+    329c:	95 e0       	ldi	r25, 0x05	; 5
     329e:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
     32a2:	ff ef       	ldi	r31, 0xFF	; 255
     32a4:	23 ed       	ldi	r18, 0xD3	; 211
@@ -6770,7 +6770,7 @@ char enviarPedidoSerial(char pedido[]){
 	}
 }
 	
-char enviarPedidoDePagamento(short cobrar){
+char enviarPedidoDePagamento(short cobrar){ //prepara o pedido e manda pra serial
     338e:	cf 93       	push	r28
     3390:	df 93       	push	r29
     3392:	cd b7       	in	r28, 0x3d	; 61
@@ -6797,8 +6797,8 @@ char enviarPedidoDePagamento(short cobrar){
     33b0:	f9 1f       	adc	r31, r25
     33b2:	ee 0f       	add	r30, r30
     33b4:	ff 1f       	adc	r31, r31
-    33b6:	e8 59       	subi	r30, 0x98	; 152
-    33b8:	fe 4f       	sbci	r31, 0xFE	; 254
+    33b6:	ee 59       	subi	r30, 0x9E	; 158
+    33b8:	f9 4f       	sbci	r31, 0xF9	; 249
     33ba:	e2 0f       	add	r30, r18
     33bc:	f3 1f       	adc	r31, r19
     33be:	40 81       	ld	r20, Z
@@ -6820,7 +6820,7 @@ char enviarPedidoDePagamento(short cobrar){
     33dc:	f7 1f       	adc	r31, r23
     33de:	40 5d       	subi	r20, 0xD0	; 208
     33e0:	40 83       	st	Z, r20
-char enviarPedidoDePagamento(short cobrar){
+char enviarPedidoDePagamento(short cobrar){ //prepara o pedido e manda pra serial
 	char cartao[NUMDIGITOSCARTOES];
 	char pedido[13], resultado;
 	short i;
@@ -6850,8 +6850,8 @@ char enviarPedidoDePagamento(short cobrar){
     3400:	ff 1f       	adc	r31, r31
     3402:	e8 0f       	add	r30, r24
     3404:	f9 1f       	adc	r31, r25
-    3406:	e6 5b       	subi	r30, 0xB6	; 182
-    3408:	fe 4f       	sbci	r31, 0xFE	; 254
+    3406:	ec 5b       	subi	r30, 0xBC	; 188
+    3408:	f9 4f       	sbci	r31, 0xF9	; 249
     340a:	e2 0f       	add	r30, r18
     340c:	f3 1f       	adc	r31, r19
     340e:	60 81       	ld	r22, Z
@@ -7020,8 +7020,8 @@ void cobrarPagementosAgendados(){
     34f4:	ff 1f       	adc	r31, r31
     34f6:	ee 0f       	add	r30, r30
     34f8:	ff 1f       	adc	r31, r31
-    34fa:	ee 5f       	subi	r30, 0xFE	; 254
-    34fc:	fe 4f       	sbci	r31, 0xFE	; 254
+    34fa:	e4 50       	subi	r30, 0x04	; 4
+    34fc:	fa 4f       	sbci	r31, 0xFA	; 250
     34fe:	20 81       	ld	r18, Z
     3500:	28 30       	cpi	r18, 0x08	; 8
     3502:	09 f4       	brne	.+2      	; 0x3506 <cobrarPagementosAgendados+0x96>
@@ -7039,8 +7039,8 @@ void cobrarPagementosAgendados(){
     3518:	ff 1f       	adc	r31, r31
     351a:	ee 0f       	add	r30, r30
     351c:	ff 1f       	adc	r31, r31
-    351e:	ee 5f       	subi	r30, 0xFE	; 254
-    3520:	fe 4f       	sbci	r31, 0xFE	; 254
+    351e:	e4 50       	subi	r30, 0x04	; 4
+    3520:	fa 4f       	sbci	r31, 0xFA	; 250
     3522:	31 81       	ldd	r19, Z+1	; 0x01
     3524:	2a 81       	ldd	r18, Y+2	; 0x02
     3526:	32 13       	cpse	r19, r18
@@ -7055,8 +7055,8 @@ void cobrarPagementosAgendados(){
     3536:	ff 1f       	adc	r31, r31
     3538:	ee 0f       	add	r30, r30
     353a:	ff 1f       	adc	r31, r31
-    353c:	ee 5f       	subi	r30, 0xFE	; 254
-    353e:	fe 4f       	sbci	r31, 0xFE	; 254
+    353c:	e4 50       	subi	r30, 0x04	; 4
+    353e:	fa 4f       	sbci	r31, 0xFA	; 250
     3540:	32 81       	ldd	r19, Z+2	; 0x02
     3542:	2b 81       	ldd	r18, Y+3	; 0x03
 	//012345 67891011 
@@ -7077,8 +7077,8 @@ void cobrarPagementosAgendados(){
     3554:	ff 1f       	adc	r31, r31
     3556:	ee 0f       	add	r30, r30
     3558:	ff 1f       	adc	r31, r31
-    355a:	ee 5f       	subi	r30, 0xFE	; 254
-    355c:	fe 4f       	sbci	r31, 0xFE	; 254
+    355a:	e4 50       	subi	r30, 0x04	; 4
+    355c:	fa 4f       	sbci	r31, 0xFA	; 250
     355e:	33 81       	ldd	r19, Z+3	; 0x03
     3560:	2c 81       	ldd	r18, Y+4	; 0x04
     3562:	32 13       	cpse	r19, r18
@@ -7093,8 +7093,8 @@ void cobrarPagementosAgendados(){
     3572:	ff 1f       	adc	r31, r31
     3574:	ee 0f       	add	r30, r30
     3576:	ff 1f       	adc	r31, r31
-    3578:	ee 5f       	subi	r30, 0xFE	; 254
-    357a:	fe 4f       	sbci	r31, 0xFE	; 254
+    3578:	e4 50       	subi	r30, 0x04	; 4
+    357a:	fa 4f       	sbci	r31, 0xFA	; 250
     357c:	34 81       	ldd	r19, Z+4	; 0x04
     357e:	2d 81       	ldd	r18, Y+5	; 0x05
 	//ddmmaa|ddmma a
@@ -7115,8 +7115,8 @@ void cobrarPagementosAgendados(){
     3590:	ff 1f       	adc	r31, r31
     3592:	ee 0f       	add	r30, r30
     3594:	ff 1f       	adc	r31, r31
-    3596:	ee 5f       	subi	r30, 0xFE	; 254
-    3598:	fe 4f       	sbci	r31, 0xFE	; 254
+    3596:	e4 50       	subi	r30, 0x04	; 4
+    3598:	fa 4f       	sbci	r31, 0xFA	; 250
     359a:	35 81       	ldd	r19, Z+5	; 0x05
     359c:	2e 81       	ldd	r18, Y+6	; 0x06
     359e:	32 13       	cpse	r19, r18
@@ -7125,7 +7125,7 @@ void cobrarPagementosAgendados(){
     35a2:	c8 01       	movw	r24, r16
 			}
 		}
-		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda
+		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda data
     35a4:	f8 01       	movw	r30, r16
     35a6:	ee 0f       	add	r30, r30
     35a8:	ff 1f       	adc	r31, r31
@@ -7135,8 +7135,8 @@ void cobrarPagementosAgendados(){
     35b0:	ff 1f       	adc	r31, r31
     35b2:	ee 0f       	add	r30, r30
     35b4:	ff 1f       	adc	r31, r31
-    35b6:	ee 5f       	subi	r30, 0xFE	; 254
-    35b8:	fe 4f       	sbci	r31, 0xFE	; 254
+    35b6:	e4 50       	subi	r30, 0x04	; 4
+    35b8:	fa 4f       	sbci	r31, 0xFA	; 250
     35ba:	26 81       	ldd	r18, Z+6	; 0x06
     35bc:	29 30       	cpi	r18, 0x09	; 9
     35be:	09 f4       	brne	.+2      	; 0x35c2 <cobrarPagementosAgendados+0x152>
@@ -7154,8 +7154,8 @@ void cobrarPagementosAgendados(){
     35d4:	ff 1f       	adc	r31, r31
     35d6:	ee 0f       	add	r30, r30
     35d8:	ff 1f       	adc	r31, r31
-    35da:	ee 5f       	subi	r30, 0xFE	; 254
-    35dc:	fe 4f       	sbci	r31, 0xFE	; 254
+    35da:	e4 50       	subi	r30, 0x04	; 4
+    35dc:	fa 4f       	sbci	r31, 0xFA	; 250
     35de:	37 81       	ldd	r19, Z+7	; 0x07
     35e0:	2a 81       	ldd	r18, Y+2	; 0x02
     35e2:	32 13       	cpse	r19, r18
@@ -7170,15 +7170,15 @@ void cobrarPagementosAgendados(){
     35f2:	ff 1f       	adc	r31, r31
     35f4:	ee 0f       	add	r30, r30
     35f6:	ff 1f       	adc	r31, r31
-    35f8:	ee 5f       	subi	r30, 0xFE	; 254
-    35fa:	fe 4f       	sbci	r31, 0xFE	; 254
+    35f8:	e4 50       	subi	r30, 0x04	; 4
+    35fa:	fa 4f       	sbci	r31, 0xFA	; 250
     35fc:	30 85       	ldd	r19, Z+8	; 0x08
     35fe:	2b 81       	ldd	r18, Y+3	; 0x03
 			datasVenc[i][4]==anoAtual[0] && datasVenc[i][5]==anoAtual[1]){ //se é o dia de cobrar
 				cobrar = i;
 			}
 		}
-		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda
+		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda data
 			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
     3600:	32 13       	cpse	r19, r18
     3602:	2e c0       	rjmp	.+92     	; 0x3660 <cobrarPagementosAgendados+0x1f0>
@@ -7192,8 +7192,8 @@ void cobrarPagementosAgendados(){
     3610:	ff 1f       	adc	r31, r31
     3612:	ee 0f       	add	r30, r30
     3614:	ff 1f       	adc	r31, r31
-    3616:	ee 5f       	subi	r30, 0xFE	; 254
-    3618:	fe 4f       	sbci	r31, 0xFE	; 254
+    3616:	e4 50       	subi	r30, 0x04	; 4
+    3618:	fa 4f       	sbci	r31, 0xFA	; 250
     361a:	31 85       	ldd	r19, Z+9	; 0x09
     361c:	2c 81       	ldd	r18, Y+4	; 0x04
     361e:	32 13       	cpse	r19, r18
@@ -7208,14 +7208,14 @@ void cobrarPagementosAgendados(){
     362e:	ff 1f       	adc	r31, r31
     3630:	ee 0f       	add	r30, r30
     3632:	ff 1f       	adc	r31, r31
-    3634:	ee 5f       	subi	r30, 0xFE	; 254
-    3636:	fe 4f       	sbci	r31, 0xFE	; 254
+    3634:	e4 50       	subi	r30, 0x04	; 4
+    3636:	fa 4f       	sbci	r31, 0xFA	; 250
     3638:	32 85       	ldd	r19, Z+10	; 0x0a
     363a:	2d 81       	ldd	r18, Y+5	; 0x05
 				cobrar = i;
 			}
 		}
-		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda
+		if(datasVenc[i][6] != SEMPARCELA){ //verifica a segunda data
 			if(datasVenc[i][6]==diaAtual[0] && datasVenc[i][7]==diaAtual[1] &&
 			datasVenc[i][8]==mesAtual[0] && datasVenc[i][9]==mesAtual[1] &&
     363c:	32 13       	cpse	r19, r18
@@ -7230,8 +7230,8 @@ void cobrarPagementosAgendados(){
     364c:	ff 1f       	adc	r31, r31
     364e:	ee 0f       	add	r30, r30
     3650:	ff 1f       	adc	r31, r31
-    3652:	ee 5f       	subi	r30, 0xFE	; 254
-    3654:	fe 4f       	sbci	r31, 0xFE	; 254
+    3652:	e4 50       	subi	r30, 0x04	; 4
+    3654:	fa 4f       	sbci	r31, 0xFA	; 250
     3656:	33 85       	ldd	r19, Z+11	; 0x0b
     3658:	2e 81       	ldd	r18, Y+6	; 0x06
     365a:	32 13       	cpse	r19, r18
@@ -7290,8 +7290,8 @@ void cobrarPagementosAgendados(){
 	for(i=0,cobrar=-1;i<numPagsAgendados;i++){
     3682:	0f 5f       	subi	r16, 0xFF	; 255
     3684:	1f 4f       	sbci	r17, 0xFF	; 255
-    3686:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__data_start>
-    368a:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__data_start+0x1>
+    3686:	20 91 b8 05 	lds	r18, 0x05B8	; 0x8005b8 <numPagsAgendados>
+    368a:	30 91 b9 05 	lds	r19, 0x05B9	; 0x8005b9 <numPagsAgendados+0x1>
     368e:	02 17       	cp	r16, r18
     3690:	13 07       	cpc	r17, r19
     3692:	0c f4       	brge	.+2      	; 0x3696 <cobrarPagementosAgendados+0x226>
@@ -7383,7 +7383,7 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	}
 
 	if (teclaG == KEY_CONFIRMA)
-    3714:	80 91 9f 01 	lds	r24, 0x019F	; 0x80019f <teclaG>
+    3714:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
     3718:	8b 30       	cpi	r24, 0x0B	; 11
     371a:	31 f4       	brne	.+12     	; 0x3728 <__vector_11+0x70>
 		contTelaOn++;
@@ -7570,7 +7570,7 @@ int main(){
 	// inserindo cartões pra teste
 	char cartao_teste[] = {8+48,0+48,0+48,0+48,0+48,0+48};
     3846:	86 e0       	ldi	r24, 0x06	; 6
-    3848:	e7 eb       	ldi	r30, 0xB7	; 183
+    3848:	eb e2       	ldi	r30, 0x2B	; 43
     384a:	f1 e0       	ldi	r31, 0x01	; 1
     384c:	de 01       	movw	r26, r28
     384e:	11 96       	adiw	r26, 0x01	; 1
@@ -7580,7 +7580,7 @@ int main(){
     3856:	e1 f7       	brne	.-8      	; 0x3850 <main+0x3c>
 	char cartao_teste_2[] = {0+48,0+48,2+48,0+48,0+48,0+48};
     3858:	86 e0       	ldi	r24, 0x06	; 6
-    385a:	ed eb       	ldi	r30, 0xBD	; 189
+    385a:	e1 e3       	ldi	r30, 0x31	; 49
     385c:	f1 e0       	ldi	r31, 0x01	; 1
     385e:	de 01       	movw	r26, r28
     3860:	17 96       	adiw	r26, 0x07	; 7
@@ -7592,18 +7592,18 @@ int main(){
     386a:	ae 01       	movw	r20, r28
     386c:	4f 5f       	subi	r20, 0xFF	; 255
     386e:	5f 4f       	sbci	r21, 0xFF	; 255
-    3870:	6d e2       	ldi	r22, 0x2D	; 45
-    3872:	76 e0       	ldi	r23, 0x06	; 6
+    3870:	61 ea       	ldi	r22, 0xA1	; 161
+    3872:	75 e0       	ldi	r23, 0x05	; 5
     3874:	cb 01       	movw	r24, r22
     3876:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <addCartao>
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
     387a:	ae 01       	movw	r20, r28
     387c:	49 5f       	subi	r20, 0xF9	; 249
     387e:	5f 4f       	sbci	r21, 0xFF	; 255
-    3880:	64 e3       	ldi	r22, 0x34	; 52
-    3882:	76 e0       	ldi	r23, 0x06	; 6
-    3884:	8b e3       	ldi	r24, 0x3B	; 59
-    3886:	96 e0       	ldi	r25, 0x06	; 6
+    3880:	68 ea       	ldi	r22, 0xA8	; 168
+    3882:	75 e0       	ldi	r23, 0x05	; 5
+    3884:	8f ea       	ldi	r24, 0xAF	; 175
+    3886:	95 e0       	ldi	r25, 0x05	; 5
     3888:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <addCartao>
 	anoZero();							// inicia o relogio
 	USART_INIT(UBRR);					// inicia serial
@@ -7621,33 +7621,33 @@ int main(){
     388e:	00 23       	and	r16, r16
     3890:	41 f0       	breq	.+16     	; 0x38a2 <main+0x8e>
 			userIndex = login(&teclaG); //o que faz tudo com relação a senha inicial, retorna quem entrou (0 adm, 1 e 2 operadores 1 e 2)
-    3892:	8f e9       	ldi	r24, 0x9F	; 159
+    3892:	83 e1       	ldi	r24, 0x13	; 19
     3894:	91 e0       	ldi	r25, 0x01	; 1
     3896:	0e 94 32 08 	call	0x1064	; 0x1064 <login>
-    389a:	80 93 9e 01 	sts	0x019E, r24	; 0x80019e <userIndex>
+    389a:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
 			loop1 = 0;
     389e:	00 e0       	ldi	r16, 0x00	; 0
     38a0:	0c c0       	rjmp	.+24     	; 0x38ba <main+0xa6>
 		}else{
 			continuar = continuar_modo_atual(&teclaG);
-    38a2:	8f e9       	ldi	r24, 0x9F	; 159
+    38a2:	83 e1       	ldi	r24, 0x13	; 19
     38a4:	91 e0       	ldi	r25, 0x01	; 1
     38a6:	0e 94 bf 0a 	call	0x157e	; 0x157e <continuar_modo_atual>
 			if(!continuar)
     38aa:	81 11       	cpse	r24, r1
     38ac:	06 c0       	rjmp	.+12     	; 0x38ba <main+0xa6>
 				userIndex = login(&teclaG); //pode mudar o modo adm <-> oper
-    38ae:	8f e9       	ldi	r24, 0x9F	; 159
+    38ae:	83 e1       	ldi	r24, 0x13	; 19
     38b0:	91 e0       	ldi	r25, 0x01	; 1
     38b2:	0e 94 32 08 	call	0x1064	; 0x1064 <login>
-    38b6:	80 93 9e 01 	sts	0x019E, r24	; 0x80019e <userIndex>
+    38b6:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <userIndex>
 		}
 		
 		teclaG = TECLA_INVALIDA;
     38ba:	89 e1       	ldi	r24, 0x19	; 25
-    38bc:	80 93 9f 01 	sts	0x019F, r24	; 0x80019f <teclaG>
+    38bc:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		if(userIndex != 0){
-    38c0:	10 91 9e 01 	lds	r17, 0x019E	; 0x80019e <userIndex>
+    38c0:	10 91 12 01 	lds	r17, 0x0112	; 0x800112 <userIndex>
     38c4:	11 23       	and	r17, r17
     38c6:	e1 f0       	breq	.+56     	; 0x3900 <main+0xec>
 			if(getOperStatus(userIndex))
@@ -7665,14 +7665,14 @@ int main(){
     38dc:	04 c0       	rjmp	.+8      	; 0x38e6 <main+0xd2>
 						teclaG = teclaDebouce();
     38de:	0e 94 76 05 	call	0xaec	; 0xaec <teclaDebouce>
-    38e2:	80 93 9f 01 	sts	0x019F, r24	; 0x80019f <teclaG>
+    38e2:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		if(userIndex != 0){
 			if(getOperStatus(userIndex))
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
 					menu_vendas();
 					while(teclaG+49 > 51){
-    38e6:	80 91 9f 01 	lds	r24, 0x019F	; 0x80019f <teclaG>
+    38e6:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
     38ea:	90 e0       	ldi	r25, 0x00	; 0
     38ec:	c1 96       	adiw	r24, 0x31	; 49
     38ee:	84 33       	cpi	r24, 0x34	; 52
@@ -7693,32 +7693,32 @@ int main(){
 		}
 		
 		if(userIndex == 0){
-    3900:	80 91 9e 01 	lds	r24, 0x019E	; 0x80019e <userIndex>
+    3900:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <userIndex>
     3904:	81 11       	cpse	r24, r1
     3906:	c3 cf       	rjmp	.-122    	; 0x388e <main+0x7a>
 			menuADM();
     3908:	0e 94 60 0a 	call	0x14c0	; 0x14c0 <menuADM>
 			teclaG = TECLA_INVALIDA;
     390c:	89 e1       	ldi	r24, 0x19	; 25
-    390e:	80 93 9f 01 	sts	0x019F, r24	; 0x80019f <teclaG>
+    390e:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 			while(teclaG == TECLA_INVALIDA){
     3912:	04 c0       	rjmp	.+8      	; 0x391c <main+0x108>
 				teclaG = teclaDebouce();
     3914:	0e 94 76 05 	call	0xaec	; 0xaec <teclaDebouce>
-    3918:	80 93 9f 01 	sts	0x019F, r24	; 0x80019f <teclaG>
+    3918:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		}
 		
 		if(userIndex == 0){
 			menuADM();
 			teclaG = TECLA_INVALIDA;
 			while(teclaG == TECLA_INVALIDA){
-    391c:	80 91 9f 01 	lds	r24, 0x019F	; 0x80019f <teclaG>
+    391c:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
     3920:	89 31       	cpi	r24, 0x19	; 25
     3922:	c1 f3       	breq	.-16     	; 0x3914 <main+0x100>
 				teclaG = teclaDebouce();
 			}
 			modoADM(&teclaG);
-    3924:	8f e9       	ldi	r24, 0x9F	; 159
+    3924:	83 e1       	ldi	r24, 0x13	; 19
     3926:	91 e0       	ldi	r25, 0x01	; 1
     3928:	0e 94 86 18 	call	0x310c	; 0x310c <modoADM>
     392c:	b0 cf       	rjmp	.-160    	; 0x388e <main+0x7a>

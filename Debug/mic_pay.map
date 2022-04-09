@@ -702,51 +702,50 @@ END GROUP
  *(.fini0)
                 0x0000398e                _etext = .
 
-.data           0x00800100      0x542 load address 0x0000398e
+.data           0x00800100      0x4b6 load address 0x0000398e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.numPagsAgendados
-                0x00800100        0x2 main.o
- .data.datasVenc
-                0x00800102       0x48 main.o
- .data.valParcelaA
-                0x0080014a       0x1e main.o
- .data.cartoesA
-                0x00800168       0x24 main.o
  .data.statusOperadores
-                0x0080018c        0x2 main.o
+                0x00800100        0x2 main.o
  .data.senhaLida
-                0x0080018e        0x4 main.o
-                0x0080018e                senhaLida
- .data.senhas   0x00800192        0xc main.o
-                0x00800192                senhas
+                0x00800102        0x4 main.o
+                0x00800102                senhaLida
+ .data.senhas   0x00800106        0xc main.o
+                0x00800106                senhas
  .data.userIndex
-                0x0080019e        0x1 main.o
-                0x0080019e                userIndex
- .data.teclaG   0x0080019f        0x1 main.o
-                0x0080019f                teclaG
+                0x00800112        0x1 main.o
+                0x00800112                userIndex
+ .data.teclaG   0x00800113        0x1 main.o
+                0x00800113                teclaG
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x008001a0       0x23 main.o
+ .rodata        0x00800114       0x23 main.o
  *(.rodata*)
  .rodata.str1.1
-                0x008001c3      0x47f main.o
+                0x00800137      0x47f main.o
                                 0x483 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x00800642                . = ALIGN (0x2)
-                0x00800642                _edata = .
-                0x00800642                PROVIDE (__data_end, .)
+                0x008005b6                . = ALIGN (0x2)
+                0x008005b6                _edata = .
+                0x008005b6                PROVIDE (__data_end, .)
 
-.bss            0x00800642       0xc3
-                0x00800642                PROVIDE (__bss_start, .)
+.bss            0x008005b6      0x14f
+                0x008005b6                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.numPendecias
-                0x00800642        0x2 main.o
+                0x008005b6        0x2 main.o
+ .bss.numPagsAgendados
+                0x008005b8        0x2 main.o
  .bss.valParcelaP
+                0x008005ba       0x1e main.o
+ .bss.cartoesP  0x008005d8       0x24 main.o
+ .bss.datasVenc
+                0x008005fc       0x48 main.o
+ .bss.valParcelaA
                 0x00800644       0x1e main.o
- .bss.cartoesP  0x00800662       0x24 main.o
+ .bss.cartoesA  0x00800662       0x24 main.o
  .bss.ano       0x00800686        0x1 main.o
  .bss.mes       0x00800687        0x1 main.o
  .bss.dia       0x00800688        0x1 main.o
@@ -787,7 +786,7 @@ END GROUP
  *(COMMON)
                 0x00800705                PROVIDE (__bss_end, .)
                 0x0000398e                __data_load_start = LOADADDR (.data)
-                0x00003ed0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00003e44                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800705        0x0
                 [!provide]                PROVIDE (__noinit_start, .)

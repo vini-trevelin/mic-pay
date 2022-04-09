@@ -107,7 +107,7 @@ void mudarStatusOper(char *tecla){
 	tela_operacaoConcluida();
 }
 
-void tela_status_oper(){
+void tela_status_oper(){ //printa o que se pode fazer com os operadores
 	
 	writeInstruction(lcd_Clear | lcd_Home);
 	writeString("Oper1 ");
@@ -124,11 +124,11 @@ void tela_status_oper(){
 		writeString("hab     -2");
 }
 
-char getOperStatus(char oper){
+char getOperStatus(char oper){ //para ver se o operador pode mexer, usa no main
 	return statusOperadores[(int)oper - 1];
 }
 
-char getDiaMesAno(char dia[], char mes[], char ano[]){
+char getDiaMesAno(char dia[], char mes[], char ano[]){ //pegar a data para trocar
 	char tecla = TECLA_INVALIDA;
 	short cont=0;
 	uint8_t offset = 6;
@@ -232,7 +232,7 @@ char getDiaMesAno(char dia[], char mes[], char ano[]){
 }
 
 
-char getHoraMinSeg(char hora[], char min[], char seg[]){
+char getHoraMinSeg(char hora[], char min[], char seg[]){ //pegar hora para trocar
 	char tecla = TECLA_INVALIDA;
 	short cont=0;
 	unsigned char i=0;
