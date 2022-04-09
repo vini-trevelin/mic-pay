@@ -3938,7 +3938,7 @@ char getNumPendecias(){
     2080:	83 e4       	ldi	r24, 0x43	; 67
     2082:	95 e0       	ldi	r25, 0x05	; 5
     2084:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
-    2088:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+    2088:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
     208c:	81 30       	cpi	r24, 0x01	; 1
     208e:	29 f4       	brne	.+10     	; 0x209a <tela_status_oper+0x20>
     2090:	8a e4       	ldi	r24, 0x4A	; 74
@@ -3953,7 +3953,7 @@ char getNumPendecias(){
     20a8:	80 e6       	ldi	r24, 0x60	; 96
     20aa:	95 e0       	ldi	r25, 0x05	; 5
     20ac:	0e 94 1a 06 	call	0xc34	; 0xc34 <writeString>
-    20b0:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+    20b0:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <__data_start+0x1>
     20b4:	81 30       	cpi	r24, 0x01	; 1
     20b6:	29 f4       	brne	.+10     	; 0x20c2 <tela_status_oper+0x48>
     20b8:	87 e6       	ldi	r24, 0x67	; 103
@@ -7352,10 +7352,10 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	if(flagRELOGIO)
     36de:	80 91 e4 06 	lds	r24, 0x06E4	; 0x8006e4 <flagRELOGIO>
     36e2:	81 11       	cpse	r24, r1
-		tela_dataAtual();
+		tela_dataAtual(); //para colocar relogio na tela (modo adm)
     36e4:	0e 94 28 0c 	call	0x1850	; 0x1850 <tela_dataAtual>
 	
-	contSerial = verificaSerial(contSerial);
+	contSerial = verificaSerial(contSerial); //verifica comunicacao
     36e8:	80 91 e6 06 	lds	r24, 0x06E6	; 0x8006e6 <contSerial>
     36ec:	90 e0       	ldi	r25, 0x00	; 0
     36ee:	0e 94 c9 05 	call	0xb92	; 0xb92 <verificaSerial>
@@ -7382,7 +7382,7 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
     3710:	80 93 e5 06 	sts	0x06E5, r24	; 0x8006e5 <com_ext>
 	}
 
-	if (teclaG == KEY_CONFIRMA)
+	if (teclaG == KEY_CONFIRMA) //contador de ligar tela
     3714:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <teclaG>
     3718:	8b 30       	cpi	r24, 0x0B	; 11
     371a:	31 f4       	brne	.+12     	; 0x3728 <__vector_11+0x70>
@@ -7395,7 +7395,7 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 		contTelaOn = 0;
     3728:	10 92 e9 06 	sts	0x06E9, r1	; 0x8006e9 <contTelaOn>
 	
-	if (teclaG == KEY_APAGAR)
+	if (teclaG == KEY_APAGAR) //contador de desligar tela
     372c:	89 30       	cpi	r24, 0x09	; 9
     372e:	31 f4       	brne	.+12     	; 0x373c <__vector_11+0x84>
 		contTelaOff++;
@@ -7441,7 +7441,7 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	}
 					
 	
-	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos == 0) {
+	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos == 0) { //verificacao de pags agendados e pendentes
     377e:	80 91 ec 06 	lds	r24, 0x06EC	; 0x8006ec <horas>
     3782:	8c 30       	cpi	r24, 0x0C	; 12
     3784:	21 f0       	breq	.+8      	; 0x378e <__vector_11+0xd6>
@@ -7465,7 +7465,7 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
     37aa:	0e 94 7e 15 	call	0x2afc	; 0x2afc <verificarPendencia>
 	}
 	
-	if(existePendencia()){
+	if(existePendencia()){ //pisca led caso pendencia 
     37ae:	0e 94 1a 15 	call	0x2a34	; 0x2a34 <existePendencia>
     37b2:	88 23       	and	r24, r24
     37b4:	29 f0       	breq	.+10     	; 0x37c0 <__vector_11+0x108>
@@ -7646,7 +7646,7 @@ int main(){
 		teclaG = TECLA_INVALIDA;
     38ba:	89 e1       	ldi	r24, 0x19	; 25
     38bc:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
-		if(userIndex != 0){
+		if(userIndex != 0){ // se é um operador
     38c0:	10 91 12 01 	lds	r17, 0x0112	; 0x800112 <userIndex>
     38c4:	11 23       	and	r17, r17
     38c6:	e1 f0       	breq	.+56     	; 0x3900 <main+0xec>
@@ -7666,7 +7666,7 @@ int main(){
 						teclaG = teclaDebouce();
     38de:	0e 94 76 05 	call	0xaec	; 0xaec <teclaDebouce>
     38e2:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
-		if(userIndex != 0){
+		if(userIndex != 0){ // se é um operador
 			if(getOperStatus(userIndex))
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
@@ -7692,7 +7692,7 @@ int main(){
 				}
 		}
 		
-		if(userIndex == 0){
+		if(userIndex == 0){ //se é o adm
     3900:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <userIndex>
     3904:	81 11       	cpse	r24, r1
     3906:	c3 cf       	rjmp	.-122    	; 0x388e <main+0x7a>
@@ -7708,7 +7708,7 @@ int main(){
     3918:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 		}
 		
-		if(userIndex == 0){
+		if(userIndex == 0){ //se é o adm
 			menuADM();
 			teclaG = TECLA_INVALIDA;
 			while(teclaG == TECLA_INVALIDA){

@@ -26,7 +26,7 @@ void setup_lcd(){
 	// Coloca modo 4 bits
     writeInstruction(lcd_FunctionSet4bit);
 
-	//Display Off
+	//desliga display
     writeInstruction(lcd_DisplayOff); 
 	
 	//Limpa display
@@ -35,11 +35,9 @@ void setup_lcd(){
 	//modo para escrita
     writeInstruction(lcd_EntryMode);
     
-	// Display On
-   // writeInstruction(lcd_DisplayOn); 
 }
 
-void writeString(char text[])
+void writeString(char text[]) //escreve um string no display (uso externo)
 {
     volatile int i = 0;                            
     while (text[i] != 0)
@@ -51,7 +49,7 @@ void writeString(char text[])
 }
 
 
-void writeCharacter(uint8_t caracter)
+void writeCharacter(uint8_t caracter) //escrvee so um caracter (ascci) (uso externo)
 {
     lcdPort |= (1<<lcd_RS_bit);                // garante RS = 0
     lcdPort &= ~(1<<lcd_E_bit);                
@@ -60,7 +58,7 @@ void writeCharacter(uint8_t caracter)
 }
 
 
-void writeInstruction(uint8_t instruction)
+void writeInstruction(uint8_t instruction) //muda posição do cursos, liga/desliga, etc (uso externo)
 {
     lcdPort &= ~(1<<lcd_RS_bit);                // garante RS = 0
     lcdPort &= ~(1<<lcd_E_bit);                
@@ -70,7 +68,7 @@ void writeInstruction(uint8_t instruction)
 }
 
 
-void write(uint8_t bitCmd)
+void write(uint8_t bitCmd) //escreve o bit em si na porta, uso interno
 {
 	//coloca zero na portaD
     lcdPort &= ~(1<<PORTB7);

@@ -69,9 +69,9 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	updateDate();
 	
 	if(flagRELOGIO)
-		tela_dataAtual();
+		tela_dataAtual(); //para colocar relogio na tela (modo adm)
 	
-	contSerial = verificaSerial(contSerial);
+	contSerial = verificaSerial(contSerial); //verifica comunicacao
 
 	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
 		contSerial = 0;
@@ -82,12 +82,12 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 		com_ext++;
 	}
 
-	if (teclaG == KEY_CONFIRMA)
+	if (teclaG == KEY_CONFIRMA) //contador de ligar tela
 		contTelaOn++;
 	else
 		contTelaOn = 0;
 	
-	if (teclaG == KEY_APAGAR)
+	if (teclaG == KEY_APAGAR) //contador de desligar tela
 		contTelaOff++;
 	else
 		contTelaOff = 0;
@@ -105,47 +105,24 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	}
 					
 	
-	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos == 0) {
+	if((horas == 12 || horas == 18 || horas == 22) && minutos==0 && segundos == 0) { //verificacao de pags agendados e pendentes
 		cobrarPagementosAgendados();
 		if (horas == 22)
 			verificarPendencia();
 	}
 	
-	if(existePendencia()){
+	if(existePendencia()){ //pisca led caso pendencia 
 		PORTC ^= (1<<5);
 	}else{
 		PORTC &= ~(1<<5);
 		}
 }
-	
-	//AtualizaStringDataHora(); // opcional estariamos disperdição processamento uma vez que essa função só converte a data atual para string
-									//acho q vamos usar ela no modo adm pra guardar o momento das pendencias 
 
 //////////////////////////////////////////////////////////////////////////
 //FUNÇÔES//
 //////////////////////////////////////////////////////////////////////////
 
 		
-		/*void testaRelogio(){
-			writeInstruction(lcd_DisplayOn);
-
-			writeString(stringHORA);
-			char ArrNovoDia[] ={'0','1'};
-			char ArrNovoMes[] ={'0','4'};
-			char ArrNovoAno[] = {'2','2'};
-			char ArrNovaHora[] = {'1','7'};
-			char ArrNovoMinuto[] = {'2','2'};
-			char ArrNovoSegundo[] = {'1','0'};
-			changeDate( ArrNovoDia, ArrNovoMes, ArrNovoAno,  ArrNovaHora, ArrNovoMinuto, ArrNovoSegundo);
-			while (1){
-			writeInstruction(lcd_LineOne | lcd_SetCursor);
-			writeString(stringDATA);
-			writeInstruction(lcd_LineTwo | lcd_SetCursor);
-			writeString(stringHORA);
-			}
-		}
-		*/
-
 
 void setTimer1_UmSeg(){
 	// 16 MHz -> 1 instrução = 62.5ns
@@ -196,7 +173,7 @@ int main(){
 		}
 		
 		teclaG = TECLA_INVALIDA;
-		if(userIndex != 0){
+		if(userIndex != 0){ // se é um operador
 			if(getOperStatus(userIndex))
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
@@ -212,7 +189,7 @@ int main(){
 				}
 		}
 		
-		if(userIndex == 0){
+		if(userIndex == 0){ //se é o adm
 			menuADM();
 			teclaG = TECLA_INVALIDA;
 			while(teclaG == TECLA_INVALIDA){
