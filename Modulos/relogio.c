@@ -26,7 +26,7 @@ unsigned static char dia;
 unsigned static char mes;
 unsigned static char ano; // de 2000 (00) até (2099) (99)
 // Relógio estilo 0 -  23 horas
-// software não preve anos bissextos
+// software preve anos bissextos
 void anoZero(){
 	horas	 = 0;
 	minutos  = 0;
@@ -44,7 +44,6 @@ void anoZero(){
 	stringHORA[5] = ':';
 	stringHORA[8] =  '\0'; 
 	}
-//talvez quebrar em duas funções ??
 
 
 char changeDate(char ArrNovoDia[],char ArrNovoMes[],char ArrNovoAno[], char ArrNovaHora[],char ArrNovoMinuto[],char ArrNovoSegundo[]){ // TRUE(1) SE FOI FEITO COM SUCESSO
@@ -63,7 +62,7 @@ char changeDate(char ArrNovoDia[],char ArrNovoMes[],char ArrNovoAno[], char ArrN
 		}
 		else if (novoDia == 31){
 			switch(novoMes){
-				// sem break todos os casos fazem a mesma coisa, só fica masi  legível de que com um mando de or 
+				// sem break todos os casos fazem a mesma coisa, só fica mais  legível de que com varias ORs
 				case ABR:
 				case JUN:
 				case SET:
@@ -116,7 +115,7 @@ void updateDate(){
 				}
 					break;
 				case FEV:
-					if( (dia ==29 && (ano%4)!=0) || dia ==30){// o maior é somente para segurança
+					if( (dia ==29 && (ano%4)!=0) || dia ==30){
 					atualizaMesAno();
 					}
 				break;

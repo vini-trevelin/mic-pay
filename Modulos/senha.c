@@ -3,7 +3,7 @@
 #include "../Headers/botoes.h"
 #include "../Headers/senha.h"
 #include "../Headers/telas.h"
-
+#include "../Headers/modoAdm.h"
 
 
 char senhas[3][N_CARACSENHA] =  {	{'0','1','2','3'}, //adm
@@ -66,7 +66,7 @@ void lerSenha(char *teclaG){ // comecei a pensar no ler senha e tals. Não sei se
 char login(char *teclaG){
 
 	char senhaValida = 0;
-	char userIndex = -1;
+	char userIndex = -1,aux;
 	short i;
 	// para testar mais rapido
 // 	userIndex = 0;
@@ -86,20 +86,27 @@ char login(char *teclaG){
 				userIndex = i; //0 -> adm , 1 e 2 vendedores
 				writeInstruction(lcd_Clear);
 				writeInstruction(lcd_LineOne | lcd_SetCursor);
-				writeString("Bem Vindo");
-				writeInstruction(lcd_SetCursor | lcd_LineTwo);
+				if(userIndex == 0){
+					writeString("Bem Vindo");
+					writeInstruction(lcd_SetCursor | lcd_LineTwo);
+					writeString("Administrador");
+					_delay_ms(2000);
+				}
+				if(userIndex != 0){
+					aux = getOperStatus((char)userIndex);
+					if(aux){
+						writeString("Bem Vindo");
+						writeInstruction(lcd_SetCursor | lcd_LineTwo);
+						if(userIndex == 1)
+							writeString("Operador 1");
+						else if(userIndex == 2)
+							writeString("Operador 2");
+						_delay_ms(2000);
+					}
+				}
 				
-				if(userIndex == 0)
-				writeString("Administrador");
-				else if(userIndex == 1)
-				writeString("Operador 1");
-				else if(userIndex == 2)
-				writeString("Operador 2");
-				
-				_delay_ms(2000);
 				return userIndex;
 			}
-		
 		}
 	tela_SF();
 	}

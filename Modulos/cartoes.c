@@ -239,7 +239,7 @@ void subtraiSaldo(char indice,char venda[]){
 char verificaSaldo (char indice, char valorVenda[]){ // Retorna TRUE ou FALSE de acordo com a disponibilidade de saldo
 	unsigned char k = indice -1; // somente para as expressões ficarem mais claras, de certa forma é um disperdício de performace 
 	// venda tem 5 caracteres e eles estão na ordem invertida. Ex: R$ 652,43 -> {3, 4 ,2, 5, 6}
-	// Depois organizar isso para fazer com um for, está muito hardcoded
+	// Depois está muito hardcoded, poderia aprimorar isso em versoes futuras
 	if      (saldosLocais[k][0] >  valorVenda[4]) {return TRUE;}  //centenas
 	
 	else if (saldosLocais[k][0] == valorVenda[4] && saldosLocais[k][1] >  valorVenda[3]) {return TRUE;} //dezenas
@@ -268,7 +268,7 @@ char verificaSaldo (char indice, char valorVenda[]){ // Retorna TRUE ou FALSE de
 	}
 	return TRUE;
 }
-void mostraSaldoNaSerial(char indice){
+void mostraSaldoNaSerial(char indice){  // função criada somente para DEBUG da máquina. 
 	short k;
 	for(k=0;k<cartoesCadastrados;k++){
 

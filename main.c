@@ -16,7 +16,7 @@
 
 #include <util/delay.h>
 
-#define N_CARACSENHA 4				// todas as senhas com 4 caracteres? s, menos de cartão
+#define N_CARACSENHA 4				// todas as senhas com 4 caracteres=
 #define TEMPO_COMUNICACAO 120		// 2min   (tempo para verificação da comunicação externa)
 #define TEMPO_REQUISICAO 13			// 13s (tempo para verificação de resposta a requisição ext)
 
@@ -133,7 +133,7 @@ void setTimer1_UmSeg(){
 	TCNT1 = 0;  //contagem começa do zero
 	OCR1A = 62500; //até onde tem q contar
 	TIMSK1 |= (1<<OCIE1A); //habilita interrupção por comparação em 
-	sei(); // talvez colocar no mais ??
+	sei(); 
 }
 
 int main(){
@@ -146,20 +146,24 @@ int main(){
 	char loop1 = 1; //para ele agir diferente no 1 loop
 	char continuar;
 
-// 	writeInstruction(lcd_DisplayOff);
-// 	while(telaOnOff==0)
-// 		teclaG = teclaDebouce();
+	writeInstruction(lcd_DisplayOff);
+ 	while(telaOnOff==0)
+ 		teclaG = teclaDebouce();
 
 	writeInstruction(lcd_DisplayOn);
 	tela_bloqueio_inicial(); //comenta se quiser testar mais rapido
 	
 	
 	// inserindo cartões pra teste
-	char cartao_teste[] = {8+48,0+48,0+48,0+48,0+48,0+48};
+	char valor1[] = {8+48,0+48,0+48,0+48,0+48,0+48};
 	char cartao_teste_2[] = {0+48,0+48,2+48,0+48,0+48,0+48};
-	addCartao("123456","123456",cartao_teste);	// inserindo cartão pra teste 80000 (800,00)
+	addCartao("123456","123456",valor1);	// inserindo cartão pra teste 80000 (800,00)
 	addCartao("000001","111111",cartao_teste_2);	// inserindo cartão pra teste 00200	(2,00)
-	/////
+	addCartao("000002","111111",valor1);	// inserindo cartão pra teste 02000	(800,00)
+	addCartao("000003","111111",valor1);	// inserindo cartão pra teste 80000	(800,00)
+	addCartao("000004","111111",valor1);	// inserindo cartão pra teste 80000 (800,00)
+	
+	// em futuras versões poderia ser adicionado um modo para adicionar um cartão interno.
 	
 	while(1){
 		
@@ -186,6 +190,7 @@ int main(){
 				}
 			else{
 				tela_operadorDesabilitado(userIndex);
+				loop1=1;
 				}
 		}
 		
