@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000003d0  00000000  00000000  00003fe4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00005a0d  00000000  00000000  000043b4  2**0
+  6 .debug_info   00005a02  00000000  00000000  000043b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009bf  00000000  00000000  00009dc1  2**0
+  7 .debug_abbrev 000009bf  00000000  00000000  00009db6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00003860  00000000  00000000  0000a780  2**0
+  8 .debug_line   00003860  00000000  00000000  0000a775  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000c08  00000000  00000000  0000dfe0  2**2
+  9 .debug_frame  00000c08  00000000  00000000  0000dfd8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000f7a  00000000  00000000  0000ebe8  2**0
+ 10 .debug_str    00000f7d  00000000  00000000  0000ebe0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00004432  00000000  00000000  0000fb62  2**0
+ 11 .debug_loc    00004432  00000000  00000000  0000fb5d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000003f0  00000000  00000000  00013f94  2**0
+ 12 .debug_ranges 000003f0  00000000  00000000  00013f8f  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -7379,25 +7379,25 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 		tela_dataAtual(); //para colocar relogio na tela (modo adm)
     371a:	0e 94 c3 0b 	call	0x1786	; 0x1786 <tela_dataAtual>
 	
-	contSerial = verificaSerial(contSerial); //verifica comunicacao
+	contSerial = verificaSerial(contSerial);			//verifica comunicacao, se não ocorreu no ultimo segundo, incremento 1
     371e:	80 91 fc 06 	lds	r24, 0x06FC	; 0x8006fc <contSerial>
     3722:	90 e0       	ldi	r25, 0x00	; 0
     3724:	0e 94 c9 05 	call	0xb92	; 0xb92 <verificaSerial>
     3728:	80 93 fc 06 	sts	0x06FC, r24	; 0x8006fc <contSerial>
 
-	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
+	if(contSerial==TEMPO_COMUNICACAO){					// se passei 120s(2 min) sem comunicação
     372c:	88 37       	cpi	r24, 0x78	; 120
     372e:	31 f4       	brne	.+12     	; 0x373c <__vector_11+0x4e>
-		contSerial = 0;
+		contSerial = 0;									// zero variavel contadora
     3730:	10 92 fc 06 	sts	0x06FC, r1	; 0x8006fc <contSerial>
-		PORTC ^= (1 << PORTC4);
+		PORTC ^= (1 << PORTC4);							// inverto valor (ligo) led de aviso
     3734:	98 b1       	in	r25, 0x08	; 8
     3736:	80 e1       	ldi	r24, 0x10	; 16
     3738:	89 27       	eor	r24, r25
     373a:	88 b9       	out	0x08, r24	; 8
 	}
 	
-	if(com_ext != 0){
+	if(com_ext != 0){									// caso tenha existido alguma comunicação externa, incremento a cada segundo
     373c:	80 91 fb 06 	lds	r24, 0x06FB	; 0x8006fb <com_ext>
     3740:	88 23       	and	r24, r24
     3742:	19 f0       	breq	.+6      	; 0x374a <__vector_11+0x5c>
@@ -7579,7 +7579,7 @@ int main(){
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
     386e:	0e 94 0f 1c 	call	0x381e	; 0x381e <setTimer1_UmSeg>
-	char loop1 = 1; //para ele agir diferente no 1 loop
+	char loop1 = 1;						//para ele agir diferente no 1 loop
 	char continuar;
 
 	writeInstruction(lcd_DisplayOff);
@@ -7591,7 +7591,7 @@ int main(){
     387a:	0e 94 76 05 	call	0xaec	; 0xaec <teclaDebouce>
     387e:	80 93 13 01 	sts	0x0113, r24	; 0x800113 <teclaG>
 	setTimer1_UmSeg();					
-	char loop1 = 1; //para ele agir diferente no 1 loop
+	char loop1 = 1;						//para ele agir diferente no 1 loop
 	char continuar;
 
 	writeInstruction(lcd_DisplayOff);
@@ -7678,7 +7678,7 @@ int main(){
 	setup_lcd();						// inicia lcd
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
-	char loop1 = 1; //para ele agir diferente no 1 loop
+	char loop1 = 1;						//para ele agir diferente no 1 loop
     3910:	01 e0       	ldi	r16, 0x01	; 1
 	
 	// em futuras versões poderia ser adicionado um modo para adicionar um cartão interno.
@@ -7748,13 +7748,13 @@ int main(){
     3976:	ac f7       	brge	.-22     	; 0x3962 <main+0x118>
 						teclaG = teclaDebouce();
 					}
-					processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
+					processa_venda(teclaG+49);	// quando recebo digito, processo a venda
     3978:	0e 94 f8 13 	call	0x27f0	; 0x27f0 <processa_venda>
     397c:	04 c0       	rjmp	.+8      	; 0x3986 <main+0x13c>
 					break;
 				}
 			else{
-				tela_operadorDesabilitado(userIndex);
+				tela_operadorDesabilitado(userIndex);	// caso o operador que tentou logar esteja desabilitado, volto a tela inicial
     397e:	81 2f       	mov	r24, r17
     3980:	0e 94 ff 0a 	call	0x15fe	; 0x15fe <tela_operadorDesabilitado>
 				loop1=1;

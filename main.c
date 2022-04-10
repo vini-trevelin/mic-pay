@@ -16,7 +16,7 @@
 
 #include <util/delay.h>
 
-#define N_CARACSENHA 4				// todas as senhas com 4 caracteres=
+#define N_CARACSENHA 4				// todas as senhas com 4 caracteres
 #define TEMPO_COMUNICACAO 120		// 2min   (tempo para verificação da comunicação externa)
 #define TEMPO_REQUISICAO 13			// 13s (tempo para verificação de resposta a requisição ext)
 
@@ -71,14 +71,14 @@ ISR(TIMER1_COMPA_vect){									// interrupção cada 1 segundo
 	if(flagRELOGIO)
 		tela_dataAtual(); //para colocar relogio na tela (modo adm)
 	
-	contSerial = verificaSerial(contSerial); //verifica comunicacao
+	contSerial = verificaSerial(contSerial);			//verifica comunicacao, se não ocorreu no ultimo segundo, incremento 1
 
-	if(contSerial==TEMPO_COMUNICACAO){					// segundos para aguardar comunicação cm serial
-		contSerial = 0;
-		PORTC ^= (1 << PORTC4);
+	if(contSerial==TEMPO_COMUNICACAO){					// se passei 120s(2 min) sem comunicação
+		contSerial = 0;									// zero variavel contadora
+		PORTC ^= (1 << PORTC4);							// inverto valor (ligo) led de aviso
 	}
 	
-	if(com_ext != 0){
+	if(com_ext != 0){									// caso tenha existido alguma comunicação externa, incremento a cada segundo
 		com_ext++;
 	}
 
@@ -143,7 +143,7 @@ int main(){
 	setup_lcd();						// inicia lcd
 	setupBotoes();						// inicia teclado
 	setTimer1_UmSeg();					
-	char loop1 = 1; //para ele agir diferente no 1 loop
+	char loop1 = 1;						//para ele agir diferente no 1 loop
 	char continuar;
 
 	writeInstruction(lcd_DisplayOff);
@@ -185,11 +185,11 @@ int main(){
 					while(teclaG+49 > 51){
 						teclaG = teclaDebouce();
 					}
-					processa_venda(teclaG+49);	// para testar cartão por aprox coloca CW + 6dig docartao + 6 dig da senha no serial
+					processa_venda(teclaG+49);	// quando recebo digito, processo a venda
 					break;
 				}
 			else{
-				tela_operadorDesabilitado(userIndex);
+				tela_operadorDesabilitado(userIndex);	// caso o operador que tentou logar esteja desabilitado, volto a tela inicial
 				loop1=1;
 				}
 		}

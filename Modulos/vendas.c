@@ -9,18 +9,17 @@
 #include "../Headers/pendencias.h"
 
 
-void processa_venda(int opcao){
+void processa_venda(int opcao){  // ativa função requisitada segundo opção selecionada no menu
 	if(opcao == '1'){
 		venda_avista();
-	}
-	else if(opcao == '2'){
+	}else if(opcao == '2'){
 		venda_parcelada();
 	}else if(opcao == '3'){
 		estorno();
 	}
 }
 
-void formata_valor(char valor[]){	// provavelmente algo errado gambiarra fudida
+void formata_valor(char valor[]){	// formata o valor recebido para a forma [centena/dezena/unidade/dezena centavos/unidade centavos]
 	short i;
 	
 	if(valor[4] != '0' && valor[3]==' ' && valor[2]==' ' && valor[1] == ' ' && valor[0] == ' '){
@@ -39,8 +38,8 @@ void formata_valor(char valor[]){	// provavelmente algo errado gambiarra fudida
 	}
 }
 
-char metodo_pagamento(){
-	char tecla = TECLA_INVALIDA;
+char metodo_pagamento(){			// função recebe metodo de pagamento pelo teclado ([1] débito e [2] crédito)
+ 	char tecla = TECLA_INVALIDA;
 	menu_pagamento();
 	while (1){
 		tecla = teclaDebouce();
@@ -57,7 +56,6 @@ int aguarda_cartao(){
 	menu_cartao();
 	while(tecla == TECLA_INVALIDA){
 		tecla = teclaDebouce();
-		//USART_envia(tecla+49);
 		if((UCSR0A & (1<<RXC0))){		// preciso desse if pra n ficar preso no loop
 			if(USART_recebe() == 0x43){ // C em ascii, verifico se recebi algo pela serial ( SIMULAÇÃO DE CARTÃO NA MAQUININHA)
 				switch(USART_recebe()){
@@ -71,7 +69,7 @@ int aguarda_cartao(){
 	return 3;
 }
 
-char n_parcelas(){
+char n_parcelas(){										// função que recebe o número de parcelas digitado no teclado
 	char tecla = TECLA_INVALIDA,parcelas='1';
 	short contador=0;
 	
@@ -80,7 +78,6 @@ char n_parcelas(){
 		tecla = teclaDebouce();
 		if(tecla!= TECLA_INVALIDA){
 			tecla = tecla+49;
-			//USART_envia(tecla);
 			if(tecla == KEY_APAGAR_ASCII){
 				if(contador>0){
 					uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
@@ -109,13 +106,12 @@ char n_parcelas(){
 }
 
 void estorno(){
-	char senha_operador[] = {'0', '0', '0' ,'0'};	// to declarando aq pq n sei onde vou usar
+	char senha_operador[] = {'0', '0', '0' ,'0'};	
 	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
 	char valor[] = {' ', ' ', ' ' ,' ',' '};
 	short i,senhaValida=0;	
 	char tipo_cartao; // parcelas = 0 = estorno
 	
-	// declarei denovo pq n sei se vai ficar global ou oq ---- MUDAR
 
 	char senhas[3][N_CARACSENHA] =  {	{'0','1','2','3'}, //adm
 	{'1','2','3','4'}, //op 1
@@ -123,15 +119,15 @@ void estorno(){
 	};
 	
 	tela_estorno();
-	recebe_senha(senha_operador);
+	recebe_senha(senha_operador);										// recebo a senha do operador
 	
 	for (i =0;i<3 ; i++){
 		if(senhaValida == 0 ){
-			senhaValida = validarSenha(senha_operador,senhas[i]);
+			senhaValida = validarSenha(senha_operador,senhas[i]);		// verifico a senha nas senhas cadastradas	
 		}
 	}
 	
-	if (senhaValida){
+	if (senhaValida){													// realizo op de estorno se a senha for valida
 		tela_valorEstorno();
 		recebe_valor(valor);
 		formata_valor(valor);
@@ -145,9 +141,9 @@ void estorno(){
 	_delay_ms(3000);
 }
 
-void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 números
+void venda_parcelada(){								// funcao para venda a vista considerando apenas 5 números
 	
-	char senha[] = {'0', '0', '0' ,'0', '0', '0'};	// to declarando aq pq n sei onde vou usar
+	char senha[] = {'0', '0', '0' ,'0', '0', '0'};	
 	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
 	char valor[] = {' ', ' ', ' ' ,' ',' '};
 	char metodo_pgmt,tipo_cartao,parcelas;
@@ -156,14 +152,6 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 	tela_vendaParcelada();
 	recebe_valor(valor);
 	formata_valor(valor);	
-		
-	// print do valor
-	//USART_envia(valor[4]);
-	//USART_envia(valor[3]);
-	//USART_envia(valor[2]);
-	//USART_envia(valor[1]);
-	//USART_envia(valor[0]);
-	//
 	
 	parcelas = n_parcelas();
 	metodo_pgmt = metodo_pagamento();
@@ -209,8 +197,8 @@ void venda_parcelada(){	// funcao para venda a vista considerando apenas 5 númer
 
 }
 
-void venda_avista(){	// funcao para venda a vista considerando apenas 4 números
-	char senha[] = {'0', '0', '0' ,'0', '0', '0'};	// to declarando aq pq n sei onde vou usar
+void venda_avista(){								// funcao para venda a vista considerando apenas 4 números
+	char senha[] = {'0', '0', '0' ,'0', '0', '0'};	
 	char cartao[] = {'0', '0', '0' ,'0', '0', '0'};
 	
 	char metodo_pgmt,tipo_cartao;
@@ -257,27 +245,27 @@ int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor
 	short i, req=0, aux;
 	char cartao_local=0;
 	
-	while(req != 1){
+	while(req != 1){						// enquanto a resposta de requisição não for igual a 1, fico no loop
 
 		if(tipo_cartao == 1){ // cartão magnetico - vai cartão e pede senha (CM 123456 /r)
 			if(req != 2){
 				for(i=0;i<6;i++){
-					cartao [i] = USART_recebe()	;		 // preenche cartao
+					cartao [i] = USART_recebe()	;		 // preenche cartao pelo valor recebido na serial
 				}
 			}
-			recebe_senha(senha);
+			recebe_senha(senha);						// preenche senha pelo valor digitado
 		}
 		if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r)
 			for(i=0;i<12;i++){
-				if(i<6){cartao [i] = USART_recebe();} // preenche cartao
-				else{senha [i-6] = USART_recebe();}	// preenche senha
+				if(i<6){cartao [i] = USART_recebe();}	// preenche cartao pelo valor recebido na serial
+				else{senha [i-6] = USART_recebe();}		// preenche senha pelo valor recebido na serial
 			}
 		}
-		if(tipo_cartao == 3){ // digitar nº e senha
+		if(tipo_cartao == 3){ // digitar nºcartão e senha
 			if(req != 2){
-				recebe_cartao(cartao);
+				recebe_cartao(cartao);					// preenche senha pelo cartao digitado
 			}
-			recebe_senha(senha);
+			recebe_senha(senha);						// preenche senha pelo valor digitado
 		}
 		
 		if(metodo_pgmt == 2){										// se o pagamento for no cartão de crédito, verifica pra ver se for cartão da FIRMA
@@ -297,7 +285,6 @@ int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor
 				req=1;
 			}
 			tela_vendaInterna(aux);
-			//mostraSaldoNaSerial(cartao_local);
 		}
 		
 		com_ext = 0;
@@ -314,51 +301,51 @@ int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){
 	short i,tamanho = 0;
 	
 	
-	if(parcelas == 1){										// para venda a vista	------------------------------------------------------
+	if(parcelas == 1){									// para venda a vista (parcelas = 1)
 		req[0] = 0x56;	// V em ascii
 		req[1] = 0x56;	// V em ascii
-		for(i=2;i<19;i++){								// tem q melhorar fiz a moda caralha
+		for(i=2;i<19;i++){								
 			if(i<8){req[i] = cartao [i-2];}				// armazena cartao na requisicao
-			if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+			if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao 
 			if(i>13){ req[i] = valor[18-i];}			// armazena valor na requisicao
 		}
 		tamanho = 19;
-	}else if(parcelas == 0){							// para estorno	-------------------------------------------------------------
+	}else if(parcelas == 0){							// para estorno (parcelas = 0)
 		req[0] = 0x45;	// E em ascii
 		req[1] = 0x56;	// V em ascii
 		for(i=2;i<13;i++){								
-			if(i<8){req[i] = cartao [i-2];}				
-			else{ req[i] = valor[12-i];}			
+			if(i<8){req[i] = cartao [i-2];}				// armazena cartao na requisicao		
+			else{ req[i] = valor[12-i];}				// armazena valor na requisicao	
 		}
 		tamanho = 13;
-	}else{												// para venda  parcelada	---------------------------------------------------	
+	}else{												// para venda  parcelada (parcelas > 1)
 		req[0] = 0x56;	// V em ascii
 		req[1] = 0x50;	// P em ascii
-		for(i=2;i<20;i++){								// tem q melhorar fiz a moda caralha
+		for(i=2;i<20;i++){								
 			if(i<8){req[i] = cartao [i-2];}				// armazena cartao na requisicao
-			if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao esse and ai foi sacanagem
+			if(i<14 && i>=8){req[i] = senha [i-8];}		// armazena senha na requisicao
 			if(i==14){ req[i] = parcelas;}				// armazena qtd de parcelas
 			if(i>14){ req[i] = valor[19-i];}			// armazena valor na requisicao
 		}
 		tamanho = 20;
 	}
 	
-	for(i=0;i<tamanho;i++){								//envia pra serial
+	for(i=0;i<tamanho;i++){								//envia toda requisição para a serial
 		USART_envia(req[i]);
 	}
-	USART_envia(0x0d);								// \r final
+	USART_envia(0x0d);									// \r final
 	
-	com_ext = 1;
+	com_ext = 1;										// abre flag de comunicação externa
 	
 	while(1){
-		if(parcelas==0){
-			switch(USART_recebe() ){
+		if(parcelas==0){								// caso seja um estorno
+			switch(USART_recebe() ){					// aguarda recebimento na serial
 				case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
 				case 0x43: tela_CF();return 3;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
-				case 0: return 5; break;
+				case 0: return 5; break;							// se for 0, erro de comunicação ext
 			}
 		}else{
-			switch(USART_recebe() ){
+			switch(USART_recebe() ){					// aguarda recebimento na serial
 				case 0x4f: tela_OK();return 1;break;				// O(K) em ascii - OK -> volta pra tela inicial
 				case 0x43: tela_CF();return 3;break;				// C(F) em ascii - CONTA COM FALHA -> volta pra tela inicial
 				case 0x53:											// S em ascii
@@ -379,7 +366,7 @@ int requisicao_externa(char cartao[],char senha[], char valor[], int parcelas){
 	}
 }
 
-uint8_t transforma_int(char valor[]){
+uint8_t transforma_int(char valor[]){	// transforma o valor do vetor de valores em int
 	short i, soma=0;
 	if(valor[2]=='0'){
 		valor[2]=valor[3];
@@ -391,16 +378,16 @@ uint8_t transforma_int(char valor[]){
 	return soma;
 }
 
-void recebe_senha(char senha[]){
+void recebe_senha(char senha[]){ // função recebe senha de 6 digitos  e armazena no vetor designado
 	short contador=0;
 	char tecla;
 	tela_senhaCartao();
 
 	while (1){
 		tecla = teclaDebouce();
-		if(tecla!= TECLA_INVALIDA){
+		if(tecla!= TECLA_INVALIDA){	// só entra no loop se a tecla pressionada for valida ( uma das 12 do teclado )
 			tecla = tecla+49;
-			if(tecla == KEY_APAGAR_ASCII){
+			if(tecla == KEY_APAGAR_ASCII){ // caso tecla pressionada seja de apagar, deleta ultimo valor do char e apaga na tela
 				if(contador>0){
 					uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
 					writeInstruction(lcd_LineTwo | aux);
@@ -426,7 +413,7 @@ void recebe_senha(char senha[]){
 	}
 }
 
-void recebe_cartao(char cartao[]){
+void recebe_cartao(char cartao[]){ // função recebe cartao de 6 digitos  e armazena no vetor designado
 	short contador=0;
 	char tecla;
 	tela_numCartao();
@@ -435,7 +422,7 @@ void recebe_cartao(char cartao[]){
 		tecla = teclaDebouce();
 		if(tecla!= TECLA_INVALIDA){
 			tecla = tecla+49;
-			if(tecla == KEY_APAGAR_ASCII){
+			if(tecla == KEY_APAGAR_ASCII){		// caso tecla pressionada seja de apagar, deleta ultimo valor do char e apaga na tela
 				if(contador>0){
 					uint8_t aux = lcd_SetCursor | (uint8_t)(contador-1);
 					writeInstruction(lcd_LineTwo | aux);
@@ -444,9 +431,9 @@ void recebe_cartao(char cartao[]){
 					cartao[contador-1] = '0';
 					contador --;
 				}
-				}else if(tecla == KEY_CONFIRMA_ASCII){
+				}else if(tecla == KEY_CONFIRMA_ASCII){ // caso tecla pressionada seja de confirmação, sai do loop
 					break;
-				}else if(contador<6){
+				}else if(contador<6){					// caso nenhuma condição atendida, e não tiver 6 digitos armazenados ainda, armazena novo digito
 					if(tecla == KEY_0_ASCII){
 						tecla = 48;
 					}
@@ -461,7 +448,7 @@ void recebe_cartao(char cartao[]){
 	}
 }
 
-void recebe_valor(char valor[]){	// f recebe valor de 5 digitos (ou menos)
+void recebe_valor(char valor[]){	// função recebe valor de 5 digitos (ou menos) e armazena no vetor designado
 	char tecla = TECLA_INVALIDA;
 	short contador = 0;
 	short pos=4;
@@ -471,7 +458,7 @@ void recebe_valor(char valor[]){	// f recebe valor de 5 digitos (ou menos)
 			if(tecla!= TECLA_INVALIDA){
 				tecla = tecla+49;
 				//USART_envia(tecla);
-				if(tecla == KEY_APAGAR_ASCII){
+				if(tecla == KEY_APAGAR_ASCII){									// caso tecla pressionada seja de apagar, deleta ultimo valor do char e apaga na tela
 					if(contador>0){
 						uint8_t aux = lcd_SetCursor | (uint8_t)(contador+2);
 						writeInstruction(lcd_LineTwo | aux);
@@ -480,10 +467,10 @@ void recebe_valor(char valor[]){	// f recebe valor de 5 digitos (ou menos)
 						valor[pos-contador+1] = ' ';
 						contador --;
 					}
-					}else if(tecla == KEY_CONFIRMA_ASCII && valor[5]!=' '){
+					}else if(tecla == KEY_CONFIRMA_ASCII && valor[5]!=' '){		// caso tecla pressionada seja de confirmação, sai do loop
 						break;
-					}else if(contador<5){
-						if(tecla == KEY_0_ASCII){
+					}else if(contador<5){										// caso nenhuma condição atendida, armazena digito
+						if(tecla == KEY_0_ASCII){ // mudo o valor em ascii para zero
 							tecla = 48;
 						}
 					valor[pos-contador] = (tecla);
