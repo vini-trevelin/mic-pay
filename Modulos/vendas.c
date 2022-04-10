@@ -244,9 +244,8 @@ void processa_estorno(int tipo_cartao, char valor[],char cartao[]){
 int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor[],char senha[],char cartao[]){
 	short i, req=0, aux;
 	char cartao_local=0;
-	
+	char lixo=0;
 	while(req != 1){						// enquanto a resposta de requisição não for igual a 1, fico no loop
-
 		if(tipo_cartao == 1){ // cartão magnetico - vai cartão e pede senha (CM 123456 /r)
 			if(req != 2){
 				for(i=0;i<6;i++){
@@ -256,6 +255,12 @@ int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor
 			recebe_senha(senha);						// preenche senha pelo valor digitado
 		}
 		if(tipo_cartao == 2){ // aproximacao - vai cartão e senha (CW 123456 123456 /r)
+			if(req==2){ //se deu erro dei leitura do cartão magnético.
+				for(i=0;i<2;i++){ //ignora os dois primeiros
+					lixo =USART_recebe();
+					lixo=lixo;
+				}
+			}
 			for(i=0;i<12;i++){
 				if(i<6){cartao [i] = USART_recebe();}	// preenche cartao pelo valor recebido na serial
 				else{senha [i-6] = USART_recebe();}		// preenche senha pelo valor recebido na serial
@@ -278,15 +283,17 @@ int processa_pagamento(int parcelas,int tipo_cartao,char metodo_pgmt, char valor
 		}else{
 			aux = executarVendaInterna(cartao_local,valor,senha);	// se for local, executa venda interna
 			if(aux==1){
-				req=1;
+				req=1; //sai do loop
 			}else if(aux==2){
 				req=2;												// vai perguntar denovo a senha
 			}else{
-				req=1;
+				req=1; //sai do loop
 			}
-			tela_vendaInterna(aux);
+			tela_vendaInterna(aux);  // mensagem de senha invalido ou outro 
 		}
-		
+		if(req==2 && tipo_cartao==2){
+			tela_reaproxime();   //SENHA ERRADA DA APROXIMAÇÃO NUNCA VAI ACONTECER MAS NÉ 
+		}
 		com_ext = 0;
 		
 		if(req==3 || req==4 || req==5){								// se retornou CF, SI ou falha de comunicação ext, sai do loop

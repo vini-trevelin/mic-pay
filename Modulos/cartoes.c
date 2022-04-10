@@ -85,6 +85,7 @@ char verificarContasLocais(char cartaoLido[]){ // verificada
 	for (i=0;i<LOCALCARDNUM;i++){
 		for (j=0;j<CARDSIZE;j++){
 			if(numCartoesLocais[i][j]!=cartaoLido[j]){
+				return 0;
 				break;
 			}
 			else if (j == CARDSIZE-1){ // todos os caracteres lido eram iguais

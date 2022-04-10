@@ -182,10 +182,11 @@ int main(){
 				while(1){
 					writeInstruction(lcd_Home | lcd_Clear);
 					menu_vendas();
-					while(teclaG+49 > 51){
+					while(teclaG+49 > 51 &&teclaG != KEY_APAGAR){
 						teclaG = teclaDebouce();
 					}
-					processa_venda(teclaG+49);	// quando recebo digito, processo a venda
+					if(teclaG!=KEY_APAGAR)processa_venda(teclaG+49);	// quando recebo digito, processo a venda
+					else if(teclaG==KEY_APAGAR)loop1=1;
 					break;
 				}
 			else{

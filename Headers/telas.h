@@ -37,3 +37,4 @@ void tela_instrucoes_remPendencia();
 void tela_dataAtual();
 void tela_erroCom();
 void tela_precioneOK();
+void tela_reaproxime();

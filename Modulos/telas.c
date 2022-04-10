@@ -132,6 +132,16 @@ void tela_vendaInterna(int aux){
 	}
 	
 }
+
+void tela_reaproxime(int aux){
+	writeInstruction(lcd_Clear);
+	writeInstruction(lcd_LineOne | lcd_SetCursor);
+	writeString("Erro de Leitura");
+	writeInstruction(lcd_LineTwo | lcd_SetCursor);
+	writeString("Tente Novamente");
+	_delay_ms(2000);
+}
+
 void tela_nParcelas(){
 	writeInstruction(lcd_Clear);
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
@@ -320,7 +330,7 @@ void tela_erroCom(){
 	writeInstruction(lcd_LineOne | lcd_SetCursor);
 	writeString("Erro na");
 	writeInstruction(lcd_LineTwo | lcd_SetCursor);
-	writeString("Comonicacao Ext.");
+	writeString("Comunicacao Ext.");
 	_delay_ms(2000);
 }
 void tela_precioneOK(){
